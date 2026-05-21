@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Климат-контроль Volvo XC60 T4 Momentum 2020 — полное руководство</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f0f2f5;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, #003057 0%, #00263b 100%);
+            padding: 2rem 2rem;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 span {
+            font-weight: 400;
+            color: #ffb347;
+        }
+        .hero p {
+            opacity: 0.85;
+            max-width: 800px;
+        }
+        .content {
+            padding: 2rem 1.8rem;
+        }
+        .nav-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+            background: #f8fafd;
+            padding: 1rem 1.2rem;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+        }
+        .nav-link {
+            background: white;
+            border: 1px solid #dce5f0;
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #003057;
+            transition: 0.2s;
+        }
+        .nav-link:hover {
+            background: #e30613;
+            color: white;
+            border-color: #e30613;
+        }
+        .section-card {
+            background: #f9fbfe;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            scroll-margin-top: 1rem;
+        }
+        .section-header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid #e30613;
+        }
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #003057;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .section-body {
+            padding: 1.2rem 1.5rem;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .info-item {
+            background: white;
+            border-radius: 20px;
+            padding: 0.9rem 1rem;
+            border: 1px solid #e9f0f5;
+        }
+        .info-item h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e30613;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .info-detail {
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        .info-detail strong {
+            color: #003057;
+        }
+        .tip-block {
+            background: #eef3fc;
+            border-left: 4px solid #003057;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .warning-block {
+            background: #fff3e0;
+            border-left: 4px solid #e30613;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .footnote {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+            border-top: 1px solid #e2edf7;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            text-align: center;
+        }
+        .green-tip {
+            background: #e6f7e6;
+            border-left: 4px solid #2e7d32;
+        }
+        @media (max-width: 700px) {
+            .hero { padding: 1.2rem; }
+            .content { padding: 1rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>Климат-контроль <span>Volvo XC60 T4 Momentum 2020</span></h1>
+        <p>Полное руководство: устройство, управление, режимы, настройки, чистка, обслуживание, экономия топлива — и ответ на вечный спор: кондиционер или открытые окна/люк?</p>
+    </div>
+    <div class="content">
+
+        <!-- Навигация -->
+        <div class="nav-grid">
+            <a href="#overview" class="nav-link">🌡️ Обзор системы</a>
+            <a href="#controls" class="nav-link">🎮 Управление</a>
+            <a href="#modes" class="nav-link">🌀 Режимы работы</a>
+            <a href="#settings" class="nav-link">⚙️ Настройки</a>
+            <a href="#care" class="nav-link">🧹 Уход и обслуживание</a>
+            <a href="#debate" class="nav-link">💨 Спор: кондиционер vs окна/люк</a>
+            <a href="#faq" class="nav-link">❓ Частые вопросы</a>
+        </div>
+
+        <!-- 1. Обзор климат-системы -->
+        <div id="overview" class="section-card">
+            <div class="section-header">
+                <h2>🌡️ Обзор климат-контроля в XC60 Momentum</h2>
+            </div>
+            <div class="section-body">
+                <p>Ваш Volvo XC60 T4 Momentum 2020 оснащён <strong>2-зонным автоматическим климат-контролем</strong> (Electronic Climate Control — ECC). Это означает:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li><strong>2 зоны:</strong> водитель и передний пассажир могут устанавливать свою температуру независимо.</li>
+                    <li><strong>Задние пассажиры:</strong> отдельного управления температурой или интенсивностью обдува <strong>нет</strong> (в отличие от 4-зонной системы в более дорогих комплектациях). Задние дефлекторы получают воздух из передней зоны.</li>
+                    <li><strong>Фильтрация:</strong> салонный фильтр (угольный, рекомендуется менять каждые 20 000 км) задерживает пыльцу, пыль и выхлопные газы.</li>
+                    <li><strong>Clean Zone:</strong> функция контроля качества воздуха — при открытых окнах или загрязнении снаружи система может автоматически закрыть заслонку рециркуляции.</li>
+                </ul>
+                <p>Основные компоненты системы: компрессор кондиционера, испаритель, конденсатор, осушитель, датчики температуры в салоне и снаружи, датчик солнечной радиации (на верхней панели). Хладагент — <strong>R1234yf</strong> (экологичный).</p>
+                <div class="tip-block">
+                    💡 <strong>Особенность Momentum:</strong> задние дефлекторы на центральном тоннеле (для ног) и на стойках — подают воздух, но температура соответствует настройкам передней панели. Если хотите усилить обдув сзади, направьте центральные дефлекторы на потолке назад и увеличьте общую мощность вентилятора.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Управление климатом (кнопки и сенсорный экран) -->
+        <div id="controls" class="section-card">
+            <div class="section-header">
+                <h2>🎮 Управление: физические кнопки + сенсорный экран</h2>
+            </div>
+            <div class="section-body">
+                <div class="contact-grid">
+                    <div class="info-item">
+                        <h3>🕹️ Физические кнопки (центральная консоль)</h3>
+                        <div class="info-detail"><strong>🌬️ Максимальный обогрев стекла (Max Defroster)</strong> — мгновенное включение обдува лобового стекла на полную мощность + кондиционер + подогрев зеркал/заднего стекла.</div>
+                        <div class="info-detail"><strong>🔲 Подогрев заднего стекла и зеркал</strong> — включается отдельной кнопкой, автоматически отключается через несколько минут.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>📱 Управление через центральный дисплей</h3>
+                        <div class="info-detail"><strong>Климат-бар (внизу экрана):</strong> температура водителя/пассажира (+/-), кнопка подогрева сидений, вентиляции*, иконка открытия полного климат-меню.</div>
+                        <div class="info-detail"><strong>Климат-меню (Climate view):</strong> открывается касанием центральной иконки. Здесь доступны: точная регулировка температуры (0.5°C), мощность вентилятора (1–5), распределение воздуха (на стекло/тело/ноги), включение кондиционера (AC), рециркуляция, авто-режим.</div>
+                    </div>
+                </div>
+                <div class="warning-block">
+                    🧊 <strong>Важно для Израиля:</strong> В жаркую погоду сначала откройте окна на 1-2 минуты, чтобы выпустить горячий воздух, затем включайте кондиционер в режиме AUTO. Это ускорит охлаждение и снизит нагрузку на систему.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Режимы работы -->
+        <div id="modes" class="section-card">
+            <div class="section-header">
+                <h2>🌀 Режимы работы климат-контроля</h2>
+            </div>
+            <div class="section-body">
+                <div class="contact-grid">
+                    <div class="info-item">
+                        <h3>🔵 AUTO (автоматический режим)</h3>
+                        <div class="info-detail">Система сама поддерживает заданную температуру, регулируя мощность вентилятора, распределение потоков и включение кондиционера. Рекомендуемый режим для повседневной езды. В AUTO кондиционер работает только при необходимости (охлаждение или осушение).</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🌬️ Максимальный обогрев (Max Defroster)</h3>
+                        <div class="info-detail">Одним касанием включает: обдув лобового стекла на максимум, кондиционер (для осушения), подогрев зеркал и заднего стекла. Используйте при запотевании или инее. После отключения возвращает предыдущие настройки.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🔄 Рециркуляция воздуха</h3>
+                        <div class="info-detail">Закрывает заслонку забора наружного воздуха. Используйте в пробках или при сильном загрязнении (дым, пыль). <strong>Не оставляйте надолго</strong> — воздух станет спертым, и запотеют окна. В AUTO рециркуляция включается автоматически при активации датчика качества воздуха (IAQS).</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>❄️ Кондиционер (AC)</h3>
+                        <div class="info-detail">Включает компрессор для охлаждения и осушения воздуха. В режиме AUTO включается по необходимости. Рекомендуется включать AC хотя бы на 10–15 минут раз в месяц даже зимой для смазки компрессора.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🌡️ Распределение потоков</h3>
+                        <div class="info-detail">Можно вручную выбрать направление воздуха: только на стекло, на лицо/тело, на ноги, комбинированные. В AUTO система сама распределяет потоки в зависимости от температуры и освещённости (солнечный датчик).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Настройки и персонализация -->
+        <div id="settings" class="section-card">
+            <div class="section-header">
+                <h2>⚙️ Настройки климата в системе Sensus</h2>
+            </div>
+            <div class="section-body">
+                <p><strong>Путь:</strong> <code>Настройки → Климат</code> (или через Top view → Settings → Climate). Доступны следующие опции:</p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Автоматический обогрев заднего стекла</strong> — включает подогрев зеркал и заднего стекла автоматически при низкой температуре (обычно ниже +7°C).</li>
+                    <li><strong>Датчик качества воздуха (IAQS)</strong> — автоматическая рециркуляция при превышении уровня загрязнения. Рекомендуется держать включённым.</li>
+                    <li><strong>Автоматическая вентиляция при очистке салона</strong> — функция CZIP (Clean Zone Interior Package) включает вентилятор при открытии двери для продувки салона.</li>
+                    <li><strong>Таймер рециркуляции</strong> — автоматическое выключение рециркуляции через 20 минут во избежание запотевания.</li>
+                </ul>
+                <div class="tip-block">
+                    💡 <strong>Персонализация:</strong> настройки климата сохраняются в активном профиле водителя. Если вы связали ключ с профилем, при открытии автомобиля ваши предпочтения (температура, включение AC и т.д.) загрузятся автоматически.
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Уход и обслуживание -->
+        <div id="care" class="section-card">
+            <div class="section-header">
+                <h2>🧹 Уход, чистка и профилактика</h2>
+            </div>
+            <div class="section-body">
+                <div class="contact-grid">
+                    <div class="info-item">
+                        <h3>🔄 Замена салонного фильтра</h3>
+                        <div class="info-detail"><strong>Периодичность:</strong> каждые 20 000 км или 1 год (в Израиле — чаще из-за пыли). Угольный фильтр оригинал Volvo (31390880) или аналоги MANN CUK 2733, MAHLE LAK 1310.</div>
+                        <div class="info-detail">Расположен под бардачком. Замена доступна самостоятельно.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🧼 Дезинфекция кондиционера</h3>
+                        <div class="info-detail">При появлении неприятного запаха (грибок, бактерии) используйте спрей-очиститель испарителя (например, Liqui Moly Klima Fresh). Распыляется через воздухозаборники снаружи.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>⚠️ Признаки неисправности</h3>
+                        <div class="info-detail">• Слабый поток воздуха → забит фильтр.<br>• Не холодит → возможна утечка хладагента (R1234yf), требуется заправка в сервисе.<br>• Посторонние звуки при включении → проблемы с вентилятором или компрессором.</div>
+                    </div>
+                </div>
+                <div class="warning-block">
+                    🔧 <strong>Заправка кондиционера:</strong> на XC60 2020 используется хладагент R1234yf (не R134a). Обращайтесь только в специализированные сервисы, имеющие оборудование для R1234yf. Оригинальный объём — 650 г, масло компрессора PAG SP-A2.
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Вечный спор: кондиционер или открытые окна/люк -->
+        <div id="debate" class="section-card">
+            <div class="section-header">
+                <h2>💨 Главный спор: кондиционер (AC) vs открытые окна и люк</h2>
+            </div>
+            <div class="section-body">
+                <p>Водители часто спорят, что экономичнее и полезнее — включить кондиционер или открыть окна. Разберём по фактам для Volvo XC60 T4 с учётом аэродинамики и климата Израиля.</p>
+                <div class="contact-grid">
+                    <div class="info-item">
+                        <h3>❄️ Кондиционер (AC)</h3>
+                        <div class="info-detail"><strong>Плюсы:</strong><br>• Поддерживает комфортную температуру в любую жару.<br>• Осушает воздух, предотвращая запотевание стекол.<br>• Фильтрует воздух через салонный фильтр (угольный — задерживает пыль, выхлопные газы).<br>• При движении по трассе на скорости >80 км/ч потребляет <strong>меньше топлива</strong>, чем открытые окна (из-за аэродинамического сопротивления).</div>
+                        <div class="info-detail"><strong>Минусы:</strong><br>• Увеличивает расход топлива на 5–15% в городском цикле (при коротких поездках).<br>• Создаёт дополнительную нагрузку на двигатель, особенно на малых оборотах.<br>• При неправильном обслуживании может стать источником бактерий и неприятного запаха.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🚪 Открытые окна / люк</h3>
+                        <div class="info-detail"><strong>Плюсы:</strong><br>• Нулевое дополнительное потребление топлива (но аэродинамика ухудшается).<br>• Приятный естественный ветерок, особенно на низких скоростях.<br>• Быстрое проветривание салона после стоянки.</div>
+                        <div class="info-detail"><strong>Минусы:</strong><br>• На скорости >70–80 км/ч рост аэродинамического сопротивления увеличивает расход топлива <strong>больше, чем у кондиционера</strong> (до 20%).<br>• Пыль, выхлопные газы, шум (особенно на трассе).<br>• В жару открытые окна не охлаждают, а только обдувают горячим воздухом — эффект «фена».<br>• Люк на скорости создаёт сильный шум и турбулентность.</div>
+                    </div>
+                </div>
+                <div class="tip-block green-tip">
+                    📊 <strong>Чистая математика (по данным SAE и реальным замерам):</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>При городской езде (до 60 км/ч) — открытые окна чуть экономичнее, но разница мизерная (1–3%).</li>
+                        <li>При трассовой скорости (100–120 км/ч) — кондиционер экономичнее на 5–15%, так как аэродинамическое сопротивление с открытыми окнами растёт квадратично.</li>
+                        <li>При жаре выше 30°C открытые окна не снижают температуру в салоне до комфортных 22–23°C — только AC.</li>
+                    </ul>
+                </div>
+                <div class="warning-block">
+                    🧭 <strong>Практический вывод для вашего XC60 в Израиле:</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>В городе (пробки, низкая скорость, до 60 км/ч):</strong> можно открыть окна, если не слишком жарко и нет пыли/выхлопов. Это сэкономит топливо и снизит нагрузку на компрессор.</li>
+                        <li><strong>На трассе (>80 км/ч):</strong> всегда включайте кондиционер (режим AUTO). Расход топлива будет меньше, чем с открытыми окнами, а комфорт — выше.</li>
+                        <li><strong>При экстремальной жаре (>35°C):</strong> только кондиционер. Открытые окна создадут эффект теплового удара.</li>
+                        <li><strong>Люк:</strong> используйте в режиме «вентиляция» (задний край приподнят) на невысокой скорости, чтобы выпустить горячий воздух — но на трассе закрывайте.</li>
+                        <li><strong>При запотевании стёкол (дождь, высокая влажность):</strong> только кондиционер (в паре с обдувом стекла). Без AC окна не высушить.</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;">Итог: для израильского лета и частых поездок по Аялону и шоссе №1 — кондиционер + режим AUTO оптимальны. Окна — только на коротких участках с низкой скоростью и при отсутствии смога.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Частые вопросы (FAQ) -->
+        <div id="faq" class="section-card">
+            <div class="section-header">
+                <h2>❓ Частые вопросы о климат-контроле XC60</h2>
+            </div>
+            <div class="section-body">
+                <div class="contact-grid">
+                    <div class="info-item">
+                        <h3>🤔 Почему задние пассажиры жалуются, что им жарко, а передним нормально?</h3>
+                        <div class="info-detail">В Momentum нет отдельного заднего блока. Воздух к задним дефлекторам поступает из передней зоны. Чтобы улучшить ситуацию: включите направление воздуха «на лицо + ноги», увеличьте мощность вентилятора на 1–2 шага, убедитесь, что центральные дефлекторы на торпедо не закрыты и смотрят в сторону потолка (так поток пойдёт дальше).</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🧊 Кондиционер дует нормально, но не холодит?</h3>
+                        <div class="info-detail">Возможные причины: утечка хладагента (R1234yf), засорён конденсатор (перед радиатором), неисправен компрессор или датчик. Проверьте чистоту радиатора кондиционера (промойте снаружи). Если не помогло — в сервис.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>💧 После запуска кондиционера запах сырости/грибка?</h3>
+                        <div class="info-detail">Образуется конденсат на испарителе. Лечение: перед выключением двигателя за 2–3 минуты отключите AC, оставив вентилятор на средней скорости — высушит систему. Также раз в сезон используйте дезинфекцию спреем.</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>⚙️ Можно ли установить климат в задний ряд после покупки?</h3>
+                        <div class="info-detail">Нет, 4-зонный климат требует заводской установки другого блока HVAC и проводки. Послепродажная установка нецелесообразна. Компромисс: направляйте обдув на задних пассажиров через передние дефлекторы.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footnote">
+            📌 Информация актуальна для Volvo XC60 T4 Momentum 2020 (2-зонный климат). Некоторые функции могут отличаться в зависимости от опций. Рекомендуется раз в 2 года проводить диагностику системы кондиционирования в специализированном сервисе.
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
