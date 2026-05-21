@@ -1,233 +1,30 @@
 meta:
   app: CS Helper
   version: 1.0.0
-  updated: 2026-05-21 09:26
+  updated: 2026-05-21 11:06
 
 sections:
   - id: calculators
     title: Calculators and Schemes
     icon: 🧮
     items:
-      - id: drug-dilution
-        title: "Drug Dilution Calculator"
-        file: books/calculators/drug-dilution.html
-        type: calculator
-        visible: true
-        tags: []
-      - id: heparin
-        title: "Cardiac Surgery Heparin Protocol | Appendix 7"
-        file: books/calculators/heparin.html
-        type: calculator
-        visible: true
-        tags: []
-      - id: insulin-bb
-        title: "Insulin Basis-Bolus"
-        file: books/calculators/insulin-bb.html
-        type: calculator
-        visible: true
-        tags: [insulin, diabetes, endocrine]
-      - id: iv-infusion
-        title: "IV Infusion Rates"
-        file: books/calculators/iv-infusion.html
-        type: calculator
-        visible: true
-        tags: []
-      - id: ppm
-        title: "PPM Calculator | Prosthesis-Patient Mismatch · Heart Valve Sizing (including Bicarbon)"
-        file: books/calculators/ppm.html
-        type: calculator
-        visible: true
-        tags: []
-
   - id: references
     title: References
     icon: 📋
     items:
-      - id: drug-formulary
-        title: "Department Drug Formulary"
-        file: books/references/drug-formulary.md
-        type: reference
-        visible: true
-        tags: [drugs, pharmacy, formulary]
-      - id: ecg-norms
-        title: "ECG Normal Values"
-        file: books/references/ecg-norms.md
-        type: reference
-        visible: true
-        tags: [ecg, norms, electrophysiology]
-      - id: echo-norms
-        title: "Echocardiography Normal Values"
-        file: books/references/echo-norms.md
-        type: reference
-        visible: true
-        tags: [echo, echocardiography, norms]
-      - id: platelets
-        title: "Platelets"
-        file: books/references/platelets.md
-        type: reference
-        visible: true
-        tags: []
-
   - id: scales
     title: Scales & Scores
     icon: 📊
     items:
-      - id: cha2ds2-vasc
-        title: "CHA₂DS₂-VASc Score"
-        file: books/scales/cha2ds2-vasc.html
-        type: scale
-        visible: true
-        tags: []
-      - id: euroscore2
-        title: "EuroSCORE II – Cardiac Surgery Risk Calculator"
-        file: books/scales/euroscore2.html
-        type: scale
-        visible: true
-        tags: []
-      - id: has-bled
-        title: "HAS-BLED Score"
-        file: books/scales/has-bled.html
-        type: scale
-        visible: true
-        tags: []
-      - id: nyha
-        title: "NYHA Functional Classification"
-        file: books/scales/nyha.md
-        type: scale
-        visible: true
-        tags: [heart failure, NYHA, classification]
-
   - id: protocols
     title: Protocols
     icon: 📄
     items:
-      - id: heparin-protocol
-        title: "Heparin Anticoagulation Protocol — Cardiac Surgery (Appendix 7)"
-        file: books/protocols/heparin-protocol.md
-        type: protocol
-        visible: true
-        tags: [heparin, anticoagulation, protocol, cardiac-surgery]
-      - id: insulin-bb-protocol
-        title: "Insulin Bb Protocol"
-        file: books/protocols/insulin-bb-protocol.md
-        type: protocol
-        visible: true
-        tags: []
-
   - id: cheatsheets
     title: Cheat Sheets
     icon: 🗒️
     items:
-      - id: acls2025
-        title: "ACLS 2025 Quick Reference – AHA Guidelines"
-        file: books/cheatsheets/acls2025.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: alter_coagulation
-        title: "Non‑Heparin Anticoagulation | Angiomax, Iloprost, DOACs, Argatroban, Fondaparinux & Defibrotide"
-        file: books/cheatsheets/alter_coagulation.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: cardiac-acls
-        title: "Cardiac Surgery ACLS (CALS)"
-        file: books/cheatsheets/cardiac-acls.html
-        type: cheatsheet
-        visible: true
-        tags: [icu, acute, cardiac surgery]
-      - id: cardiac-echo
-        title: "Echocardiography Reference Guide | Normal Values & Severity Grading | ASE/EACVI"
-        file: books/cheatsheets/cardiac-echo.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: carotid-doppler
-        title: "Carotid & Vertebral Doppler — Interpretation"
-        file: books/cheatsheets/carotid-doppler.md
-        type: cheatsheet
-        visible: true
-        tags: [doppler, carotid, vascular, ultrasound]
-      - id: cirrhosis
-        title: "Cirrhosis — Quick Reference"
-        file: books/cheatsheets/cirrhosis.md
-        type: cheatsheet
-        visible: true
-        tags: [liver, cirrhosis, hepatology]
-      - id: ecg
-        title: "ECG Cheat Sheet – LITFL based | Advanced"
-        file: books/cheatsheets/ecg.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: electrolytes
-        title: "Electrolyte Disorders in Cardiac Surgery | K⁺, Ca²⁺, Mg²⁺ Guide"
-        file: books/cheatsheets/electrolytes.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: external_pacing
-        title: "Medtronic 5388 – Temporary External Pacing Guide"
-        file: books/cheatsheets/external_pacing.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: infection
-        title: "Cardiac Surgery Microbes & Antibiotic Therapy Guide"
-        file: books/cheatsheets/infection.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: inotrops
-        title: "Inotropes & Vasoactive Drugs | Cardiac Surgery Guide"
-        file: books/cheatsheets/inotrops.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: picco
-        title: "PiCCO Monitoring – Comprehensive Clinical Guide"
-        file: books/cheatsheets/picco.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: prism-setup
-        title: "PRISM Setup — Quick Reference"
-        file: books/cheatsheets/prism-setup.md
-        type: cheatsheet
-        visible: false
-        tags: [prism, CRRT, renal replacement, device]
-      - id: renal-failure
-        title: "Acute Kidney Injury — Quick Reference"
-        file: books/cheatsheets/renal-failure.md
-        type: cheatsheet
-        visible: true
-        tags: [renal, AKI, acute kidney injury]
-      - id: ventilation
-        title: "Hamilton C1 Ventilator Guide | VSIMV, PSIMV, Modes & Clinical Reference"
-        file: books/cheatsheets/ventilation.html
-        type: cheatsheet
-        visible: true
-        tags: []
-      - id: warfarin
-        title: "Warfarin Anticoagulation Protocol – Bojar Appendix 8 & 9 | Cardiac Surgery"
-        file: books/cheatsheets/warfarin.html
-        type: cheatsheet
-        visible: true
-        tags: []
-
   - id: icd
     title: ICD Codes
     icon: 🏷️
     items:
-      - id: diagnoses
-        title: "Diagnoses"
-        file: books/icd/diagnoses.json
-        type: icd
-        visible: true
-        tags: []
-      - id: procedures
-        title: "Procedures"
-        file: books/icd/procedures.json
-        type: icd
-        visible: true
-        tags: []
