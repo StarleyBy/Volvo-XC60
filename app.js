@@ -393,19 +393,86 @@ function renderHTML(item, area, section) {
   frame.onload = () => {
     try {
       const doc = frame.contentWindow.document;
+      
+      // Глобальная инъекция стилей Volvo Luxury во все iframe
       const style = doc.createElement('style');
       style.textContent = `
-        body { background: transparent !important; padding: 0 !important; margin: 0 !important; color: inherit; font-family: inherit; }
-        [class*="-container"] { max-width: none !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 100% !important; }
-        .content { padding: 20px !important; }
-        table { display: block !important; width: 100% !important; overflow-x: auto !important; border-collapse: collapse !important; }
+        :root {
+          --accent: #003057;
+          --gold: #c5a059;
+          --bg: #121212;
+          --panel: #1e1e1e;
+          --border: #333;
+          --text: #e0e0e0;
+          --text-muted: #a0a0a0;
+        }
+        
+        body { 
+          background: transparent !important; 
+          color: var(--text) !important; 
+          font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
+          margin: 0 !important; 
+          padding: 20px !important; 
+          line-height: 1.6;
+        }
+
+        /* Заголовки */
+        h1, h2, h3 { color: #fff !important; font-weight: 300 !important; margin-top: 1.5em !important; margin-bottom: 0.8em !important; }
+        h1 { font-size: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 0.5em; }
+        h2 { font-size: 1.6em; color: var(--gold) !important; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        /* Таблицы */
+        table { 
+          width: 100% !important; 
+          border-collapse: collapse !important; 
+          margin: 1.5em 0 !important; 
+          background: var(--panel) !important;
+          border: 1px solid var(--border) !important;
+        }
+        th { 
+          background: #000 !important; 
+          color: var(--text-muted) !important; 
+          text-align: left !important; 
+          padding: 12px 16px !important;
+          font-size: 11px !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.1em !important;
+          border-bottom: 2px solid var(--border) !important;
+        }
+        td { padding: 12px 16px !important; border-bottom: 1px solid var(--border) !important; font-size: 14px; }
+        tr:hover td { background: rgba(255,255,255,0.02) !important; }
+
+        /* Карточки и блоки */
+        .info-card, .card, [class*="card"] {
+          background: var(--panel) !important;
+          border: 1px solid var(--border) !important;
+          padding: 1.5em !important;
+          margin: 1em 0 !important;
+          border-radius: 4px !important;
+        }
+        
+        /* Скроллбары */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Убираем лишние сайдбары и фиксированные элементы из car.html если они там остались */
+        .sidebar, aside, nav { display: none !important; }
+        .layout, .content { display: block !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
       `;
       doc.head.appendChild(style);
-      const updateHeight = () => { frame.style.height = doc.documentElement.scrollHeight + 'px'; };
+
+      const updateHeight = () => {
+        const height = doc.documentElement.scrollHeight;
+        frame.style.height = height + 'px';
+      };
+      
       updateHeight();
       frame.style.opacity = '1';
       new ResizeObserver(updateHeight).observe(doc.body);
     } catch(e) {
+      console.warn('Seamless mode failed:', e);
       frame.style.height = '80vh';
       frame.style.opacity = '1';
     }

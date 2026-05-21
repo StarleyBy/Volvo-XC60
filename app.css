@@ -280,5 +280,15 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   #content-area { padding: 20px; }
 }
 
+/* ── CALCULATOR FRAME ───────────────────────────────────── */
+#calc-frame {
+  width: 100%; border: none;
+  background: transparent;
+  min-height: 200px;
+  display: block;
+}
+
+#page-view.wide { max-width: 1200px; }
+
 /* ── LOADING ────────────────────────────────────────────── */
 .loading-msg { text-align: center; padding: 100px 0; color: var(--text-muted); font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; }
