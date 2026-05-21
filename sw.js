@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cs-helper-v14';
+const CACHE_NAME = 'volvo-v1';
 
 const STATIC_ASSETS = [
   './',
@@ -8,9 +8,7 @@ const STATIC_ASSETS = [
   './app-manifest.yml',
   './libs/js-yaml.min.js',
   './libs/marked.min.js',
-  './manifest.json',
-  './books/icd/diagnoses.json',
-  './books/icd/procedures.json'
+  './manifest.json'
 ];
 
 self.addEventListener('install', event => {
@@ -21,7 +19,7 @@ self.addEventListener('install', event => {
         try {
           await cache.add(url);
         } catch (err) {
-          console.warn(`[SW] Could not pre-cache: ${url}. Check if file exists on server.`);
+          console.warn(`[SW] Could not pre-cache: ${url}`);
         }
       }
     })
@@ -41,7 +39,6 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (!event.request.url.startsWith('http')) return;
 
-  // Network First Strategy
   event.respondWith(
     fetch(event.request)
       .then(response => {
