@@ -168,26 +168,29 @@ body {
 
 .home-grid, .index-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
 
-.home-card, .index-card {
+.home-card {
   background: var(--bg-panel);
   border: 1px solid var(--border);
-  padding: 20px;
+  padding: 24px;
   cursor: pointer;
   transition: all 0.3s;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
 }
-.home-card:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
 
-/* Article View */
-#page-view { width: 100%; max-width: 1000px; margin: 0 auto; }
-.page-header { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; align-items: center; }
+.home-card-icon { font-size: 32px; }
+.home-card-title { font-size: 14px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+.home-card-count { font-size: 10px; color: var(--text-muted); }
 
-.md-body { font-size: 1.1em; line-height: 1.7; }
-.md-body h1 { margin-bottom: 20px; }
+.home-card:hover { border-color: var(--accent-gold); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -205,6 +208,21 @@ body {
   .vin-box { font-size: 10px; }
   
   .topbar-btn { width: 30px; height: 30px; font-size: 11px; }
+
+  /* Compact Home Grid for Mobile */
+  .home-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .home-card {
+    padding: 12px 8px;
+    gap: 6px;
+    background: transparent;
+    border-color: rgba(255,255,255,0.05);
+  }
+  .home-card-icon { font-size: 24px; }
+  .home-card-title { font-size: 9px; letter-spacing: 0; font-weight: 500; }
+  .home-card-count { display: none; }
 }
 
 /* ── LOGIN SCREEN ───────────────────────────────────────── */
