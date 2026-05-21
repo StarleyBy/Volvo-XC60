@@ -71,12 +71,57 @@ function isFavorite(itemId, sectionId) {
   return State.favorites.some(f => f.itemId === itemId && f.sectionId === sectionId);
 }
 
+// ── AUDIO ENGINE ─────────────────────────────────────────
+const AudioEngine = {
+  bgm: new Audio('https://assets.mixkit.co/music/preview/mixkit-luxury-lifestyle-35.mp3'),
+  click: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3'),
+  start: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-car-ignition-1538.mp3'),
+  error: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-car-lock-1539.mp3'),
+  muted: localStorage.getItem('volvo-muted') === 'true',
+  
+  init() {
+    this.bgm.loop = true;
+    this.bgm.volume = 0.2;
+    this.click.volume = 0.4;
+    this.start.volume = 0.6;
+    this.error.volume = 0.5;
+    this.updateToggle();
+  },
+  
+  playBGM() {
+    if (!this.muted) this.bgm.play().catch(() => {});
+  },
+  
+  playSFX(key) {
+    if (this.muted) return;
+    const sfx = this[key];
+    if (sfx) {
+      sfx.currentTime = 0;
+      sfx.play().catch(() => {});
+    }
+  },
+  
+  toggle() {
+    this.muted = !this.muted;
+    localStorage.setItem('volvo-muted', this.muted);
+    if (this.muted) this.bgm.pause();
+    else this.playBGM();
+    this.updateToggle();
+  },
+  
+  updateToggle() {
+    const btn = $('sound-toggle');
+    if (btn) btn.textContent = this.muted ? '🔇' : '🔊';
+  }
+};
+
 // ── AUTH & IGNITION ──────────────────────────────────────
 const AUTH_CODE = '456755';
 let pinInput = '';
 
 function addPin(num) {
   if (pinInput.length >= 6) return;
+  AudioEngine.playSFX('click');
   pinInput += num;
   updatePinDisplay();
   if (pinInput.length === 6) {
@@ -85,15 +130,9 @@ function addPin(num) {
 }
 
 function clearPin() {
+  AudioEngine.playSFX('click');
   pinInput = '';
   updatePinDisplay();
-}
-
-function updatePinDisplay() {
-  const dots = document.querySelectorAll('.pin-dot');
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i < pinInput.length);
-  });
 }
 
 async function checkPin() {
@@ -101,6 +140,7 @@ async function checkPin() {
     $('login-status').textContent = 'ENGINE STARTING...';
     $('login-status').style.color = '#4caf50';
     document.querySelector('#ignition-knob').classList.add('ignited');
+    AudioEngine.playSFX('start');
     
     localStorage.setItem('volvo-session', Date.now());
     
@@ -110,10 +150,11 @@ async function checkPin() {
         $('login-screen').style.display = 'none';
         showApp();
       }, 500);
-    }, 1000);
+    }, 2000);
   } else {
     $('login-status').textContent = 'INVALID KEY';
     $('login-status').style.color = '#f44336';
+    AudioEngine.playSFX('error');
     pinInput = '';
     updatePinDisplay();
     setTimeout(() => {
@@ -124,6 +165,8 @@ async function checkPin() {
 }
 
 $('ignition-knob').addEventListener('click', () => {
+  AudioEngine.playSFX('click');
+  AudioEngine.playBGM();
   $('ignition-knob-wrap').style.transform = 'scale(0.9) rotate(10deg)';
   setTimeout(() => {
     $('ignition-knob-wrap').style.transform = '';
