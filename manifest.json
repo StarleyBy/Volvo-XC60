@@ -1,11 +1,11 @@
 {
-  "name": "CS Helper",
-  "short_name": "CS Helper",
-  "description": "Pocket Medical Reference for Cardiac Surgery",
+  "name": "Volvo XC60: Справочник",
+  "short_name": "Volvo XC60",
+  "description": "Личный справочник и дневник эксплуатации Volvo XC60",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f1117",
-  "theme_color": "#0f1117",
+  "background_color": "#121212",
+  "theme_color": "#121212",
   "orientation": "any",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
