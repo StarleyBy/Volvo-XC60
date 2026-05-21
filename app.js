@@ -52,7 +52,7 @@ function toggleTheme() {
 }
 
 function updateFontSize(delta) {
-  State.fontSize = Math.max(12, Math.min(24, State.fontSize + delta));
+  State.fontSize = Math.max(12, Math.min(26, State.fontSize + delta));
   document.documentElement.style.setProperty('--base-font', State.fontSize + 'px');
   localStorage.setItem('volvo-font-size', State.fontSize);
   
@@ -62,12 +62,13 @@ function updateFontSize(delta) {
     try {
       const doc = frame.contentWindow.document;
       doc.body.style.fontSize = State.fontSize + 'px';
+      // Recalculate height after font change
+      frame.style.height = doc.documentElement.scrollHeight + 'px';
     } catch(e) {}
   }
 }
 
-// ── AUTH & IGNITION ──────────────────────────────────────
-
+// ── FAVORITES ────────────────────────────────────────────
 function toggleFavorite(itemId, sectionId) {
   const index = State.favorites.findIndex(f => f.itemId === itemId && f.sectionId === sectionId);
   if (index > -1) {
@@ -155,32 +156,24 @@ const AudioEngine = {
     const dur = 3.0;
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    const noise = this.ctx.createBufferSource();
-    
-    // Aggressive Sawyer wave
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(20, this.ctx.currentTime);
-    osc.frequency.linearRampToValueAtTime(85, this.ctx.currentTime + 0.4); // Start jump
+    osc.frequency.linearRampToValueAtTime(85, this.ctx.currentTime + 0.4); 
     osc.frequency.exponentialRampToValueAtTime(55, this.ctx.currentTime + dur);
-    
     gain.gain.setValueAtTime(0.01, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.4, this.ctx.currentTime + 0.3); // High peak
-    gain.gain.exponentialRampToValueAtTime(0.02, this.ctx.currentTime + dur);
-    
+    gain.gain.linearRampToValueAtTime(0.6, this.ctx.currentTime + 0.3); // More aggressive peak
+    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + dur);
     const filter = this.ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1000, this.ctx.currentTime);
-    filter.frequency.exponentialRampToValueAtTime(250, this.ctx.currentTime + dur);
-
-    // Distortion for "growl"
+    filter.frequency.setValueAtTime(1200, this.ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + dur);
     const shaper = this.ctx.createWaveShaper();
     const curve = new Float32Array(44100);
     for (let i = 0; i < 44100; i++) {
       const x = (i * 2) / 44100 - 1;
-      curve[i] = (Math.PI + 20) * x / (Math.PI + 20 * Math.abs(x));
+      curve[i] = (Math.PI + 30) * x / (Math.PI + 30 * Math.abs(x));
     }
     shaper.curve = curve;
-
     osc.connect(shaper); shaper.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
     osc.start(); osc.stop(this.ctx.currentTime + dur);
   },
@@ -288,7 +281,7 @@ $('ignition-knob').addEventListener('click', () => {
 
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
-  const APP_VERSION = '2.3';
+  const APP_VERSION = '2.4';
   if (localStorage.getItem('volvo-app-version') !== APP_VERSION) {
     localStorage.removeItem('volvo-session');
     localStorage.setItem('volvo-app-version', APP_VERSION);
@@ -417,19 +410,11 @@ function openSection(sectionId, push = true) {
 function openItem(section, item, push = true) {
   State.currentItem = item;
   if (push) updateUrl({ view: 'item', sectionId: section.id, itemId: item.id });
-
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.itemId === item.id));
-
-  $('page-breadcrumb').innerHTML = `
-    <span class="bc-link" onclick="showHome()">Главная</span>
-    <span class="bc-sep">/</span>
-    <span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>
-  `;
-
+  $('page-breadcrumb').innerHTML = `<span class="bc-link" onclick="showHome()">Главная</span><span class="bc-sep">/</span><span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>`;
   $('sidebar').classList.remove('open');
   $('overlay').classList.remove('visible');
   AudioEngine.playSFX('open');
-
   const area = $('content-area');
   const file = resolvePath(item.file);
   if (item.type === 'document' || file.endsWith('.pdf')) renderPDF(item, area, section);
@@ -484,8 +469,7 @@ function renderSectionIndex(section) {
   State.currentItem = null;
   const area = $('content-area');
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  $('page-breadcrumb').innerHTML = `<span class="bc-link" onclick="showHome()">Главная</span>`;
-  $('page-title-bar').textContent = section.title;
+  $('page-breadcrumb').innerHTML = `<span class="bc-link" onclick="showHome()">Главная</span> <span class="bc-sep">/</span> <span>${section.title}</span>`;
   let listHtml = '';
   (section.items || []).forEach((item, index) => {
     listHtml += `<div class="index-card ic-${item.type} v-${index%5}" onclick="openItemById('${section.id}', '${item.id}')"><div class="index-card-title">${item.title}</div><div class="index-card-tags"><span class="page-type-badge type-${item.type}">${item.type}</span>${(item.tags || []).map(t => `<span class="tag">#${t}</span>`).join(' ')}</div></div>`;
@@ -505,18 +489,18 @@ async function renderMarkdown(item, area, section) {
     const text = await fetch(resolvePath(item.file) + '?v=' + Date.now()).then(r => r.text());
     const html = marked.parse(text);
     const responsiveHtml = html.replace(/<table>/g, '<div class="table-wrapper"><table>').replace(/<\/table>/g, '</table></div>');
-    area.innerHTML = `<div id="page-view"><div class="page-header"><div><span class="page-type-badge type-${item.type}">${item.type}</span><button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${isFavorite(item.id, section.id) ? '★' : '☆'}</button></div><div style="flex:1"></div><a href="redact.html?file=${encodeURIComponent(item.file)}" target="_blank" id="redact-link">✏️ Редактировать</a></div><div class="md-body">${responsiveHtml}</div></div>`;
+    area.innerHTML = `<div id="page-view"><div class="page-header"><div><span class="page-type-badge type-${item.type}">${item.type}</span><button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${isFavorite(item.id, section.id) ? '★' : '☆'}</button></div><div style="flex:1"></div></div><div class="md-body">${responsiveHtml}</div></div>`;
   } catch(e) { area.innerHTML = `<p class="empty-msg">Ошибка загрузки</p>`; }
 }
 
 function renderHTML(item, area, section) {
-  area.innerHTML = `<div id="page-view" class="wide"><div class="page-header" style="margin-bottom: 8px;"><span class="page-type-badge type-${item.type}">${item.type}</span><button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${isFavorite(item.id, section.id) ? '★' : '☆'}</button><a href="redact.html?file=${encodeURIComponent(item.file)}" target="_blank" id="redact-link" style="margin-left:auto">✏️ Редактировать</a></div><iframe id="calc-frame" title="${item.title}" style="opacity:0; transition:opacity 0.2s; width:100%; border:none;"></iframe></div>`;
+  area.innerHTML = `<div id="page-view" class="wide"><div class="page-header" style="margin-bottom: 8px;"><span class="page-type-badge type-${item.type}">${item.type}</span><button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${isFavorite(item.id, section.id) ? '★' : '☆'}</button></div><iframe id="calc-frame" title="${item.title}" style="opacity:0; transition:opacity 0.2s; width:100%; border:none;"></iframe></div>`;
   const frame = $('calc-frame');
   frame.onload = () => {
     try {
       const doc = frame.contentWindow.document;
       const style = doc.createElement('style');
-      style.textContent = `:root { --gold: #c5a059; --bg: #121212; --panel: #1e1e1e; --border: #333; --text: #e0e0e0; } body { background: transparent !important; margin: 0 !important; padding: 20px !important; line-height: 1.6; color: var(--text) !important; font-family: 'IBM Plex Sans', sans-serif !important; } * { color: var(--text) !important; border-color: var(--border) !important; } div, section, header, footer, article, aside, main, p, li { background-color: transparent !important; } h1, h2, h3, h4, strong, b { color: #fff !important; } h2 { color: var(--gold) !important; text-transform: uppercase; } a, a * { color: var(--gold) !important; text-decoration: none !important; } .card, .info-card, .highlight, .toc, blockquote, [class*="card"], [class*="warning"], [class*="block"] { background: var(--panel) !important; border: 1px solid var(--border) !important; border-left: 4px solid var(--gold) !important; padding: 20px !important; margin: 20px 0 !important; } table { width: 100% !important; border-collapse: collapse !important; background: var(--panel) !important; } th { background: #000 !important; color: var(--gold) !important; padding: 12px !important; } td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; } .sidebar, aside, nav:not(.toc nav) { display: none !important; } .layout, .content, .container { display: block !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }`;
+      style.textContent = `:root { --gold: #c5a059; --bg: #121212; --panel: #1e1e1e; --border: #333; --text: #e0e0e0; --base-font: ${State.fontSize}px; } body { background: transparent !important; margin: 0 !important; padding: 20px !important; line-height: 1.6; color: var(--text) !important; font-family: 'IBM Plex Sans', sans-serif !important; font-size: var(--base-font) !important; } * { color: var(--text) !important; border-color: var(--border) !important; } div, section, header, footer, article, aside, main, p, li { background-color: transparent !important; } h1, h2, h3, h4, strong, b { color: #fff !important; } h2 { color: var(--gold) !important; text-transform: uppercase; } a, a * { color: var(--gold) !important; text-decoration: none !important; } .card, .info-card, .highlight, .toc, blockquote, [class*="card"], [class*="warning"], [class*="block"] { background: var(--panel) !important; border: 1px solid var(--border) !important; border-left: 4px solid var(--gold) !important; padding: 20px !important; margin: 20px 0 !important; } table { width: 100% !important; border-collapse: collapse !important; background: var(--panel) !important; } th { background: #000 !important; color: var(--gold) !important; padding: 12px !important; } td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; } .sidebar, aside, nav:not(.toc nav) { display: none !important; } .layout, .content, .container { display: block !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }`;
       doc.head.appendChild(style);
       const updateHeight = () => { frame.style.height = doc.documentElement.scrollHeight + 'px'; };
       updateHeight(); frame.style.opacity = '1';
@@ -540,7 +524,6 @@ $('sidebar-search').addEventListener('input', e => buildNav(e.target.value.trim(
 $('menu-toggle').addEventListener('click', () => { $('sidebar').classList.add('open'); $('overlay').classList.add('visible'); });
 $('overlay').addEventListener('click', () => { $('sidebar').classList.remove('open'); $('overlay').classList.remove('visible'); });
 $('theme-toggle').addEventListener('click', toggleTheme);
-$('font-toggle').addEventListener('click', () => updateFontSize(1));
 
 function updatePinDisplay() {
   const dots = document.querySelectorAll('.pin-dot');
