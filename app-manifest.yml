@@ -1,13 +1,7 @@
 meta:
-<<<<<<< HEAD
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-21 11:10
-=======
-  app: CS Helper
-  version: 1.0.0
-  updated: 2026-05-21 11:08
->>>>>>> 4aa0eef1e169da76ea935d7029ce36f7de9ffb2a
+  updated: 2026-05-21 11:13
 
 sections:
   - id: device
@@ -30,23 +24,23 @@ sections:
   - id: control
     title: Управление
     icon: 🕹️
-    items: []
+    items:
   - id: repair
     title: Ремонт
     icon: 🛠️
-    items: []
+    items:
   - id: care
     title: Уход
     icon: ✨
-    items: []
+    items:
   - id: inspection
     title: Техосмотр
     icon: 📋
-    items: []
+    items:
   - id: schedule
     title: График замен
     icon: 📅
-    items: []
+    items:
   - id: records
     title: Записи
     icon: 📝
@@ -61,12 +55,12 @@ sections:
   - id: insurance
     title: Страховка
     icon: 🛡️
-    items: []
+    items:
   - id: tuning
     title: Тюнинг
     icon: 🏎️
-    items: []
+    items:
   - id: accessories
     title: Аксессуары
     icon: 👜
-    items: []
+    items:
