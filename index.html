@@ -21,6 +21,32 @@
 </head>
 <body>
 
+<!-- ── LOGIN SCREEN (VOLVO IGNITION) ──────────────────── -->
+<div id="login-screen">
+  <div id="ignition-module">
+    <div id="ignition-knob-wrap">
+      <div id="ignition-knob">
+        <span id="ignition-label">START<br>STOP</span>
+        <div id="ignition-dot"></div>
+      </div>
+    </div>
+    <div id="login-status">READY TO START</div>
+    
+    <div id="pin-pad" style="display:none">
+      <div id="pin-display">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-grid">
+        <button onclick="addPin('1')">1</button><button onclick="addPin('2')">2</button><button onclick="addPin('3')">3</button>
+        <button onclick="addPin('4')">4</button><button onclick="addPin('5')">5</button><button onclick="addPin('6')">6</button>
+        <button onclick="addPin('7')">7</button><button onclick="addPin('8')">8</button><button onclick="addPin('9')">9</button>
+        <button onclick="clearPin()">C</button><button onclick="addPin('0')">0</button><button onclick="checkPin()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ── MOBILE OVERLAY ────────────────────────────────── -->
 <div id="overlay"></div>
 

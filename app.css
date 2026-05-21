@@ -290,5 +290,81 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 #page-view.wide { max-width: 1200px; }
 
+/* ── LOGIN SCREEN (VOLVO IGNITION) ──────────────────── */
+#login-screen {
+  position: fixed; inset: 0; z-index: 2000;
+  background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.5s;
+}
+
+#ignition-module { text-align: center; }
+
+#ignition-knob-wrap {
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, #2a2a2a 0%, #111 70%);
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.1);
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#ignition-knob-wrap:hover { transform: scale(1.05); }
+
+#ignition-knob {
+  width: 100%; height: 100%;
+  background: #1a1a1a;
+  border-radius: 50%;
+  border: 4px solid #333;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+}
+#ignition-label {
+  color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2;
+  letter-spacing: 0.1em; opacity: 0.8;
+}
+#ignition-dot {
+  width: 6px; height: 6px; background: #555; border-radius: 50%; margin-top: 10px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#ignition-knob.ignited #ignition-dot {
+  background: #4caf50;
+  box-shadow: 0 0 10px #4caf50, 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+#login-status {
+  font-size: 12px; font-weight: 600; color: var(--accent-gold);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-top: 20px; min-height: 1.2em;
+}
+
+/* PIN PAD */
+#pin-display {
+  display: flex; gap: 15px; justify-content: center; margin: 30px 0;
+}
+.pin-dot {
+  width: 12px; height: 12px; border: 2px solid #333; border-radius: 50%;
+  transition: all 0.2s;
+}
+.pin-dot.active {
+  background: var(--accent-gold); border-color: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.pin-grid {
+  display: grid; grid-template-columns: repeat(3, 70px); gap: 15px;
+}
+.pin-grid button {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #222;
+  color: #fff; font-size: 20px; font-weight: 300;
+  cursor: pointer; transition: all 0.15s;
+}
+.pin-grid button:hover { background: rgba(255,255,255,0.08); border-color: #444; }
+.pin-grid button:active { background: var(--accent-gold); color: #000; transform: scale(0.9); }
+
 /* ── LOADING ────────────────────────────────────────────── */
 .loading-msg { text-align: center; padding: 100px 0; color: var(--text-muted); font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; }

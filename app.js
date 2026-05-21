@@ -71,9 +71,79 @@ function isFavorite(itemId, sectionId) {
   return State.favorites.some(f => f.itemId === itemId && f.sectionId === sectionId);
 }
 
+// ── AUTH & IGNITION ──────────────────────────────────────
+const AUTH_CODE = '456755';
+let pinInput = '';
+
+function addPin(num) {
+  if (pinInput.length >= 6) return;
+  pinInput += num;
+  updatePinDisplay();
+  if (pinInput.length === 6) {
+    setTimeout(checkPin, 300);
+  }
+}
+
+function clearPin() {
+  pinInput = '';
+  updatePinDisplay();
+}
+
+function updatePinDisplay() {
+  const dots = document.querySelectorAll('.pin-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i < pinInput.length);
+  });
+}
+
+async function checkPin() {
+  if (pinInput === AUTH_CODE) {
+    $('login-status').textContent = 'ENGINE STARTING...';
+    $('login-status').style.color = '#4caf50';
+    document.querySelector('#ignition-knob').classList.add('ignited');
+    
+    localStorage.setItem('volvo-session', Date.now());
+    
+    setTimeout(() => {
+      $('login-screen').style.opacity = '0';
+      setTimeout(() => {
+        $('login-screen').style.display = 'none';
+        showApp();
+      }, 500);
+    }, 1000);
+  } else {
+    $('login-status').textContent = 'INVALID KEY';
+    $('login-status').style.color = '#f44336';
+    pinInput = '';
+    updatePinDisplay();
+    setTimeout(() => {
+      $('login-status').textContent = 'READY TO START';
+      $('login-status').style.color = '';
+    }, 1500);
+  }
+}
+
+$('ignition-knob').addEventListener('click', () => {
+  $('ignition-knob-wrap').style.transform = 'scale(0.9) rotate(10deg)';
+  setTimeout(() => {
+    $('ignition-knob-wrap').style.transform = '';
+    $('ignition-knob-wrap').style.display = 'none';
+    $('pin-pad').style.display = 'block';
+    $('login-status').textContent = 'ENTER PIN';
+  }, 200);
+});
+
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
-  // Update user indicator
+  // Check auth
+  const session = localStorage.getItem('volvo-session');
+  if (!session) {
+    $('login-screen').style.display = 'flex';
+    $('app').style.display = 'none';
+    return;
+  }
+  
+  $('app').style.display = 'flex';
   $('user-role-label').textContent = 'Владелец';
   $('user-dot').style.background = '#4caf50';
 
