@@ -1,7 +1,7 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-21 12:35
+  updated: 2026-05-21 12:36
 
 sections:
   - id: device
@@ -43,6 +43,12 @@ sections:
         type: reference
         visible: true
         tags: []
+      - id: panel
+        title: "Приборная панель Volvo XC60 2020 | Полный гид с графикой"
+        file: books/volvo/control/panel.html
+        type: reference
+        visible: true
+        tags: []
       - id: safe
         title: "Safe"
         file: books/volvo/control/safe.md
@@ -53,19 +59,19 @@ sections:
   - id: repair
     title: Ремонт
     icon: 🛠️
-    items: []
+    items:
   - id: care
     title: Уход
     icon: ✨
-    items: []
+    items:
   - id: inspection
     title: Техосмотр
     icon: 📋
-    items: []
+    items:
   - id: schedule
     title: График замен
     icon: 📅
-    items: []
+    items:
   - id: records
     title: Записи
     icon: 📝
@@ -115,12 +121,12 @@ sections:
   - id: insurance
     title: Страховка
     icon: 🛡️
-    items: []
+    items:
   - id: tuning
     title: Тюнинг
     icon: 🏎️
-    items: []
+    items:
   - id: accessories
     title: Аксессуары
     icon: 👜
-    items: []
+    items:
