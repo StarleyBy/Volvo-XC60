@@ -400,7 +400,7 @@ window.addEventListener('popstate', (e) => {
 });
 
 function openSection(sectionId, push = true) {
-  AudioEngine.playSFX('nav');
+  if (push) AudioEngine.playSFX('nav');
   const section = State.manifest.sections.find(s => s.id === sectionId);
   if (!section) return;
   if (push) updateUrl({ view: 'section', id: sectionId });
@@ -410,12 +410,22 @@ function openSection(sectionId, push = true) {
 function openItem(section, item, push = true) {
   State.currentItem = item;
   if (push) updateUrl({ view: 'item', sectionId: section.id, itemId: item.id });
+
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.itemId === item.id));
-  $('page-breadcrumb').innerHTML = `<span class="bc-link" onclick="showHome()">Главная</span><span class="bc-sep">/</span><span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>`;
+
+  $('page-breadcrumb').innerHTML = `
+    <span class="bc-link" onclick="showHome()">Главная</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>
+  `;
+
   $('sidebar').classList.remove('open');
   $('overlay').classList.remove('visible');
-  AudioEngine.playSFX('open');
+
+  if (push) AudioEngine.playSFX('open');
+
   const area = $('content-area');
+
   const file = resolvePath(item.file);
   if (item.type === 'document' || file.endsWith('.pdf')) renderPDF(item, area, section);
   else if (item.type === 'calculator' || item.file.endsWith('.html')) renderHTML(item, area, section);

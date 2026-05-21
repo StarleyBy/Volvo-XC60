@@ -6,52 +6,28 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg:          #121212;
-  --bg-panel:    #1e1e1e;
-  --bg-sidebar:  #0a0a0a;
-  --bg-hover:    #2a2a2a;
-  --bg-active:   #003057; /* Volvo Blue */
+  --bg:          #0a0a0a;
+  --bg-panel:    #161616;
+  --bg-sidebar:  #050505;
+  --bg-hover:    #1c1c1c;
+  --bg-active:   #003057; 
   --base-font:   15px;
 
-  --text:        #e0e0e0;
-  --text-muted:  #a0a0a0;
-  --text-sidebar:#d0d0d0;
-  --text-sidebar-muted: #666;
+  --text:        #d0d0d0;
+  --text-muted:  #808080;
+  --text-sidebar:#b0b0b0;
 
-  --accent:      #003057; /* Volvo Blue */
-  --accent-light:#004a87;
-  --accent-silver: #a8a8a8;
+  --accent:      #003057; 
   --accent-gold: #c5a059;
+  --border:      #222;
 
-  --border:      #333;
-  --border-dark: #444;
-
-  --tag-device:  #1a2a3a; --tag-device-text: #8fbdf5;
-  --tag-repair:  #2a1a1a; --tag-repair-text: #f58f8f;
-  --tag-care:    #1a2a1a; --tag-care-text: #8ff58f;
-  --tag-record:  #2a2a1a; --tag-record-text: #f5f58f;
-
-  --shadow-sm:   0 2px 4px rgba(0,0,0,0.5);
-  --shadow-md:   0 8px 24px rgba(0,0,0,0.7);
-  --radius:      4px;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.5);
+  --shadow-md:   0 12px 32px rgba(0,0,0,0.8);
   --sidebar-w:   280px;
-  --header-h:    64px;
+  --header-h:    60px;
 
   --font-body:   'IBM Plex Sans', system-ui, sans-serif;
   --font-mono:   'IBM Plex Mono', monospace;
-}
-
-[data-theme="light"] {
-  --bg:          #f0f2f5;
-  --bg-panel:    #ffffff;
-  --bg-sidebar:  #1e1e1e;
-  --bg-hover:    #f5f7fa;
-  --bg-active:   #e8efff;
-
-  --text:        #1a1a1a;
-  --text-muted:  #666;
-  --accent:      #003057;
-  --border:      #dcdcdc;
 }
 
 /* ── RESET ──────────────────────────────────────────────── */
@@ -63,10 +39,8 @@ body {
   color: var(--text);
   font-size: var(--base-font);
   line-height: 1.6;
-  transition: background 0.3s, color 0.3s;
 }
 
-/* ── LAYOUT ─────────────────────────────────────────────── */
 #app { display: flex; height: 100vh; overflow: hidden; }
 
 /* ── SIDEBAR ────────────────────────────────────────────── */
@@ -75,9 +49,6 @@ body {
   background: var(--bg-sidebar);
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  height: 100%;
-  overflow: hidden;
   z-index: 100;
   border-right: 1px solid var(--border);
 }
@@ -90,39 +61,15 @@ body {
   gap: 12px;
   border-bottom: 1px solid var(--border);
 }
-#sidebar-logo {
-  font-size: 24px;
-}
+
+#sidebar-logo svg { filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); }
+
 #sidebar-title {
   color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-#sidebar-badge {
-  margin-left: auto;
-  font-size: 9px;
-  padding: 2px 6px;
-  border-radius: 2px;
-  background: var(--accent-gold);
-  color: #000;
-  font-weight: 700;
-}
-
-#sidebar-search-wrap { padding: 16px 12px; }
-#sidebar-search {
-  width: 100%;
-  background: #1a1a1a;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  color: #fff;
-  padding: 10px 10px 10px 34px;
-  outline: none;
-  font-size: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 10px center;
+  font-family: serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.2em;
 }
 
 #sidebar-nav { 
@@ -131,323 +78,140 @@ body {
   -webkit-overflow-scrolling: touch;
   padding: 10px 0; 
 }
-.nav-section { margin-bottom: 8px; }
+
 .nav-section-header {
-  padding: 10px 20px;
+  padding: 12px 20px;
   cursor: pointer;
-  color: var(--text-sidebar-muted);
+  color: var(--text-muted);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   display: flex; align-items: center; gap: 8px;
 }
-.nav-section-chevron { margin-left: auto; transition: transform 0.2s; }
-.nav-section.collapsed .nav-section-chevron { transform: rotate(-90deg); }
-.nav-section.collapsed .nav-items { display: none; }
 
 .nav-item {
   padding: 10px 20px 10px 44px;
   cursor: pointer;
   font-size: 14px;
   color: var(--text-sidebar);
-  transition: all 0.2s;
-  border-left: 3px solid transparent;
+  border-left: 2px solid transparent;
 }
-.nav-item:hover { background: var(--bg-hover); color: #fff; }
 .nav-item.active {
   background: var(--bg-active);
   color: #fff;
   border-left-color: var(--accent-gold);
 }
 
-#sidebar-footer {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-  display: flex; align-items: center;
-}
-#user-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-#user-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; }
-
-/* ── MAIN ───────────────────────────────────────────────── */
-#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
+/* ── TOPBAR ─────────────────────────────────────────────── */
 #topbar {
   height: var(--header-h);
   background: var(--bg-panel);
   border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 24px; gap: 16px;
-  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; padding: 0 16px; gap: 12px;
 }
-#menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
 
-#page-breadcrumb { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-.bc-link { cursor: pointer; transition: color 0.2s; }
-.bc-link:hover { color: #fff; }
-#page-title-bar { font-size: 18px; font-weight: 500; flex: 1; }
+#page-breadcrumb { 
+  font-size: 10px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.1em; 
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bc-link { cursor: pointer; }
+.bc-link:hover { color: var(--accent-gold); }
 
-#content-area { flex: 1; overflow-y: auto; padding: 32px; }
+#topbar-actions { display: flex; gap: 6px; }
 
-/* ── HOME ───────────────────────────────────────────────── */
-#home-screen { max-width: 1000px; margin: 0 auto; }
-#home-greeting { margin-bottom: 40px; }
-#home-greeting h1 { font-size: 32px; font-weight: 300; margin-bottom: 8px; }
-#home-greeting p { color: var(--text-muted); font-size: 16px; }
+.topbar-btn {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.topbar-btn:hover { border-color: var(--text-muted); background: rgba(255,255,255,0.08); }
+.topbar-btn:active { transform: scale(0.95); background: var(--accent-gold); color: #000; }
 
-.home-grid {
+/* ── CONTENT ────────────────────────────────────────────── */
+#content-area { flex: 1; overflow-y: auto; padding: 24px; -webkit-overflow-scrolling: touch; }
+
+/* Home Grid & Info Bar */
+#home-screen { max-width: 1200px; margin: 0 auto; }
+#home-greeting h1 { font-size: 28px; font-weight: 300; margin-bottom: 24px; }
+
+#vehicle-info-bar {
+  background: linear-gradient(to right, #161616, #0a0a0a);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+
+#vehicle-img-wrap { width: 40px; height: 40px; flex-shrink: 0; }
+#vehicle-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+
+#vehicle-details { flex: 1; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+#vehicle-title { font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+
+#vehicle-specs { display: flex; align-items: center; gap: 8px; }
+.spec-pill { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+.vin-box { font-family: var(--font-mono); color: var(--accent-gold); font-size: 11px; padding: 2px 6px; background: #000; border-radius: 2px; }
+.plate-box { background: #ffcc00; color: #000; font-weight: 800; padding: 2px 8px; border-radius: 2px; font-size: 13px; border: 1px solid #000; }
+
+.home-grid, .index-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-.home-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  padding: 24px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-.home-card:hover {
-  border-color: var(--accent-gold);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-.home-card::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-  background: var(--accent); transition: width 0.3s;
-}
-.home-card:hover::before { width: 8px; background: var(--accent-gold); }
-.home-card-icon { font-size: 32px; margin-bottom: 16px; }
-.home-card-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-.home-card-count { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
-
-/* ── INDEX CARDS ────────────────────────────────────────── */
-.index-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
-.index-card {
+
+.home-card, .index-card {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   padding: 20px;
   cursor: pointer;
-  transition: all 0.2s;
-  display: flex; flex-direction: column; justify-content: space-between;
-  min-height: 120px;
+  transition: all 0.3s;
+  border-radius: 4px;
 }
-.index-card:hover { border-color: #fff; background: var(--bg-hover); }
-.index-card-title { font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+.home-card:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
 
-/* ── CONTENT ────────────────────────────────────────────── */
-#page-view { max-width: 900px; margin: 0 auto; width: 100%; }
-.page-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
-}
-.page-type-badge {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 4px 10px; border-radius: 2px; background: var(--border);
-}
+/* Article View */
+#page-view { width: 100%; max-width: 1000px; margin: 0 auto; }
+.page-header { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; display: flex; align-items: center; }
 
-.md-body { font-size: 1.1em; line-height: 1.8; color: #ccc; }
-.md-body h1 { font-size: 2.2em; font-weight: 300; color: #fff; margin-bottom: 24px; }
-.md-body h2 { font-size: 1.5em; font-weight: 500; color: #fff; margin: 40px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-.md-body p { margin-bottom: 20px; }
-.md-body strong { color: #fff; }
-.md-body blockquote { border-left: 4px solid var(--accent-gold); padding: 10px 20px; background: rgba(197, 160, 89, 0.05); margin-bottom: 24px; }
-
-/* ── TABLES ─────────────────────────────────────────────── */
-.table-wrapper { overflow-x: auto; margin-bottom: 24px; border: 1px solid var(--border); }
-table { width: 100%; border-collapse: collapse; }
-th { background: #1a1a1a; padding: 12px 16px; text-align: left; font-size: 12px; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border); }
-td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
-tr:hover td { background: rgba(255,255,255,0.02); }
-
-/* ── BUTTONS ────────────────────────────────────────────── */
-.topbar-btn {
-  background: none; border: 1px solid var(--border); color: var(--text-muted);
-  padding: 6px 12px; font-size: 12px; cursor: pointer; transition: all 0.2s;
-}
-.topbar-btn:hover { border-color: #fff; color: #fff; }
-
-#redact-link {
-  text-decoration: none; font-size: 12px; color: var(--accent-gold); font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.05em;
-}
+.md-body { font-size: 1.1em; line-height: 1.7; }
+.md-body h1 { margin-bottom: 20px; }
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   #sidebar { position: fixed; transform: translateX(-100%); transition: transform 0.3s; height: 100vh; }
   #sidebar.open { transform: translateX(0); }
-  #menu-toggle { display: block; }
-  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99; }
-  #overlay.visible { display: block; }
-  #content-area { padding: 16px; }
+  #menu-toggle { display: block; background: none; border: none; color: #fff; font-size: 20px; }
+  #overlay.visible { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99; }
+  
+  #content-area { padding: 12px; }
   #page-view { max-width: 100%; padding: 0; }
-  #home-greeting h1 { font-size: 24px; }
-  #vehicle-info-bar { padding: 16px; gap: 16px; }
-}
-
-/* ── CALCULATOR FRAME ───────────────────────────────────── */
-#calc-frame {
-  width: 100%; border: none;
-  background: transparent;
-  min-height: 200px;
-  display: block;
-}
-
-#page-view.wide { max-width: 1200px; }
-
-/* ── LOGIN SCREEN (VOLVO IGNITION) ──────────────────── */
-#login-screen {
-  position: fixed; inset: 0; z-index: 2000;
-  background: #000;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transition: opacity 0.5s;
-}
-
-#ignition-module { text-align: center; }
-
-#ignition-knob-wrap {
-  width: 160px; height: 160px;
-  background: radial-gradient(circle, #2a2a2a 0%, #111 70%);
-  border-radius: 50%;
-  padding: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.1);
-  margin-bottom: 30px;
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-#ignition-knob-wrap:hover { transform: scale(1.05); }
-
-#ignition-knob {
-  width: 100%; height: 100%;
-  background: #1a1a1a;
-  border-radius: 50%;
-  border: 4px solid #333;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  position: relative;
-  transition: all 0.3s;
-}
-#ignition-label {
-  color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2;
-  letter-spacing: 0.1em; opacity: 0.8;
-}
-#ignition-dot {
-  width: 6px; height: 6px; background: #555; border-radius: 50%; margin-top: 10px;
-  transition: background 0.3s, box-shadow 0.3s;
-}
-#ignition-knob.ignited #ignition-dot {
-  background: #4caf50;
-  box-shadow: 0 0 10px #4caf50, 0 0 20px rgba(76, 175, 80, 0.5);
-}
-
-#login-status {
-  font-size: 12px; font-weight: 600; color: var(--accent-gold);
-  letter-spacing: 0.2em; text-transform: uppercase;
-  margin-top: 20px; min-height: 1.2em;
-}
-
-/* PIN PAD */
-#pin-display {
-  display: flex; gap: 15px; justify-content: center; margin: 30px 0;
-}
-.pin-dot {
-  width: 12px; height: 12px; border: 2px solid #333; border-radius: 50%;
-  transition: all 0.2s;
-}
-.pin-dot.active {
-  background: var(--accent-gold); border-color: var(--accent-gold);
-  box-shadow: 0 0 10px var(--accent-gold);
-}
-
-.pin-grid {
-  display: grid; grid-template-columns: repeat(3, 70px); gap: 15px;
-}
-.pin-grid button {
-  width: 70px; height: 70px; border-radius: 50%;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid #222;
-  color: #fff; font-size: 20px; font-weight: 300;
-  cursor: pointer; transition: all 0.15s;
-}
-.pin-grid button:hover { background: rgba(255,255,255,0.08); border-color: #444; }
-.pin-grid button:active { background: var(--accent-gold); color: #000; transform: scale(0.9); }
-
-/* ── VEHICLE INFO CARD ──────────────────────────────────── */
-#vehicle-info-bar {
-  background: linear-gradient(to right, #1a1a1a, #0a0a0a);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 12px 16px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  position: relative;
-  box-shadow: var(--shadow-sm);
-}
-
-#vehicle-img-wrap {
-  flex-shrink: 0;
-  width: 48px; height: 48px;
-  display: flex; align-items: center; justify-content: center;
-}
-#vehicle-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
-
-#vehicle-details { 
-  flex: 1; 
-  display: flex; 
-  flex-wrap: wrap; 
-  align-items: center; 
-  gap: 12px;
-  min-width: 0;
-}
-
-#vehicle-title { 
-  font-size: 14px; font-weight: 600; color: #fff; 
-  white-space: nowrap;
-}
-
-#vehicle-specs { 
-  display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; 
-  overflow: hidden;
-}
-
-.spec-pill { font-size: 9px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; opacity: 0.7; }
-
-.vin-box {
-  font-family: var(--font-mono);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid #333;
-  color: var(--accent-gold);
-  padding: 2px 8px;
-  border-radius: 2px;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-}
-
-.plate-box {
-  background: #ffcc00;
-  color: #000;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 2px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  border: 1px solid #000;
-  white-space: nowrap;
-}
-
-@media (max-width: 600px) {
+  
   #vehicle-info-bar { padding: 10px; gap: 10px; }
-  #vehicle-img-wrap { width: 32px; height: 32px; }
-  #vehicle-title { font-size: 12px; width: 100%; margin-bottom: 2px; }
-  #vehicle-specs { width: 100%; flex-wrap: wrap; gap: 6px; }
-  .vin-box { font-size: 10px; padding: 2px 4px; }
-  .plate-box { font-size: 11px; padding: 2px 4px; }
+  #vehicle-details { gap: 8px; }
+  #vehicle-title { width: 100%; font-size: 11px; }
+  .vin-box { font-size: 10px; }
+  
+  .topbar-btn { width: 30px; height: 30px; font-size: 11px; }
 }
 
-/* ── LOADING ────────────────────────────────────────────── */
-.loading-msg { text-align: center; padding: 100px 0; color: var(--text-muted); font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; }
+/* ── LOGIN SCREEN ───────────────────────────────────────── */
+#login-screen { position: fixed; inset: 0; z-index: 2000; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s; }
+#ignition-knob-wrap { width: 140px; height: 140px; background: radial-gradient(circle, #222, #000); border-radius: 50%; padding: 12px; box-shadow: 0 10px 30px #000; cursor: pointer; margin-bottom: 30px; transition: 0.2s; }
+#ignition-knob { width: 100%; height: 100%; background: #111; border-radius: 50%; border: 3px solid #333; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#ignition-knob.ignited #ignition-dot { background: #4caf50; box-shadow: 0 0 10px #4caf50; }
+.pin-dot { width: 10px; height: 10px; border: 1px solid #333; border-radius: 50%; }
+.pin-dot.active { background: var(--accent-gold); box-shadow: 0 0 8px var(--accent-gold); }
+.pin-grid button { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.02); border: 1px solid #222; color: #fff; font-size: 18px; cursor: pointer; }
