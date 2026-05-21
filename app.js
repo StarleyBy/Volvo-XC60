@@ -430,20 +430,20 @@ function renderHTML(item, area, section) {
         <button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${favIcon}</button>
         <a href="redact.html?file=${encodeURIComponent(item.file)}" target="_blank" id="redact-link" style="margin-left:auto">✏️ Редактировать</a>
       </div>
-      <iframe id="calc-frame" src="${resolvePath(item.file)}" title="${item.title}" style="opacity:0; transition:opacity 0.2s;"></iframe>
+      <iframe id="calc-frame" title="${item.title}" style="opacity:0; transition:opacity 0.2s; width:100%; border:none;"></iframe>
     </div>
   `;
 
   const frame = $('calc-frame');
+  
+  // Важно: настраиваем onload ДО того как задаем src
   frame.onload = () => {
     try {
       const doc = frame.contentWindow.document;
       
-      // Глобальная инъекция стилей Volvo Luxury во все iframe
       const style = doc.createElement('style');
       style.textContent = `
         :root {
-          --accent: #003057;
           --gold: #c5a059;
           --bg: #121212;
           --panel: #1e1e1e;
@@ -454,90 +454,77 @@ function renderHTML(item, area, section) {
         
         body { 
           background: transparent !important; 
-          color: var(--text) !important; 
-          font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
           margin: 0 !important; 
           padding: 20px !important; 
           line-height: 1.6;
+          color: var(--text) !important;
+          font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
         }
 
-        /* Принудительный сброс цвета для всех текстовых элементов */
-        p, li, span, label, div:not([class*="badge"]) { color: var(--text) !important; }
+        /* Агрессивный сброс цвета для ВСЕХ элементов внутри */
+        * { color: var(--text) !important; border-color: var(--border) !important; }
         
-        /* Заголовки */
-        h1, h2, h3, h4 { color: #fff !important; font-weight: 300 !important; margin-top: 1.5em !important; margin-bottom: 0.8em !important; }
-        h1 { font-size: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 0.5em; }
-        h2 { font-size: 1.6em; color: var(--gold) !important; text-transform: uppercase; letter-spacing: 0.05em; }
+        /* Заголовки и акценты */
+        h1, h2, h3, h4, h5, h6, strong, b { color: #fff !important; }
+        h1 { border-bottom: 1px solid var(--border) !important; padding-bottom: 10px; }
+        h2, .subsection-title { color: var(--gold) !important; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Ссылки и Кнопки */
-        a { color: var(--gold) !important; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
-        a:hover { border-bottom-color: var(--gold); }
-        .button-demo, code { background: #000 !important; color: var(--gold) !important; padding: 2px 6px !important; border-radius: 4px !important; font-family: monospace !important; border: 1px solid var(--border) !important; }
+        /* Ссылки и кнопки */
+        a, a * { color: var(--gold) !important; text-decoration: none !important; }
+        a:hover { text-decoration: underline !important; }
+        
+        /* Специальные блоки (карточки, цитаты, оглавление) */
+        .card, .info-card, .highlight, .toc, blockquote, .note, .warning {
+          background: var(--panel) !important;
+          border: 1px solid var(--border) !important;
+          border-left: 4px solid var(--gold) !important;
+          padding: 20px !important;
+          margin: 20px 0 !important;
+          border-radius: 4px !important;
+        }
+        
+        .toc ul, .nav-list { list-style: none !important; padding: 0 !important; display: flex !important; flex-wrap: wrap !important; gap: 8px !important; }
+        .toc li a, .nav-list li a { 
+          background: #000 !important; 
+          border: 1px solid var(--border) !important;
+          padding: 6px 14px !important;
+          border-radius: 20px !important;
+          font-size: 13px !important;
+        }
 
         /* Таблицы */
-        table { 
-          width: 100% !important; 
-          border-collapse: collapse !important; 
-          margin: 1.5em 0 !important; 
-          background: var(--panel) !important;
-          border: 1px solid var(--border) !important;
-        }
-        th { 
-          background: #000 !important; 
-          color: var(--text-muted) !important; 
-          text-align: left !important; 
-          padding: 12px 16px !important;
-          font-size: 11px !important;
-          text-transform: uppercase !important;
-          letter-spacing: 0.1em !important;
-          border-bottom: 2px solid var(--border) !important;
-        }
-        td { padding: 12px 16px !important; border-bottom: 1px solid var(--border) !important; font-size: 14px; color: var(--text) !important; }
-        tr:hover td { background: rgba(255,255,255,0.02) !important; }
+        table { width: 100% !important; border-collapse: collapse !important; margin: 20px 0 !important; background: var(--panel) !important; }
+        th { background: #000 !important; color: var(--gold) !important; text-align: left !important; padding: 12px !important; font-size: 11px !important; text-transform: uppercase !important; }
+        td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; }
 
-        /* Карточки, блоки, подсветка и цитаты */
-        .info-card, .card, [class*="card"], .highlight, [class*="highlight"], .toc, blockquote {
-          background: var(--panel) !important;
-          border: 1px solid var(--border) !important;
-          padding: 1.5em !important;
-          margin: 1em 0 !important;
-          border-radius: 4px !important;
-          color: var(--text) !important;
-        }
-        .highlight, blockquote { border-left: 4px solid var(--gold) !important; }
-        .toc ul { list-style: none !important; padding: 0 !important; display: flex !important; flex-wrap: wrap !important; gap: 10px !important; }
-        .toc li a { background: #000 !important; padding: 5px 12px !important; border-radius: 20px !important; font-size: 13px !important; }
+        /* Исключения для бейджей */
+        .badge, [class*="badge"] { background: var(--gold) !important; color: #000 !important; padding: 2px 6px !important; border-radius: 2px !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 10px !important; }
+        .badge * { color: #000 !important; }
 
-        /* Списки */
-        ul, ol { padding-left: 1.5em !important; }
-        li { margin-bottom: 0.5em !important; }
+        /* Скрытие лишнего мусора из старых шаблонов */
+        .sidebar, aside, nav:not(.toc nav), header br { display: none !important; }
+        .layout, .content, .container { display: block !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
         
-        /* Скроллбары */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-        /* Убираем лишние сайдбары и фиксированные элементы из car.html если они там остались */
-        .sidebar, aside, nav { display: none !important; }
-        .layout, .content { display: block !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
+        /* Кнопки-демо */
+        .button-demo { background: #000 !important; border: 1px solid var(--gold) !important; color: var(--gold) !important; padding: 2px 8px !important; border-radius: 4px !important; }
       `;
       doc.head.appendChild(style);
 
       const updateHeight = () => {
-        const height = doc.documentElement.scrollHeight;
-        frame.style.height = height + 'px';
+        frame.style.height = doc.documentElement.scrollHeight + 'px';
       };
       
       updateHeight();
       frame.style.opacity = '1';
       new ResizeObserver(updateHeight).observe(doc.body);
     } catch(e) {
-      console.warn('Seamless mode failed:', e);
       frame.style.height = '80vh';
       frame.style.opacity = '1';
     }
   };
+
+  // Запускаем загрузку ПОСЛЕ того как навесили onload
+  frame.src = resolvePath(item.file);
 }
 
 // ── SIDEBAR SEARCH ───────────────────────────────────────
