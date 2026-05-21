@@ -162,7 +162,8 @@ function buildNav(filter = '') {
 
   // ── Regular Sections ──
   for (const section of State.manifest.sections) {
-    const items = section.items.filter(item => {
+    const sectionItems = section.items || [];
+    const items = sectionItems.filter(item => {
       if (!fl) return true;
       return item.title.toLowerCase().includes(fl) ||
              (item.tags || []).some(t => t.includes(fl));

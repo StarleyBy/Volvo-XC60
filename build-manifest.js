@@ -13,12 +13,16 @@ const path = require('path');
 // ── CONFIGURATION ──────────────────────────────────────────
 
 const SECTIONS = [
-  { id: 'calculators', title: 'Calculators and Schemes', icon: '🧮', dir: 'books/calculators', defaultType: 'calculator' },
-  { id: 'references',  title: 'References',             icon: '📋', dir: 'books/references',  defaultType: 'reference' },
-  { id: 'scales',      title: 'Scales & Scores',        icon: '📊', dir: 'books/scales',      defaultType: 'scale' },
-  { id: 'protocols',   title: 'Protocols',              icon: '📄', dir: 'books/protocols',   defaultType: 'protocol' },
-  { id: 'cheatsheets', title: 'Cheat Sheets',           icon: '🗒️', dir: 'books/cheatsheets', defaultType: 'cheatsheet' },
-  { id: 'icd',         title: 'ICD Codes',              icon: '🏷️', dir: 'books/icd',         defaultType: 'icd' }
+  { id: 'device',      title: 'Устройство',     icon: '🏗️', dir: 'books/volvo/device',      defaultType: 'reference' },
+  { id: 'control',     title: 'Управление',     icon: '🕹️', dir: 'books/volvo/control',     defaultType: 'reference' },
+  { id: 'repair',      title: 'Ремонт',         icon: '🛠️', dir: 'books/volvo/repair',      defaultType: 'reference' },
+  { id: 'care',        title: 'Уход',           icon: '✨', dir: 'books/volvo/care',        defaultType: 'reference' },
+  { id: 'inspection',  title: 'Техосмотр',      icon: '📋', dir: 'books/volvo/inspection',  defaultType: 'reference' },
+  { id: 'schedule',    title: 'График замен',   icon: '📅', dir: 'books/volvo/schedule',    defaultType: 'reference' },
+  { id: 'records',     title: 'Записи',         icon: '📝', dir: 'books/volvo/records',     defaultType: 'calculator' },
+  { id: 'insurance',   title: 'Страховка',      icon: '🛡️', dir: 'books/volvo/insurance',   defaultType: 'reference' },
+  { id: 'tuning',      title: 'Тюнинг',         icon: '🏎️', dir: 'books/volvo/tuning',      defaultType: 'reference' },
+  { id: 'accessories', title: 'Аксессуары',     icon: '👜', dir: 'books/volvo/accessories', defaultType: 'reference' }
 ];
 
 const OUTPUT_FILE = 'app-manifest.yml';
@@ -96,8 +100,8 @@ function parseSimpleYaml(yaml) {
 
 function generateYaml() {
   let yaml = `meta:
-  app: CS Helper
-  version: 1.0.0
+  app: Volvo XC60 Справочник
+  version: 2.0.0
   updated: ${new Date().toISOString().replace('T', ' ').substring(0, 16)}
 
 sections:`;

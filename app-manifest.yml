@@ -1,30 +1,66 @@
 meta:
-  app: CS Helper
-  version: 1.0.0
-  updated: 2026-05-21 11:06
+  app: Volvo XC60 Справочник
+  version: 2.0.0
+  updated: 2026-05-21 11:10
 
 sections:
-  - id: calculators
-    title: Calculators and Schemes
-    icon: 🧮
+  - id: device
+    title: Устройство
+    icon: 🏗️
     items:
-  - id: references
-    title: References
+      - id: car
+        title: "Volvo XC60 2020 — Руководство по устройству, габаритам и спецификациям"
+        file: books/volvo/device/car.html
+        type: reference
+        visible: true
+        tags: []
+      - id: spec
+        title: "Spec"
+        file: books/volvo/device/spec.md
+        type: reference
+        visible: true
+        tags: []
+
+  - id: control
+    title: Управление
+    icon: 🕹️
+    items: []
+  - id: repair
+    title: Ремонт
+    icon: 🛠️
+    items: []
+  - id: care
+    title: Уход
+    icon: ✨
+    items: []
+  - id: inspection
+    title: Техосмотр
     icon: 📋
+    items: []
+  - id: schedule
+    title: График замен
+    icon: 📅
+    items: []
+  - id: records
+    title: Записи
+    icon: 📝
     items:
-  - id: scales
-    title: Scales & Scores
-    icon: 📊
-    items:
-  - id: protocols
-    title: Protocols
-    icon: 📄
-    items:
-  - id: cheatsheets
-    title: Cheat Sheets
-    icon: 🗒️
-    items:
-  - id: icd
-    title: ICD Codes
-    icon: 🏷️
-    items:
+      - id: log
+        title: "Бортовой журнал"
+        file: books/volvo/records/log.html
+        type: calculator
+        visible: true
+        tags: []
+
+  - id: insurance
+    title: Страховка
+    icon: 🛡️
+    items: []
+  - id: tuning
+    title: Тюнинг
+    icon: 🏎️
+    items: []
+  - id: accessories
+    title: Аксессуары
+    icon: 👜
+    items: []
