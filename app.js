@@ -247,12 +247,55 @@ function openItem(section, item, push = true) {
   $('overlay').classList.remove('visible');
 
   const area = $('content-area');
-  if (item.type === 'calculator' || item.file.endsWith('.html')) {
+  const file = resolvePath(item.file);
+  
+  if (item.type === 'document' || file.endsWith('.pdf')) {
+    renderPDF(item, area, section);
+  } else if (item.type === 'calculator' || item.file.endsWith('.html')) {
     renderHTML(item, area, section);
   } else {
     renderMarkdown(item, area, section);
   }
   area.scrollTo(0, 0);
+}
+
+// ── RENDER: PDF ──────────────────────────────────────────
+function renderPDF(item, area, section) {
+  const file = resolvePath(item.file);
+  const favIcon = isFavorite(item.id, section.id) ? '★' : '☆';
+  
+  area.innerHTML = `
+    <div id="page-view" class="wide">
+      <div class="page-header" style="margin-bottom: 16px;">
+        <span class="page-type-badge" style="background:var(--accent-gold); color:#000;">PDF Документ</span>
+        <button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${favIcon}</button>
+        
+        <div style="margin-left:auto; display:flex; gap:10px;">
+          <a href="${file}" download="${item.title}.pdf" class="topbar-btn" style="text-decoration:none;">⬇️ Скачать</a>
+          <button class="topbar-btn" onclick="shareFile('${file}', '${item.title}')">🔗 Поделиться</button>
+        </div>
+      </div>
+      
+      <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:10px; height:80vh;">
+        <iframe src="${file}" style="width:100%; height:100%; border:none;"></iframe>
+      </div>
+      
+      <div style="margin-top:20px; text-align:center; color:var(--text-muted); font-size:13px;">
+        Если документ не отображается, воспользуйтесь кнопкой «Скачать»
+      </div>
+    </div>
+  `;
+}
+
+async function shareFile(url, title) {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: title, url: url });
+    } catch (err) { console.log('Share failed:', err); }
+  } else {
+    navigator.clipboard.writeText(url);
+    alert('Ссылка на документ скопирована в буфер обмена');
+  }
 }
 
 function showHome(push = true) {

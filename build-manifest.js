@@ -20,6 +20,7 @@ const SECTIONS = [
   { id: 'inspection',  title: 'Техосмотр',      icon: '📋', dir: 'books/volvo/inspection',  defaultType: 'reference' },
   { id: 'schedule',    title: 'График замен',   icon: '📅', dir: 'books/volvo/schedule',    defaultType: 'reference' },
   { id: 'records',     title: 'Записи',         icon: '📝', dir: 'books/volvo/records',     defaultType: 'calculator' },
+  { id: 'documents',  title: 'Документы',     icon: '📂', dir: 'books/volvo/documents',   defaultType: 'document' },
   { id: 'insurance',   title: 'Страховка',      icon: '🛡️', dir: 'books/volvo/insurance',   defaultType: 'reference' },
   { id: 'tuning',      title: 'Тюнинг',         icon: '🏎️', dir: 'books/volvo/tuning',      defaultType: 'reference' },
   { id: 'accessories', title: 'Аксессуары',     icon: '👜', dir: 'books/volvo/accessories', defaultType: 'reference' }
