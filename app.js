@@ -461,11 +461,19 @@ function renderHTML(item, area, section) {
           line-height: 1.6;
         }
 
+        /* Принудительный сброс цвета для всех текстовых элементов */
+        p, li, span, label, div:not([class*="badge"]) { color: var(--text) !important; }
+        
         /* Заголовки */
-        h1, h2, h3 { color: #fff !important; font-weight: 300 !important; margin-top: 1.5em !important; margin-bottom: 0.8em !important; }
+        h1, h2, h3, h4 { color: #fff !important; font-weight: 300 !important; margin-top: 1.5em !important; margin-bottom: 0.8em !important; }
         h1 { font-size: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 0.5em; }
         h2 { font-size: 1.6em; color: var(--gold) !important; text-transform: uppercase; letter-spacing: 0.05em; }
         
+        /* Ссылки и Кнопки */
+        a { color: var(--gold) !important; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
+        a:hover { border-bottom-color: var(--gold); }
+        .button-demo, code { background: #000 !important; color: var(--gold) !important; padding: 2px 6px !important; border-radius: 4px !important; font-family: monospace !important; border: 1px solid var(--border) !important; }
+
         /* Таблицы */
         table { 
           width: 100% !important; 
@@ -484,17 +492,25 @@ function renderHTML(item, area, section) {
           letter-spacing: 0.1em !important;
           border-bottom: 2px solid var(--border) !important;
         }
-        td { padding: 12px 16px !important; border-bottom: 1px solid var(--border) !important; font-size: 14px; }
+        td { padding: 12px 16px !important; border-bottom: 1px solid var(--border) !important; font-size: 14px; color: var(--text) !important; }
         tr:hover td { background: rgba(255,255,255,0.02) !important; }
 
-        /* Карточки и блоки */
-        .info-card, .card, [class*="card"] {
+        /* Карточки, блоки, подсветка и цитаты */
+        .info-card, .card, [class*="card"], .highlight, [class*="highlight"], .toc, blockquote {
           background: var(--panel) !important;
           border: 1px solid var(--border) !important;
           padding: 1.5em !important;
           margin: 1em 0 !important;
           border-radius: 4px !important;
+          color: var(--text) !important;
         }
+        .highlight, blockquote { border-left: 4px solid var(--gold) !important; }
+        .toc ul { list-style: none !important; padding: 0 !important; display: flex !important; flex-wrap: wrap !important; gap: 10px !important; }
+        .toc li a { background: #000 !important; padding: 5px 12px !important; border-radius: 20px !important; font-size: 13px !important; }
+
+        /* Списки */
+        ul, ol { padding-left: 1.5em !important; }
+        li { margin-bottom: 0.5em !important; }
         
         /* Скроллбары */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
