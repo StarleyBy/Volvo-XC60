@@ -535,6 +535,7 @@ function pluralize(n, forms) {
 }
 
 function openSection(sectionId, push = true) {
+  AudioEngine.playSFX('nav');
   const section = State.manifest.sections.find(s => s.id === sectionId);
   if (!section) return;
   if (push) updateUrl({ view: 'section', id: sectionId });
@@ -728,6 +729,35 @@ $('sidebar-search').addEventListener('input', e => {
 
 // ── MOBILE SIDEBAR ───────────────────────────────────────
 $('menu-toggle').addEventListener('click', () => {
+  $('sidebar').classList.add('open');
+  $('overlay').classList.add('visible');
+});
+$('overlay').addEventListener('click', () => {
+  $('sidebar').classList.remove('open');
+  $('overlay').classList.remove('visible');
+});
+
+// ── THEME ────────────────────────────────────────────────
+$('theme-toggle').addEventListener('click', toggleTheme);
+
+function updatePinDisplay() {
+  const dots = document.querySelectorAll('.pin-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i < pinInput.length);
+  });
+}
+
+// ── BOOT ─────────────────────────────────────────────────
+AudioEngine.init();
+initTheme();
+showApp();
+
+// PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}e').addEventListener('click', () => {
   $('sidebar').classList.add('open');
   $('overlay').classList.add('visible');
 });
