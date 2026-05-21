@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Сиденья, руль и зеркала Volvo XC60 T4 Momentum 2020 (с электрорегулировками)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f0f2f5;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, #003057 0%, #00263b 100%);
+            padding: 2rem 2rem;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 span {
+            font-weight: 400;
+            color: #ffb347;
+        }
+        .hero p {
+            opacity: 0.85;
+            max-width: 800px;
+        }
+        .content {
+            padding: 2rem 1.8rem;
+        }
+        .nav-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+            background: #f8fafd;
+            padding: 1rem 1.2rem;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+        }
+        .nav-link {
+            background: white;
+            border: 1px solid #dce5f0;
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #003057;
+            transition: 0.2s;
+        }
+        .nav-link:hover {
+            background: #e30613;
+            color: white;
+            border-color: #e30613;
+        }
+        .section-card {
+            background: #f9fbfe;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            scroll-margin-top: 1rem;
+        }
+        .section-header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid #e30613;
+        }
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #003057;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .section-body {
+            padding: 1.2rem 1.5rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            border: 1px solid #e9f0f5;
+        }
+        .info-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e30613;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .step-list {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .step-list li {
+            margin-bottom: 0.4rem;
+        }
+        .tip-block {
+            background: #eef3fc;
+            border-left: 4px solid #003057;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .warning-block {
+            background: #fff3e0;
+            border-left: 4px solid #e30613;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .green-tip {
+            background: #e6f7e6;
+            border-left-color: #2e7d32;
+        }
+        .footnote {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+            border-top: 1px solid #e2edf7;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            .hero { padding: 1.2rem; }
+            .content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>Сиденья, руль и зеркала <span>Volvo XC60 T4 Momentum (с электрорегулировками)</span></h1>
+        <p>Полное руководство по настройке: электронные сиденья водителя и пассажира, память положений, задние сиденья (складывание), правильная посадка, регулировка руля и зеркал.</p>
+    </div>
+    <div class="content">
+
+        <!-- Навигация -->
+        <div class="nav-grid">
+            <a href="#driver-seat" class="nav-link">👨‍✈️ Сиденье водителя (электро)</a>
+            <a href="#passenger-seat" class="nav-link">👤 Сиденье пассажира (электро)</a>
+            <a href="#memory" class="nav-link">💾 Память положений</a>
+            <a href="#rear-seats" class="nav-link">🪑 Задние сиденья</a>
+            <a href="#posture" class="nav-link">🧘 Правильная посадка</a>
+            <a href="#steering" class="nav-link">🚗 Регулировка руля</a>
+            <a href="#mirrors" class="nav-link">🪞 Настройка зеркал</a>
+        </div>
+
+        <!-- 1. Сиденье водителя (электрорегулировки) -->
+        <div id="driver-seat" class="section-card">
+            <div class="section-header">
+                <h2>👨‍✈️ Сиденье водителя — электронные регулировки</h2>
+            </div>
+            <div class="section-body">
+                <p>Ваш XC60 T4 Momentum оснащён <strong>электроприводом передних сидений</strong>. Управление — с помощью боковой панели на сиденье (кнопки и переключатели). Доступны следующие регулировки:</p>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>↔️ Продольное перемещение вперёд/назад</h3>
+                        <div class="info-text">Горизонтальный переключатель (сдвигайте вперёд/назад). <strong>Правило:</strong> Правая нога должна легко нажимать педаль тормоза до упора, сохраняя лёгкий изгиб в колене.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>⬆️⬇️ Вертикальная регулировка (высота сиденья)</h3>
+                        <div class="info-text">Тот же переключатель двигайте вверх/вниз. <strong>Цель:</strong> бёдра не давят на край подушки, взгляд направлен в центр лобового стекла.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>📐 Наклон подушки (передний/задний угол)</h3>
+                        <div class="info-text">Передняя часть горизонтального переключателя (поднимайте/опускайте край подушки). Улучшает поддержку бёдер.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>↩️ Наклон спинки</h3>
+                        <div class="info-text">Вертикальная кнопка или переключатель сбоку. <strong>Правило:</strong> спина полностью прилегает к спинке, запястья касаются верхней точки руля при вытянутых руках.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🧽 Поясничная поддержка (lumbar)</h3>
+                        <div class="info-text">Круглая 4-позиционная кнопка (вверх/вниз/вперёд/назад). Регулирует выпячивание в пояснице. Настройте для ощущения лёгкой поддержки без давления.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🦵 Длина подушки (выдвижение коленной опоры)</h3>
+                        <div class="info-text">Если есть дополнительный рычажок или электрокнопка — выдвигает передний край подушки. Помогает высоким водителям.</div>
+                    </div>
+                </div>
+                <div class="warning-block">
+                    ⚠️ <strong>Важно:</strong> Не регулируйте сиденье во время движения — это может отвлечь и привести к аварии. Все настройки выполняйте только на стоящем автомобиле.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Сиденье переднего пассажира (электро) -->
+        <div id="passenger-seat" class="section-card">
+            <div class="section-header">
+                <h2>👤 Сиденье переднего пассажира — аналогичные электрорегулировки</h2>
+            </div>
+            <div class="section-body">
+                <p>Переднее пассажирское сиденье, как правило, имеет те же электрорегулировки, что и водительское (продольное, высота, наклон спинки, поясничная поддержка). Управление — с правой стороны сиденья (со стороны двери). Исключение — возможность управления пассажирским сиденьем со стороны водителя (опция), но в стандарте Momentum её нет.</p>
+                <div class="tip-block">
+                    💡 <strong>Совет:</strong> При длительных поездках пассажир может настроить сиденье для максимального комфорта, используя все электроприводы.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Память положений (если есть кнопки M,1,2) -->
+        <div id="memory" class="section-card">
+            <div class="section-header">
+                <h2>💾 Память положений сиденья, зеркал и проекционного дисплея (если установлена)</h2>
+            </div>
+            <div class="section-body">
+                <p>На автомобилях с электрорегулировками часто присутствует <strong>функция памяти</strong> (кнопки <strong>M, 1, 2</strong> на боковой панели водительского сиденья). Если этих кнопок нет — памяти нет, но электрорегулировки остаются.</p>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>📝 Как сохранить положение (если есть память)</h3>
+                        <div class="info-text">1. Отрегулируйте сиденье, наружные зеркала и проекционный дисплей (если есть).<br>2. Нажмите и удерживайте кнопку <strong>M</strong> (загорится индикатор).<br>3. В течение 3 секунд нажмите <strong>1</strong> или <strong>2</strong>. Раздастся звуковой сигнал — положение сохранено.<br>4. Привязать к ключу можно через меню <code>Настройки → Система → Профили водителя → Редактировать профиль → Подключить ключ</code>.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔁 Активация сохранённого положения</h3>
+                        <div class="info-text">• При открытой двери — кратко нажмите кнопку 1 или 2.<br>• При закрытой двери — удерживайте кнопку до завершения движения.<br>• Также можно активировать через профиль водителя, если ключ привязан.</div>
+                    </div>
+                </div>
+                <div class="tip-block">
+                    🔑 <strong>Связка с ключом:</strong> Если вы привязали профиль к ключу, то при открытии автомобиля этим ключом сиденье, зеркала и дисплей автоматически примут сохранённое положение (даже если автомобилем пользовался другой водитель).
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Задние сиденья — не регулируются, только складываются -->
+        <div id="rear-seats" class="section-card">
+            <div class="section-header">
+                <h2>🪑 Задние сиденья — только складывание (60/40)</h2>
+            </div>
+            <div class="section-body">
+                <p>Вы совершенно правы: задние сиденья в XC60 Momentum <strong>не имеют регулировок</strong> (ни продольных, ни наклона спинки). Единственные доступные действия:</p>
+                <ul class="step-list">
+                    <li><strong>Складывание спинок (по частям 60/40):</strong> потяните за рычаг/петлю в багажнике или сбоку спинки. Спинка складывается почти горизонтально, увеличивая грузовое пространство.</li>
+                    <li><strong>Регулировка центрального подголовника:</strong> его можно поднять/опустить рукой (фиксация). Боковые подголовники при складывании сами откидываются.</li>
+                    <li><strong>Люк для лыж (Ski hatch):</strong> открывается из багажника для перевозки длинномеров.</li>
+                </ul>
+                <div class="info-card">
+                    <h3>🔁 Возврат спинки в вертикальное положение</h3>
+                    <div class="info-text">Поднимите спинку до щелчка. Убедитесь, что красный индикатор замка скрыт (иначе спинка не зафиксирована). Не перевозите пассажиров при незаблокированной спинке!</div>
+                </div>
+                <div class="warning-block">
+                    🚨 <strong>Безопасность:</strong> При перевозке людей на задних сиденьях спинки должны быть надёжно зафиксированы в вертикальном положении. Перед поездкой проверьте, что оба замка (слева и справа) защёлкнуты.
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Правильная посадка водителя (критерии) -->
+        <div id="posture" class="section-card">
+            <div class="section-header">
+                <h2>🧘 Правильная посадка водителя — безопасность и комфорт</h2>
+            </div>
+            <div class="section-body">
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>✅ Критерии идеальной посадки</h3>
+                        <div class="info-text">• Спина плотно прилегает к спинке сиденья (никакой «горбатой» посадки).<br>• Поясничная поддержка ощущается, но не давит.<br>• Ноги: правая нога легко нажимает педаль тормоза «в пол» с лёгким изгибом в колене.<br>• Руки: при хвате за руль в положении «9-3» локти слегка согнуты (~120°).<br>• Запястья лежат на верхней части руля при вытянутых руках (плечи не отрываются от спинки).<br>• Взгляд направлен в центр лобового стекла, верхний край руля не перекрывает обзор приборов.<br>• Подголовник: его верхняя граница на уровне макушки или чуть ниже.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>❌ Типичные ошибки</h3>
+                        <div class="info-text">• Слишком близко к рулю — опасно при срабатывании подушки.<br>• Слишком далеко — не хватает длины рук, устают плечи.<br>• «Развал» в сиденье (наклон таза) — нагрузка на позвоночник.<br>• Высокий подголовник — ограничивает обзор, низкий — не защищает шею при ударе сзади.</div>
+                    </div>
+                </div>
+                <div class="green-tip" style="margin-top: 0.5rem;">
+                    🧘 <strong>Профессиональный совет:</strong> После настройки сиденья проверьте себя: положите руки на руль в положение «9-3». Если можете свободно оторвать лопатки от спинки — вы слишком далеко. Если плечи напряжены — слишком близко.
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Регулировка рулевой колонки -->
+        <div id="steering" class="section-card">
+            <div class="section-header">
+                <h2>🚗 Регулировка рулевой колонки (по высоте и вылету)</h2>
+            </div>
+            <div class="section-body">
+                <p>Рулевая колонка регулируется механически с помощью рычага под рулём.</p>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>🕹️ Как настроить</h3>
+                        <div class="info-text">1. Опустите фиксирующий рычаг вниз.<br>2. Переместите руль вверх/вниз и на себя/от себя (вылет).<br>3. Зафиксируйте рычаг.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎯 Критерий правильной регулировки</h3>
+                        <div class="info-text">При правильной посадке (спина на спинке) ваше запястье должно лежать на верхней точке руля, а плечи — касаться спинки. При этом руль не должен перекрывать верхнюю часть приборной панели (спидометр должен быть полностью виден).</div>
+                    </div>
+                </div>
+                <div class="warning-block">
+                    🚨 <strong>Осторожно:</strong> Никогда не регулируйте руль во время движения. Изменяйте положение только на стоящем автомобиле.
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Настройка зеркал заднего вида -->
+        <div id="mirrors" class="section-card">
+            <div class="section-header">
+                <h2>🪞 Настройка наружных зеркал и салонного зеркала</h2>
+            </div>
+            <div class="section-body">
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>🔘 Наружные зеркала (электропривод — стандарт)</h3>
+                        <div class="info-text">Джойстик на панели водительской двери:<br>1. Нажмите L (левое) или R (правое).<br>2. Движением джойстика регулируйте положение.<br>3. Нажмите L или R повторно для фиксации.<br><strong>Правильная настройка:</strong> горизонт проходит по центру зеркала, заднее крыло видно примерно на 5–10% от края.</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🧷 Автоматическое складывание (опция)</h3>
+                        <div class="info-text">Если есть кнопка одновременного нажатия L+R — зеркала складываются. Можно включить автоматическое складывание при блокировке автомобиля (меню <code>Настройки → Мой автомобиль → Зеркала и удобство → Складывать зеркала при блокировке</code>).</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔲 Салонное зеркало заднего вида</h3>
+                        <div class="info-text">Регулируется вручную (наклон). Имеет автоматическое затемнение (если есть опция) — работает всегда, отключается при включении задней передачи. Также может быть с компасом и кнопками HomeLink.</div>
+                    </div>
+                </div>
+                <div class="tip-block">
+                    💡 <strong>Секрет настройки зеркал:</strong> Сядьте в нормальную позу. В боковых зеркалах вы должны видеть только малую часть своего автомобиля (чтобы понимать габариты). Салонное зеркало должно показывать центр заднего стекла.
+                </div>
+                <div class="green-tip">
+                    📌 <strong>Связь с памятью сиденья:</strong> Если у вас есть функция памяти, положения наружных зеркал также сохраняются вместе с настройками сиденья (кнопки 1/2). Это очень удобно, если автомобилем пользуются несколько водителей.
+                </div>
+            </div>
+        </div>
+
+        <div class="footnote">
+            📌 Данные актуальны для Volvo XC60 T4 Momentum 2020 с опциональными электрорегулировками передних сидений. Если ваш автомобиль не имеет кнопок M/1/2, то функция памяти отсутствует, но электропривод остаётся. Всегда сверяйтесь с комплектацией вашего автомобиля.
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

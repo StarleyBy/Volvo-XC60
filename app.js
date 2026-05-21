@@ -55,9 +55,19 @@ function updateFontSize(delta) {
   State.fontSize = Math.max(12, Math.min(24, State.fontSize + delta));
   document.documentElement.style.setProperty('--base-font', State.fontSize + 'px');
   localStorage.setItem('volvo-font-size', State.fontSize);
+  
+  // Apply to iframes
+  const frame = $('calc-frame');
+  if (frame && frame.contentWindow) {
+    try {
+      const doc = frame.contentWindow.document;
+      doc.body.style.fontSize = State.fontSize + 'px';
+    } catch(e) {}
+  }
 }
 
-// ── FAVORITES ────────────────────────────────────────────
+// ── AUTH & IGNITION ──────────────────────────────────────
+
 function toggleFavorite(itemId, sectionId) {
   const index = State.favorites.findIndex(f => f.itemId === itemId && f.sectionId === sectionId);
   if (index > -1) {
@@ -444,16 +454,18 @@ function renderHome() {
   area.innerHTML = `
     <div id="home-screen">
       <div id="home-greeting"><h1>${greeting}</h1><p>Volvo XC60 · ${now.toLocaleDateString('ru-RU', {weekday:'long', day:'numeric', month:'long', year:'numeric'})}</p></div>
+      
       <div id="vehicle-info-bar">
         <div id="vehicle-img-wrap"><img src="icons/icon-192.png" alt="Volvo"></div>
         <div id="vehicle-details">
-          <div id="vehicle-title">Volvo XC60 Momentum <span style="opacity:0.5">2020</span></div>
+          <div id="vehicle-title">Volvo XC60 Momentum 2020</div>
           <div id="vehicle-specs">
-            <div class="spec-pill">VIN</div><div class="vin-box">LYVUZAKVDLB515051</div>
-            <div class="spec-pill">Номер</div><div class="plate-box">78770601</div>
+            <span class="spec-pill">VIN</span><span class="vin-box">LYVUZAKVDLB515051</span>
+            <span class="spec-pill">Номер</span><span class="plate-box">78770601</span>
           </div>
         </div>
       </div>
+
       <div class="home-grid">${cards}</div>
     </div>`;
 }

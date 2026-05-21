@@ -57,9 +57,15 @@
   <!-- SIDEBAR -->
   <nav id="sidebar">
     <div id="sidebar-header">
-      <div id="sidebar-logo">🚗</div>
-      <span id="sidebar-title">Volvo XC60</span>
-      <span id="sidebar-badge">v2</span>
+      <div id="sidebar-logo">
+        <svg viewBox="0 0 100 100" width="28" height="28">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="white" stroke-width="6"/>
+          <path d="M78 22 L92 8 L92 30" fill="none" stroke="white" stroke-width="6" stroke-linecap="square"/>
+          <rect x="10" y="44" width="80" height="12" fill="white"/>
+        </svg>
+      </div>
+      <span id="sidebar-title" style="font-family: serif; letter-spacing: 0.15em; font-weight: 400;">VOLVO</span>
+      <span id="sidebar-badge">XC60</span>
     </div>
 
     <div id="sidebar-search-wrap">
@@ -81,16 +87,18 @@
 
   <!-- MAIN -->
   <div id="main">
-    <div id="topbar">
-      <button id="menu-toggle">☰</button>
-      <div id="page-breadcrumb"></div>
-      <span id="page-title-bar">Volvo XC60</span>
-      <div id="topbar-actions">
-        <button class="topbar-btn" id="font-toggle" title="Размер шрифта">Aa</button>
-        <button class="topbar-btn" id="sound-toggle" onclick="AudioEngine.toggle()">🔊</button>
-        <button class="topbar-btn" id="theme-toggle">🌙</button>
-      </div>
+  <div id="topbar">
+    <button id="menu-toggle">☰</button>
+    <div id="page-breadcrumb"></div>
+    <span id="page-title-bar">Volvo XC60</span>
+    <div id="topbar-actions">
+      <button class="topbar-btn" onclick="updateFontSize(-1)">A−</button>
+      <button class="topbar-btn" onclick="updateFontSize(1)">A+</button>
+      <button class="topbar-btn" id="sound-toggle" onclick="AudioEngine.toggle()">🔊</button>
+      <button class="topbar-btn" id="theme-toggle">🌙</button>
     </div>
+  </div>
+
     <div id="content-area">
       <p class="loading-msg">Инициализация…</p>
     </div>
