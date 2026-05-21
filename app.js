@@ -264,6 +264,9 @@ function renderPDF(item, area, section) {
   const file = resolvePath(item.file);
   const favIcon = isFavorite(item.id, section.id) ? '★' : '☆';
   
+  // Кодируем URL для корректной работы с пробелами и спецсимволами
+  const encodedFile = encodeURI(file);
+  
   area.innerHTML = `
     <div id="page-view" class="wide">
       <div class="page-header" style="margin-bottom: 16px;">
@@ -271,17 +274,25 @@ function renderPDF(item, area, section) {
         <button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${favIcon}</button>
         
         <div style="margin-left:auto; display:flex; gap:10px;">
-          <a href="${file}" download="${item.title}.pdf" class="topbar-btn" style="text-decoration:none;">⬇️ Скачать</a>
-          <button class="topbar-btn" onclick="shareFile('${file}', '${item.title}')">🔗 Поделиться</button>
+          <button class="topbar-btn" onclick="window.open('${encodedFile}', '_blank')">📱 На весь экран</button>
+          <a href="${encodedFile}" download="${item.title}.pdf" class="topbar-btn" style="text-decoration:none;">⬇️ Скачать</a>
+          <button class="topbar-btn" onclick="shareFile('${encodedFile}', '${item.title}')">🔗 Поделиться</button>
         </div>
       </div>
       
-      <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:10px; height:80vh;">
-        <iframe src="${file}" style="width:100%; height:100%; border:none;"></iframe>
+      <div class="pdf-container" style="background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; height:80vh; overflow:hidden; position:relative;">
+        <object data="${encodedFile}" type="application/pdf" width="100%" height="100%">
+          <iframe src="${encodedFile}" style="width:100%; height:100%; border:none;">
+            <div style="padding:40px; text-align:center;">
+              <p>Ваш браузер не может отобразить PDF внутри страницы.</p>
+              <button class="topbar-btn" style="margin-top:20px;" onclick="window.open('${encodedFile}', '_blank')">Открыть документ</button>
+            </div>
+          </iframe>
+        </object>
       </div>
       
       <div style="margin-top:20px; text-align:center; color:var(--text-muted); font-size:13px;">
-        Если документ не отображается, воспользуйтесь кнопкой «Скачать»
+        Если документ не открылся сразу, нажмите кнопку «На весь экран»
       </div>
     </div>
   `;
