@@ -248,6 +248,13 @@ $('ignition-knob').addEventListener('click', () => {
 
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
+  // Проверяем версию для принудительного показа новых фишек
+  const APP_VERSION = '2.1';
+  if (localStorage.getItem('volvo-app-version') !== APP_VERSION) {
+    localStorage.removeItem('volvo-session');
+    localStorage.setItem('volvo-app-version', APP_VERSION);
+  }
+
   // Check auth
   const session = localStorage.getItem('volvo-session');
   if (!session) {
