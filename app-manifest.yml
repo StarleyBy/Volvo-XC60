@@ -1,7 +1,7 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-21 12:39
+  updated: 2026-05-21 12:51
 
 sections:
   - id: device
@@ -25,6 +25,12 @@ sections:
     title: Управление
     icon: 🕹️
     items:
+      - id: centalrscreen
+        title: "Центральный дисплей Volvo XC60 Momentum 2020 | Полный гид Sensus (русифицированный)"
+        file: books/volvo/control/centalrscreen.html
+        type: reference
+        visible: true
+        tags: []
       - id: cruiz
         title: "Круиз-контроль Volvo XC60 T4 Momentum 2020 — полное руководство"
         file: books/volvo/control/cruiz.html
