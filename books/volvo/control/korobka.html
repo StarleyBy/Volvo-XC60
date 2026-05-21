@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Коробка передач и стояночный тормоз Volvo XC60 T4 Momentum 2020 — полное руководство</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, #003057 0%, #00263b 100%);
+            padding: 2rem 2.5rem;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 span {
+            font-weight: 400;
+            color: #ffb347;
+        }
+        .hero p {
+            opacity: 0.85;
+            max-width: 800px;
+        }
+        .content {
+            padding: 2rem 2.2rem;
+        }
+        .nav-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            background: #f8fafd;
+            padding: 1rem 1.5rem;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+        }
+        .nav-link {
+            background: white;
+            border: 1px solid #dce5f0;
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #003057;
+            transition: 0.2s;
+        }
+        .nav-link:hover {
+            background: #e30613;
+            color: white;
+            border-color: #e30613;
+        }
+        .card {
+            background: #f9fbfe;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            scroll-margin-top: 1rem;
+        }
+        .card-header {
+            background: white;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 2px solid #e30613;
+        }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #003057;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        /* цветные символы режимов */
+        .gear-p { background: #e30613; color: white; }
+        .gear-r { background: #ff8c00; color: white; }
+        .gear-n { background: #1e88e5; color: white; }
+        .gear-d { background: #2e7d32; color: white; }
+        .gear-m { background: #6a1b9a; color: white; }
+        .gear-symbol {
+            font-size: 1.5rem;
+            font-weight: 800;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            margin-right: 0.4rem;
+            vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .inline-gear {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            font-weight: 600;
+        }
+        .mode-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e2f3e;
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0.2rem 0;
+        }
+        .scenario-list {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .scenario-list li {
+            margin-bottom: 0.7rem;
+        }
+        .warning-block {
+            background: #fff3e0;
+            border-left: 4px solid #e30613;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+        .footnote {
+            font-size: 0.8rem;
+            color: #5f7f9e;
+            border-top: 1px solid #e2edf7;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            .hero { padding: 1.2rem; }
+            .content { padding: 1rem; }
+            .gear-symbol { width: 38px; height: 38px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>Коробка передач и стояночный тормоз <span>Volvo XC60 T4 Momentum 2020</span></h1>
+        <p>Полное руководство: режимы АКПП, алгоритмы переключения, применение стояночного тормоза, автоматические функции (Auto-hold, Hill Start Assist), экстренные ситуации и типичные ошибки</p>
+    </div>
+    <div class="content">
+
+        <!-- Навигация -->
+        <div class="nav-grid">
+            <a href="#gearbox" class="nav-link">⚙️ Коробка передач</a>
+            <a href="#modes" class="nav-link">🎮 Режимы АКПП</a>
+            <a href="#algorithms" class="nav-link">🔄 Алгоритмы старта/парковки</a>
+            <a href="#parking-brake" class="nav-link">🅿️ Стояночный тормоз</a>
+            <a href="#autohold" class="nav-link">⏸️ Auto-hold & HSA</a>
+            <a href="#emergency" class="nav-link">🚨 Нестандартные ситуации</a>
+            <a href="#errors" class="nav-link">⚠️ Типичные ошибки</a>
+        </div>
+
+        <!-- 1. Коробка передач — общие сведения -->
+        <div id="gearbox" class="card">
+            <div class="card-header">
+                <h2>⚙️ 8-ступенчатая автоматическая коробка Geartronic (AWF8G55)</h2>
+            </div>
+            <div class="card-body">
+                <p>Ваш XC60 оснащён современной 8-диапазонной АКПП с гидротрансформатором. Она имеет два основных режима: <strong>автоматический <span class="inline-gear"><span class="gear-symbol gear-d">D</span></span></strong> и <strong>ручной <span class="inline-gear"><span class="gear-symbol gear-m">M</span></span></strong>. Переключение осуществляется электронным селектором (shift-by-wire).</p>
+                <p><strong>Особенности:</strong></p>
+                <ul class="scenario-list">
+                    <li>Адаптивное обучение — коробка подстраивается под ваш стиль вождения.</li>
+                    <li>Функция <strong>Eco Coast</strong> — при отпускании газа в режиме Eco на скорости 65–140 км/ч трансмиссия отсоединяется от двигателя, автомобиль катится накатом.</li>
+                    <li>Защита от перегрева — при интенсивной буксировке или в горах может включиться аварийный режим (снижение мощности).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. Режимы АКПП с цветными символами (подробно) -->
+        <div id="modes" class="card">
+            <div class="card-header">
+                <h2>🎮 Режимы работы и их применение</h2>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div><span class="gear-symbol gear-p">P</span> <strong>Park</strong> — стоянка, блокировка выходного вала</div>
+                    <div><span class="gear-symbol gear-r">R</span> <strong>Reverse</strong> — задний ход</div>
+                    <div><span class="gear-symbol gear-n">N</span> <strong>Neutral</strong> — нейтраль</div>
+                    <div><span class="gear-symbol gear-d">D</span> <strong>Drive</strong> — автоматический режим (1–8)</div>
+                    <div><span class="gear-symbol gear-m">M</span> <strong>Manual</strong> — ручное переключение (+/-)</div>
+                </div>
+                <p><strong>Когда что использовать:</strong></p>
+                <ul class="scenario-list">
+                    <li><strong><span class="inline-gear"><span class="gear-symbol gear-p">P</span></span> (Park):</strong> Только при полной остановке. Включается кнопкой P (на маленьком селекторе) или перемещением рычага в положение P (на большом). Блокирует колёса. <strong>Всегда включайте P перед выходом из машины.</strong></li>
+                    <li><strong><span class="inline-gear"><span class="gear-symbol gear-r">R</span></span> (Reverse):</strong> Для движения назад. Включается только при нажатой педали тормоза и скорости близкой к нулю.</li>
+                    <li><strong><span class="inline-gear"><span class="gear-symbol gear-n">N</span></span> (Neutral):</strong> При буксировке, на мойке с конвейером, или когда нужно на короткое время оставить двигатель работать без нагрузки. <strong>Не используйте N на спусках!</strong></li>
+                    <li><strong><span class="inline-gear"><span class="gear-symbol gear-d">D</span></span> (Drive):</strong> Основной режим для города и трассы. Коробка сама выбирает оптимальную передачу.</li>
+                    <li><strong><span class="inline-gear"><span class="gear-symbol gear-m">M</span></span> (Manual):</strong> Переключение рычага влево (или вбок). Для переключения вверх (+) или вниз (-). Используйте для активного обгона, при спуске с горы (торможение двигателем), или в пробках для фиксации низкой передачи.</li>
+                </ul>
+                <div class="warning-block">
+                    🚨 <strong>Никогда не переключайтесь в <span class="inline-gear"><span class="gear-symbol gear-p">P</span></span> или <span class="inline-gear"><span class="gear-symbol gear-r">R</span></span> до полной остановки автомобиля</strong> — это разрушит коробку передач!
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Алгоритмы: старт, парковка, остановка (везде символы) -->
+        <div id="algorithms" class="card">
+            <div class="card-header">
+                <h2>🔄 Последовательность действий (алгоритмы)</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>🚦 Стандартный старт и начало движения:</strong></p>
+                <ol class="scenario-list">
+                    <li>Нажмите педаль тормоза (не отпускайте).</li>
+                    <li>Запустите двигатель (поверните стартер).</li>
+                    <li>Селектор из <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span> переведите в <span class="gear-symbol gear-d" style="width: 32px; height: 32px; font-size: 1rem;">D</span> (или <span class="gear-symbol gear-r" style="width: 32px; height: 32px; font-size: 1rem;">R</span>, если нужно задним ходом).</li>
+                    <li>Отпустите стояночный тормоз (кнопкой или автоматически при нажатии газа).</li>
+                    <li>Отпустите педаль тормоза — автомобиль тронется (на холостых).</li>
+                </ol>
+
+                <p><strong>🅿️ Правильная парковка (особенно на уклоне):</strong></p>
+                <ol class="scenario-list">
+                    <li>Остановитесь, нажмите педаль тормоза.</li>
+                    <li>Затяните <strong>стояночный тормоз</strong> (кнопка в консоли).</li>
+                    <li>Только после этого переведите селектор в <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span>.</li>
+                    <li>Выключите двигатель.</li>
+                </ol>
+                <div class="warning-block">
+                    💡 <strong>Почему так?</strong> Если сначала перевести в <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span> на уклоне, вся нагрузка ляжет на механизм блокировки коробки. При последующем выходе из <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span> будет рывок. Стояночный тормоз должен держать машину, а не коробка.
+                </div>
+
+                <p><strong>⛔ Длительная остановка (светофор, пробка):</strong></p>
+                <ul class="scenario-list">
+                    <li>Оставайтесь в <span class="gear-symbol gear-d" style="width: 32px; height: 32px; font-size: 1rem;">D</span> с нажатой педалью тормоза — коробка не изнашивается.</li>
+                    <li>Если остановка более 30–40 секунд — можно перевести в <span class="gear-symbol gear-n" style="width: 32px; height: 32px; font-size: 1rem;">N</span> (но не обязательно).</li>
+                    <li>Используйте <strong>Auto-hold</strong> (кнопка с символом (A) в консоли) — тогда можно отпустить педаль тормоза, и автомобиль останется стоять.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Стояночный тормоз (EPB) -->
+        <div id="parking-brake" class="card">
+            <div class="card-header">
+                <h2>🅿️ Электрический стояночный тормоз (EPB)</h2>
+            </div>
+            <div class="card-body">
+                <p>Кнопка стояночного тормоза находится в туннельной консоли, рядом с селектором. Управление — нажатие/поднятие.</p>
+                <p><strong>Активация:</strong> потяните кнопку вверх. Загорится красный символ <strong>(P)</strong> на приборной панели.</p>
+                <p><strong>Деактивация:</strong> нажмите кнопку при нажатой педали тормоза. Или просто начните движение — стояночный тормоз отпустится автоматически (если водитель пристёгнут и дверь закрыта).</p>
+                <div class="warning-block">
+                    ⚠️ <strong>Важно:</strong> При автоматическом отпускании стояночного тормоза нажатием газа будьте осторожны — автомобиль может дёрнуться. Особенно аккуратно в пробках.
+                </div>
+                <p><strong>Автоматическое включение (настройка):</strong></p>
+                <ul class="scenario-list">
+                    <li>В меню <strong>Настройки → Мой автомобиль → Стояночный тормоз и подвеска</strong> можно включить опцию «Автоматическое включение стояночного тормоза». Тогда при выключении двигателя он затянется сам.</li>
+                </ul>
+                <p><strong>Экстренное торможение стояночным тормозом:</strong></p>
+                <ul class="scenario-list">
+                    <li>Если отказала основная тормозная система, потяните и <strong>удерживайте</strong> кнопку EPB — автомобиль начнёт экстренно тормозить с ABS (все 4 колеса). Отпустите — торможение прекратится.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Auto-hold и HSA -->
+        <div id="autohold" class="card">
+            <div class="card-header">
+                <h2>⏸️ Auto-hold и Hill Start Assist (HSA)</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Auto-hold (кнопка (A) в консоли):</strong></p>
+                <ul class="scenario-list">
+                    <li>При активации (загорается зелёный индикатор) автомобиль автоматически удерживается тормозами после остановки, даже если вы отпустите педаль тормоза.</li>
+                    <li>Для трогания просто нажмите газ — Auto-hold отпустит тормоза.</li>
+                    <li>Идеально для светофоров и пробок — не нужно держать ногу на тормозе.</li>
+                    <li>При длительной стоянке (>5-10 минут) Auto-hold автоматически передаст управление стояночному тормозу.</li>
+                </ul>
+                <p><strong>Hill Start Assist (HSA) — всегда активна:</strong></p>
+                <ul class="scenario-list">
+                    <li>Удерживает торможение около 2–3 секунд после отпускания педали тормоза на подъёме (или спуске при движении задним ходом).</li>
+                    <li>Позволяет спокойно перенести ногу с тормоза на газ без отката назад.</li>
+                </ul>
+                <div class="warning-block">
+                    💡 Если вы не любите Auto-hold, просто не включайте его кнопкой. Но HSA работает всегда, отключить нельзя.
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Нестандартные ситуации -->
+        <div id="emergency" class="card">
+            <div class="card-header">
+                <h2>🚨 Нестандартные ситуации и их решение</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>🔋 Разрядилась батарея — как выйти из <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span>?</strong></p>
+                <ul class="scenario-list">
+                    <li>На XC60 с маленьким селектором <strong>нет механического оверрайда</strong>. Если АКБ разряжена, селектор не переключится.</li>
+                    <li>Решение: подключите внешний источник питания (пусковое устройство) к клеммам под капотом, либо зарядите АКБ. Или вызовите эвакуатор.</li>
+                </ul>
+
+                <p><strong>🚗 Буксировка автомобиля с АКПП:</strong></p>
+                <ul class="scenario-list">
+                    <li>Рекомендуется только эвакуатор с подъёмом передних колёс (передний привод).</li>
+                    <li>Если всё же нужно буксировать на гибкой сцепке (только на короткие расстояния): переведите в <span class="gear-symbol gear-n" style="width: 32px; height: 32px; font-size: 1rem;">N</span>, скорость не более 50 км/ч, дистанция не более 50 км.</li>
+                    <li><strong>Запрещено</strong> буксировать с включённым <span class="gear-symbol gear-d" style="width: 32px; height: 32px; font-size: 1rem;">D</span> или <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span> — разрушение коробки.</li>
+                </ul>
+
+                <p><strong>🌊 Затопление или вода в трансмиссии:</strong></p>
+                <ul class="scenario-list">
+                    <li>Если въехали в глубокую лужу и коробка начала «пинаться» — срочно эвакуация. Замена масла и диагностика.</li>
+                </ul>
+
+                <p><strong>🥵 Перегрев АКПП (сообщение на панели):</strong></p>
+                <ul class="scenario-list">
+                    <li>Снизьте нагрузку (уменьшите скорость, отключите кондиционер).</li>
+                    <li>Если горит красный индикатор — остановитесь, дайте остыть 10–15 минут (двигатель работает на холостых в <span class="gear-symbol gear-n" style="width: 32px; height: 32px; font-size: 1rem;">N</span>).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Типичные ошибки (символы везде) -->
+        <div id="errors" class="card">
+            <div class="card-header">
+                <h2>⚠️ Типичные ошибки водителей</h2>
+            </div>
+            <div class="card-body">
+                <ul class="scenario-list">
+                    <li><strong>❌ Переключение в <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span> на ходу:</strong> мгновенная поломка фиксатора коробки. <strong>Правильно:</strong> только при полной остановке.</li>
+                    <li><strong>❌ Движение на <span class="gear-symbol gear-n" style="width: 32px; height: 32px; font-size: 1rem;">N</span> на спуске (экономия топлива):</strong> не экономит (!), но лишает торможения двигателем и может привести к перегреву коробки. Опасно!</li>
+                    <li><strong>❌ Парковка на уклоне: сначала <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span>, потом стояночный тормоз:</strong> груз на коробку, потом трудно выйти из <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span>. <strong>Правильно:</strong> сначала стояночный тормоз, потом <span class="gear-symbol gear-p" style="width: 32px; height: 32px; font-size: 1rem;">P</span>.</li>
+                    <li><strong>❌ Выезд с Auto-hold на газ в пробке:</strong> можно резко дёрнуться. Приучайте себя нажимать газ плавно.</li>
+                    <li><strong>❌ Игнорирование сообщения «Transmission warm Reduce speed»:</strong> ведёт к дорогому ремонту. Всегда снижайте нагрузку или останавливайтесь.</li>
+                </ul>
+                <div class="warning-block">
+                    🛠️ <strong>Регулярное обслуживание:</strong> масло в АКПП рекомендуется менять каждые 60 000 км (в Израиле — 50 000 км). Используйте только оригинальное масло AW-1 или AISIN ATF AW-1. Частичная замена (3–4 литра) — каждые 30 000 км.
+                </div>
+            </div>
+        </div>
+
+        <!-- БОНУС: дополнительные рекомендации -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🌟 Дополнительные рекомендации</h2>
+            </div>
+            <div class="card-body">
+                <ul class="scenario-list">
+                    <li><strong>В пробках:</strong> не переключайтесь постоянно между <span class="gear-symbol gear-d" style="width: 32px; height: 32px; font-size: 1rem;">D</span> и <span class="gear-symbol gear-n" style="width: 32px; height: 32px; font-size: 1rem;">N</span> — это ускоряет износ соленоидов. Лучше включить Auto-hold и оставаться в <span class="gear-symbol gear-d" style="width: 32px; height: 32px; font-size: 1rem;">D</span>.</li>
+                    <li><strong>На крутых подъёмах:</strong> используйте ручной режим <span class="gear-symbol gear-m" style="width: 32px; height: 32px; font-size: 1rem;">M</span>1–<span class="gear-symbol gear-m" style="width: 32px; height: 32px; font-size: 1rem;">M</span>2, чтобы коробка не «дергалась» переключениями.</li>
+                    <li><strong>Длительный спуск (Иерусалимские горы):</strong> перейдите в <span class="gear-symbol gear-m" style="width: 32px; height: 32px; font-size: 1rem;">M</span> и выбирайте пониженную передачу (двигатель поможет тормозить, разгрузив тормозные диски).</li>
+                    <li><strong>После замены масла в АКПП:</strong> выполните адаптацию в сервисе (сброс счётчиков износа).</li>
+                </ul>
+                <div class="footnote" style="margin-top: 1rem;">
+                    📌 Все описанные алгоритмы проверены на XC60 T4 2020. Следуйте им для продления ресурса коробки и комфортного вождения.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

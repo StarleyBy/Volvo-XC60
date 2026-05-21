@@ -669,7 +669,15 @@ $('overlay').addEventListener('click', () => {
 // ── THEME ────────────────────────────────────────────────
 $('theme-toggle').addEventListener('click', toggleTheme);
 
+function updatePinDisplay() {
+  const dots = document.querySelectorAll('.pin-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i < pinInput.length);
+  });
+}
+
 // ── BOOT ─────────────────────────────────────────────────
+AudioEngine.init();
 initTheme();
 showApp();
 
