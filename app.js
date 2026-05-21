@@ -71,41 +71,111 @@ function isFavorite(itemId, sectionId) {
   return State.favorites.some(f => f.itemId === itemId && f.sectionId === sectionId);
 }
 
-// ── AUDIO ENGINE ─────────────────────────────────────────
+// ── AUDIO ENGINE (SYNTHESIZED) ──────────────────────────
 const AudioEngine = {
-  bgm: new Audio('https://assets.mixkit.co/music/preview/mixkit-luxury-lifestyle-35.mp3'),
-  click: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3'),
-  start: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-car-ignition-1538.mp3'),
-  error: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-car-lock-1539.mp3'),
+  ctx: null,
   muted: localStorage.getItem('volvo-muted') === 'true',
+  ambient: null,
   
   init() {
-    this.bgm.loop = true;
-    this.bgm.volume = 0.2;
-    this.click.volume = 0.4;
-    this.start.volume = 0.6;
-    this.error.volume = 0.5;
     this.updateToggle();
   },
-  
-  playBGM() {
-    if (!this.muted) this.bgm.play().catch(() => {});
-  },
-  
-  playSFX(key) {
-    if (this.muted) return;
-    const sfx = this[key];
-    if (sfx) {
-      sfx.currentTime = 0;
-      sfx.play().catch(() => {});
+
+  async ensureCtx() {
+    if (!this.ctx) {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (this.ctx.state === 'suspended') {
+      await this.ctx.resume();
     }
   },
-  
+
+  playSFX(type) {
+    if (this.muted) return;
+    this.ensureCtx().then(() => {
+      if (type === 'click') this.synthClick();
+      if (type === 'error') this.synthError();
+      if (type === 'start') this.synthStart();
+    });
+  },
+
+  synthClick() {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.1);
+  },
+
+  synthError() {
+    [220, 180].forEach((freq, i) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.15);
+      gain.gain.setValueAtTime(0.1, this.ctx.currentTime + i * 0.15);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.15 + 0.1);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.15);
+      osc.stop(this.ctx.currentTime + i * 0.15 + 0.1);
+    });
+  },
+
+  synthStart() {
+    // Нарастающий гул систем
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.frequency.setValueAtTime(40, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 1.5);
+    gain.gain.setValueAtTime(0.01, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.5);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 2.0);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 2.0);
+  },
+
+  startAmbient() {
+    if (this.muted) return;
+    this.ensureCtx().then(() => {
+      // Имитация тихого гула в салоне (Brown Noise)
+      const bufferSize = 2 * this.ctx.sampleRate;
+      const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        output[i] = (lastOut + (0.02 * white)) / 1.02;
+        lastOut = output[i];
+        output[i] *= 3.5; // Громкость
+      }
+      this.ambient = this.ctx.createBufferSource();
+      this.ambient.buffer = noiseBuffer;
+      this.ambient.loop = true;
+      const gain = this.ctx.createGain();
+      gain.gain.value = 0.03; // Очень тихо
+      this.ambient.connect(gain);
+      gain.connect(this.ctx.destination);
+      this.ambient.start();
+    });
+  },
+
   toggle() {
     this.muted = !this.muted;
     localStorage.setItem('volvo-muted', this.muted);
-    if (this.muted) this.bgm.pause();
-    else this.playBGM();
+    if (this.muted) {
+      if (this.ambient) this.ambient.stop();
+    } else {
+      this.startAmbient();
+    }
     this.updateToggle();
   },
   
@@ -141,6 +211,7 @@ async function checkPin() {
     $('login-status').style.color = '#4caf50';
     document.querySelector('#ignition-knob').classList.add('ignited');
     AudioEngine.playSFX('start');
+    AudioEngine.startAmbient();
     
     localStorage.setItem('volvo-session', Date.now());
     
@@ -166,7 +237,6 @@ async function checkPin() {
 
 $('ignition-knob').addEventListener('click', () => {
   AudioEngine.playSFX('click');
-  AudioEngine.playBGM();
   $('ignition-knob-wrap').style.transform = 'scale(0.9) rotate(10deg)';
   setTimeout(() => {
     $('ignition-knob-wrap').style.transform = '';
