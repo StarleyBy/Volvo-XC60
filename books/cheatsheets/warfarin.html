@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Warfarin Anticoagulation Protocol – Bojar Appendix 8 & 9 | Cardiac Surgery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f8;
+      font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.45;
+      padding: 28px 20px;
+      color: #1a2c3e;
+    }
+
+    .warf-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e3c3c 0%, #2c5e6e 100%);
+      padding: 28px 34px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .badge-warf {
+      background: #f5a65b;
+      color: #1e3c3c;
+      padding: 5px 14px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .subhead {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-top: 8px;
+      border-left: 3px solid #f5a65b;
+      padding-left: 16px;
+    }
+
+    .content {
+      padding: 32px 34px;
+    }
+
+    /* Card grid & cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 26px;
+      margin-bottom: 36px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2ebf3;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      transition: all 0.1s ease;
+    }
+
+    .card-header {
+      background: #edf5fa;
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 18px;
+      border-bottom: 2px solid #cbdfec;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #115c6b;
+    }
+
+    .card-body {
+      padding: 20px 22px;
+    }
+
+    .step-title {
+      font-weight: 800;
+      font-size: 14px;
+      background: #f2f7fc;
+      padding: 6px 12px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #1a6f80;
+    }
+
+    .drug-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .drug-table td, .drug-table th {
+      padding: 9px 7px;
+      border-bottom: 1px solid #e5edf3;
+      vertical-align: top;
+    }
+
+    .drug-table th {
+      text-align: left;
+      font-weight: 800;
+      background: #f5faff;
+      color: #1c6070;
+    }
+
+    .two-col {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 230px;
+    }
+
+    .important-box {
+      background: #fff7ec;
+      border-left: 5px solid #e67e22;
+      padding: 14px 18px;
+      border-radius: 20px;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    .alert-box {
+      background: #ffeceb;
+      border-left: 5px solid #c73e2d;
+      padding: 14px 18px;
+      border-radius: 20px;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    .pill {
+      background: #ecf5fd;
+      color: #1f6c7c;
+      border-radius: 40px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .footnote {
+      font-size: 11px;
+      color: #6a7f9b;
+      margin-top: 14px;
+      border-top: 1px dashed #d0deea;
+      padding-top: 12px;
+    }
+
+    hr {
+      margin: 28px 0;
+      border: 0;
+      height: 1px;
+      background: #e2edf5;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 12px 0 10px 0;
+      font-weight: 700;
+      color: #1f5e6e;
+    }
+
+    .inline-badge {
+      background: #1f6c7c;
+      color: white;
+      font-size: 11px;
+      border-radius: 30px;
+      padding: 2px 10px;
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 720px) {
+      .content {
+        padding: 18px;
+      }
+      .header {
+        padding: 20px;
+      }
+    }
+
+    .score-grid {
+      background: #fafeff;
+      border-radius: 18px;
+      padding: 12px 16px;
+      border: 1px solid #d9e6f2;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+<div class="warf-container">
+  <div class="header">
+    <h1>
+      💊 WARFARIN ANTICOAGULATION PROTOCOL
+      <span class="badge-warf">APPENDIX 8 & 9 · BOJAR 6TH ED.</span>
+    </h1>
+    <div class="subhead">
+      Evidence‑based initiation, monitoring, INR reversal, and drug interactions for cardiac surgery patients.<br>
+      <strong>Key facts in 5 seconds:</strong> Standard vs low‑dose initiation • Daily INR until therapeutic • Reversal based on bleeding risk • PCC + vitamin K for life‑threatening bleeding.
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- 2-COLUMN GRID: INITIATION (Standard + Low-dose) -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">📅 STANDARD INITIATION PROTOCOL (no risk factors)</div>
+        <div class="card-body">
+          <div class="important-box" style="margin-top: 0;">
+            <strong>⚡ Risk factors for warfarin sensitivity → use LOW-DOSE protocol:</strong><br>
+            • Small, elderly females • Age >75 years • Renal (Cr >1.5) or hepatic dysfunction • Interacting drugs (amiodarone, antibiotics)
+          </div>
+          <table class="drug-table">
+            <thead>
+              <tr><th>Day</th><th>INR</th><th>Standard dose (mg)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>WNL</td><td>5 mg</td></tr>
+              <tr><td rowspan="3">2</td><td>&lt;1.5</td><td>5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>2.5 mg</td></tr>
+              <tr><td>&gt;2.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">3</td><td>&lt;1.5</td><td>7.5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>2.5 mg</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">4</td><td>&lt;1.5</td><td>10 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>7.5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>5 mg</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">5</td><td>&lt;1.5</td><td>10 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>10 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>5 mg</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">6</td><td>&lt;1.5</td><td>12.5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>10 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>5 mg</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+            </tbody>
+          </table>
+          <div class="footnote">* Restart warfarin when INR &lt;3.0, then adjust dose based on INR trend. Target INR 2.0–3.0 (or 2.5–3.5 for mechanical mitral/aortic valve).</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">📉 LOW‑DOSE PROTOCOL (sensitivity / high bleeding risk)</div>
+        <div class="card-body">
+          <table class="drug-table">
+            <thead><tr><th>Day</th><th>INR</th><th>Low dose (mg)</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>WNL</td><td>2.5 mg</td></tr>
+              <tr><td rowspan="3">2</td><td>&lt;1.5</td><td>2.5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>1.25 mg</td></tr>
+              <tr><td>&gt;2.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">3</td><td>&lt;1.5</td><td>5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>2.5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>HOLD*</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">4</td><td>&lt;1.5</td><td>7.5 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>HOLD*</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">5</td><td>&lt;1.5</td><td>10 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>HOLD*</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+              <tr><td rowspan="4">6</td><td>&lt;1.5</td><td>10 mg</td></tr>
+              <tr><td>1.5–1.9</td><td>7.5 mg</td></tr>
+              <tr><td>2.0–3.0</td><td>2.5 mg</td></tr>
+              <tr><td>&gt;3.0</td><td>HOLD*</td></tr>
+            </tbody>
+          </table>
+          <div class="important-box" style="margin-top: 12px;">💡 <strong>Monitoring:</strong> Check INR daily until therapeutic range (≥2 consecutive days), then 2–3 times/week, then weekly, then up to every 4 weeks when stable.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVERSAL PROTOCOL (APPENDIX 9) + PCC DOSING -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">🩸 INR REVERSAL PROTOCOL – NON‑BLEEDING PATIENT</div>
+        <div class="card-body">
+          <table class="drug-table">
+            <thead><tr><th>INR range</th><th>Action (no active bleeding)</th></tr></thead>
+            <tbody>
+              <tr><td>3.5 – 4.9</td><td>Reduce dose or hold 1 dose; resume at lower dose (reduce by 10–20%)</td></tr>
+              <tr><td>5.0 – 8.9</td><td>Hold warfarin 1–2 days; consider oral vitamin K 1–2.5 mg (high bleeding risk)</td></tr>
+              <tr><td>9.0 – 20.0</td><td>Hold warfarin; administer oral vitamin K 2.5–5 mg; recheck INR in 6–12 h</td></tr>
+              <tr><td>&gt;20.0</td><td>Hold warfarin; oral vitamin K 5–10 mg; consider IV vitamin K 5–10 mg (slow)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">🚨 ACTIVE BLEEDING / LIFE‑THREATENING REVERSAL</div>
+        <div class="card-body">
+          <div class="alert-box" style="margin-top:0"><strong>⚠️ ANY ACTIVE BLEEDING (mild/moderate):</strong> Hold warfarin, IV vitamin K 5–10 mg, consider PCC 25–50 units/kg or FFP 15 mL/kg if PCC unavailable.</div>
+          <div class="alert-box" style="background:#f9e0dd;"><strong>🆘 LIFE‑THREATENING BLEEDING / INTRACRANIAL HEMORRHAGE:</strong><br>
+            • IMMEDIATELY hold warfarin<br>
+            • IV vitamin K 10 mg (slow over 30 min)<br>
+            • <strong>4‑factor PCC (Kcentra) 25–50 units/kg</strong> → target INR &lt;1.5<br>
+            • FFP 15–30 mL/kg if PCC not available (slower, volume overload risk)<br>
+            • Repeat INR q15–30 min until &lt;1.5.
+          </div>
+          <table class="drug-table">
+            <thead><tr><th>Pre‑treatment INR (4‑factor PCC Kcentra)</th><th>Dose (units/kg factor IX)</th><th>Max dose</th></tr></thead>
+            <tbody>
+              <tr><td>2.0 – 4.0</td><td>25 units/kg</td><td>2500 units</td></tr>
+              <tr><td>4.0 – 6.0</td><td>35 units/kg</td><td>3500 units</td></tr>
+              <tr><td>&gt;6.0</td><td>50 units/kg</td><td>5000 units</td></tr>
+            </tbody>
+          </table>
+          <div class="footnote">PCC = 3‑factor (Profline) or 4‑factor (Kcentra). Always administer IV vitamin K concurrently – reversal effect lasts 24h.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TARGET INR + MONITORING + INTERACTIONS (two cards) -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">🎯 TARGET INR & CLINICAL SCORES</div>
+        <div class="card-body">
+          <h3>Indication – target INR</h3>
+          <ul style="margin-left: 20px; margin-bottom: 16px;">
+            <li><strong>Atrial fibrillation (non‑valvular):</strong> INR 2.0–3.0</li>
+            <li><strong>Mechanical mitral/aortic valve (bileaflet):</strong> INR 2.5–3.5</li>
+            <li><strong>Mechanical valve + additional risk (AF, LV thrombus):</strong> INR 3.0–4.0</li>
+            <li><strong>DVT / PE / LV thrombus:</strong> INR 2.0–3.0</li>
+            <li><strong>Bioprosthetic valve + AF:</strong> INR 2.0–3.0</li>
+          </ul>
+          <div class="score-grid">
+            <strong>🔹 CHA₂DS₂‑VASc (stroke risk, non‑rheumatic AF)</strong><br>
+            CHF (1), Hypertension (1), Age≥75 (2), DM (1), Stroke/TIA (2), Vascular disease (1), Age 65–74 (1), Female (1).<br>
+            <strong>Anticoagulate if male ≥1, female ≥2.</strong>
+          </div>
+          <div class="score-grid">
+            <strong>🔹 HAS‑BLED (bleeding risk, score ≥3 high risk)</strong><br>
+            Hypertension (1), Abnormal renal/hepatic (1 or 2), Stroke (1), Bleeding history (1), Labile INR (1), Elderly >65 (1), Drugs/alcohol (1). 
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">⚡ DRUG, FOOD & HERBAL INTERACTIONS (Appendix 11)</div>
+        <div class="card-body">
+          <div class="two-col">
+            <div class="col">
+              <span class="pill" style="background:#fde9e8;">🔺 Increase INR (potentiation)</span>
+              <ul style="margin-top: 8px;">
+                <li>Amiodarone, Metronidazole</li>
+                <li>Fluconazole, Trimethoprim‑SMX</li>
+                <li>Simvastatin, Omeprazole</li>
+                <li>Diltiazem, Aspirin, Tramadol</li>
+                <li>Fish oils, Grapefruit, Mango</li>
+              </ul>
+            </div>
+            <div class="col">
+              <span class="pill" style="background:#e1f5e8;">🔻 Decrease INR (inhibition)</span>
+              <ul style="margin-top: 8px;">
+                <li>Rifampin, Carbamazepine</li>
+                <li>Barbiturates, Cholestyramine</li>
+                <li>Nafcillin, Sucralfate</li>
+                <li>Avocado, Ginseng</li>
+                <li>Green leafy vegetables (high vitamin K)</li>
+                <li>Soy milk, Multivitamins with K</li>
+              </ul>
+            </div>
+          </div>
+          <div class="important-box" style="margin-top: 8px;">📌 <strong>Key advice:</strong> consistent vitamin K intake, avoid abrupt dietary changes. Inform all providers about warfarin.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMERGENCY REVERSAL + BRIDGING / SPECIAL SITUATIONS -->
+    <div class="card">
+      <div class="card-header">📋 BRIDGING & PERIOPERATIVE MANAGEMENT</div>
+      <div class="card-body">
+        <div class="two-col">
+          <div class="col">
+            <h3>🔄 Interruption for surgery (mechanical valve / high risk)</h3>
+            <ul>
+              <li>Stop warfarin 5 days pre‑op</li>
+              <li>Start therapeutic LMWH (enoxaparin 1 mg/kg BID) when INR &lt;2.0</li>
+              <li>Last LMWH 24h before procedure (12h for prophylactic dose)</li>
+              <li>Resume warfarin post‑op when hemostasis secure</li>
+              <li>Restart LMWH when INR &lt;2.0 until INR therapeutic</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>🧠 Special considerations</h3>
+            <ul>
+              <li>Extreme INR &gt;10 with no bleeding → oral vitamin K 2.5–5 mg, recheck in 24h.</li>
+              <li>Reversal with PCC and FFP: contraindicated in HIT history? use alternative.</li>
+              <li>If life‑threatening bleed and PCC not available → rFVIIa (off‑label, thrombotic risk).</li>
+              <li>After reversal: restart warfarin only when clinical stability regained and INR &lt;1.5 (start with low dose).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK REFERENCE CARD: SUMMARY ALGORITHM -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">⚙️ QUICK STEP‑BY‑STEP WARFarin INITIATION (wards/ICU)</div>
+        <div class="card-body">
+          <div class="step-title">✅ Step 1 – Assess</div>
+          <p>Baseline INR, CBC, LFTs, renal function. Identify sensitivity risks (age &gt;75, low weight, amiodarone, Cr &gt;1.5).</p>
+          <div class="step-title">✅ Step 2 – Choose protocol</div>
+          <p>No risk factors → Standard (Day1: 5 mg). Sensitivity → Low‑dose (Day1: 2.5 mg).</p>
+          <div class="step-title">✅ Step 3 – Daily INR & dosing</div>
+          <p>Follow day 1–6 tables above. Hold if INR &gt;3.0, restart when &lt;3.0 with reduced dose.</p>
+          <div class="step-title">✅ Step 4 – Therapeutic range & maintenance</div>
+          <p>Once INR 2.0–3.0 (or target) for 2 days → adjust weekly doses (typical maintenance 2.5–10 mg/day).</p>
+          <div class="alert-box" style="margin-top: 12px;">⏱️ <strong>First 5 seconds summary:</strong> INITIATE with 5 mg or 2.5 mg (sensitive) → INR daily → REVERSAL: oral vitamin K if INR &gt;5 without bleed; IV vitamin K + PCC for major/life‑threatening bleed.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">🧾 PATIENT EDUCATION & DISCHARGE CHECKLIST</div>
+        <div class="card-body">
+          <ul style="margin-left: 18px;">
+            <li>Take warfarin at same time (evening preferred, 5–6 PM).</li>
+            <li>Do not double dose; if missed, contact provider.</li>
+            <li>Avoid abrupt changes in green vegetables (keep vitamin K intake stable).</li>
+            <li>Report bleeding: hematuria, black stools, bruising, epistaxis, gingival bleeding.</li>
+            <li>Use soft toothbrush, electric razor, avoid NSAIDs unless approved.</li>
+            <li>Carry warfarin alert card and list of current medications.</li>
+            <li>Limit alcohol to ≤1 drink/day.</li>
+          </ul>
+          <div class="important-box" style="margin-bottom: 0;">📞 <strong>Emergency contact:</strong> immediately seek care for severe headache, neurologic change, heavy bleeding, or chest trauma.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="footnote" style="text-align: center; margin-top: 12px;">
+      ⚕️ Protocol derived from Bojar 6th Edition – <strong>Appendix 8 (Warfarin Initiation)</strong> and <strong>Appendix 9 (INR Reversal)</strong>, supplemented with CHA₂DS₂‑VASc, HAS‑BLED, and drug interactions (Appendix 10A, 10B, 11). Always adapt to local INR monitoring frequency and institutional PCC availability.
+    </div>
+  </div>
+</div>
+</body>
+</html>

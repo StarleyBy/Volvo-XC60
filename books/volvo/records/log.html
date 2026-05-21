@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бортовой журнал</title>
+    <style>
+        body { font-family: 'IBM Plex Sans', sans-serif; color: #e0e0e0; background: transparent; padding: 20px; }
+        .container { max-width: 100%; }
+        h2 { font-weight: 300; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        form { background: #1e1e1e; padding: 20px; border: 1px solid #333; border-radius: 4px; margin-bottom: 30px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .field { display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 12px; text-transform: uppercase; color: #a0a0a0; font-weight: 600; }
+        input, select { background: #121212; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 2px; }
+        input:focus { border-color: #c5a059; outline: none; }
+        
+        button { background: #003057; color: #fff; border: none; padding: 12px 24px; cursor: pointer; border-radius: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; margin-top: 20px; }
+        button:hover { background: #004a87; }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+        .table-wrap { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; background: #1e1e1e; border: 1px solid #333; }
+        th { background: #121212; padding: 12px; text-align: left; font-size: 11px; text-transform: uppercase; color: #a0a0a0; border-bottom: 2px solid #333; }
+        td { padding: 12px; border-bottom: 1px solid #333; font-size: 14px; }
+        tr:nth-child(even) { background: #1a1a1a; }
+        
+        #status { margin-top: 10px; font-size: 13px; }
+        .success { color: #4caf50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Запись в бортовой журнал</h2>
+        
+        <form id="log-form">
+            <div class="form-grid">
+                <div class="field">
+                    <label>Дата</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="field">
+                    <label>Пробег (км)</label>
+                    <input type="number" id="mileage" placeholder="0" required>
+                </div>
+                <div class="field">
+                    <label>Вид работ</label>
+                    <input type="text" id="service" placeholder="Например: Замена масла" required>
+                </div>
+                <div class="field">
+                    <label>Стоимость</label>
+                    <input type="text" id="cost" placeholder="0.00">
+                </div>
+            </div>
+            <button type="submit" id="submit-btn">Добавить запись</button>
+            <div id="status"></div>
+        </form>
+
+        <h2>Последние записи</h2>
+        <div class="table-wrap">
+            <table id="log-table">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Пробег</th>
+                        <th>Работа</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody id="log-body">
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding: 40px; color:#666;">Настройте Google Apps Script для загрузки данных</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ИНСТРУКЦИЯ:
+        // 1. Создайте Google Таблицу
+        // 2. Инструменты -> Редактор скриптов
+        // 3. Вставьте код из файла README_GOOGLE_SHEETS.md
+        // 4. Разверните как веб-приложение (Доступ: Все, даже анонимные)
+        // 5. Вставьте полученный URL ниже:
+        const SCRIPT_URL = ''; 
+
+        const form = document.getElementById('log-form');
+        const status = document.getElementById('status');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            if (!SCRIPT_URL) {
+                status.innerHTML = '<span class="error">Ошибка: Не указан URL скрипта в log.html</span>';
+                return;
+            }
+
+            status.textContent = 'Отправка данных...';
+            submitBtn.disabled = true;
+
+            const data = {
+                date: document.getElementById('date').value,
+                mileage: document.getElementById('mileage').value,
+                service: document.getElementById('service').value,
+                cost: document.getElementById('cost').value
+            };
+
+            try {
+                // Используем fetch с mode: no-cors если скрипт просто записывает, 
+                // или полноценный JSONP/CORS если нужно подтверждение.
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                status.innerHTML = '<span class="success">Запись успешно добавлена! (Обновите страницу через минуту)</span>';
+                form.reset();
+                // В реальном приложении здесь был бы вызов loadData()
+            } catch (error) {
+                status.innerHTML = '<span class="error">Ошибка при отправке: ' + error.message + '</span>';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        };
+
+        async function loadData() {
+            if (!SCRIPT_URL) return;
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=get');
+                const data = await response.json();
+                const body = document.getElementById('log-body');
+                body.innerHTML = '';
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.date}</td>
+                        <td>${row.mileage}</td>
+                        <td>${row.service}</td>
+                        <td>${row.cost}</td>
+                    `;
+                    body.appendChild(tr);
+                });
+            } catch (e) {
+                console.warn('Не удалось загрузить данные:', e);
+            }
+        }
+        
+        if (SCRIPT_URL) loadData();
+    </script>
+</body>
+</html>

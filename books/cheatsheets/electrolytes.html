@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Electrolyte Disorders in Cardiac Surgery | K⁺, Ca²⁺, Mg²⁺ Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f8;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.45;
+            padding: 28px 20px;
+            color: #1a2c3e;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a3a3f 0%, #1f5e6e 100%);
+            padding: 28px 34px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .badge {
+            background: #ff9f4a;
+            color: #1a3a3f;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .subhead {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-top: 8px;
+            border-left: 3px solid #ffb347;
+            padding-left: 16px;
+        }
+
+        .content {
+            padding: 28px 34px;
+        }
+
+        /* navigation */
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2edf5;
+        }
+
+        .nav-pill {
+            background: #edf5fa;
+            color: #1f6c7c;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .nav-pill:hover {
+            background: #d4e3ef;
+            color: #0b4f5e;
+        }
+
+        /* cards / accordion */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e2ebf3;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+        }
+
+        .card-summary {
+            background: #fafeff;
+            padding: 18px 22px;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid #e2ebf3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.15s;
+            color: #1a5f6e;
+        }
+
+        .card-summary:hover {
+            background: #f0f7fc;
+        }
+
+        .card-summary::after {
+            content: "▼";
+            font-size: 14px;
+            color: #7799b0;
+            transition: transform 0.2s;
+        }
+
+        .card.open .card-summary::after {
+            transform: rotate(180deg);
+        }
+
+        .card-content {
+            display: none;
+            padding: 22px 26px;
+            background: white;
+        }
+
+        .card.open .card-content {
+            display: block;
+        }
+
+        /* tables */
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 16px 0;
+        }
+
+        .ref-table th,
+        .ref-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e5edf3;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .ref-table th {
+            background: #f5faff;
+            font-weight: 800;
+            color: #1c6070;
+        }
+
+        .two-col {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .col {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .info-box {
+            background: #fff7ec;
+            border-left: 5px solid #e67e22;
+            padding: 12px 18px;
+            border-radius: 16px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .alert-box {
+            background: #ffeceb;
+            border-left: 5px solid #c73e2d;
+            padding: 12px 18px;
+            border-radius: 16px;
+            margin: 16px 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 24px 0 12px 0;
+            font-weight: 700;
+            color: #1f5e6e;
+        }
+
+        h4 {
+            font-size: 16px;
+            margin: 20px 0 10px;
+            font-weight: 700;
+            color: #2e6f82;
+        }
+
+        .footnote {
+            font-size: 11px;
+            color: #6a7f9b;
+            margin-top: 20px;
+            border-top: 1px dashed #d0deea;
+            padding-top: 12px;
+        }
+
+        ul,
+        .dash-list {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 720px) {
+            .content {
+                padding: 18px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .card-summary {
+                font-size: 18px;
+                padding: 14px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Electrolyte Disorders in Cardiac Surgery</h1>
+        <div class="badge">Potassium · Calcium · Magnesium · Emergency management</div>
+        <div class="subhead">Based on Bojar 6th edition (Chapter 12) and 2025 ASE/ACC guidelines. Diagnostic algorithms,
+            ECG correlates, and evidence‑based treatment strategies for hyperkalemia, hypokalemia, hypocalcemia, and
+            hypomagnesemia.
+        </div>
+    </div>
+    <div class="content">
+        <div class="nav-bar">
+            <span class="nav-pill" data-target="card-k-high">⚡ Hyperkalemia</span>
+            <span class="nav-pill" data-target="card-k-low">⚠️ Hypokalemia</span>
+            <span class="nav-pill" data-target="card-ca-low">🦴 Hypocalcemia</span>
+            <span class="nav-pill" data-target="card-mg-low">💡 Hypomagnesemia</span>
+            <span class="nav-pill" data-target="card-ecg">📈 ECG patterns</span>
+        </div>
+
+        <!-- HYPERKALEMIA -->
+        <div id="card-k-high" class="card">
+            <div class="card-summary">⚡ Hyperkalemia — causes, ECG, emergency therapy</div>
+            <div class="card-content">
+                <div class="two-col">
+                    <div class="col">
+                        <h4>Etiology (post‑cardiac surgery)</h4>
+                        <ul>
+                            <li>High‑potassium cardioplegia (especially in oliguric patients)</li>
+                            <li>Low cardiac output / oliguric renal failure</li>
+                            <li>Severe tissue ischemia (IABP complication, mesenteric ischemia)</li>
+                            <li>Medications: ACE inhibitors, ARBs, potassium‑sparing diuretics, NSAIDs, β‑blockers</li>
+                            <li>Hyperglycemia (insulin deficiency shifts K⁺ out of cells)</li>
+                            <li>Acidosis (each 0.1 ↓ pH → ↑ K⁺ ~0.4–0.6 mEq/L)</li>
+                        </ul>
+                        <h4>ECG progression (rate‑dependent)</h4>
+                        <ul>
+                            <li>Peaked T waves (first sign, often >6.0 mEq/L)</li>
+                            <li>PR prolongation, loss of P wave</li>
+                            <li>QRS widening → sine wave → ventricular fibrillation/asystole</li>
+                            <li>Paced patients: loss of capture, widening of paced QRS</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="alert-box">
+                            <strong>🆘 Hyperkalemic emergency</strong><br>
+                            Indicated by ECG changes OR K⁺ >6.5 mEq/L (or >5.5 with rapid rise/acute renal failure).<br>
+                            <strong>Immediate steps:</strong> calcium gluconate (membrane stabilization), insulin+glucose (shift
+                            into cells), then elimination (loop diuretics / hemodialysis).
+                        </div>
+                        <h4>Acute treatment (Table 12.8)</h4>
+                        <table class="ref-table">
+                            <thead>
+                            <tr><th>Therapy</th><th>Dose</th><th>Onset</th><th>Duration</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><td>Calcium gluconate 10%</td><td>10 mL IV over 2–3 min</td><td>Immediate</td><td>30 min</td></tr>
+                            <tr><td>Insulin + dextrose*</td><td>10 units regular + 50 mL D50W</td><td>10–20 min</td><td>4–6 h</td></tr>
+                            <tr><td>Albuterol nebulized</td><td>10–20 mg</td><td>90 min peak</td><td>2–3 h</td></tr>
+                            <tr><td>Furosemide IV</td><td>40–80 mg (if renal function preserved)</td><td>15–60 min</td><td>4 h</td></tr>
+                            <tr><td>Hemodialysis</td><td>—</td><td>rapid</td><td>variable</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="info-box">📌 <strong>Calcium caution:</strong> In digoxin‑treated patients, give calcium
+                            gluconate slowly over 20–30 min; use digoxin‑specific Fab fragments if severe toxicity.
+                        </div>
+                        <div class="info-box">📌 <strong>Kayexalate / patiromer / zirconium cyclosilicate</strong> – not
+                            first‑line in acute emergencies (delayed action, risk of colonic necrosis post‑op). Use only
+                            after acute phase or if dialysis unavailable.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HYPOKALEMIA -->
+        <div id="card-k-low" class="card">
+            <div class="card-summary">⚠️ Hypokalemia — causes, risks, replacement protocol</div>
+            <div class="card-content">
+                <div class="two-col">
+                    <div class="col">
+                        <h4>Etiology after cardiac surgery</h4>
+                        <ul>
+                            <li>Loop diuresis (furosemide, bumetanide) – kaliuresis</li>
+                            <li>Insulin for hyperglycemia (redistributive hypokalemia)</li>
+                            <li>Hypomagnesemia (impairs K⁺ repletion)</li>
+                            <li>Metabolic or respiratory alkalosis (“L” in alkalosis = low K⁺)</li>
+                            <li>Nasogastric drainage, vomiting</li>
+                        </ul>
+                        <h4>ECG & clinical consequences</h4>
+                        <ul>
+                            <li>U waves, flattened T waves, ST depression, QT prolongation</li>
+                            <li>Atrial / ventricular ectopy, paroxysmal atrial tachycardia, VT/VF</li>
+                            <li>Enhances digoxin toxicity</li>
+                            <li>Muscle weakness, ileus</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Treatment – IV potassium chloride (KCl)</h4>
+                        <ul>
+                            <li><strong>Central line preferred</strong>: 10–20 mEq/h (max 40 mEq/h with close monitoring)</li>
+                            <li><strong>Peripheral</strong>: max concentration 60 mEq/L (e.g., 20 mEq in 250 mL)</li>
+                            <li><strong>Never run KCl through a syringe pump without infusion pump safety</strong></li>
+                            <li>Each 2 mEq KCl raises serum K⁺ ~0.1 mEq/L (estimates vary)</li>
+                            <li><strong>Check magnesium first</strong> – correct hypomagnesemia (MgSO₄ 2 g) to enable K⁺ repletion</li>
+                        </ul>
+                        <div class="info-box">📌 <strong>Oral replacement (after extubation):</strong> 10–40 mEq KCl tabs
+                            TID–QID. For severe deficits (K⁺ <3.0), may need 60–80 mEq/day.
+                        </div>
+                        <div class="info-box">📌 <strong>Diabetic caution:</strong> Before treating hyperglycemia with insulin,
+                            ensure K⁺ >4.0 mEq/L; otherwise give KCl before insulin to avoid severe hypokalemia.
+                        </div>
+                        <div class="alert-box">⚠️ <strong>Contraction alkalosis + hypokalemia:</strong> Must replete both
+                            chloride and potassium. Use NaCl 0.9% + KCl to break alkalosis (enhances renal bicarbonate
+                            excretion).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HYPOCALCEMIA -->
+        <div id="card-ca-low" class="card">
+            <div class="card-summary">🦴 Hypocalcemia — ionized calcium, hemodynamic effects, correction</div>
+            <div class="card-content">
+                <div class="two-col">
+                    <div class="col">
+                        <h4>Why ionized calcium (iCa) matters</h4>
+                        <ul>
+                            <li>Normal iCa = 1.1–1.3 mmol/L (total Ca may be misleading due to hypoalbuminemia)</li>
+                            <li>Causes post‑CPB: hemodilution, citrate from blood products, hypomagnesemia, alkalosis</li>
+                            <li>ECG: prolonged QT interval, may reduce digoxin sensitivity</li>
+                        </ul>
+                        <h4>When to treat</h4>
+                        <ul>
+                            <li>iCa <1.0 mmol/L and hemodynamic instability or myocardial dysfunction</li>
+                            <li>Routine “empiric” calcium at termination of CPB is common, but <strong>may attenuate
+                                catecholamine effects</strong> (dobutamine, epinephrine). Does not improve outcomes
+                                when used prophylactically.
+                            </li>
+                            <li>Emergency: refractory hypotension / low CO while investigating cause → calcium chloride
+                                0.5–1 g slow IV (central line) provides transient support.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Replacement strategies</h4>
+                        <table class="ref-table">
+                            <thead><tr><th>Preparation</th><th>Dose (central line)</th><th>Onset</th></tr></thead>
+                            <tbody>
+                            <tr><td>Calcium gluconate 10%</td><td>10 mL in 50 mL D5W over 10–20 min</td><td>5–10 min</td></tr>
+                            <tr><td>Continuous infusion</td><td>100 mL 10% gluconate in 1 L D5W at 50 mL/h</td><td>—</td></tr>
+                            <tr><td>Calcium chloride 10%</td><td>0.5–1 g (5–10 mL) slowly (emergency only)</td><td>1–2 min</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="info-box">💡 <strong>Hypomagnesemia first:</strong> If Mg low, replete with MgSO₄ 2 g before
+                            calcium – otherwise hypocalcemia is refractory.
+                        </div>
+                        <div class="info-box">📌 Calcium chloride has 3× more elemental calcium than gluconate but is
+                            irritant to veins – central line only. Use for cardiac arrest only if hyperkalemia, calcium
+                            channel blocker overdose, or massive transfusion.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HYPOMAGNESEMIA -->
+        <div id="card-mg-low" class="card">
+            <div class="card-summary">💡 Hypomagnesemia — rhythm benefits, dosing, synergy with K⁺</div>
+            <div class="card-content">
+                <div class="two-col">
+                    <div class="col">
+                        <h4>Prevalence & causes</h4>
+                        <ul>
+                            <li>Present in >50% of patients after CPB (hemodilution, diuresis, PPI use)</li>
+                            <li>Loop diuretics, thiazides, PPIs (chronic), poor intake</li>
+                            <li>Normal Mg range: 1.5–2.0 mEq/L (0.75–1.0 mmol/L)</li>
+                        </ul>
+                        <h4>Clinical impact</h4>
+                        <ul>
+                            <li>Refractory hypokalemia (K⁺ repletion fails without Mg)</li>
+                            <li>Increased risk of postoperative atrial fibrillation (AF)</li>
+                            <li>Ventricular arrhythmias (Torsade de pointes, PVCs)</li>
+                            <li>Coronary spasm, low cardiac output syndrome</li>
+                            <li>Prolonged ICU stay, higher mortality</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Treatment protocol</h4>
+                        <ul>
+                            <li><strong>Prophylaxis</strong> (common practice): MgSO₄ 2 g IV over 1 hour at the end of CPB
+                                and on POD#1 morning → reduces AF and ventricular arrhythmias.
+                            </li>
+                            <li><strong>Therapeutic</strong>: MgSO₄ 2–4 g IV (diluted in 50–100 mL NS) over 15–30 min,
+                                followed by infusion 1–2 g/h if severe deficit.
+                            </li>
+                            <li><strong>Torsade de pointes</strong>: MgSO₄ 2 g IV push (over 1–2 min) as first‑line therapy
+                                (even with normal Mg level).
+                            </li>
+                        </ul>
+                        <div class="info-box">📌 Magnesium inhibits epinephrine‑induced vasoconstriction without blunting
+                            its inotropic effect → ideal in post‑bypass vasoplegia + need for inotrope.
+                        </div>
+                        <div class="alert-box">⚠️ <strong>Always check Mg before aggressive K⁺ repletion.</strong> If Mg
+                            <1.5 mg/dL, give MgSO₄ first; otherwise K⁺ will not stay inside cells.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ECG PATTERNS quick reference -->
+        <div id="card-ecg" class="card">
+            <div class="card-summary">📈 ECG patterns — hyperkalemia, hypokalemia, hypocalcemia</div>
+            <div class="card-content">
+                <div class="two-col">
+                    <div class="col">
+                        <h4>Hyperkalemia (progressive)</h4>
+                        <ul>
+                            <li><strong>Early:</strong> Tall, peaked T waves (symmetrical, narrow base)</li>
+                            <li><strong>Moderate:</strong> PR prolongation, P wave flattening/absence</li>
+                            <li><strong>Severe:</strong> Wide QRS, sine wave, ventricular fibrillation, asystole</li>
+                            <li><strong>Paced rhythm:</strong> increased capture threshold, loss of capture</li>
+                        </ul>
+                        <h4>Hypokalemia</h4>
+                        <ul>
+                            <li>U wave (prominent after T wave, best seen in V2–V4)</li>
+                            <li>ST depression, flattened T wave, prolonged QT interval</li>
+                            <li>Ectopy (PACs, PVCs), torsade risk if QT very long</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Hypocalcemia</h4>
+                        <ul>
+                            <li>Prolonged QT interval (due to prolonged ST segment)</li>
+                            <li>Normal T wave morphology</li>
+                            <li>May predispose to ventricular arrhythmias but rarely torsade.</li>
+                        </ul>
+                        <div class="info-box">💡 <strong>Differentiation:</strong> Hypocalcemia → QT prolongation with
+                            normal T wave; hypokalemia → QU prolongation with U wave.
+                        </div>
+                        <div class="info-box">⚡ In hyperkalemic emergency, do not wait for ECG confirmation if clinical
+                            suspicion high — give calcium immediately.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional clinical pearls -->
+        <div class="card">
+            <div class="card-summary">📌 Clinical pearls & electrolyte synergy</div>
+            <div class="card-content">
+                <ul>
+                    <li><strong>Hypomagnesemia → hypokalemia → refractory arrhythmias.</strong> Always check Mg before
+                        or together with K⁺.
+                    </li>
+                    <li><strong>Alkalosis lowers K⁺ and ionized calcium.</strong> Correct chloride depletion (NaCl, KCl)
+                        to break metabolic alkalosis.
+                    </li>
+                    <li><strong>Calcium and digoxin:</strong> Give calcium slowly over 20–30 min in digoxin‑toxic
+                        patients; use Digibind for life‑threatening arrhythmias.
+                    </li>
+                    <li><strong>Renal dosing:</strong> In oliguric patients, reduce potassium infusion rate (max 5–10
+                        mEq/h) and recheck frequently.
+                    </li>
+                    <li><strong>Post‑cardiotomy vasoplegia:</strong> Norepinephrine + vasopressin preferred; magnesium
+                        infusion may improve vascular tone.
+                    </li>
+                </ul>
+                <div class="footnote">
+                    ⚕️ Sources: Bojar 6th Edition, Chapter 12 (Fluid Management, Renal, Metabolic and Endocrine Problems),
+                    ACC/ESC 2025 electrolyte management consensus, KDIGO 2025 guidelines. Always individualize therapy based
+                    on continuous monitoring, rhythm strips, and serial electrolytes.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // accordion functionality
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const summary = card.querySelector('.card-summary');
+        if (summary) {
+            summary.addEventListener('click', () => {
+                card.classList.toggle('open');
+            });
+        }
+    });
+
+    // navigation pills
+    const navPills = document.querySelectorAll('.nav-pill');
+    navPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const targetId = pill.getAttribute('data-target');
+            if (!targetId) return;
+            const targetCard = document.getElementById(targetId);
+            if (targetCard) {
+                if (!targetCard.classList.contains('open')) targetCard.classList.add('open');
+                targetCard.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
+        });
+    });
+</script>
+</body>
+</html>

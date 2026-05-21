@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    metadata:
+      title: "Cardiac Surgery ACLS (CALS)"
+      tags: [icu, acute, cardiac surgery]
+      visible: true
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CALS 2025 – Cardiac Surgery Advanced Life Support (post-sternotomy arrest)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #eef2f8;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.45;
+            padding: 28px 20px;
+            color: #1a2c3e;
+        }
+        .cals-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0b2b38 0%, #1f5e6e 100%);
+            padding: 28px 34px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .badge-cals {
+            background: #ff9f4a;
+            color: #0b2b38;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        .subhead {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-top: 8px;
+            border-left: 3px solid #ffb347;
+            padding-left: 16px;
+        }
+        .content {
+            padding: 32px 34px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 26px;
+            margin-bottom: 36px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e2ebf3;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+        .card-header {
+            background: #edf5fa;
+            padding: 16px 20px;
+            font-weight: 700;
+            font-size: 18px;
+            border-bottom: 2px solid #cbdfec;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #115c6b;
+        }
+        .card-body {
+            padding: 20px 22px;
+        }
+        .algorithm-step {
+            margin-bottom: 20px;
+        }
+        .step-title {
+            font-weight: 800;
+            font-size: 14px;
+            background: #f2f7fc;
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #1a6f80;
+        }
+        .rhythm-badge {
+            display: inline-block;
+            background: #be3a2b;
+            color: white;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 11px;
+            letter-spacing: 0.3px;
+            margin-right: 8px;
+        }
+        .rhythm-badge.nonshock {
+            background: #2d728f;
+        }
+        .drug-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .drug-table td, .drug-table th {
+            padding: 9px 7px;
+            border-bottom: 1px solid #e5edf3;
+            vertical-align: top;
+        }
+        .drug-table th {
+            text-align: left;
+            font-weight: 800;
+            background: #f5faff;
+            color: #1c6070;
+        }
+        .pill {
+            background: #ecf5fd;
+            color: #1f6c7c;
+            border-radius: 40px;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .important-box {
+            background: #fff7ec;
+            border-left: 5px solid #e67e22;
+            padding: 14px 18px;
+            border-radius: 20px;
+            margin: 18px 0;
+            font-size: 13px;
+        }
+        .alert-box {
+            background: #ffeceb;
+            border-left: 5px solid #c73e2d;
+            padding: 14px 18px;
+            border-radius: 20px;
+            margin: 18px 0;
+            font-size: 13px;
+        }
+        .footnote {
+            font-size: 11px;
+            color: #6a7f9b;
+            margin-top: 14px;
+            border-top: 1px dashed #d0deea;
+            padding-top: 12px;
+        }
+        .two-col {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .col {
+            flex: 1;
+            min-width: 230px;
+        }
+        hr {
+            margin: 28px 0;
+            border: 0;
+            height: 1px;
+            background: #e2edf5;
+        }
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        .checklist li {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+        }
+        .checklist li:before {
+            content: "⚡";
+            font-size: 12px;
+            color: #e9822c;
+        }
+        h3 {
+            font-size: 16px;
+            margin: 12px 0 10px 0;
+            font-weight: 700;
+            color: #1f5e6e;
+        }
+        @media (max-width: 720px) {
+            .content { padding: 18px; }
+            .header { padding: 20px; }
+        }
+        .role-list {
+            background: #fafeff;
+            border-radius: 18px;
+            padding: 10px 14px;
+            border: 1px solid #d9e6f2;
+        }
+    </style>
+</head>
+<body>
+<div class="cals-container">
+    <div class="header">
+        <h1>
+            🫀 CALS – CARDIAC ADVANCED LIFE SUPPORT (2025)
+            <span class="badge-cals">POST‑STERNOTOMY ARREST PROTOCOL</span>
+        </h1>
+        <div class="subhead">
+            Specialized protocol for cardiac arrest after median sternotomy. Adheres to STS, EACTS, ERC guidelines.<br>
+            <strong>Key differences from ACLS:</strong> prioritise defibrillation/epicardial pacing, limited external chest compressions, emergency resternotomy within &lt;5 min.
+        </div>
+    </div>
+    <div class="content">
+        <!-- CORE CALS ALGORITHM -->
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-header">🆘 CALS ALGORITHM — CARDIAC ARREST AFTER CARDIAC SURGERY</div>
+                <div class="card-body">
+                    <div class="algorithm-step">
+                        <span class="step-title">1️⃣ RECOGNITION (0–10 sec)</span>
+                        <ul style="margin-left: 20px;">
+                            <li>Loss of pulse on arterial line + loss of SpO₂ / invasive pressure waveform.</li>
+                            <li>Simultaneously shout “Cardiac arrest!” → activate cardiac surgery resuscitation team (surgeon, perfusionist).</li>
+                        </ul>
+                    </div>
+                    <div class="algorithm-step">
+                        <span class="step-title">2️⃣ IMMEDIATE THERAPY (first 60 sec, CHEST COMPRESSIONS MAY BE DEFERRED)</span>
+                        <div style="margin-top: 8px;">
+                            <span class="rhythm-badge">VF / PULSELESS VT</span>
+                            <strong>→ 3 stacked shocks (if immediate readiness) 150–200 J biphasic</strong><br>
+                            <span class="rhythm-badge nonshock">BRADYARRHYTHMIA / ASYSTOLE</span>
+                            <strong>→ Activate epicardial pacing: DDD / asynchronous, rate 100 bpm, max mA/V output.</strong><br>
+                            <span class="rhythm-badge nonshock">PEA</span>
+                            <strong>→ Immediately rule out tamponade / hypovolemia / pneumothorax (consider POCUS).</strong>
+                        </div>
+                        <div class="important-box" style="margin-top: 12px;">
+                            <strong>📌 ACLS deviation:</strong> External chest compressions may be deferred for up to 60 sec if defibrillation or pacing can be delivered rapidly. External compressions are dangerous in tamponade and fresh sternotomy (risk of RV rupture).
+                        </div>
+                    </div>
+                    <div class="algorithm-step">
+                        <span class="step-title">3️⃣ EXTERNAL CHEST COMPRESSIONS (if no response or cause not reversible)</span>
+                        <ul>
+                            <li>100–120 /min, depth 5–6 cm, target invasive SBP ≥60 mmHg.</li>
+                            <li>Use backboard, minimise interruptions.</li>
+                            <li>Simultaneously prepare for <strong>EMERGENCY RESTERNOTOMY</strong> (must be done within 5 min of arrest).</li>
+                        </ul>
+                    </div>
+                    <div class="algorithm-step">
+                        <span class="step-title">4️⃣ EMERGENCY RESTERNOTOMY (time is survival)</span>
+                        <p>Indications: no ROSC after defibrillation/pacing, suspected tamponade, massive bleeding, ineffective external compressions.<br>
+                        <strong>Timing:</strong> resternotomy <strong>within 5 minutes</strong> from arrest.<br>
+                        After sternal reopening → internal cardiac massage (two‑handed), internal defibrillation (20 J).</p>
+                        <div class="alert-box">
+                            ⚠️ <strong>10‑day postoperative rule:</strong> resternotomy is recommended up to day 10. Later decisions by senior surgeon (adhesion risk).
+                        </div>
+                    </div>
+                    <div class="footnote">
+                        *Based on STS (2017), ERC 2025, and CSU-ALS guidelines. Survival with CALS reaches 65–79% vs ~35% with standard ACLS.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 ROLES & KEY DIFFERENCES -->
+            <div class="card">
+                <div class="card-header">⚙️ 6 CORE CALS ROLES + ACLS DIFFERENCES</div>
+                <div class="card-body">
+                    <div class="role-list">
+                        <p><strong>✅ Role 1:</strong> External chest compressions (monitor pressure, depth) – until sternum open.<br>
+                        <strong>✅ Role 2:</strong> Airway / ventilation – FiO₂ 1.0, turn off PEEP, exclude pneumothorax.<br>
+                        <strong>✅ Role 3:</strong> Defibrillation / pacing – connect defibrillator, internal paddles, test epicardial wires.<br>
+                        <strong>✅ Role 4:</strong> Team leader (senior clinician) – runs protocol, decides resternotomy.<br>
+                        <strong>✅ Role 5:</strong> Medications – stop infusions, administer drugs (amiodarone, atropine, fluids).<br>
+                        <strong>✅ Role 6:</strong> ICU coordinator – mobilise surgeon, perfusionist, ECMO and resternotomy tray.</p>
+                    </div>
+                    <hr style="margin: 12px 0;">
+                    <div class="important-box" style="background:#eff7f9;">
+                        <strong>🚫 WHAT NOT TO DO (differences from standard ACLS):</strong><br>
+                        • Do NOT give adrenaline routinely → may cause hypertension relapse, arrhythmias, increase myocardial demand.<br>
+                        • Do NOT start external compressions until rhythm/pacing assessed (first 60 sec).<br>
+                        • Do NOT use calcium or bicarbonate without specific indication (hyperK+, TCA overdose).<br>
+                        • No advantage of routine amiodarone over lidocaine.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DRUG DOSING (CALS SPECIFIC) -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">💊 PHARMACOTHERAPY IN POST‑CARDIAC SURGERY ARREST (CALS vs ACLS)</div>
+            <div class="card-body">
+                <div class="two-col">
+                    <div class="col">
+                        <h3>⚡ Drugs for shockable rhythms (VF/pVT)</h3>
+                        <table class="drug-table">
+                            <tr><th>Drug</th><th>Dose</th><th>When</th></tr>
+                            <tr><td>Amiodarone</td><td>300 mg IV (after 2nd/3rd shock)</td><td>Refractory VF</td></tr>
+                            <tr><td>Lidocaine</td><td>1–1.5 mg/kg</td><td>Alternative to amiodarone</td></tr>
+                            <tr><td>Magnesium sulfate</td><td>2 g IV bolus</td><td>Torsade de Pointes (long QT)</td></tr>
+                            <tr><td>Atropine</td><td>1 mg (max 3 mg)</td><td>Persistent bradycardia (if pacing unavailable)</td></tr>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <h3>🩸 Infusion support & notes</h3>
+                        <ul style="margin-bottom: 10px;">
+                            <li><strong>Crystalloids (warmed):</strong> 500–1000 mL bolus for hypovolaemia.</li>
+                            <li><strong>Phenylephrine / norepinephrine</strong> only after sternum open, for vasoplegia.</li>
+                            <li><strong>Epinephrine</strong> – NOT recommended in initial arrest (risk of afterload increase and bleeding).</li>
+                            <li>If IABP in place → switch to trigger mode (pressure).</li>
+                        </ul>
+                        <div class="footnote" style="margin-top: 8px;">* Doses aligned with CALS 2025 and STS expert consensus.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESTERNOTOMY + INTERNAL MASSAGE -->
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-header">🪡 EMERGENCY RESTERNOTOMY – STEP‑BY‑STEP</div>
+                <div class="card-body">
+                    <ul class="checklist">
+                        <li><strong>Call:</strong> Surgeon + perfusionist (prepare ECMO / MCS).</li>
+                        <li><strong>Kit:</strong> Sterile gloves, scalpel, scissors, retractor, clamps, internal paddles (5–20 J).</li>
+                        <li><strong>Step 1:</strong> Aseptic technique, rapid full‑length skin and subcutaneous incision.</li>
+                        <li><strong>Step 2:</strong> Cut or twist sternal wires (wire cutters) → open mediastinum.</li>
+                        <li><strong>Step 3:</strong> Evacuate clot, visualise heart, identify bleeding / tamponade.</li>
+                        <li><strong>Step 4:</strong> <strong>INTERNAL CARDIAC MASSAGE (two‑handed)</strong> – 100–120 /min, more effective than external.</li>
+                        <li><strong>Step 5:</strong> Internal defibrillation (20 J) → repeat if needed. Cross‑clamp or venous drainage for massive bleeding.</li>
+                    </ul>
+                    <div class="important-box">
+                        💡 Critical timeline: if after resternotomy and internal massage no ROSC, consider immediate VA‑ECMO (ECPR) – goal within 10–15 min from arrest.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MECHANICAL SUPPORT + ECMO -->
+            <div class="card">
+                <div class="card-header">🔄 MECHANICAL SUPPORT (MCS) & ECPR</div>
+                <div class="card-body">
+                    <p><strong>For refractory arrest or no ROSC after resternotomy:</strong><br>
+                    • Initiate <strong>VA‑ECMO</strong> (peripheral or central cannulation). Early start within 10–15 min improves survival.<br>
+                    • Consider <strong>Impella / IABP</strong> for left ventricular unloading in post‑cardiotomy cardiogenic shock.<br>
+                    • IABP can be a bridge if ECMO not available.<br>
+                    • In large centres, ECMO team is activated simultaneously with CALS call.</p>
+                    <div class="alert-box" style="margin-top: 10px;">
+                        🧩 <strong>CALS + ECMO integration:</strong> Modern protocols include perfusionist and ECMO console mobilisation at time of “code C”. Designate ECMO coordinator as role #7.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POST‑ARREST CARE (CARDIAC SURGERY SPECIFIC) -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">📋 POST‑RESUSCITATION CARE AFTER OPEN CHEST</div>
+            <div class="card-body">
+                <div class="two-col">
+                    <div class="col">
+                        <h3>🫀 Immediate goals after ROSC:</h3>
+                        <ul>
+                            <li>Maintain MAP ≥65–70 mmHg (norepinephrine, vasopressin)</li>
+                            <li>Control FiO₂: SpO₂ 92–96%, normocapnia (PaCO₂ 35–45 mmHg)</li>
+                            <li>Monitor Hb, ABG, lactate, echocardiography (LV/RV function, tamponade)</li>
+                            <li>Continue temporary pacing if needed; if persistent shock → IABP/ECMO</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h3>🌡️ Temperature control / neuroprognosis:</h3>
+                        <ul>
+                            <li>Active normothermia (36–37°C) for at least 24–48 hours in unresponsive patients.</li>
+                            <li>Avoid hyperthermia.</li>
+                            <li>Seizure surveillance (EEG). Neurofilament light chain (NfL) as biomarker.</li>
+                            <li>Delayed sternal closure until haemodynamics and coagulopathy are stable.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footnote">
+                    *Sternal closure is often deferred – vacuum‑assisted temporary closure is common.
+                </div>
+            </div>
+        </div>
+
+        <!-- REVERSIBLE CAUSES + BEDSIDE KIT -->
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-header">🔎 REVERSIBLE CAUSES (H’s & T’s) – ESPECIALLY RELEVANT AFTER STERNOTOMY</div>
+                <div class="card-body">
+                    <div class="two-col">
+                        <div class="col">
+                            <strong>⚙️ Haemodynamic / Mechanical</strong>
+                            <ul style="margin-left: 18px; margin-top: 8px;">
+                                <li>Cardiac tamponade – #1 cause of failed external CPR</li>
+                                <li>Hypovolaemia / massive bleeding</li>
+                                <li>Tension pneumothorax (often iatrogenic from line placement)</li>
+                                <li>Graft failure / coronary occlusion</li>
+                                <li>Epicardial lead disconnection or poor capture</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <strong>⚡ Metabolic / Arrhythmogenic</strong>
+                            <ul style="margin-left: 18px; margin-top: 8px;">
+                                <li>Severe electrolyte disorders (K⁺, Ca²⁺, Mg²⁺)</li>
+                                <li>Hypoxaemia (circuit disconnect, ETT displacement)</li>
+                                <li>Beta‑blocker / antiarrhythmic overdose</li>
+                                <li>Graft spasm / thrombosis</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footnote">→ If cause not identified within 2 min, proceed to resternotomy.</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🧰 EMERGENCY RESTERNOTOMY BEDSIDE KIT</div>
+                <div class="card-body">
+                    <ul class="checklist">
+                        <li>Sterile gloves, gown, cap, face shield</li>
+                        <li>Scalpel #20, heavy scissors, Finocchietto retractor</li>
+                        <li>Sternal wire cutters</li>
+                        <li>Haemostatic clamps, electrocautery</li>
+                        <li>Internal defibrillation paddles (20 J) + gel/saline pads</li>
+                        <li>Spare epicardial pacing wires and generator</li>
+                        <li>50 mL syringes, warm saline irrigation</li>
+                    </ul>
+                    <div class="important-box" style="margin-top: 8px;">
+                        ✅ <strong>CALS team:</strong> Roles are pre‑assigned. Quarterly simulation training is standard.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARISON TABLE ACLS vs CALS -->
+        <div class="card">
+            <div class="card-header">📊 ACLS vs CALS – KEY DIFFERENCES FOR CARDIAC SURGERY PATIENT</div>
+            <div class="card-body">
+                <table class="drug-table">
+                    <thead><tr><th>Parameter</th><th>Standard ACLS</th><th>CALS (post‑cardiac surgery)</th></tr></thead>
+                    <tbody>
+                        <tr><td>First action</td><td>External chest compressions (C‑A‑B)</td><td>Defibrillation / epicardial pacing within 60 sec</td></tr>
+                        <tr><td>Chest compressions</td><td>Immediate, depth ≥5 cm</td><td>May be deferred; internal massage preferred after sternotomy</td></tr>
+                        <tr><td>Epinephrine</td><td>1 mg q3‑5 min, routine</td><td>NOT routine; only specific situations (anaphylaxis, after open chest)</td></tr>
+                        <tr><td>Pacing</td><td>Transcutaneous for bradycardia</td><td>Epicardial (max output, DDD, 100 bpm) – first line</td></tr>
+                        <tr><td>Resternotomy</td><td>Not considered within 3‑5 min</td><td>Resternotomy <5 min from arrest</td></tr>
+                        <tr><td>Internal defibrillation</td><td>Not applicable</td><td>20 J directly on myocardium after reopening</td></tr>
+                        <tr><td>Mechanical support</td><td>Not in baseline algorithm</td><td>VA‑ECMO (ECPR) for refractory arrest (10–15 min)</td></tr>
+                    </tbody>
+                </table>
+                <div class="footnote" style="margin-top: 16px;">
+                    🧠 Sources: STS expert consensus (2017), ERC guidelines 2025 (special circumstances), CSU-ALS course, CALS 2024 update. Survival with CALS 60–80% vs 15–30% with standard ACLS.
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div style="font-size: 11px; color: #6c7f94; text-align: center; margin-top: 18px;">
+            ⚕️ This protocol is an educational tool based on current international guidelines (STS, EACTS, ERC). Always follow local protocols and multidisciplinary team decisions. Emergency resternotomy and internal cardiac massage are life‑saving interventions for tamponade / bleeding.
+        </div>
+    </div>
+</div>
+</body>
+</html>

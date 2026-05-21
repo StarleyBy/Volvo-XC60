@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Cardiac Surgery Heparin Protocol | Appendix 7</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-page: #f0f2f8;
+      --card-bg: #ffffff;
+      --text-primary: #1a2634;
+      --text-secondary: #4a5b6e;
+      --border: #dce3ec;
+      --accent: #1a73e8;
+      --accent-light: #e8f0fe;
+      --accent-hover: #0d5fcf;
+      --success: #2e7d32;
+      --success-light: #e8f5e9;
+      --warning: #ed6c02;
+      --warning-light: #fff4e5;
+      --danger: #d32f2f;
+      --danger-light: #ffebee;
+      --info: #0288d1;
+      --info-light: #e1f5fe;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #121212;
+      --card-bg: #1e1e2f;
+      --text-primary: #eef2ff;
+      --text-secondary: #9aa4bf;
+      --border: #2d2f3e;
+      --accent: #4b8eff;
+      --accent-light: #1e2a4a;
+      --accent-hover: #3b7ae6;
+      --success: #4caf50;
+      --success-light: #1e3a2a;
+      --warning: #ff9800;
+      --warning-light: #332400;
+      --danger: #f44336;
+      --danger-light: #3b1a1a;
+      --info: #29b6f6;
+      --info-light: #0a2a3a;
+    }
+
+    body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, var(--accent), #6b92f0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* Grid Layout */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 800px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .card-header .phase-icon {
+      font-size: 1.6rem;
+    }
+
+    /* Input rows */
+    .input-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .input-group label {
+      min-width: 160px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    input, select {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: 0.2s;
+      width: 140px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .unit-hint {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    hr {
+      margin: 16px 0;
+      border-color: var(--border);
+    }
+
+    /* Results grid */
+    .results-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 20px 0 16px;
+    }
+
+    .result-card {
+      background: var(--bg-page);
+      border-radius: 18px;
+      padding: 16px;
+      flex: 1;
+      min-width: 160px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .result-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .result-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      margin: 8px 0 4px;
+      line-height: 1.2;
+    }
+
+    .result-unit {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .success-card {
+      border-left-color: var(--success);
+      background: var(--success-light);
+    }
+
+    .warning-card {
+      border-left-color: var(--warning);
+      background: var(--warning-light);
+    }
+
+    .info-card {
+      border-left-color: var(--info);
+      background: var(--info-light);
+    }
+
+    /* Table */
+    .adjust-table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: var(--bg-page);
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      font-weight: 600;
+    }
+
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .tag-red { background: var(--danger-light); color: var(--danger); }
+    .tag-green { background: var(--success-light); color: var(--success); }
+    .tag-blue { background: var(--info-light); color: var(--info); }
+    .tag-orange { background: var(--warning-light); color: var(--warning); }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+<script>
+  // detect theme
+  const theme = (window.parent?.document.documentElement.getAttribute('data-theme')) ||
+                localStorage.getItem('pmr-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+</script>
+
+<div class="container">
+  <div class="header">
+    <h1>Heparin Protocol for Cardiac Surgery <span class="badge">Appendix 7</span></h1>
+    <div class="subtitle">Weight‑based UFH protocol • Target aPTT <strong>56–65 sec</strong> • monitoring & titration nomogram</div>
+  </div>
+
+  <div class="two-columns">
+    <!-- LEFT: INITIAL DOSING (weight-based) -->
+    <div class="card">
+      <div class="card-header">
+        <span class="phase-icon">⚡</span>
+        <h2>1. Initial dosing</h2>
+      </div>
+      <div class="input-group">
+        <label>Actual body weight</label>
+        <input type="number" id="weight" value="75" step="1" min="40" max="200">
+        <span class="unit-hint">kg</span>
+      </div>
+      <div class="input-group">
+        <label>Heparin concentration</label>
+        <input type="number" id="conc" value="25" step="5" min="10" max="100">
+        <span class="unit-hint">000 U / 500 mL</span>
+      </div>
+      <div class="input-group">
+        <label>IV bolus (50–75 U/kg)</label>
+        <input type="number" id="bolusPerKg" value="60" step="5" min="50" max="75">
+        <span class="unit-hint">U/kg (rounded to nearest 100)</span>
+        <label style="margin-left: 8px; min-width: auto;">
+          <input type="checkbox" id="noBolus"> No bolus
+        </label>
+      </div>
+
+      <div id="initialResultsContainer" class="results-grid"></div>
+      <div class="note">
+        <strong>📋 Pre‑start checks:</strong> PT, aPTT, CBC, platelets before heparin. Discontinue all previous heparin orders.<br>
+        <strong>▶ First aPTT check:</strong> 6h after start (4h if bolus given).
+      </div>
+    </div>
+
+    <!-- RIGHT: ADJUSTMENT (based on current aPTT + current rate) -->
+    <div class="card">
+      <div class="card-header">
+        <span class="phase-icon">🎚️</span>
+        <h2>2. aPTT‑based adjustment</h2>
+      </div>
+      <div class="input-group">
+        <label>Current infusion rate</label>
+        <input type="number" id="currentRate" value="1000" step="50">
+        <span class="unit-hint">U/h</span>
+      </div>
+      <div class="input-group">
+        <label>Current aPTT (sec)</label>
+        <input type="number" id="aptt" value="0" step="1">
+        <span class="unit-hint">target 56–65 sec</span>
+      </div>
+      <button id="recalcAdjustBtn" style="margin-bottom: 8px;">⟳ Apply adjustments</button>
+
+      <div id="adjustmentResult" class="results-grid"></div>
+      <div class="note">
+        <strong>📌 aPTT recheck interval:</strong> 4h for changes, 8h if stable within target.
+      </div>
+    </div>
+  </div>
+
+  <!-- full titration table reference -->
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-icon">📊</span>
+      <h2>aPTT titration nomogram (Appendix 7)</h2>
+    </div>
+    <div class="adjust-table-wrapper">
+      <table id="nomogramTable">
+        <thead>
+          <tr><th>aPTT (sec)</th><th>Action</th><th>Rate change (U/kg/h)</th><th>Recheck PTT</th></tr>
+        </thead>
+        <tbody id="nomogramBody"></tbody>
+      </table>
+    </div>
+    <div class="note">
+      <strong>Safety & monitoring:</strong> daily aPTT once stable; platelets daily if &lt;100,000 / qod if &gt;100,000; guaiac all stools; notify HO for bleeding, aPTT &lt;35 or &gt;100 sec.
+    </div>
+  </div>
+
+  <div class="footer">
+    ⚕️ Based on "Manual of Perioperative Care in Adult Cardiac Surgery" – Appendix 7 heparinization protocol.<br>
+    Target therapeutic aPTT 56–65 sec. Always confirm with institutional guidelines.
+  </div>
+</div>
+
+<script>
+  // --------------------------------------------------------------
+  //  Helper: get concentration (U/mL)
+  function getConcUperMl() {
+    let concTh = parseFloat(document.getElementById('conc').value);
+    if (isNaN(concTh)) concTh = 25;
+    return (concTh * 1000) / 500;   // U/mL
+  }
+
+  // Helper: round bolus to nearest 100
+  function roundTo100U(val) {
+    return Math.round(val / 100) * 100;
+  }
+
+  // 1) INITIAL DOSING (weight table – Appendix 7)
+  function getInitialRateFromWeight(weightKg) {
+    if (weightKg <= 60) return 600;
+    if (weightKg <= 70) return 800;
+    if (weightKg <= 80) return 1000;
+    if (weightKg <= 90) return 1100;
+    if (weightKg <= 100) return 1200;
+    return 1500;
+  }
+
+  function updateInitialDosing() {
+    let weight = parseFloat(document.getElementById('weight').value);
+    if (isNaN(weight) || weight <= 0) weight = 70;
+    let bolusPerKg = parseFloat(document.getElementById('bolusPerKg').value);
+    if (isNaN(bolusPerKg)) bolusPerKg = 60;
+    bolusPerKg = Math.min(75, Math.max(50, bolusPerKg));
+    const noBolusChecked = document.getElementById('noBolus').checked;
+    const concUml = getConcUperMl();
+
+    // bolus calculation
+    let bolusUnits = 0;
+    let bolusMl = 0;
+    if (!noBolusChecked) {
+      let rawBolus = weight * bolusPerKg;
+      bolusUnits = roundTo100U(rawBolus);
+      bolusMl = concUml > 0 ? (bolusUnits / concUml).toFixed(1) : 0;
+    }
+
+    // initial infusion rate from weight table (units/h)
+    let initialRateUnits = getInitialRateFromWeight(weight);
+    let initialRateMl = (initialRateUnits / concUml).toFixed(1);
+
+    // also auto-fill the "current rate" field on the right side with this initial value
+    document.getElementById('currentRate').value = initialRateUnits;
+
+    // display in UI
+    const container = document.getElementById('initialResultsContainer');
+    container.innerHTML = `
+      <div class="result-card success-card">
+        <div class="result-label">LOADING BOLUS</div>
+        <div class="result-value">${bolusUnits.toLocaleString()} <span class="result-unit">U</span></div>
+        <div class="result-unit">≈ ${bolusMl} mL IV push (3‑5 min)</div>
+        ${noBolusChecked ? '<div class="result-unit" style="color:var(--warning)">⚠️ No bolus selected</div>' : ''}
+      </div>
+      <div class="result-card">
+        <div class="result-label">INITIAL INFUSION RATE (table)</div>
+        <div class="result-value">${initialRateUnits} <span class="result-unit">U/h</span></div>
+        <div class="result-unit">${initialRateMl} mL/h (${concUml.toFixed(0)} U/mL)</div>
+        <div class="result-unit">${weight} kg → ${initialRateUnits} U/h</div>
+      </div>
+      <div class="result-card info-card">
+        <div class="result-label">INFUSION PREPARATION</div>
+        <div class="result-value">${concUml.toFixed(0)} <span class="result-unit">U/mL</span></div>
+        <div class="result-unit">${document.getElementById('conc').value} 000 U / 500 mL</div>
+      </div>
+    `;
+  }
+
+  // --------------------------------------------------------------
+  // 2) ADJUSTMENT based on CURRENT rate + aPTT (Appendix 7 rules)
+  //    using weight-based delta (U/kg/h)
+  const adjRules = [
+    { min: 0,    max: 45,  label: "< 46",    action: "Increase rate",     deltaPerKg: +4, stopHrs: 0, recheck: 4, classTag: "tag-red" },
+    { min: 46,   max: 55,  label: "46–55",   action: "Increase rate",     deltaPerKg: +2, stopHrs: 0, recheck: 4, classTag: "tag-red" },
+    { min: 56,   max: 65,  label: "56–65",   action: "No change",         deltaPerKg: 0,  stopHrs: 0, recheck: 8, classTag: "tag-green" },
+    { min: 66,   max: 75,  label: "66–75",   action: "Decrease rate",     deltaPerKg: -1, stopHrs: 0, recheck: 6, classTag: "tag-blue" },
+    { min: 76,   max: 90,  label: "76–90",   action: "Decrease rate",     deltaPerKg: -2, stopHrs: 0, recheck: 4, classTag: "tag-blue" },
+    { min: 91,   max: 100, label: "91–100",  action: "Stop 1h then ↓",    deltaPerKg: -3, stopHrs: 1, recheck: 4, classTag: "tag-orange" },
+    { min: 101,  max: 999, label: "> 100",   action: "Stop 2h then ↓↓",   deltaPerKg: -4, stopHrs: 2, recheck: 4, classTag: "tag-red" }
+  ];
+
+  function updateAdjustment() {
+    let weight = parseFloat(document.getElementById('weight').value);
+    if (isNaN(weight) || weight <= 0) weight = 70;
+    let currentRate = parseFloat(document.getElementById('currentRate').value);
+    if (isNaN(currentRate)) currentRate = 1000;
+    let aptt = parseFloat(document.getElementById('aptt').value);
+    const concUml = getConcUperMl();
+
+    const resultDiv = document.getElementById('adjustmentResult');
+
+    if (isNaN(aptt) || aptt <= 0) {
+      resultDiv.innerHTML = `<div class="result-card" style="width:100%">
+        <div class="result-label">📈 ENTER aPTT VALUE</div>
+        <div class="result-value">—</div>
+        <div class="result-unit">Input current aPTT (seconds) to get precise rate adjustment</div>
+      </div>`;
+      return;
+    }
+
+    // find rule
+    let activeRule = adjRules.find(r => aptt >= r.min && aptt <= r.max);
+    if (!activeRule) activeRule = adjRules[adjRules.length - 1];
+
+    const deltaUnitsPerHour = activeRule.deltaPerKg * weight;
+    let newRateUnits = currentRate + deltaUnitsPerHour;
+    if (newRateUnits < 0) newRateUnits = 0;
+    const newRateMl = (newRateUnits / concUml).toFixed(1);
+    const currentMl = (currentRate / concUml).toFixed(1);
+
+    let actionHtml = '';
+    if (activeRule.deltaPerKg === 0 && activeRule.stopHrs === 0) {
+      actionHtml = `<span class="tag tag-green">${activeRule.action}</span> – rate unchanged.`;
+    } else {
+      let holdMsg = '';
+      if (activeRule.stopHrs > 0) {
+        holdMsg = `Stop infusion for ${activeRule.stopHrs} hour(s), then `;
+      }
+      const direction = activeRule.deltaPerKg > 0 ? 'increase' : 'decrease';
+      const absDelta = Math.abs(activeRule.deltaPerKg);
+      actionHtml = `
+        <span class="tag ${activeRule.classTag}">${activeRule.action}</span><br>
+        ${holdMsg}${direction} by ${absDelta} U/kg/h (Δ = ${deltaUnitsPerHour > 0 ? '+' : ''}${deltaUnitsPerHour.toFixed(0)} U/h).
+      `;
+    }
+
+    resultDiv.innerHTML = `
+      <div class="result-card warning-card" style="width:100%; margin-bottom:12px;">
+        <div class="result-label">⚡ CURRENT aPTT = ${aptt} sec (target 56–65)</div>
+        <div class="result-value" style="font-size:1.2rem;">${actionHtml}</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">CURRENT INFUSION</div>
+        <div class="result-value">${currentRate} <span class="result-unit">U/h</span></div>
+        <div class="result-unit">${currentMl} mL/h</div>
+      </div>
+      <div class="result-card success-card">
+        <div class="result-label">RECOMMENDED NEW RATE</div>
+        <div class="result-value">${Math.round(newRateUnits)} <span class="result-unit">U/h</span></div>
+        <div class="result-unit">${newRateMl} mL/h</div>
+        ${activeRule.recheck ? `<div class="result-unit">📌 Recheck aPTT in ${activeRule.recheck} hours</div>` : ''}
+      </div>
+    `;
+  }
+
+  // --------------------------------------------------------------
+  // build the nomogram table (dynamic based on weight)
+  function buildNomogramTable() {
+    let weight = parseFloat(document.getElementById('weight').value);
+    if (isNaN(weight)) weight = 70;
+    const tbody = document.getElementById('nomogramBody');
+    tbody.innerHTML = '';
+    for (const rule of adjRules) {
+      const deltaTotal = (rule.deltaPerKg * weight).toFixed(0);
+      let rateChangeText = '';
+      if (rule.deltaPerKg === 0) rateChangeText = 'No change';
+      else if (rule.deltaPerKg > 0) rateChangeText = `+${rule.deltaPerKg} U/kg/h (+${deltaTotal} U/h)`;
+      else rateChangeText = `${rule.deltaPerKg} U/kg/h (${deltaTotal} U/h)`;
+      let actionDisplay = rule.action;
+      if (rule.stopHrs > 0) actionDisplay = `${rule.action} (hold ${rule.stopHrs}h)`;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${rule.label}</strong> sec</td>
+        <td><span class="tag ${rule.classTag}">${actionDisplay}</span></td>
+        <td>${rateChangeText}</td>
+        <td>${rule.recheck} h</td>
+      `;
+      tbody.appendChild(row);
+    }
+  }
+
+  // sync weight change to initial + nomogram + adjustment (keep current rate field)
+  function fullRefresh() {
+    updateInitialDosing();      // also sets currentRate field to initial table rate
+    buildNomogramTable();
+    updateAdjustment();
+  }
+
+  // when user manually changes current rate field, recompute adjustment only
+  function onCurrentRateChange() {
+    updateAdjustment();
+  }
+
+  // event binding
+  document.getElementById('weight').addEventListener('input', fullRefresh);
+  document.getElementById('conc').addEventListener('input', fullRefresh);
+  document.getElementById('bolusPerKg').addEventListener('input', updateInitialDosing);
+  document.getElementById('noBolus').addEventListener('change', updateInitialDosing);
+  document.getElementById('aptt').addEventListener('input', updateAdjustment);
+  document.getElementById('currentRate').addEventListener('input', onCurrentRateChange);
+  document.getElementById('recalcAdjustBtn').addEventListener('click', updateAdjustment);
+
+  // initial load
+  fullRefresh();
+</script>
+</body>
+</html>

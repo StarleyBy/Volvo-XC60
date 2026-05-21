@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>PiCCO Monitoring – Comprehensive Clinical Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f4f9;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.45;
+            padding: 32px 24px;
+            color: #1a2c3e;
+        }
+        .guide-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0b3650 0%, #07273d 100%);
+            padding: 28px 34px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #ffb74d;
+            color: #07273d;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subhead {
+            font-size: 15px;
+            margin-top: 10px;
+            border-left: 3px solid #ffb74d;
+            padding-left: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px 34px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b3650;
+            border-bottom: 3px solid #cbe4f0;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+        .subsection-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 24px 0 16px 0;
+            color: #1a607b;
+            padding-left: 8px;
+            border-left: 5px solid #ffb74d;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: #fefefe;
+            border-radius: 24px;
+            border: 1px solid #e2edf5;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            background: #ecf5fc;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 18px;
+            border-bottom: 1px solid #d0e2ef;
+            color: #0b3650;
+        }
+        .card-body {
+            padding: 18px 22px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .param-table, .decision-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin: 16px 0;
+        }
+        .param-table th, .decision-table th {
+            background: #f4f9fe;
+            text-align: left;
+            padding: 10px 12px;
+            font-weight: 700;
+        }
+        .param-table td, .decision-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e6edf4;
+            vertical-align: top;
+        }
+        .warning-box {
+            background: #fff6e5;
+            border-left: 5px solid #f39c12;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .alert-box {
+            background: #ffeae9;
+            border-left: 5px solid #e74c3c;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 5px solid #2980b9;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .footnote {
+            font-size: 12px;
+            color: #6c86a3;
+            margin-top: 20px;
+            border-top: 1px solid #dde5ef;
+            padding-top: 14px;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #dfeaf2;
+        }
+        .toc {
+            background: #fafdff;
+            padding: 16px 24px;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            border: 1px solid #e2edf5;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #0b3650;
+            font-weight: 500;
+        }
+        .toc a:hover { text-decoration: underline; }
+        .img-container {
+            margin: 0 0 24px 0;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #e2edf5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        @media (max-width: 680px) {
+            .content { padding: 20px; }
+        }
+        code {
+            background: #f0f4f9;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="guide-container">
+    <div class="header">
+        <h1>
+            📊 PiCCO Monitoring <span class="badge">Clinical Guide 2025</span>
+        </h1>
+        <div class="subhead">
+            Pulse‑induced Contour Cardiac Output · Transpulmonary thermodilution · Haemodynamic decision support
+            <br>Based on Pulsion/Getinge PiCCO2, Philips modules, LITFL, and <strong>https://starleyby.github.io/PiCCO/</strong>.
+        </div>
+    </div>
+    <div class="content">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <strong>📖 Contents</strong><br>
+            <a href="#principles">1. Principles (TPTD + pulse contour)</a><br>
+            <a href="#parameters">2. Key parameters & normal ranges</a><br>
+            <a href="#decision">3. Clinical decision tree & scenarios</a><br>
+            <a href="#setup">4. Equipment, insertion & calibration</a><br>
+            <a href="#indications">5. Indications & contraindications</a><br>
+            <a href="#adv-lim">6. Advantages & limitations</a><br>
+            <a href="#tips">7. Practical tips & troubleshooting</a><br>
+            <a href="#references">8. References & further reading</a>
+        </div>
+
+        <!-- 1. Principles -->
+        <div class="section" id="principles">
+            <div class="section-title">🔬 1. How PiCCO Works – Two Complementary Technologies</div>
+            
+            <div class="img-container">
+                <img src="../assets/picco.jpeg" alt="PiCCO Technologies Map">
+            </div>
+
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🌡️ Transpulmonary Thermodilution (TPTD)</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li><strong>Cold bolus</strong> (≤8 °C saline, 15 mL) injected via central venous catheter.</li>
+                            <li>Bolus passes right heart → lungs → left heart → thermistor‑tipped arterial catheter (femoral).</li>
+                            <li>Monitors temperature change → Stewart‑Hamilton equation → <strong>cardiac output (CO)</strong>.</li>
+                            <li>Also yields <strong>GEDV</strong> (global end‑diastolic volume), <strong>ITBV</strong>, <strong>EVLW</strong> (extravascular lung water).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">📈 Pulse Contour Analysis (PCCO)</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li>Modified Wesseling algorithm analyses arterial pressure waveform <strong>beat‑by‑beat</strong>.</li>
+                            <li><strong>Calibrated</strong> with TPTD‑derived CO → continuous CO, SV, SVV, PPV, dPmx, SVR.</li>
+                            <li>Provides <strong>real‑time</strong> dynamic preload indices (SVV/PPV) and contractility trend (dPmx).</li>
+                            <li>Requires a stable arterial waveform (dicrotic notch visible).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>Core equations:</strong> GEDV = ITTV – PTV · ITBV = 1.25 × GEDV · EVLW = ITTV – ITBV · PVPI = EVLW / PBV.
+            </div>
+        </div>
+
+        <!-- 2. Parameters and normal ranges -->
+        <div class="section" id="parameters">
+            <div class="section-title">📊 2. Key Parameters – Definitions & Normal Ranges</div>
+            <div class="card">
+                <div class="card-header">🫀 Preload & volume status</div>
+                <div class="card-body">
+                    <table class="param-table">
+                        <thead><tr><th>Parameter</th><th>Normal range</th><th>Interpretation</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>GEDVI</strong> (Global End‑Diastolic Volume Index)</td><td>680 – 800 mL/m²</td><td>Volume in all four chambers – superior to CVP/PCWP, unaffected by ventilation/compliance.</td></tr>
+                            <tr><td><strong>ITBVI</strong> (Intrathoracic Blood Volume Index)</td><td>850 – 1000 mL/m²</td><td>Direct preload measure; cardiac + pulmonary blood volume.</td></tr>
+                            <tr><td><strong>SVV</strong> (Stroke Volume Variation)</td><td>&lt;10 % (&lt;12% some sources)</td><td>Dynamic fluid responsiveness predictor (requires regular rhythm, Vt ≥7 mL/kg).</td></tr>
+                            <tr><td><strong>PPV</strong> (Pulse Pressure Variation)</td><td>&lt;10 %</td><td>Similar to SVV, limited by arrhythmias.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-header">❤️ Cardiac function & output</div>
+                <div class="card-body">
+                    <table class="param-table">
+                        <thead><tr><th>Parameter</th><th>Normal range</th><th>Interpretation</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>CI</strong> (Cardiac Index)</td><td>3.0 – 5.0 L/min/m²</td><td>Flow/metre²; ↓CI = low output state.</td></tr>
+                            <tr><td><strong>CFI</strong> (Cardiac Function Index)</td><td>4.5 – 6.5 /min</td><td>CI/GEDVI – load‑independent contractility; ↓CFI = myocardial depression.</td></tr>
+                            <tr><td><strong>GEF</strong> (Global Ejection Fraction)</td><td>25 – 35 %</td><td>4×SV/GEDV – global systolic function.</td></tr>
+                            <tr><td><strong>dPmx</strong> (dP/dt max)</td><td>1200 – 2000 mmHg/s</td><td>Rate of LV pressure rise – contractility (from pulse contour).</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-header">🩸 Afterload & lung water</div>
+                <div class="card-body">
+                    <table class="param-table">
+                        <thead><tr><th>Parameter</th><th>Normal range</th><th>Interpretation</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>SVRI</strong> (Systemic Vascular Resistance Index)</td><td>1700 – 2400 dyn·s·cm⁻⁵·m²</td><td>↑ = vasoconstriction (hypovolaemia, vasopressors), ↓ = vasoplegia (sepsis).</td></tr>
+                            <tr><td><strong>EVLWI</strong> (Extravascular Lung Water Index)</td><td>3 – 7 mL/kg</td><td>Pulmonary oedema quantification; >10 mL/kg severe; predicts mortality.</td></tr>
+                            <tr><td><strong>PVPI</strong> (Pulmonary Vascular Permeability Index)</td><td>1.0 – 3.0</td><td>&gt;3 → permeability oedema (ARDS); ≤3 + high EVLW → hydrostatic oedema.</td></tr>
+                            <tr><td><strong>ScvO₂</strong> (Central Venous Oxygen Saturation)</td><td>70 – 80 %</td><td>Balance O₂ delivery/consumption; calibrate daily.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Clinical decision tree & scenarios -->
+        <div class="section" id="decision">
+            <div class="section-title">🔄 3. Clinical Decision Tree & Common Scenarios</div>
+            <div class="card">
+                <div class="card-header">📐 PiCCO‑based haemodynamic algorithm (2025)</div>
+                <div class="card-body">
+                    <div class="tip-box" style="font-family: monospace; font-size: 14px;">
+                        <strong>Low CI (&lt;2.5 L/min/m²)</strong><br>
+                        ├─ SVV &gt;10 % → GEDVI low → <strong>hypovolaemia → FLUID</strong><br>
+                        └─ SVV &lt;10 %<br>
+                        &nbsp;&nbsp;&nbsp;├─ CFI low (&lt;4.5) or dPmx &lt;1200 → <strong>contractility → INOTROPE (dobutamine, milrinone)</strong><br>
+                        &nbsp;&nbsp;&nbsp;└─ CFI normal → high afterload (SVRI high) → <strong>VASODILATOR</strong><br>
+                        <br>
+                        <strong>Normal or high CI</strong><br>
+                        ├─ MAP low → SVRI low → <strong>vasoplegia → VASOPRESSOR (norepinephrine)</strong><br>
+                        └─ MAP normal → check EVLWI<br>
+                        &nbsp;&nbsp;&nbsp;├─ EVLWI high, PVPI normal → hydrostatic oedema → <strong>DIURETIC, LIMIT FLUIDS</strong><br>
+                        &nbsp;&nbsp;&nbsp;└─ EVLWI high, PVPI high → permeability oedema (ARDS) → <strong>protective ventilation, restrict fluids, consider recruitment</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🧫 Septic shock</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>SVV/PPV to guide fluids.</li>
+                            <li>SVRI to titrate norepinephrine.</li>
+                            <li>EVLWI/PVPI to differentiate ARDS from volume overload.</li>
+                            <li>ScvO₂ & CI guide inotrope need.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🫀 Cardiogenic shock</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Low CI, low CFI/GEF, normal or high GEDVI (congestion).</li>
+                            <li>Use inotropes (dobutamine, milrinone).</li>
+                            <li>EVLWI often elevated (hydrostatic). Diuretics after stabilisation.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🫁 ARDS & pulmonary oedema</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>EVLWI quantifies oedema severity; >10 mL/kg → poor outcome.</li>
+                            <li>PVPI &gt;3 confirms permeability defect.</li>
+                            <li>Guides fluid restriction and diuretic therapy.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">❤️‍🩹 Post‑cardiac surgery</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>GEDVI optimises preload without excessive volume.</li>
+                            <li>dPmx trends help weaning of inotropes.</li>
+                            <li>EVLW detects early pulmonary oedema.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Equipment, insertion and calibration -->
+        <div class="section" id="setup">
+            <div class="section-title">🛠️ 4. Equipment, Insertion & Calibration</div>
+            <div class="card">
+                <div class="card-header">📦 Required components</div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>PiCCO arterial catheter</strong> (4 Fr, 16 cm or 20 cm, femoral preferred).</li>
+                        <li><strong>Standard central venous catheter</strong> (IJ/subclavian for optimum thermodilution; femoral possible with adjusted catheter position).</li>
+                        <li><strong>PiCCO monitor</strong> (standalone or Philips IntelliVue module).</li>
+                        <li><strong>Injectate temperature sensor</strong> + 15 mL ≤8 °C saline syringes.</li>
+                        <li>Pressure transducer, flush system (300 mmHg).</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">📌 Step‑by‑step first calibration</div>
+                <div class="card-body">
+                    <ol>
+                        <li>Insert CVC and PiCCO arterial line, zero arterial transducer.</li>
+                        <li>Enter patient height/weight → BSA automatically calculated.</li>
+                        <li>Connect temperature sensor to CVC injection port.</li>
+                        <li>Perform <strong>3–5 thermodilution measurements</strong>: inject 15 mL ≤8 °C saline rapidly (≤5 s). Wait ≥5 min between injections.</li>
+                        <li>Monitor rejects invalid curves (injection time >10 s, irregular shape).</li>
+                        <li>Average of at least 3 measurements calibrates pulse contour → continuous PCCO, SVV, dPmx.</li>
+                    </ol>
+                    <div class="warning-box">
+                        ⏱️ <strong>Recalibration frequency:</strong> every 8 h in stable patient; after any major haemodynamic change (fluid bolus, vasopressor change, arrhythmia, ROSC). CeVOX (ScvO₂) requires daily in‑vivo calibration.
+                    </div>
+                </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>Injection tips:</strong> Cold saline improves signal quality. Room‑temp saline requires larger volume (20 mL) and is less reliable. Ensure no air bubbles in the arterial line – they dampen waveform.
+            </div>
+        </div>
+
+        <!-- 5. Indications and contraindications -->
+        <div class="section" id="indications">
+            <div class="section-title">✅ 5. Indications & Contraindications</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🟢 Indications</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Septic shock</li>
+                            <li>Cardiogenic shock</li>
+                            <li>ARDS / severe respiratory failure</li>
+                            <li>High‑risk surgery (cardiac, vascular, transplant)</li>
+                            <li>Severe burns, pancreatitis, trauma</li>
+                            <li>Any ICU patient with CVC + arterial line requiring advanced haemodynamic monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🔴 Contraindications & limitations</div>
+                    <div class="card-body">
+                        <p><strong>Absolute:</strong></p>
+                        <ul>
+                            <li>Intracardiac shunts (R→L or L→R)</li>
+                            <li>Aortic aneurysm (overestimates volume)</li>
+                            <li>Severe aortic stenosis</li>
+                            <li>Pneumonectomy / massive PE</li>
+                            <li>IABP in situ (pulse contour invalid)</li>
+                            <li>Extracorporeal circulation (CPB)</li>
+                            <li>Severe tricuspid/mitral regurgitation</li>
+                        </ul>
+                        <p><strong>Relative:</strong></p>
+                        <ul>
+                            <li>Rapid temperature changes</li>
+                            <li>Damped arterial waveform</li>
+                            <li>Atrial fibrillation (SVV/PPV unreliable)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Advantages & limitations -->
+        <div class="section" id="adv-lim">
+            <div class="section-title">⚖️ 6. Advantages & Limitations</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">✔️ Advantages</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Less invasive</strong> than PAC (no right heart catheterisation).</li>
+                            <li><strong>Continuous CO + dynamic indices</strong> (SVV, PPV) from pulse contour.</li>
+                            <li><strong>Quantifies pulmonary oedema</strong> (EVLW) – unique to PiCCO.</li>
+                            <li><strong>Better preload indicators</strong> (GEDV, ITBV) – not influenced by ventilation or compliance.</li>
+                            <li>Catheter can remain <strong>up to 10 days</strong> (arterial line).</li>
+                            <li>No chest X‑ray required.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">⚠️ Limitations</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Requires calibration</strong> every 8 h; accuracy drifts over time.</li>
+                            <li><strong>Not accurate with IABP</strong> (no valid pulse contour).</li>
+                            <li><strong>EVLW indexed to total body weight</strong> – use ideal body weight (IBW) to avoid underestimation in obese.</li>
+                            <li><strong>Does not measure right heart pressures</strong> (PAP, PCWP).</li>
+                            <li>Limitations with intracardiac shunts, severe valvular disease, pneumonectomy.</li>
+                            <li>Arrhythmias invalidate SVV/PPV.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Practical tips and troubleshooting -->
+        <div class="section" id="tips">
+            <div class="section-title">🧰 7. Practical Tips & Troubleshooting</div>
+            <div class="card">
+                <div class="card-body">
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Use ideal body weight (IBW)</strong> for indexing EVLW and GEDV – avoids falsely low values in obese patients.</li>
+                        <li><strong>Perform thermodilution after any major change</strong> in therapy (fluid, vasopressors, inotropes).</li>
+                        <li><strong>Keep the arterial line patent and well‑flushed</strong> – a dampened waveform kills pulse contour analysis.</li>
+                        <li><strong>Check the dicrotic notch</strong>; if not visible, pulse contour calculations will be inaccurate.</li>
+                        <li><strong>Inject cold saline rapidly (≤5 s)</strong> and ensure the correct injectate volume is entered (15 mL for adults).</li>
+                        <li><strong>If “Calibration invalid” repeats:</strong> check for arrhythmias, waveform quality, air in line, proper injection speed, or try contralateral CVC.</li>
+                        <li><strong>For ScvO₂ calibration</strong> (PiCCO2 or newer), calibrate daily using a central venous blood gas; update Hb/Hct when they change by >6%.</li>
+                        <li><strong>Label the time of last calibration</strong> on the monitor screen – helps the next shift know when to recalibrate.</li>
+                    </ul>
+                    <div class="alert-box">
+                        🚨 <strong>Common error:</strong> Recalibrating immediately after a large fluid bolus without allowing steady state (≥3 min) will produce incorrect calibration. Wait for haemodynamic stabilisation.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. References and GitHub link -->
+        <div class="section" id="references">
+            <div class="section-title">📚 8. References & Further Reading</div>
+            <div class="card">
+                <div class="card-body">
+                    <ul>
+                        <li><strong>PiCCO2 Operator’s Manual</strong> – Getinge / Pulsion Medical Systems.</li>
+                        <li><strong>LITFL – PiCCO Summary</strong> (Life in the Fast Lane).</li>
+                        <li><strong>GE Healthcare Quick Guide: PiCCO – A More Comprehensive View (2025)</strong>.</li>
+                        <li><strong>Getinge PiCCO product page</strong> – clinical evidence and setup videos.</li>
+                        <li><strong>PubMed reviews:</strong> “PiCCO monitoring in critically ill patients” (2020–2025 updates).</li>
+                        <li><strong>Amateur GitHub project: <a href="https://github.com/StarleyBy/PiCCO" target="_blank">StarleyBy/PiCCO</a></strong> – includes an interactive PiCCO quiz and educational resources.</li>
+                    </ul>
+                    <div class="footnote" style="margin-top: 16px;">
+                        This guide is intended for bedside teaching and clinical reference. Always follow local protocols and manufacturer’s instructions for use. For real‑time decision support, refer to the PiCCO monitor’s built‑in help and your institution’s policies.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="footnote" style="text-align: center;">
+            📌 Last update: 2025 – based on PiCCO2 firmware v6.2 and current literature. Contributions from StarleyBy/PiCCO GitHub repository.
+        </div>
+    </div>
+</div>
+</body>
+</html>

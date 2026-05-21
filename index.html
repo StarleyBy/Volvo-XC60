@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Volvo XC60 — Личный справочник и дневник эксплуатации">
+  <meta name="theme-color" content="#1b1b1b">
+  <title>Volvo XC60: Справочник</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="app.css">
+  <script>
+    // Fix for GitHub Pages subdirectories without trailing slash
+    (function() {
+      const path = window.location.pathname;
+      if (path.length > 1 && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
+        window.location.replace(path + '/');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ── MOBILE OVERLAY ────────────────────────────────── -->
+<div id="overlay"></div>
+
+<!-- ── APP SHELL ─────────────────────────────────────── -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div id="sidebar-header">
+      <div id="sidebar-logo">🚗</div>
+      <span id="sidebar-title">Volvo XC60</span>
+      <span id="sidebar-badge">v2</span>
+    </div>
+
+    <div id="sidebar-search-wrap">
+      <input type="text" id="sidebar-search" placeholder="Поиск…" autocomplete="off">
+    </div>
+
+    <div id="sidebar-nav"></div>
+
+    <div id="sidebar-footer">
+      <div id="user-indicator">
+        <div id="user-dot"></div>
+        <span id="user-role-label">Владелец</span>
+      </div>
+      <div id="sidebar-footer-actions">
+        <button class="footer-btn admin-only" onclick="window.open('redact.html','_blank')" title="Открыть редактор">✏️</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div id="topbar">
+      <button id="menu-toggle">☰</button>
+      <div id="page-breadcrumb"></div>
+      <span id="page-title-bar">Volvo XC60</span>
+      <div id="topbar-actions">
+        <button class="topbar-btn" id="theme-toggle">🌙</button>
+      </div>
+    </div>
+    <div id="content-area">
+      <p class="loading-msg">Инициализация…</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIBS (Local for offline PWA) ── -->
+<script src="./libs/js-yaml.min.js"></script>
+<script src="./libs/marked.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

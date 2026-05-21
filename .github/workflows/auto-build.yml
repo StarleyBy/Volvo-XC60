@@ -1,0 +1,37 @@
+name: Auto Build Manifest
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'books/**'
+      - 'build-manifest.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Manifest Builder
+        run: node build-manifest.js
+
+      - name: Commit and Push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add app-manifest.yml
+          if [ -n "$(git status --porcelain app-manifest.yml)" ]; then
+            git commit -m "chore: auto-update manifest [skip ci]"
+            git push
+          else
+            echo "No changes in manifest"
+          fi

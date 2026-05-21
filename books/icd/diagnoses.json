@@ -1,0 +1,431 @@
+{
+  "meta": {
+    "title": "ICD-9 Diagnoses — Cardiac Surgery & Cardiac ICU (Extended)",
+    "updated": "2026-05-14",
+    "note": "Extended list for cardiac surgery department and cardiac intensive care unit. Includes congenital heart disease, postoperative complications, multisystem conditions, and resuscitation-related diagnoses."
+  },
+  "categories": [
+    {
+      "name": "Ischemic Heart Disease",
+      "items": [
+        { "code": "410.01", "description": "Acute MI, anterolateral wall, initial episode" },
+        { "code": "410.11", "description": "Acute MI, other anterior wall, initial episode" },
+        { "code": "410.21", "description": "Acute MI, inferolateral wall, initial episode" },
+        { "code": "410.31", "description": "Acute MI, inferoposterior wall, initial episode" },
+        { "code": "410.41", "description": "Acute MI, inferior wall, initial episode" },
+        { "code": "410.51", "description": "Acute MI, other lateral wall, initial episode" },
+        { "code": "410.61", "description": "Acute MI, true posterior wall, initial episode" },
+        { "code": "410.71", "description": "Subendocardial infarction, initial episode" },
+        { "code": "410.81", "description": "Acute MI of other specified sites, initial episode" },
+        { "code": "411.0",  "description": "Postmyocardial infarction syndrome (Dressler's syndrome)" },
+        { "code": "411.1",  "description": "Intermediate coronary syndrome (unstable angina)" },
+        { "code": "411.81", "description": "Acute coronary occlusion without MI" },
+        { "code": "412",     "description": "Old myocardial infarction (healed, not current)" },
+        { "code": "413.0",  "description": "Angina decubitus" },
+        { "code": "413.1",  "description": "Prinzmetal angina (variant angina)" },
+        { "code": "413.9",  "description": "Angina pectoris, unspecified" },
+        { "code": "414.00", "description": "CAD of unspecified vessel type" },
+        { "code": "414.01", "description": "CAD of native coronary artery" },
+        { "code": "414.02", "description": "CAD of autologous vein bypass graft" },
+        { "code": "414.03", "description": "CAD of nonautologous biological bypass graft" },
+        { "code": "414.04", "description": "CAD of artery bypass graft (e.g., LIMA, RIMA)" },
+        { "code": "414.05", "description": "CAD of unspecified bypass graft" },
+        { "code": "414.06", "description": "CAD of native coronary artery of transplanted heart" },
+        { "code": "414.07", "description": "CAD of bypass graft of transplanted heart" },
+        { "code": "414.1",  "description": "Aneurysm of heart (ventricular aneurysm, post-MI)" },
+        { "code": "414.8",  "description": "Chronic ischemic heart disease, other specified form" },
+        { "code": "414.9",  "description": "Chronic ischemic heart disease, unspecified" },
+        { "code": "429.2",  "description": "Cardiovascular disease, unspecified, post-MI" }
+      ]
+    },
+    {
+      "name": "Valvular Heart Disease",
+      "items": [
+        { "code": "394.0",  "description": "Mitral stenosis (rheumatic)" },
+        { "code": "394.1",  "description": "Rheumatic mitral insufficiency" },
+        { "code": "394.2",  "description": "Mitral stenosis with insufficiency (rheumatic)" },
+        { "code": "394.9",  "description": "Rheumatic mitral valve disease, unspecified" },
+        { "code": "395.0",  "description": "Rheumatic aortic stenosis" },
+        { "code": "395.1",  "description": "Rheumatic aortic insufficiency" },
+        { "code": "395.2",  "description": "Rheumatic aortic stenosis with insufficiency" },
+        { "code": "395.9",  "description": "Rheumatic aortic valve disease, unspecified" },
+        { "code": "396.0",  "description": "Mitral stenosis and aortic stenosis (rheumatic)" },
+        { "code": "396.1",  "description": "Mitral stenosis and aortic insufficiency" },
+        { "code": "396.2",  "description": "Mitral insufficiency and aortic stenosis" },
+        { "code": "396.3",  "description": "Mitral insufficiency and aortic insufficiency" },
+        { "code": "396.8",  "description": "Combined mitral and aortic valve disease, other" },
+        { "code": "397.0",  "description": "Rheumatic tricuspid valve disease" },
+        { "code": "397.1",  "description": "Rheumatic pulmonary valve disease" },
+        { "code": "424.0",  "description": "Mitral valve disorder, non-rheumatic (including mitral prolapse)" },
+        { "code": "424.1",  "description": "Aortic valve disorder, non-rheumatic (including bicuspid aortic valve)" },
+        { "code": "424.2",  "description": "Tricuspid valve disorder, non-rheumatic" },
+        { "code": "424.3",  "description": "Pulmonary valve disorder, non-rheumatic" },
+        { "code": "424.91", "description": "Endocarditis, mitral valve" },
+        { "code": "424.92", "description": "Endocarditis, aortic valve" },
+        { "code": "424.93", "description": "Endocarditis, tricuspid valve" },
+        { "code": "424.94", "description": "Endocarditis, pulmonary valve" },
+        { "code": "424.99", "description": "Endocarditis, unspecified valve" },
+        { "code": "746.3",  "description": "Congenital aortic valve stenosis (bicuspid aortic valve)" }
+      ]
+    },
+    {
+      "name": "Arrhythmias and Conduction Disorders",
+      "items": [
+        { "code": "426.0",  "description": "Complete AV block (third degree)" },
+        { "code": "426.10", "description": "AV block, unspecified" },
+        { "code": "426.11", "description": "First-degree AV block" },
+        { "code": "426.12", "description": "Mobitz type I (Wenckebach)" },
+        { "code": "426.13", "description": "Mobitz type II AV block" },
+        { "code": "426.2",  "description": "Left bundle branch hemiblock (LAFB, LPFB)" },
+        { "code": "426.3",  "description": "Left bundle branch block (complete)" },
+        { "code": "426.4",  "description": "Right bundle branch block" },
+        { "code": "426.50", "description": "Bifascicular block, unspecified" },
+        { "code": "426.51", "description": "RBBB and LAFB" },
+        { "code": "426.52", "description": "RBBB and LPFB" },
+        { "code": "426.53", "description": "RBBB and left bundle branch block (trifascicular)" },
+        { "code": "426.6",  "description": "Other heart block (e.g., sinoatrial block)" },
+        { "code": "426.7",  "description": "Anomalous AV excitation (WPW syndrome)" },
+        { "code": "426.81", "description": "Lown-Ganong-Levine syndrome" },
+        { "code": "426.89", "description": "Other specified conduction disorder (e.g., intraventricular block)" },
+        { "code": "427.0",  "description": "Paroxysmal supraventricular tachycardia (SVT)" },
+        { "code": "427.1",  "description": "Paroxysmal ventricular tachycardia (VT, non-sustained/sustained)" },
+        { "code": "427.2",  "description": "Paroxysmal tachycardia, unspecified" },
+        { "code": "427.31", "description": "Atrial fibrillation (paroxysmal, persistent, permanent)" },
+        { "code": "427.32", "description": "Atrial flutter" },
+        { "code": "427.41", "description": "Ventricular fibrillation (VF)" },
+        { "code": "427.42", "description": "Ventricular flutter" },
+        { "code": "427.5",  "description": "Cardiac arrest (including sudden cardiac death)" },
+        { "code": "427.60", "description": "Premature beats, unspecified" },
+        { "code": "427.61", "description": "Atrial premature beats (PAC)" },
+        { "code": "427.69", "description": "Ventricular premature beats (PVC)" },
+        { "code": "427.81", "description": "Sinoatrial node dysfunction (sick sinus syndrome)" },
+        { "code": "427.89", "description": "Other specified cardiac dysrhythmia (e.g., bradycardia-tachycardia)" },
+        { "code": "427.9",  "description": "Cardiac dysrhythmia, unspecified" },
+        { "code": "429.0",  "description": "Myocarditis, unspecified (including arrhythmogenic)" }
+      ]
+    },
+    {
+      "name": "Heart Failure and Cardiomyopathy",
+      "items": [
+        { "code": "428.0",  "description": "CHF, unspecified" },
+        { "code": "428.1",  "description": "Left heart failure (including pulmonary edema)" },
+        { "code": "428.20", "description": "Systolic heart failure, unspecified" },
+        { "code": "428.21", "description": "Systolic heart failure, acute" },
+        { "code": "428.22", "description": "Systolic heart failure, chronic" },
+        { "code": "428.23", "description": "Systolic heart failure, acute on chronic" },
+        { "code": "428.30", "description": "Diastolic heart failure, unspecified" },
+        { "code": "428.31", "description": "Diastolic heart failure, acute" },
+        { "code": "428.32", "description": "Diastolic heart failure, chronic" },
+        { "code": "428.33", "description": "Diastolic heart failure, acute on chronic" },
+        { "code": "428.40", "description": "Combined systolic/diastolic failure, unspecified" },
+        { "code": "428.41", "description": "Combined failure, acute" },
+        { "code": "428.42", "description": "Combined failure, chronic" },
+        { "code": "428.43", "description": "Combined failure, acute on chronic" },
+        { "code": "425.1",  "description": "Hypertrophic cardiomyopathy (HOCM)" },
+        { "code": "425.11", "description": "Hypertrophic obstructive cardiomyopathy" },
+        { "code": "425.18", "description": "Hypertrophic non-obstructive cardiomyopathy" },
+        { "code": "425.4",  "description": "Dilated cardiomyopathy (idiopathic)" },
+        { "code": "425.3",  "description": "Endomyocardial fibrosis (restrictive cardiomyopathy)" },
+        { "code": "425.5",  "description": "Alcoholic cardiomyopathy" },
+        { "code": "425.8",  "description": "Cardiomyopathy due to other causes (peripartum, anthracycline, etc.)" },
+        { "code": "425.9",  "description": "Cardiomyopathy, unspecified" },
+        { "code": "402.01", "description": "Hypertensive heart disease with CHF" },
+        { "code": "404.01", "description": "Hypertensive heart and renal disease with CHF and renal failure" },
+        { "code": "429.1",  "description": "Myocardial degeneration (non-ischemic)" }
+      ]
+    },
+    {
+      "name": "Aortic Disease (Acute and Chronic)",
+      "items": [
+        { "code": "441.00", "description": "Aortic aneurysm, unspecified site, without rupture" },
+        { "code": "441.01", "description": "Thoracic aortic aneurysm, without rupture (ascending, arch, descending)" },
+        { "code": "441.02", "description": "Abdominal aortic aneurysm (AAA), without rupture" },
+        { "code": "441.03", "description": "Thoracoabdominal aortic aneurysm, without rupture" },
+        { "code": "441.1",  "description": "Thoracic aortic aneurysm, ruptured" },
+        { "code": "441.2",  "description": "Thoracoabdominal aortic aneurysm, ruptured" },
+        { "code": "441.3",  "description": "Abdominal aortic aneurysm, ruptured" },
+        { "code": "441.4",  "description": "Aortic aneurysm of unspecified site, ruptured" },
+        { "code": "441.5",  "description": "Aortic dissection (any type)" },
+        { "code": "441.6",  "description": "Thoracic aortic dissection (Type A or B)" },
+        { "code": "441.7",  "description": "Abdominal aortic dissection" },
+        { "code": "441.9",  "description": "Aortic aneurysm, unspecified, without rupture" },
+        { "code": "442.2",  "description": "Aneurysm of subclavian artery (associated with coarctation)" },
+        { "code": "747.10", "description": "Coarctation of aorta (congenital)" },
+        { "code": "747.20", "description": "Interrupted aortic arch (congenital)" },
+        { "code": "747.21", "description": "Hypoplastic aortic arch" }
+      ]
+    },
+    {
+      "name": "Pericardial Disease",
+      "items": [
+        { "code": "420.0",  "description": "Acute pericarditis, infective" },
+        { "code": "420.90", "description": "Acute pericarditis, unspecified (non-infective)" },
+        { "code": "420.91", "description": "Acute pericarditis, idiopathic" },
+        { "code": "420.99", "description": "Acute pericarditis, other specified (uremic, post-MI, post-cardiotomy)" },
+        { "code": "423.0",  "description": "Hemopericardium" },
+        { "code": "423.1",  "description": "Adhesive pericarditis (mediastinopericarditis)" },
+        { "code": "423.2",  "description": "Constrictive pericarditis" },
+        { "code": "423.3",  "description": "Cardiac tamponade" },
+        { "code": "423.8",  "description": "Other pericardial disease (effusion, non-inflammatory)" },
+        { "code": "423.9",  "description": "Pericardial disease, unspecified (pericardial effusion)" },
+        { "code": "429.3",  "description": "Postcardiotomy syndrome (postpericardiotomy syndrome)" }
+      ]
+    },
+    {
+      "name": "Infective Endocarditis and Intracardiac Infections",
+      "items": [
+        { "code": "421.0",  "description": "Acute and subacute bacterial endocarditis (SBE, ABE)" },
+        { "code": "421.1",  "description": "Acute and subacute infective endocarditis, other organisms (fungal, HACEK)" },
+        { "code": "421.9",  "description": "Acute endocarditis, unspecified" },
+        { "code": "424.90", "description": "Endocarditis, valve unspecified (non-rheumatic)" },
+        { "code": "036.42", "description": "Meningococcal endocarditis" },
+        { "code": "112.81", "description": "Candida endocarditis" },
+        { "code": "424.91", "description": "Endocarditis, mitral valve" },
+        { "code": "424.92", "description": "Endocarditis, aortic valve" },
+        { "code": "424.93", "description": "Endocarditis, tricuspid valve (IV drug user, cardiac device)" },
+        { "code": "424.94", "description": "Endocarditis, pulmonary valve" },
+        { "code": "996.61", "description": "Infection of prosthetic valve (prosthetic valve endocarditis)" },
+        { "code": "996.62", "description": "Infection of cardiac device (pacemaker, ICD lead)" }
+      ]
+    },
+    {
+      "name": "Pulmonary Hypertension and Vascular Lung Disease",
+      "items": [
+        { "code": "416.0",  "description": "Primary pulmonary hypertension (IPAH)" },
+        { "code": "416.1",  "description": "Kyphoscoliotic heart disease (cor pulmonale, chronic)" },
+        { "code": "416.8",  "description": "Chronic pulmonary heart disease, other (secondary PH)" },
+        { "code": "416.9",  "description": "Chronic pulmonary heart disease, unspecified (cor pulmonale)" },
+        { "code": "415.0",  "description": "Acute cor pulmonale (acute pulmonary heart disease)" },
+        { "code": "415.11", "description": "Iatrogenic pulmonary embolism (post-cardiac surgery)" },
+        { "code": "415.19", "description": "Pulmonary embolism, other" },
+        { "code": "415.12", "description": "Septic pulmonary embolism (from endocarditis)" },
+        { "code": "417.0",  "description": "Arteriovenous fistula of pulmonary vessels" },
+        { "code": "417.8",  "description": "Other pulmonary vascular disease (thrombosis, stenosis)" }
+      ]
+    },
+    {
+      "name": "Congenital Heart Disease (Complete Pediatric and Adult CHD)",
+      "items": [
+        { "code": "745.0",  "description": "Common truncus arteriosus (Truncus arteriosus)" },
+        { "code": "745.10", "description": "Complete transposition of great vessels (D-TGA)" },
+        { "code": "745.11", "description": "Double outlet right ventricle (DORV)" },
+        { "code": "745.12", "description": "Corrected transposition of great vessels (L-TGA)" },
+        { "code": "745.2",  "description": "Tetralogy of Fallot (TOF)" },
+        { "code": "745.3",  "description": "Common ventricle (single ventricle, univentricular heart)" },
+        { "code": "745.4",  "description": "Ventricular septal defect (VSD), any type" },
+        { "code": "745.5",  "description": "Atrial septal defect (ASD, secundum, PFO, sinus venosus)" },
+        { "code": "745.60", "description": "Atrioventricular canal defect (AVSD), unspecified" },
+        { "code": "745.61", "description": "Ostium primum defect (partial AVSD)" },
+        { "code": "745.69", "description": "Complete AVSD (endocardial cushion defect)" },
+        { "code": "746.00", "description": "Congenital pulmonary valve anomaly, unspecified" },
+        { "code": "746.01", "description": "Pulmonary valve atresia (with or without VSD)" },
+        { "code": "746.02", "description": "Pulmonary valve stenosis (valvular PS)" },
+        { "code": "746.1",  "description": "Tricuspid atresia and stenosis (including hypoplastic right heart)" },
+        { "code": "746.2",  "description": "Ebstein's anomaly (tricuspid valve)" },
+        { "code": "746.3",  "description": "Congenital aortic valve stenosis (bicuspid aortic valve)" },
+        { "code": "746.4",  "description": "Congenital aortic insufficiency (bicuspid valve dysfunction)" },
+        { "code": "746.5",  "description": "Congenital mitral stenosis" },
+        { "code": "746.6",  "description": "Congenital mitral insufficiency (parachute mitral valve)" },
+        { "code": "746.7",  "description": "Hypoplastic left heart syndrome (HLHS)" },
+        { "code": "746.81", "description": "Patent ductus arteriosus (PDA)" },
+        { "code": "746.82", "description": "Anomalous origin of coronary artery (ALCAPA, etc.)" },
+        { "code": "746.85", "description": "Coronary artery anomaly (fistula, malformation)" },
+        { "code": "746.87", "description": "Congenital heart block (complete)" },
+        { "code": "746.89", "description": "Other specified congenital anomaly of heart (crista terminalis, etc.)" },
+        { "code": "747.10", "description": "Coarctation of aorta (preductal, postductal, juxtaductal)" },
+        { "code": "747.11", "description": "Interruption of aortic arch (Type A, B, C)" },
+        { "code": "747.20", "description": "Anomalies of aortic arch (vascular ring, double arch)" },
+        { "code": "747.21", "description": "Hypoplasia of aortic arch" },
+        { "code": "747.3",  "description": "Anomalies of pulmonary artery (pulmonary artery sling, stenosis)" },
+        { "code": "747.41", "description": "Total anomalous pulmonary venous connection (TAPVC)" },
+        { "code": "747.42", "description": "Partial anomalous pulmonary venous connection (PAPVC)" },
+        { "code": "747.49", "description": "Other anomalies of pulmonary veins (cor triatriatum, stenosis)" },
+        { "code": "747.5",  "description": "Anomalies of great veins (persistent left SVC, absent SVC)" },
+        { "code": "759.3",  "description": "Situs inversus and heterotaxy syndrome (isomerism)" },
+        { "code": "V13.6",  "description": "History of congenital heart disease (post-surgical follow-up)" }
+      ]
+    },
+    {
+      "name": "Postoperative and Procedure-Related Complications (Cardiac & Non-Cardiac)",
+      "items": [
+        { "code": "997.1",  "description": "Cardiac complications, NEC (arrhythmia, low output, tamponade after surgery)" },
+        { "code": "997.2",  "description": "Peripheral vascular complications (embolism, thrombosis post-procedure)" },
+        { "code": "997.3",  "description": "Respiratory complications (ARDS, pneumothorax post-op)" },
+        { "code": "997.4",  "description": "Digestive system complications (mesenteric ischemia after CPB)" },
+        { "code": "997.5",  "description": "Urinary complications (acute kidney injury post-cardiac surgery)" },
+        { "code": "997.9",  "description": "Complication of other body systems (post-perfusion syndrome)" },
+        { "code": "998.0",  "description": "Postoperative shock (cardiogenic, hypovolemic, distributive)" },
+        { "code": "998.11", "description": "Hemorrhage complicating a procedure (surgical bleeding)" },
+        { "code": "998.12", "description": "Hematoma complicating a procedure" },
+        { "code": "998.13", "description": "Seroma complicating a procedure" },
+        { "code": "998.2",  "description": "Accidental puncture or laceration (great vessels, ventricle)" },
+        { "code": "998.3",  "description": "Disruption of operative wound (sternal dehiscence)" },
+        { "code": "998.4",  "description": "Foreign body accidentally left in (surgical sponge)" },
+        { "code": "998.51", "description": "Postoperative wound infection (superficial sternal)" },
+        { "code": "998.59", "description": "Other postoperative infection (mediastinitis, deep sternal wound infection)" },
+        { "code": "998.6",  "description": "Persistent postoperative fistula (bronchopleural, lymphatic)" },
+        { "code": "998.81", "description": "Emphysema (subcutaneous) due to procedure" },
+        { "code": "998.83", "description": "Non-healing surgical wound" },
+        { "code": "998.89", "description": "Other specified complications of procedures (chylothorax)" },
+        { "code": "999.1",  "description": "Air embolism (during CPB or central line)" },
+        { "code": "999.3",  "description": "Infection due to central venous catheter" },
+        { "code": "999.31", "description": "Catheter-related bloodstream infection (CRBSI)" },
+        { "code": "999.32", "description": "Infection due to arterial line" },
+        { "code": "996.02", "description": "Mechanical complication of heart valve prosthesis (stenosis, regurgitation)" },
+        { "code": "996.03", "description": "Mechanical complication of coronary bypass graft (occlusion)" },
+        { "code": "996.04", "description": "Mechanical complication of ventricular assist device (VAD)" },
+        { "code": "996.09", "description": "Mechanical complication of other cardiac device (pacemaker, ICD)" },
+        { "code": "996.57", "description": "Mechanical complication of ECMO cannula" },
+        { "code": "996.60", "description": "Infection of cardiac device, unspecified" },
+        { "code": "996.61", "description": "Infection of prosthetic heart valve" },
+        { "code": "996.62", "description": "Infection of pacemaker or ICD pocket" },
+        { "code": "996.63", "description": "Infection of VAD" },
+        { "code": "996.72", "description": "Thrombosis of cardiac device (valve thrombus)" }
+      ]
+    },
+    {
+      "name": "Cardiac Arrest, Resuscitation, and Post-Resuscitation",
+      "items": [
+        { "code": "427.5",  "description": "Cardiac arrest (in-hospital, out-of-hospital, witnessed, unwitnessed)" },
+        { "code": "427.41", "description": "Ventricular fibrillation as cause of arrest" },
+        { "code": "427.42", "description": "Ventricular flutter as cause of arrest" },
+        { "code": "426.0",  "description": "Asystole or PEA as cause of arrest" },
+        { "code": "427.1",  "description": "Pulseless ventricular tachycardia" },
+        { "code": "427.31", "description": "Atrial fibrillation with rapid ventricular response leading to arrest" },
+        { "code": "V12.53", "description": "Personal history of sudden cardiac arrest (survivor)" },
+        { "code": "348.1",  "description": "Anoxic brain damage due to cardiac arrest (post-resuscitation encephalopathy)" },
+        { "code": "780.01", "description": "Coma, post-cardiac arrest" },
+        { "code": "780.72", "description": "Functional neurologic deficit after cardiac arrest (myoclonus, seizures)" },
+        { "code": "997.01", "description": "Post-cardiac arrest syndrome (multiorgan dysfunction)" }
+      ]
+    },
+    {
+      "name": "Renal and Electrolyte Disorders (Cardiac ICU)",
+      "items": [
+        { "code": "584.5",  "description": "Acute kidney injury, post-cardiac surgery (AKI stage 1-3)" },
+        { "code": "584.9",  "description": "Acute renal failure, unspecified (cardiorenal syndrome)" },
+        { "code": "585.1",  "description": "Chronic kidney disease, stage 1" },
+        { "code": "585.2",  "description": "CKD stage 2" },
+        { "code": "585.3",  "description": "CKD stage 3" },
+        { "code": "585.4",  "description": "CKD stage 4" },
+        { "code": "585.5",  "description": "CKD stage 5 (dialysis-dependent)" },
+        { "code": "585.6",  "description": "End-stage renal disease on dialysis" },
+        { "code": "276.1",  "description": "Hyponatremia (dilutional in CHF)" },
+        { "code": "276.2",  "description": "Hypernatremia (post-diuretic)" },
+        { "code": "276.3",  "description": "Hyperkalemia (post-cardiac arrest, ACEi, AKI)" },
+        { "code": "276.7",  "description": "Hypokalemia (diuretic-induced)" },
+        { "code": "275.42", "description": "Hypomagnesemia (arrhythmogenic)" },
+        { "code": "275.3",  "description": "Hypocalcemia (post-transfusion, post-CPB)" }
+      ]
+    },
+    {
+      "name": "Neurological Complications (Cardiac Surgery & ICU)",
+      "items": [
+        { "code": "997.02", "description": "Stroke (ischemic) post-cardiac surgery (embolic)" },
+        { "code": "997.03", "description": "Hemorrhagic stroke post-cardiac surgery" },
+        { "code": "434.11", "description": "Cerebral embolism (from cardiac source, e.g., AF, valve)" },
+        { "code": "434.91", "description": "Stroke, unspecified (post-op)" },
+        { "code": "435.9",  "description": "Transient ischemic attack (TIA) post-CABG" },
+        { "code": "430",     "description": "Subarachnoid hemorrhage (from cerebral aneurysm or anticoagulation)" },
+        { "code": "431",     "description": "Intracerebral hemorrhage (ICH) on anticoagulation" },
+        { "code": "348.5",  "description": "Cerebral edema (post-arrest, post-bypass)" },
+        { "code": "293.0",  "description": "Delirium due to cardiac surgery (ICU delirium)" },
+        { "code": "293.1",  "description": "Post-cardiotomy psychosis" },
+        { "code": "957.0",  "description": "Brachial plexopathy (post-sternotomy)" },
+        { "code": "354.0",  "description": "Ulnar neuropathy (post-positioning)" }
+      ]
+    },
+    {
+      "name": "Respiratory Failure and Ventilation (Cardiac ICU)",
+      "items": [
+        { "code": "518.81", "description": "Acute respiratory failure (post-cardiac surgery)" },
+        { "code": "518.82", "description": "Acute on chronic respiratory failure" },
+        { "code": "518.83", "description": "Chronic respiratory failure (CHF-related)" },
+        { "code": "518.5",  "description": "Pulmonary insufficiency post-thoracic surgery" },
+        { "code": "518.4",  "description": "Acute pulmonary edema (cardiogenic, post-bypass)" },
+        { "code": "518.0",  "description": "Pulmonary collapse (atelectasis post-CPB)" },
+        { "code": "512.1",  "description": "Iatrogenic pneumothorax (central line, ventilation)" },
+        { "code": "511.9",  "description": "Pleural effusion (post-op, chylothorax)" },
+        { "code": "507.0",  "description": "Aspiration pneumonitis (post-intubation)" },
+        { "code": "997.39", "description": "ARDS (post-CPB, transfusion-related)" },
+        { "code": "J96.0",  "description": "Acute respiratory failure, not elsewhere classified" }
+      ]
+    },
+    {
+      "name": "Hematologic and Coagulation Disorders (Post-Cardiac Surgery)",
+      "items": [
+        { "code": "287.4",  "description": "Post-transfusion purpura (HIT type 2)" },
+        { "code": "289.84", "description": "Heparin-induced thrombocytopenia (HIT with thrombosis)" },
+        { "code": "287.5",  "description": "Thrombocytopenia, unspecified (post-CPB)" },
+        { "code": "286.6",  "description": "Disseminated intravascular coagulation (DIC post-CPB)" },
+        { "code": "285.1",  "description": "Acute post-hemorrhagic anemia (surgical blood loss)" },
+        { "code": "285.29", "description": "Anemia of chronic disease (post-cardiac surgery)" },
+        { "code": "273.3",  "description": "Hyperviscosity syndrome (post-bypass)" },
+        { "code": "790.92", "description": "Abnormal coagulation profile (elevated INR, PTT)" }
+      ]
+    },
+    {
+      "name": "Gastrointestinal and Hepatic Complications",
+      "items": [
+        { "code": "557.0",  "description": "Acute mesenteric ischemia (low cardiac output, emboli)" },
+        { "code": "557.1",  "description": "Chronic mesenteric ischemia (diffuse atherosclerosis)" },
+        { "code": "570",     "description": "Acute hepatic failure (post-CPB, cardiogenic shock)" },
+        { "code": "572.2",  "description": "Hepatic encephalopathy (due to heart failure)" },
+        { "code": "574.0",  "description": "Acute cholecystitis (post-op stress)" },
+        { "code": "578.9",  "description": "Upper GI bleeding (stress ulcer, anticoagulation)" },
+        { "code": "569.85", "description": "Lower GI bleeding (anticoagulation, ischemia)" },
+        { "code": "560.1",  "description": "Ileus (post-cardiac surgery, opioids)" }
+      ]
+    },
+    {
+      "name": "Metabolic and Endocrine (Critical Care)",
+      "items": [
+        { "code": "249.00", "description": "Secondary diabetes mellitus, uncontrolled (post-steroids)" },
+        { "code": "250.00", "description": "Diabetes mellitus, uncontrolled (stress hyperglycemia)" },
+        { "code": "244.9",  "description": "Euthyroid sick syndrome (post-cardiac surgery)" },
+        { "code": "255.41", "description": "Adrenal insufficiency (relative, post-steroid withdrawal)" },
+        { "code": "276.0",  "description": "Hyperosmolar hyperglycemic state (HHS)" },
+        { "code": "276.51", "description": "Dehydration (post-diuretic)" },
+        { "code": "276.52", "description": "Hypovolemia (post-surgical)" }
+      ]
+    },
+    {
+      "name": "Shock and Hemodynamic Instability (CICU)",
+      "items": [
+        { "code": "785.51", "description": "Cardiogenic shock (post-MI, post-cardiotomy)" },
+        { "code": "785.52", "description": "Septic shock (post-sternal infection, endocarditis)" },
+        { "code": "785.59", "description": "Shock, other (hypovolemic, obstructive)" },
+        { "code": "785.50", "description": "Shock, unspecified" },
+        { "code": "458.0",  "description": "Orthostatic hypotension (post-op)" },
+        { "code": "458.29", "description": "Iatrogenic hypotension (vasodilators, anesthesia)" },
+        { "code": "415.0",  "description": "Obstructive shock (massive PE, tamponade)" }
+      ]
+    },
+    {
+      "name": "Mechanical Circulatory Support (MCS) and ECMO",
+      "items": [
+        { "code": "V43.21", "description": "Presence of ventricular assist device (LVAD, RVAD, BiVAD)" },
+        { "code": "V43.22", "description": "Presence of total artificial heart (TAH)" },
+        { "code": "V45.01", "description": "Presence of intra-aortic balloon pump (IABP)" },
+        { "code": "V45.02", "description": "Presence of ECMO (veno-arterial, veno-venous)" },
+        { "code": "996.04", "description": "Mechanical complication of VAD (thrombosis, malfunction)" },
+        { "code": "996.57", "description": "Mechanical complication of ECMO (oxygenator failure)" },
+        { "code": "996.63", "description": "Infection of VAD driveline or pump pocket" }
+      ]
+    },
+    {
+      "name": "Extracardiac Vascular Disease (Surgical Relevance)",
+      "items": [
+        { "code": "440.0",  "description": "Atherosclerosis of aorta (porcelain aorta, shaggy aorta)" },
+        { "code": "440.20", "description": "Atherosclerosis of native arteries of extremities" },
+        { "code": "440.21", "description": "Atherosclerosis of bypass graft of extremities" },
+        { "code": "443.9",  "description": "Peripheral vascular disease, unspecified (PAD)" },
+        { "code": "433.10", "description": "Carotid artery stenosis (pre-CABG screening)" },
+        { "code": "433.30", "description": "Subclavian artery stenosis (prior to LIMA harvest)" },
+        { "code": "444.0",  "description": "Arterial embolism of upper extremity (post-catheter)" },
+        { "code": "444.21", "description": "Arterial embolism of lower extremity (cardioembolic)" },
+        { "code": "451.11", "description": "Deep vein thrombosis (post-op DVT)" }
+      ]
+    }
+  ]
+}

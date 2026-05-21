@@ -1,0 +1,105 @@
+meta:
+  app: Volvo XC60 Справочник
+  version: 2.0.0
+  updated: 2026-05-21
+
+sections:
+  - id: device
+    title: Устройство
+    icon: 🏗️
+    items:
+      - id: spec
+        title: "Технические характеристики"
+        file: books/volvo/device/spec.md
+        type: reference
+        visible: true
+
+  - id: control
+    title: Управление
+    icon: 🕹️
+    items:
+      - id: console
+        title: "Центральная консоль"
+        file: books/volvo/control/console.md
+        type: reference
+        visible: true
+
+  - id: repair
+    title: Ремонт
+    icon: 🛠️
+    items:
+      - id: engine-repair
+        title: "Двигатель и трансмиссия"
+        file: books/volvo/repair/engine.md
+        type: reference
+        visible: true
+
+  - id: care
+    title: Уход
+    icon: ✨
+    items:
+      - id: interior-care
+        title: "Уход за салоном"
+        file: books/volvo/care/interior.md
+        type: reference
+        visible: true
+
+  - id: inspection
+    title: Техосмотр
+    icon: 📋
+    items:
+      - id: checklist
+        title: "Чек-лист перед ТО"
+        file: books/volvo/inspection/checklist.md
+        type: reference
+        visible: true
+
+  - id: schedule
+    title: График замен
+    icon: 📅
+    items:
+      - id: replacement-plan
+        title: "План плановых замен"
+        file: books/volvo/schedule/plan.md
+        type: reference
+        visible: true
+
+  - id: records
+    title: Записи
+    icon: 📝
+    items:
+      - id: maintenance-log
+        title: "Бортовой журнал (Google Sheets)"
+        file: books/volvo/records/log.html
+        type: calculator
+        visible: true
+
+  - id: insurance
+    title: Страховка
+    icon: 🛡️
+    items:
+      - id: insurance-info
+        title: "Данные полисов"
+        file: books/volvo/insurance/info.md
+        type: reference
+        visible: true
+
+  - id: tuning
+    title: Тюнинг
+    icon: 🏎️
+    items:
+      - id: tuning-ideas
+        title: "Идеи и проекты"
+        file: books/volvo/tuning/ideas.md
+        type: reference
+        visible: true
+
+  - id: accessories
+    title: Аксессуары
+    icon: 👜
+    items:
+      - id: catalog
+        title: "Каталог допов"
+        file: books/volvo/accessories/catalog.md
+        type: reference
+        visible: true

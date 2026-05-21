@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Non‑Heparin Anticoagulation | Angiomax, Iloprost, DOACs, Argatroban, Fondaparinux & Defibrotide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #edf2f9;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.45;
+            padding: 0;
+            color: #162b3a;
+            scroll-behavior: smooth;
+        }
+        .guide-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e4a6e 0%, #0e2e45 100%);
+            padding: 28px 34px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #ffb74d;
+            color: #0e2e45;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subhead {
+            font-size: 15px;
+            margin-top: 10px;
+            border-left: 3px solid #ffb74d;
+            padding-left: 16px;
+            opacity: 0.9;
+        }
+        /* QUICK NAVIGATION */
+        .quick-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e2edf5;
+            padding: 12px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-start;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background-color: rgba(255,255,255,0.92);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .quick-nav a {
+            background: #ecf5fc;
+            padding: 6px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e4a6e;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .quick-nav a:hover {
+            background: #cbe4f0;
+            transform: scale(1.02);
+        }
+        .content {
+            padding: 30px 34px;
+        }
+        .section {
+            margin-bottom: 44px;
+            scroll-margin-top: 80px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e4a6e;
+            border-bottom: 3px solid #cbe4f0;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+        .subsection-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 28px 0 16px 0;
+            color: #1e6f8f;
+            padding-left: 8px;
+            border-left: 5px solid #ffb74d;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e2edf5;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            background: #ecf5fc;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 18px;
+            border-bottom: 1px solid #d0e2ef;
+            color: #1a607b;
+        }
+        .card-body {
+            padding: 18px 22px;
+        }
+        .drug-table, .dosing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin: 14px 0;
+        }
+        .drug-table th, .dosing-table th {
+            background: #f4f9fe;
+            text-align: left;
+            padding: 10px 12px;
+            font-weight: 700;
+        }
+        .drug-table td, .dosing-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e6edf4;
+            vertical-align: top;
+        }
+        .warning-box {
+            background: #fff6e5;
+            border-left: 5px solid #f39c12;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .alert-box {
+            background: #ffeae9;
+            border-left: 5px solid #e74c3c;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 5px solid #2980b9;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .footnote {
+            font-size: 12px;
+            color: #6c86a3;
+            margin-top: 20px;
+            border-top: 1px solid #dde5ef;
+            padding-top: 14px;
+        }
+        hr {
+            margin: 24px 0;
+            border: none;
+            border-top: 1px solid #dfeaf2;
+        }
+        .pill {
+            background: #eef2fc;
+            padding: 2px 10px;
+            border-radius: 24px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        @media (max-width: 760px) {
+            .content { padding: 20px; }
+            .card-header { font-size: 16px; }
+            .quick-nav { gap: 8px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; padding: 10px 16px; }
+            .quick-nav a { font-size: 11px; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+<div class="guide-container">
+    <div class="header">
+        <h1>
+            💊 Non‑Heparin Anticoagulation <span class="badge">Clinical Reference 2025</span>
+        </h1>
+        <div class="subhead">
+            Comprehensive guide to parenteral and oral alternatives: Angiomax® (bivalirudin), iloprost, argatroban, fondaparinux, DOACs (apixaban, rivaroxaban, dabigatran, edoxaban) and defibrotide.
+            Dosing, titration, monitoring, and reversal strategies.
+        </div>
+    </div>
+
+    <!-- QUICK NAVIGATION (fast drug access) -->
+    <div class="quick-nav">
+        <a href="#bivalirudin">💉 Bivalirudin (Angiomax)</a>
+        <a href="#argatroban">⚙️ Argatroban</a>
+        <a href="#fondaparinux">💊 Fondaparinux</a>
+        <a href="#doacs">💠 DOACs (Apixaban/Rivaroxaban/Edoxaban/Dabigatran)</a>
+        <a href="#iloprost">🌊 Iloprost</a>
+        <a href="#defibrotide">🫀 Defibrotide</a>
+        <a href="#comparison">📊 Comparison table</a>
+        <a href="#special">🧠 Special situations (HIT/ECMO/Renal)</a>
+    </div>
+
+    <div class="content">
+
+        <!-- 1. DIRECT THROMBIN INHIBITORS (IV) : ANGIOMAX + ARGATROBAN -->
+        <div class="section" id="bivalirudin">
+            <div class="section-title">🩸 Direct Thrombin Inhibitors (IV) – Angiomax & Argatroban</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">💉 Bivalirudin (Angiomax®)</div>
+                    <div class="card-body">
+                        <p><strong>Indications:</strong> PCI, HIT/HITT (heparin‑induced thrombocytopenia), off‑label for ECMO/VAD anticoagulation.</p>
+                        <table class="dosing-table">
+                            <tr><th>Setting</th><th>Dosing</th></tr>
+                            <tr><td>PCI (REPLACE‑2)</th><td>0.75 mg/kg IV bolus → 1.75 mg/kg/h infusion for duration of procedure (up to 4h, then 0.2 mg/kg/h if needed)</td></tr>
+                            <tr><td>HIT (non‑PCI, off‑label)</th><td>0.15–0.2 mg/kg/h continuous infusion</td></tr>
+                            <tr><td>Renal impairment (CrCl &lt;30 mL/min)</th><td>Reduce infusion by 20–25% (0.03–0.05 mg/kg/h)</td></tr>
+                            <tr><td>ECMO / VAD (off‑label)</th><td>Target aPTT 1.5–2.5× baseline. Start 0.05–0.1 mg/kg/h, titrate</td></tr>
+                        </table>
+                        <ul style="margin: 10px 0 0 18px;">
+                            <li><strong>Monitoring:</strong> aPTT (goal 1.5–2.5× baseline) or ACT (300–350 s for PCI). Draw 2–3h after start and after dose changes.</li>
+                            <li><strong>Half‑life:</strong> ~25 min; hepatic clearance preferred in renal failure.</li>
+                            <li><strong>Reversal:</strong> No specific antidote; short half‑life → discontinuation allows quick offset. In life‑threatening bleeding, consider recombinant factor VIIa or PCC (limited evidence).</li>
+                        </ul>
+                        <div class="tip-box">💡 <strong>Key advantage:</strong> No risk of HIT, predictable dose‑response, and does not require antithrombin. Preferred over heparin in HIT patients and in centres with high ECMO volumes.</div>
+                    </div>
+                </div>
+                <div class="card" id="argatroban">
+                    <div class="card-header">⚙️ Argatroban</div>
+                    <div class="card-body">
+                        <p><strong>Indications:</strong> HIT with or without thrombosis, PCI in HIT patients.</p>
+                        <table class="dosing-table">
+                            <tr><th>Parameter</th><th>Value</th></tr>
+                            <tr><td>Initial infusion (normal hepatic function)</th><td>2 mcg/kg/min continuous IV</td></tr>
+                            <tr><td>Max dose</th><td>10 mcg/kg/min</td></tr>
+                            <tr><td>Hepatic impairment (Child‑Pugh B/C)</th><td>Start 0.5 mcg/kg/min</td></tr>
+                            <tr><td>Critically ill or post‑cardiac surgery</th><td>0.5–1.0 mcg/kg/min initial</td></tr>
+                            <tr><td>PCI (bolus)</th><td>350 mcg/kg over 3–5 min → infusion 25 mcg/kg/min (target ACT 300‑450 s)</td></tr>
+                        </table>
+                        <ul style="margin: 10px 0 0 18px;">
+                            <li><strong>Monitoring:</strong> aPTT (goal 1.5–3× baseline, max 100 s). Obtain baseline and 2h after start, then q4h.</li>
+                            <li><strong>Half‑life:</strong> 39–51 min, hepatically cleared.</li>
+                            <li><strong>Transition to warfarin:</strong> Overlap until INR is therapeutic on chromogenic factor Xa assay (argatroban falsely elevates INR).</li>
+                        </ul>
+                        <div class="alert-box">⚠️ <strong>Warning:</strong> Argatroban prolongs INR; use chromogenic FXa assay when transitioning to VKA. No specific reversal agent; stop infusion (half‑life ~45 min).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. FONDAPARINUX (SC factor Xa inhibitor) -->
+        <div class="section" id="fondaparinux">
+            <div class="section-title">💉 Fondaparinux (Arixtra®) – Parenteral Factor Xa Inhibitor</div>
+            <div class="card">
+                <div class="card-body">
+                    <p><strong>Mechanism:</strong> Synthetic pentasaccharide that selectively inhibits factor Xa via antithrombin. No routine monitoring required in most patients, but special populations may require anti‑Xa assay with fondaparinux calibrators.</p>
+                    <table class="dosing-table">
+                        <tr><th>Indication</th><th>Body weight</th><th>Dose (SC once daily)</th></tr>
+                        <tr><td>VTE treatment / PE</th><td>&lt;50 kg<br>50–100 kg<br>&gt;100 kg</td><td>5 mg<br>7.5 mg<br>10 mg</td></tr>
+                        <tr><td>VTE prophylaxis (orthopaedic surgery)</th><td colspan="2">2.5 mg SC daily</td></tr>
+                        <tr><td>Renal impairment</th><td colspan="2">Use with caution if CrCl 30–50 mL/min; contraindicated if CrCl &lt;30 mL/min</td></tr>
+                    </table>
+                    <ul style="margin-left: 18px;">
+                        <li><strong>Monitoring:</strong> Generally not required. In renal failure, obesity or pregnancy → measure anti‑FXa activity using a fondaparinux‑calibrated assay (target 0.5–1.5 mg/L). LMWH‑based anti‑Xa is not reliable (up to 40% difference).</li>
+                        <li><strong>Reversal:</strong> No specific antidote. For major bleeding, consider PCC (prothrombin complex concentrate) or FEIBA; rFVIIa provides partial correction. Andexanet alfa is not approved for fondaparinux. Investigational agent r‑antidote (PRT064445) may reverse it, but not clinically available.</li>
+                        <li><strong>Half‑life:</strong> ~17–21 h; renally excreted.</li>
+                    </ul>
+                    <div class="warning-box">🧪 <strong>Important:</strong> Fondaparinux is <strong>not</strong> approved for use in HIT (off‑label with caution). It carries a small risk of HIT antibody formation.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. DIRECT ORAL ANTICOAGULANTS (DOACs) -->
+        <div class="section" id="doacs">
+            <div class="section-title">💊 Direct Oral Anticoagulants (DOACs) – Oral Non‑Heparin Options</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">✨ Factor Xa Inhibitors</div>
+                    <div class="card-body">
+                        <table class="dosing-table">
+                            <tr><th>Drug</th><th>Standard dose (AF/VTE)</th><th>Renal adjustment (CrCl)</th></tr>
+                            <tr><td><strong>Apixaban (Eliquis®)</strong></th><td>5 mg BID (2.5 mg BID for ≥2 of: age≥80, weight≤60 kg, Cr≥1.5 mg/dL)</td><td>CrCl 15–29 mL/min: 2.5 mg BID; avoid if &lt;15</td></tr>
+                            <tr><td><strong>Rivaroxaban (Xarelto®)</strong></th><td>15 mg BID ×21d (VTE), then 20 mg daily; AF 20 mg daily</td><td>CrCl 15–29: avoid; use with caution</td></tr>
+                            <tr><td><strong>Edoxaban (Savaysa®)</strong></th><td>60 mg daily (AF/VTE). Reduce to 30 mg if CrCl 15–50 or low weight ≤60 kg</td><td>CrCl 15–50: 30 mg daily; avoid if &lt;15</td></tr>
+                        </table>
+                        <div class="tip-box">✅ <strong>Advantages:</strong> No routine monitoring, fixed dosing, fewer drug‑drug interactions, lower intracranial bleeding risk vs warfarin.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🎯 Direct Thrombin Inhibitor (Oral)</div>
+                    <div class="card-body">
+                        <p><strong>Dabigatran (Pradaxa®)</strong> – oral DTI.</p>
+                        <ul>
+                            <li><strong>AF:</strong> 150 mg BID (≥80 yrs or at risk: 110 mg BID).</li>
+                            <li><strong>VTE treatment:</strong> 150 mg BID after 5–10 days parenteral.</li>
+                            <li><strong>Renal impairment:</strong> CrCl 30–50 mL/min: consider 110 mg BID; avoid if &lt;30.</li>
+                        </ul>
+                        <p><strong>Monitoring:</strong> Routine coagulation tests not required; if needed, dilute thrombin time (dTT) or ecarin clotting time (ECT) provides accurate drug level assessment. Routine PT/aPTT is insensitive.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOAC reversal agents -->
+            <div class="subsection-title" style="scroll-margin-top: 80px;">🔄 DOAC Reversal (Emergency & Peri‑Procedural)</div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="drug-table">
+                        <tr><th>Agent</th><th>Specific antidote</th><th>Dose & notes</th></tr>
+                        <tr><td>Dabigatran</th><td><strong>Idarucizumab (Praxbind®)</strong></td><td>5 g IV (2 vials of 2.5 g) – immediate reversal within minutes. Antidote of choice for life‑threatening bleeding/urgent surgery.</td></tr>
+                        <tr><td>Apixaban / Rivaroxaban / Edoxaban</th><td><strong>Andexanet alfa (Andexxa®)</strong></td><td>Bolus + infusion: low dose (400 mg bolus + 4 mg/min for up to 120 min) or high dose (800 mg + 8 mg/min) depending on dose and timing of last DOAC.</td></tr>
+                        <tr><td>Any DOAC (if specific antidote unavailable)</th><td><strong>4‑factor PCC (Kcentra®, Beriplex®)</strong></td><td>50 units/kg (max 5000 units); consider 25 units/kg for minor bleeding. aPCC (FEIBA) 50 units/kg also used.</td></tr>
+                    </table>
+                    <div class="alert-box">⚠️ <strong>Guideline 2025 update:</strong> Specific reversal agents (idarucizumab, andexanet) are first‑line for severe/life‑threatening DOAC‑associated bleeding. PCC/aPCC are alternatives when specific agents are not available. DOACs do not require bridging LMWH for elective procedures – simple interruption for 24‑48 h is sufficient (depending on renal function).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ILOPROST (IV Prostaglandin) -->
+        <div class="section" id="iloprost">
+            <div class="section-title">🌊 Iloprost (Aurlumyn® / Ventavis®) – Prostacyclin Analogue</div>
+            <div class="card">
+                <div class="card-body">
+                    <p><strong>Indications:</strong> Severe frostbite (IV), pulmonary arterial hypertension (inhaled), Raynaud’s phenomenon / critical limb ischaemia (off‑label). Iloprost exerts mild anticoagulant/antiplatelet effects via inhibition of platelet aggregation and vasodilation, used primarily as an adjunct in thrombotic microangiopathy and severe peripheral ischaemia.</p>
+                    <table class="dosing-table">
+                        <tr><th>Indication / Regimen</th><th>Dosing & titration</th></tr>
+                        <tr><td>Severe frostbite (Aurlumyn®)</th><td>Continuous IV infusion over 6 h daily for up to 8 days. Start 0.5 ng/kg/min, increase by 0.5 ng/kg/min q30 min according to tolerability up to max 2 ng/kg/min. Use actual body weight.</td></tr>
+                        <tr><td>Pulmonary arterial hypertension (inhaled)</th><td>2.5–5 mcg per inhalation, 6–9 times daily; not systemic anticoagulation</td></tr>
+                        <tr><td>Hepatic impairment (Child‑Pugh B/C)</th><td>Initiate at 0.25 ng/kg/min IV; same titration</td></tr>
+                    </table>
+                    <ul style="margin-left: 18px;">
+                        <li><strong>Monitoring:</strong> Blood pressure, heart rate, signs of bleeding (headache, flushing, jaw pain, nausea are common dose‑limiting adverse effects). Discontinue infusion if dose‑limiting reactions persist; re‑start at previously tolerated rate.</li>
+                        <li><strong>Reversal:</strong> No specific antidote; short half‑life (~20–30 min). Management of bleeding is supportive.</li>
+                        <li><strong>Clinical pearl:</strong> Iloprost is not a conventional anticoagulant, but its anti‑aggregatory effect may increase bleeding risk when combined with other antithrombotics. Used in refractory thrombotic syndromes and as a vasodilator.</li>
+                    </ul>
+                    <div class="tip-box">🧴 <strong>Preparation for IV use:</strong> Dilute 1 mL (100 mcg) in 100 mL 0.9% NaCl → final conc. 1 mcg/mL. Use 0.2 µm in‑line filter; stability 4h at room temperature.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. DEFIBROTIDE -->
+        <div class="section" id="defibrotide">
+            <div class="section-title">🫀 Defibrotide (Defitelio®) – Hepatic VOD / SOS</div>
+            <div class="card">
+                <div class="card-body">
+                    <p><strong>Indication:</strong> Treatment of hepatic veno‑occlusive disease (sinusoidal obstruction syndrome, SOS) with renal or pulmonary dysfunction after hematopoietic stem‑cell transplantation (HSCT). Defibrotide has profibrinolytic, antithrombotic, and cytoprotective effects (not a classical anticoagulant).</p>
+                    <table class="dosing-table">
+                        <tr><th>Parameter</th><th>Details</th></tr>
+                        <tr><td>Recommended dose</th><td>6.25 mg/kg every 6 hours given as 2‑hour intravenous infusion. Based on <strong>baseline body weight</strong> prior to conditioning regimen.</td></tr>
+                        <tr><td>Duration</th><td>Minimum 21 days; continue until resolution of VOD/SOS, up to a maximum of 60 days.</td></tr>
+                        <tr><td>Dose adjustments / toxicities</th><td>Withhold for persistent severe bleeding; discontinue for anaphylaxis or recurrent major bleeding. No renal/hepatic dose adjustment known.</td></tr>
+                    </table>
+                    <ul style="margin-left: 18px;">
+                        <li><strong>Monitoring:</strong> Daily bleeding assessment, complete blood count, coagulation parameters. Defibrotide does not require routine coagulation monitoring but may prolong aPTT slightly.</li>
+                        <li><strong>Reversal:</strong> No specific antidote. Half‑life ~24 min, supportive care for bleeding.</li>
+                        <li><strong>Peri‑procedure:</strong> Discontinue ≥2 h before invasive procedure; resume after bleeding risk resolves.</li>
+                    </ul>
+                    <div class="warning-box">⚠️ <strong>Contraindications:</strong> Concurrent systemic anticoagulants (increases bleeding risk). Not for use in patients with known hypersensitivity or active major bleeding.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. COMPARISON / CROSS TABLE -->
+        <div class="section" id="comparison">
+            <div class="section-title">📊 Comparison of Non‑Heparin Anticoagulants: Key Features at a Glance</div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="drug-table">
+                        <thead><tr><th>Drug</th><th>Route</th><th>Target</th><th>Half‑life</th><th>Monitoring</th><th>Reversal agent</th><th>Cost / access</th></tr></thead>
+                        <tbody>
+                            <tr><td>Bivalirudin</th><td>IV</td><td>Thrombin (direct)</td><td>25 min</td><td>aPTT, ACT</td><td>No specific (short half‑life)</td><td>$$</td></tr>
+                            <tr><td>Argatroban</th><td>IV</td><td>Thrombin (direct)</td><td>39–51 min</td><td>aPTT (↑↑ INR)</td><td>None, stop infusion</td><td>$$</td></tr>
+                            <tr><td>Fondaparinux</th><td>SC</td><td>Factor Xa (indirect)</td><td>17–21 h</td><td>Anti‑FXa (fondaparinux‑calibrated)</td><td>PCC / FEIBA (limited)</td><td>$$</td></tr>
+                            <tr><td>Dabigatran</th><td>PO</td><td>Thrombin (direct)</td><td>12–17 h</td><td>dTT, ECT</td><td>Idarucizumab (Praxbind®)</td><td>$$$</td></tr>
+                            <tr><td>Apixaban / Rivaroxaban / Edoxaban</th><td>PO</td><td>Factor Xa</td><td>8–15 h</td><td>Anti‑FXa (drug‑specific)</td><td>Andexanet alfa (Andexxa®)</td><td>$$$</td></tr>
+                            <tr><td>Iloprost (IV)</th><td>IV</td><td>Platelet inhibition, vasodilation</td><td>20–30 min</td><td>Signs of bleeding, vitals</td><td>Supportive care</td><td>$$</td></tr>
+                            <tr><td>Defibrotide</th><td>IV</td><td>Profibrinolytic</td><td>~24 min</td><td>Bleeding assessment</td><td>None (supportive)</td><td>$$$$</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. PRACTICAL TIPS & ALGORITHMS (HIT, ECMO, renal impairment) -->
+        <div class="section" id="special">
+            <div class="section-title">🧠 Clinical Algorithms & Special Situations</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">🩺 HIT management (non‑heparin anticoagulation)</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Immediately stop all heparin (including flushes).</li>
+                            <li>Start a direct thrombin inhibitor (bivalirudin or argatroban) or fondaparinux (off‑label). DOACs (apixaban, rivaroxaban) are now also used as simpler alternatives.</li>
+                            <li>Do NOT use low‑molecular‑weight heparin or warfarin alone (warfarin can cause venous limb gangrene in acute HIT).</li>
+                            <li>Transition to warfarin only after platelet recovery (&gt;150,000/µL) and aPTT therapeutic on DTI. Overlap with DTI for ≥5 days, monitor chromogenic factor Xa for accurate INR.</li>
+                        </ul>
+                        <div class="tip-box">💡 2025 update: New oral factor XI inhibitors (not yet widely available) may further reduce bleeding risk while preserving efficacy.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🫀 ECMO / VAD anticoagulation</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Bivalirudin is increasingly used as first‑line agent for ECMO (predictable anticoagulation, no HIT, lower circuit thrombosis).</li>
+                            <li>Target aPTT 1.5–2.5× baseline or ACT 180–220 s for VV ECMO, higher (200–250) for VA ECMO. Adjust based on bleeding/thrombosis.</li>
+                            <li>Argatroban is alternative in hepatic impairment or where bivalirudin is contraindicated.</li>
+                            <li>Frequent monitoring of aPTT (q4‑6h) and daily anti‑FXa levels not routinely required.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🧪 Renal & Hepatic dosing adjustments</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Bivalirudin:</strong> Reduce dose by 20–25% in CrCl &lt;30 mL/min; dose adjustment not needed for hepatic dysfunction.</li>
+                            <li><strong>Argatroban:</strong> Contraindicated in severe hepatic impairment (Child‑Pugh C); start 0.5 mcg/kg/min in moderate impairment.</li>
+                            <li><strong>Fondaparinux:</strong> Contraindicated if CrCl &lt;30 mL/min. Use with caution 30–50. No hepatic adjustment.</li>
+                            <li><strong>DOACs:</strong> Apixaban and rivaroxaban have specific renal dose reductions; dabigatran avoid if CrCl &lt;30 mL/min.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTNOTE / REFERENCES -->
+        <div class="footnote">
+            📚 <strong>Sources & further reading:</strong> FDA package inserts for Angiomax, Argatroban, Aurlumyn, Defitelio, Eliquis, Xarelto, Savaysa, Pradaxa; UCSF CHAS guidelines (2023); LITFL Pharmacology; PMC reviews (2019–2025); EHJ reversal agents paper (2023); AHA/ACCP HIT guidelines; 2025 DOAC practical guidance. Always consult local protocols and hematology before switching or reversing anticoagulation.
+            <br><br>
+            🧾 <strong>Disclaimer:</strong> This guide is for educational purposes. Doses and indications may change. Use with local pharmacy and institutional guidelines.
+        </div>
+    </div>
+</div>
+</body>
+</html>

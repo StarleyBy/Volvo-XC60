@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Echocardiography Reference Guide | Normal Values & Severity Grading | ASE/EACVI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f8;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.45;
+      padding: 28px 20px;
+      color: #1a2c3e;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a3a3f 0%, #1f5e6e 100%);
+      padding: 28px 34px;
+      color: white;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .badge {
+      background: #ff9f4a;
+      color: #1a3a3f;
+      padding: 5px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-block;
+      margin-top: 12px;
+    }
+    .subhead {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-top: 8px;
+      border-left: 3px solid #ffb347;
+      padding-left: 16px;
+    }
+
+    .content {
+      padding: 28px 34px;
+    }
+
+    /* navigation pills */
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2edf5;
+    }
+    .nav-pill {
+      background: #edf5fa;
+      color: #1f6c7c;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .nav-pill:hover {
+      background: #d4e3ef;
+      color: #0b4f5e;
+    }
+
+    /* accordion cards */
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2ebf3;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+    }
+    .card-summary {
+      background: #fafeff;
+      padding: 18px 22px;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid #e2ebf3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+      color: #1a5f6e;
+    }
+    .card-summary:hover {
+      background: #f0f7fc;
+    }
+    .card-summary::after {
+      content: "▼";
+      font-size: 14px;
+      color: #7799b0;
+      transition: transform 0.2s;
+    }
+    .card.open .card-summary::after {
+      transform: rotate(180deg);
+    }
+    .card-content {
+      display: none;
+      padding: 22px 26px;
+      background: white;
+    }
+    .card.open .card-content {
+      display: block;
+    }
+
+    /* tables */
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+    .ref-table th, .ref-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e5edf3;
+      text-align: left;
+      vertical-align: top;
+    }
+    .ref-table th {
+      background: #f5faff;
+      font-weight: 800;
+      color: #1c6070;
+    }
+    .three-col-grid {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .col {
+      flex: 1;
+      min-width: 240px;
+    }
+    .info-box {
+      background: #fff7ec;
+      border-left: 5px solid #e67e22;
+      padding: 12px 18px;
+      border-radius: 16px;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    .alert-box {
+      background: #ffeceb;
+      border-left: 5px solid #c73e2d;
+      padding: 12px 18px;
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+    h3 {
+      font-size: 18px;
+      margin: 24px 0 12px 0;
+      font-weight: 700;
+      color: #1f5e6e;
+    }
+    h4 {
+      font-size: 16px;
+      margin: 20px 0 10px;
+      font-weight: 700;
+      color: #2e6f82;
+    }
+    h5 {
+      font-size: 14px;
+      margin: 16px 0 8px;
+      font-weight: 700;
+      color: #2e6f82;
+    }
+    .footnote {
+      font-size: 11px;
+      color: #6a7f9b;
+      margin-top: 20px;
+      border-top: 1px dashed #d0deea;
+      padding-top: 12px;
+    }
+    ul, .dash-list {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .grade-badge {
+      background: #1f6c7c20;
+      color: #1f6c7c;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    @media (max-width: 720px) {
+      .content { padding: 18px; }
+      .header { padding: 20px; }
+      .card-summary { font-size: 18px; padding: 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Echocardiography Reference Guide</h1>
+    <div class="badge">Normal values · Severity grading · Phenomena & diagnoses</div>
+    <div class="subhead">Based on current ASE/EACVI guidelines, 2025 updates for diastolic function, right heart, and valvular heart disease. Integrated reference for daily clinical use.</div>
+  </div>
+  <div class="content">
+    <div class="nav-bar" id="navLinks">
+      <span class="nav-pill" data-target="card-lv">📐 LV</span>
+      <span class="nav-pill" data-target="card-rv">🫀 RV & RA</span>
+      <span class="nav-pill" data-target="card-av">🩸 Aortic valve</span>
+      <span class="nav-pill" data-target="card-mv">❤️ Mitral valve</span>
+      <span class="nav-pill" data-target="card-tv">🔁 Tricuspid & Pulm</span>
+      <span class="nav-pill" data-target="card-diastolic">📈 Diastolic function</span>
+      <span class="nav-pill" data-target="card-phenomena">🌀 Phenomena & artifacts</span>
+      <span class="nav-pill" data-target="card-diseases">🫀 Diseases & PH</span>
+    </div>
+
+    <!-- LEFT VENTRICLE (normal values + basic) -->
+    <div id="card-lv" class="card">
+      <div class="card-summary">📐 Left ventricle — normal values & mass</div>
+      <div class="card-content">
+        <table class="ref-table">
+          <thead><tr><th>Parameter</th><th>Normal Range</th><th>Units</th></tr></thead>
+          <tbody>
+            <tr><td>LVEDD</td><td>42 – 58</td><td>mm</td></tr>
+            <tr><td>LVESD</td><td>25 – 40</td><td>mm</td></tr>
+            <tr><td>IVS thickness (diastole)</td><td>6 – 11</td><td>mm</td></tr>
+            <tr><td>LVPW thickness (diastole)</td><td>6 – 11</td><td>mm</td></tr>
+            <tr><td>EF (Biplane Simpson)</td><td>≥ 55</td><td>%</td></tr>
+            <tr><td>FS (Fractional Shortening)</td><td>25 – 45</td><td>%</td></tr>
+            <tr><td>LV Mass Index (♂)</td><td>< 115</td><td>g/m²</td></tr>
+            <tr><td>LV Mass Index (♀)</td><td>< 95</td><td>g/m²</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">🔍 Hypertrophy classification: concentric if relative wall thickness (RWT) > 0.42, eccentric if RWT ≤ 0.42. RWT = (2 × PWTd)/LVEDD.</div>
+        <div class="info-box">📌 LV outflow tract (LVOT) diameter for continuity equation: measure in mid-systole, zoomed parasternal long-axis, inner edge to inner edge. Error here is the most common pitfall when calculating AVA.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT HEART (2025 ASE updates) -->
+    <div id="card-rv" class="card">
+      <div class="card-summary">🫀 Right heart — 2025 ASE grading & hemodynamics</div>
+      <div class="card-content">
+        <div class="three-col-grid">
+          <div class="col">
+            <h4>RV size (basal diameter)</h4>
+            <ul><li>Normal: < 4.1 cm</li><li>Mild: 4.1–4.4 cm</li><li>Moderate: >4.4–4.9 cm</li><li>Severe: >4.9 cm</li></ul>
+            <h4>RV wall thickness</h4>
+            <ul><li>Normal: < 0.5 cm</li><li>Mild: 0.5–0.7 cm</li><li>Moderate: >0.7–0.9 cm</li><li>Severe: >0.9 cm</li></ul>
+          </div>
+          <div class="col">
+            <h4>RA area</h4>
+            <ul><li>Normal: < 19 cm²</li><li>Mild: 19–22 cm²</li><li>Moderate: >22–24 cm²</li><li>Severe: >24 cm²</li></ul>
+            <h4>TAPSE (RV systolic function)</h4>
+            <ul><li>Normal: ≥ 17 mm</li><li>S' wave (TDI): ≥ 9.5 cm/s (2025 ASE: mild 9.5–7.2, moderate 7.2–5.0, severe <5.0 cm/s)</li></ul>
+            <div class="info-box">📊 Pulmonary hypertension probability: TRV ≤ 2.8 m/s + no other signs → low; TRV 2.9–3.4 m/s → intermediate; TRV >3.4 m/s → high probability. mPAP threshold now >20 mmHg (2025 ASE/ERS).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AORTIC VALVE (stenosis + regurgitation) -->
+    <div id="card-av" class="card">
+      <div class="card-summary">🩸 Aortic valve — stenosis & regurgitation grading</div>
+      <div class="card-content">
+        <h4>Aortic stenosis (AS) — concordant severe criteria</h4>
+        <table class="ref-table">
+          <thead><tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+          <tbody>
+            <tr><td>Peak velocity (m/s)</td><td>2.0–2.9</td><td>3.0–3.9</td><td>≥ 4.0</td></tr>
+            <tr><td>Mean gradient (mmHg)</td><td><20</td><td>20–39</td><td>≥ 40</td></tr>
+            <tr><td>AVA (cm²)</td><td>>1.5</td><td>1.0–1.5</td><td><1.0 (index <0.6 cm²/m²)</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">⚠️ Low-flow low-gradient AS: AVA ≤1.0 but MG <40 mmHg. Requires dobutamine stress echo or CT calcium scoring (men >2000 AU, women >1200 AU suggests severe).</div>
+        
+        <h4>Aortic regurgitation (AR) — integrated grading</h4>
+        <table class="ref-table">
+          <thead><tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+          <tbody>
+            <tr><td>Vena contracta (mm)</td><td><3</td><td>3–5.9</td><td>≥6</td></tr>
+            <tr><td>Pressure half-time (ms)</td><td>>500</td><td>200–500</td><td><200</td></tr>
+            <tr><td>Holodiastolic flow reversal in descending aorta</td><td>Absent/brief</td><td>Intermediate</td><td>Pronounced</td></tr>
+            <tr><td>EROA (PISA, cm²)</td><td><0.10</td><td>0.10–0.29</td><td>≥0.30</td></tr>
+          </tbody>
+        </table>
+        <div class="alert-box">Holodiastolic flow reversal in the descending aorta is the most specific sign of severe AR.</div>
+      </div>
+    </div>
+
+    <!-- MITRAL VALVE (stenosis + regurgitation, primary/secondary) -->
+    <div id="card-mv" class="card">
+      <div class="card-summary">❤️ Mitral valve — stenosis & regurgitation (primary & secondary)</div>
+      <div class="card-content">
+        <h4>Mitral stenosis (MS)</h4>
+        <table class="ref-table"><thead><tr><th>Severity</th><th>MVA (cm²)</th><th>Mean gradient (mmHg)</th><th>PASP (mmHg)</th></tr></thead>
+        <tbody><tr><td>Mild</td><td>1.5–2.0</td><td><5</td><td><30</td></tr>
+        <tr><td>Moderate</td><td>1.0–1.5</td><td>5–10</td><td>30–50</td></tr>
+        <tr><td>Severe</td><td><1.0</td><td>>10</td><td>>50</td></tr></tbody></table>
+        
+        <h4>Mitral regurgitation (MR) — Primary (degenerative)</h4>
+        <table class="ref-table"><thead><tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+        <tbody><tr><td>Vena contracta (mm)</td><td><3</td><td>3–6.9</td><td>≥7</td></tr>
+        <tr><td>EROA (cm²)</td><td><0.20</td><td>0.20–0.29</td><td>≥0.40</td></tr>
+        <tr><td>RVol (mL/beat)</td><td><30</td><td>30–44</td><td>≥60</td></tr>
+        <tr><td>CW Doppler</td><td>Faint, incomplete</td><td>Dense, partial</td><td>Triangular, early peaking</td></tr></tbody></table>
+        
+        <h4>Mitral regurgitation (MR) — Secondary (functional) — lower thresholds</h4>
+        <div class="info-box">Secondary MR (Carpentier IIIb) has adverse outcomes at lower regurgitant volumes. <strong>EROA ≥0.30 cm² or RVol ≥45 mL</strong> is considered severe (COAPT criteria). Always classify mechanism (I: normal motion, II: prolapse, IIIa: restricted diastole+sys, IIIb: restricted systole only).</div>
+        <div class="info-box">📌 Wall-hugging eccentric jets (Coanda effect) systematically underestimate color jet area — use vena contracta and PISA for quantification.</div>
+      </div>
+    </div>
+
+    <!-- TRICUSPID AND PULMONARY VALVE -->
+    <div id="card-tv" class="card">
+      <div class="card-summary">🔁 Tricuspid & Pulmonary valve — stenosis and regurgitation</div>
+      <div class="card-content">
+        <h4>Tricuspid regurgitation (TR) — 2025 ACC/ASE integrated approach</h4>
+        <table class="ref-table"><thead><tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+        <tbody><tr><td>Vena contracta (mm)</td><td><3</td><td>3–6.9</td><td>≥7</td></tr>
+        <tr><td>EROA (PISA, cm²)</td><td><0.20</td><td>0.20–0.39</td><td>≥0.40</td></tr>
+        <tr><td>CW jet density</td><td>Faint</td><td>Dense</td><td>Dense with early peaking</td></tr>
+        <tr><td>Hepatic vein flow</td><td>Systolic dominance</td><td>Systolic blunting</td><td>Systolic reversal</td></tr></tbody></table>
+        <div class="alert-box">New 4‑grade scheme for secondary TR: mild–moderate vs moderate–severe shows better agreement with RV function (EROA >0.34 cm² indicates mod‑severe).</div>
+
+        <h4>Pulmonary stenosis (PS) & regurgitation (PR)</h4>
+        <table class="ref-table"><thead><tr><th>Lesion</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+        <tbody><tr><td>PS peak gradient</td><td><36 mmHg (V<3 m/s)</td><td>36–64 mmHg (3–4 m/s)</td><td>>64 mmHg (>4 m/s)</td></tr>
+        <tr><td>PR (qualitative)</td><td>Jet width <25% RVOT</td><td>Jet width 25–50% RVOT</td><td>Jet width >65% RVOT + PHT <100 ms, flow reversal in PA</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- DIASTOLIC FUNCTION (2025 ASE guideline update) -->
+    <div id="card-diastolic" class="card">
+      <div class="card-summary">📈 Diastolic function — 2025 ASE update, filling pressures & HFA-PEFF</div>
+      <div class="card-content">
+        <div class="three-col-grid">
+          <div class="col">
+            <h4>Normal values / cutoffs (sinus rhythm, EF ≥50%)</h4>
+            <ul><li>E/A ratio: 0.8–2.0</li><li>E/e' average (septal + lateral): < 14</li><li>LA volume index: < 34 mL/m²</li><li>TR velocity: < 2.8 m/s</li></ul>
+            <h4>2025 ASE grading (4‑step algorithm)</h4>
+            <ul><li><strong>Grade I</strong> (impaired relaxation): E/A <0.8, e' ↓, deceleration time prolonged</li>
+            <li><strong>Grade II</strong> (pseudonormal): E/A 0.8–2.0 + elevated filling pressure (E/e' ≥14 or LAVI ≥34)</li>
+            <li><strong>Grade III</strong> (restrictive): E/A >2.0, DT <150 ms, E/e' ≥14, TR velocity >2.8</li></ul>
+          </div>
+          <div class="col">
+            <div class="info-box">📊 <strong>Elevated LV filling pressure (LVFP) is likely if:</strong><br>
+            • Average E/e' >14<br>
+            • Septal e' <7 cm/s, lateral e' <10 cm/s<br>
+            • TR velocity >2.8 m/s<br>
+            • LAVI >34 mL/m²<br>
+            For EF <50% algorithm differs (pulmonary vein S/D ratio etc.).</div>
+          </div>
+        </div>
+        <div class="info-box">🚩 Special populations: atrial fibrillation (multiple cycles), severe MR, post‑cardiac surgery (avoid strict cutoffs, use integrative approach).</div>
+      </div>
+    </div>
+
+    <!-- PHENOMENA, ARTIFACTS, SPECTRAL DOPPLER SIGNS -->
+    <div id="card-phenomena" class="card">
+      <div class="card-summary">🌀 Phenomena, artifacts & Doppler signatures</div>
+      <div class="card-content">
+        <div class="three-col-grid">
+          <div class="col">
+            <h4>Common artifacts & pitfalls</h4>
+            <ul><li><strong>Reverberation / comet-tail</strong>: mimics foreign bodies (e.g. pacemaker lead “ring-down”)</li>
+            <li><strong>Mirror image</strong>: duplicate structures across strong reflectors (diaphragm, aortic wall)</li>
+            <li><strong>Side‑lobe artifact</strong>: Doppler velocities or structures appearing out of true beam axis</li>
+            <li><strong>Aliasing</strong>: CW Doppler velocities wrap around — increase scale or baseline shift</li>
+            <li><strong>Color Doppler “stripes”</strong>: can mimic severe regurgitation — always align with jet direction</li></ul>
+            <div class="info-box">The first ASE guideline on cardiac ultrasound artifacts (2026) details mitigation strategies for reverberation, acoustic shadowing, and external interference (e.g. from VAD, TEE probe).</div>
+          </div>
+          <div class="col">
+            <h4>Pathognomonic Doppler/color signs</h4>
+            <ul><li><strong>Coanda effect (wall‑hugging MR jet)</strong>: systematically underestimates severity → use vena contracta and PISA</li>
+            <li><strong>“Sandwich sign”</strong> in constrictive pericarditis: septal bounce, preserved e', annulus reversus</li>
+            <li><strong>Smoke (spontaneous echo contrast)</strong>: dense swirling in LA/LAA → high thrombus risk</li>
+            <li><strong>Dagger‑shaped CW envelope</strong> in hypertrophic cardiomyopathy LVOT obstruction</li>
+            <li><strong>Laminar vs mosaic flow</strong>: high-velocity turbulence indicates stenosis/regurgitation</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECHO IN SPECIFIC DISEASES (HCM, amyloid, PH, prosthetic valve) -->
+    <div id="card-diseases" class="card">
+      <div class="card-summary">🫀 Disease phenotypes — HCM, amyloid, PH, prosthetic valve</div>
+      <div class="card-content">
+        <h4>Hypertrophic cardiomyopathy (HCM)</h4>
+        <ul><li>Asymmetric LVH (septal >1.3× posterior wall), LVOT gradient (>30 mmHg resting/provocable)</li>
+        <li>“Dagger‑shaped” CW Doppler, systolic anterior motion (SAM) of mitral valve, often MR</li>
+        <li>Strain: reduced GLS with apical sparing pattern; LVOT obstruction assessment key for septal reduction</li></ul>
+        
+        <h4>Cardiac amyloidosis (restrictive phenotype)</h4>
+        <ul><li>Increased wall thickness with low voltage ECG, “granular sparkling” myocardium</li>
+        <li>Reduced GLS with <strong>apical sparing</strong> (bull’s‑eye), biatrial enlargement, restrictive filling (E/A >2, DT short)</li>
+        <li>Associated pericardial effusion and thickened valves</li></ul>
+        
+        <h4>Pulmonary hypertension (2025 ASE guidelines)</h4>
+        <ul><li>TRV probability: &gt;3.4 m/s → high probability of PH (mPAP &gt;20 mmHg).</li>
+        <li>RV remodelling (basal diameter &gt;4.1 cm), RA area increase, TAPSE &lt;17 mm, systolic flattening of the interventricular septum (D‑sign).</li>
+        <li>PA diameter &gt;2.5 cm, RVOT acceleration time &lt;100 ms (mid‑systolic notching).</li></ul>
+
+        <h4>Prosthetic valve dysfunction (PVT / pannus)</h4>
+        <ul><li>Increased Doppler gradient + reduced valve mobility (TEE 3D gold standard).</li>
+        <li>Thrombus: soft mass, reduced opening angle, often in the hinge mechanism (bileaflet).</li>
+        <li>Pannus: hyperechoic, immobile, usually chronic.</li>
+        <li>Fluoroscopy: limited leaflet motion; echo shows increased velocities above expected for prosthesis type/size.</li></ul>
+        <div class="info-box">🚨 Any sudden gradient increase in a mechanical valve warrants exclusion of obstructive thrombosis with TEE.</div>
+      </div>
+    </div>
+
+    <!-- Normal reference summary footer -->
+    <div class="footnote">
+      ⚕️ Based on ASE 2025 Right Heart Guidelines, ASE 2025 Diastolic Function Update (Nagueh et al.), ASE 2023 valve stenosis/regurgitation recommendations, EACVI/ESC 2021/2025 VHD documents. Severity tables integrated from Zoghbi, Lancellotti, Baumgartner, Lang, and the 2025 WASE study reference ranges. Always correlate with clinical context and local protocols.
+    </div>
+  </div>
+</div>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const navs = document.querySelectorAll('.nav-pill');
+  
+  cards.forEach(card => {
+    const sum = card.querySelector('.card-summary');
+    if (sum) {
+      sum.addEventListener('click', (e) => {
+        card.classList.toggle('open');
+      });
+    }
+  });
+  
+  navs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      const targetCard = document.getElementById(targetId);
+      if (targetCard) {
+        if (!targetCard.classList.contains('open')) targetCard.classList.add('open');
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

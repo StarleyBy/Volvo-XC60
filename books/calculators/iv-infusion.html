@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IV Infusion Rates</title>
+<style>
+  :root{--bg:#f5f6f8;--bg-panel:#fff;--text:#1c2333;--text-muted:#6b7a99;--accent:#3b6ff5;--accent-light:#e8effe;--border:#dde1ec;--bg-hover:#eef0f5;--green:#2d6a2d;--green-bg:#e8f4e8;--orange:#8a5a00;--orange-bg:#fff4e0;--font:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;}
+  [data-theme="dark"]{--bg:#0f1117;--bg-panel:#181c27;--text:#e0e4f0;--text-muted:#6b7a99;--accent:#4d7fff;--accent-light:#1a2a4a;--border:#252b3d;--bg-hover:#1e2233;--green:#5aaa5a;--green-bg:#1a2e1a;--orange:#ddaa33;--orange-bg:#2a2000;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:20px;}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px;}
+  .subtitle{color:var(--text-muted);font-size:13px;margin-bottom:20px;}
+  .card{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:14px;}
+  .card h2{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  label{font-size:13px;min-width:200px;}
+  input[type=number],select{background:var(--bg-hover);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--font);font-size:14px;padding:7px 10px;outline:none;transition:border-color .15s;}
+  input[type=number]{width:120px;}
+  select{width:auto;}
+  input:focus,select:focus{border-color:var(--accent);}
+  .unit{color:var(--text-muted);font-size:12px;}
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));}
+  .ritem{background:var(--bg-hover);border:1px solid var(--border);border-radius:6px;padding:12px;}
+  .ritem .rl{font-size:11px;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+  .ritem .rv{font-size:22px;font-weight:600;font-family:var(--mono);}
+  .ritem .ru{font-size:12px;color:var(--text-muted);margin-left:3px;}
+  .ritem.ac{background:var(--accent-light);border-color:var(--accent);}
+  .ritem.ac .rv{color:var(--accent);}
+  .ritem.gr{background:var(--green-bg);border-color:var(--green);}
+  .ritem.gr .rv{color:var(--green);}
+  .note{font-size:12px;color:var(--text-muted);margin-top:10px;line-height:1.7;}
+  .note strong{color:var(--text);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th{background:var(--bg-hover);padding:8px 10px;text-align:left;border:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.04em;}
+  td{padding:7px 10px;border:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--bg-hover);}
+  .drug-select-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+  .drug-btn{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--bg-hover);cursor:pointer;font-size:13px;font-family:var(--font);color:var(--text);transition:all .12s;}
+  .drug-btn.active,.drug-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+</style>
+</head>
+<body>
+<script>
+  const theme=(window.parent?.document.documentElement.getAttribute('data-theme'))||localStorage.getItem('pmr-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+</script>
+
+<h1>IV Infusion Rates</h1>
+<p class="subtitle">Common vasoactive & cardiology infusions — dose-to-rate calculator</p>
+
+<!-- Drug selector -->
+<div class="card">
+  <h2>Select Drug</h2>
+  <div class="drug-select-row" id="drug-btns"></div>
+  <div class="row">
+    <label>Patient weight</label>
+    <input type="number" id="weight" min="30" max="200" value="70" step="0.5" oninput="calc()">
+    <span class="unit">kg</span>
+  </div>
+</div>
+
+<!-- Drug params -->
+<div class="card" id="drug-card">
+  <h2 id="drug-title">—</h2>
+  <div id="drug-params"></div>
+</div>
+
+<!-- Result -->
+<div class="card">
+  <h2>Result</h2>
+  <div class="grid" id="results"></div>
+  <p class="note" id="result-note"></p>
+</div>
+
+<!-- Reference table -->
+<div class="card">
+  <h2>Reference — Common Vasoactive Drugs</h2>
+  <table>
+    <tr><th>Drug</th><th>Std. concentration</th><th>Usual dose range</th><th>Indication</th></tr>
+    <tr><td>Norepinephrine</td><td>4 mg / 250 mL</td><td>0.01–3 mcg/kg/min</td><td>Vasopressor</td></tr>
+    <tr><td>Epinephrine</td><td>1 mg / 250 mL</td><td>0.01–1 mcg/kg/min</td><td>Vasopressor / inotrope</td></tr>
+    <tr><td>Dopamine</td><td>200 mg / 250 mL</td><td>2–20 mcg/kg/min</td><td>Inotrope / vasopressor</td></tr>
+    <tr><td>Dobutamine</td><td>250 mg / 250 mL</td><td>2–20 mcg/kg/min</td><td>Inotrope</td></tr>
+    <tr><td>Milrinone</td><td>20 mg / 100 mL</td><td>0.375–0.75 mcg/kg/min</td><td>Inodilator</td></tr>
+    <tr><td>Vasopressin</td><td>20 U / 100 mL</td><td>0.01–0.04 U/min</td><td>Vasopressor</td></tr>
+    <tr><td>Nitroglycerin</td><td>50 mg / 250 mL</td><td>5–200 mcg/min</td><td>Vasodilator</td></tr>
+    <tr><td>Nitroprusside</td><td>50 mg / 250 mL</td><td>0.25–10 mcg/kg/min</td><td>Vasodilator (hypertensive crisis)</td></tr>
+    <tr><td>Amiodarone</td><td>150 mg / 100 mL → 900 mg / 500 mL</td><td>Loading 150 mg over 10 min, then 1 mg/min × 6h, 0.5 mg/min × 18h</td><td>Antiarrhythmic</td></tr>
+    <tr><td>Lidocaine</td><td>1 g / 250 mL</td><td>1–4 mg/min</td><td>Antiarrhythmic</td></tr>
+  </table>
+</div>
+
+<script>
+const DRUGS = [
+  {
+    id:'norepi', name:'Norepinephrine',
+    conc_mg:4, vol_ml:250, // 4mg/250mL = 0.016 mg/mL = 16 mcg/mL
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:0.1, min:0.01, max:3, step:0.01,
+    note:'Titrate to MAP > 65 mmHg. Central line preferred.'
+  },
+  {
+    id:'epi', name:'Epinephrine',
+    conc_mg:1, vol_ml:250,
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:0.05, min:0.01, max:1, step:0.01,
+    note:'Titrate to effect. Monitor for tachycardia and lactic acidosis.'
+  },
+  {
+    id:'dopa', name:'Dopamine',
+    conc_mg:200, vol_ml:250,
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:5, min:1, max:20, step:0.5,
+    note:'Low dose (1–3): renal. Mid (3–10): inotrope. High (>10): vasopressor.'
+  },
+  {
+    id:'dobu', name:'Dobutamine',
+    conc_mg:250, vol_ml:250,
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:5, min:2, max:20, step:0.5,
+    note:'Pure inotrope. May cause hypotension due to vasodilation.'
+  },
+  {
+    id:'milri', name:'Milrinone',
+    conc_mg:20, vol_ml:100,
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:0.375, min:0.1, max:0.75, step:0.025,
+    note:'Loading bolus 50 mcg/kg over 10 min (optional). Reduce dose in renal failure.'
+  },
+  {
+    id:'vasop', name:'Vasopressin',
+    conc_u:20, vol_ml:100, isUnits:true,
+    unit:'U/min', perkg:false,
+    defaultDose:0.03, min:0.01, max:0.04, step:0.005,
+    note:'Fixed dose 0.03–0.04 U/min. Not titrated. Adjunct to norepinephrine.'
+  },
+  {
+    id:'ntg', name:'Nitroglycerin',
+    conc_mg:50, vol_ml:250,
+    unit:'mcg/min', perkg:false,
+    defaultDose:20, min:5, max:200, step:5,
+    note:'Use non-PVC tubing. Adsorbs into PVC. Start low, titrate to BP/symptoms.'
+  },
+  {
+    id:'snp', name:'Nitroprusside',
+    conc_mg:50, vol_ml:250,
+    unit:'mcg/kg/min', perkg:true,
+    defaultDose:1, min:0.25, max:10, step:0.25,
+    note:'Light-protect bag and tubing. Max duration 72h. Monitor thiocyanate in prolonged use.'
+  },
+  {
+    id:'lido', name:'Lidocaine',
+    conc_mg:1000, vol_ml:250,
+    unit:'mg/min', perkg:false,
+    defaultDose:2, min:1, max:4, step:0.5,
+    note:'Loading bolus 1–1.5 mg/kg IV push. Reduce maintenance in hepatic failure.'
+  }
+];
+
+let currentDrug = DRUGS[0];
+
+function buildButtons() {
+  const div = document.getElementById('drug-btns');
+  div.innerHTML = DRUGS.map(d =>
+    `<button class="drug-btn${d.id===currentDrug.id?' active':''}" onclick="selectDrug('${d.id}')">${d.name}</button>`
+  ).join('');
+}
+
+function selectDrug(id) {
+  currentDrug = DRUGS.find(d => d.id === id);
+  buildButtons();
+  buildParams();
+  calc();
+}
+
+function buildParams() {
+  const d = currentDrug;
+  document.getElementById('drug-title').textContent = d.name;
+  const concLabel = d.isUnits
+    ? `${d.conc_u} U / ${d.vol_ml} mL = ${(d.conc_u/d.vol_ml).toFixed(3)} U/mL`
+    : `${d.conc_mg} mg / ${d.vol_ml} mL = ${(d.conc_mg/d.vol_ml*1000).toFixed(1)} mcg/mL`;
+  document.getElementById('drug-params').innerHTML = `
+    <div class="row"><label>Standard concentration</label><span style="font-size:13px">${concLabel}</span></div>
+    <div class="row">
+      <label>Desired dose</label>
+      <input type="number" id="dose" min="${d.min}" max="${d.max}" value="${d.defaultDose}" step="${d.step}" oninput="calc()">
+      <span class="unit">${d.unit}</span>
+    </div>
+  `;
+}
+
+function calc() {
+  const d = currentDrug;
+  const w = parseFloat(document.getElementById('weight').value) || 70;
+  const dose = parseFloat(document.getElementById('dose')?.value) || d.defaultDose;
+
+  let rate_ml_h;
+  if (d.isUnits) {
+    // vasopressin: U/min → mL/h
+    const conc_u_ml = d.conc_u / d.vol_ml;
+    rate_ml_h = (dose * 60) / conc_u_ml;
+  } else {
+    const conc_mcg_ml = (d.conc_mg * 1000) / d.vol_ml;
+    if (d.unit === 'mcg/kg/min') {
+      rate_ml_h = (dose * w * 60) / conc_mcg_ml;
+    } else if (d.unit === 'mcg/min') {
+      rate_ml_h = (dose * 60) / conc_mcg_ml;
+    } else if (d.unit === 'mg/min') {
+      rate_ml_h = (dose * 60 * 1000) / conc_mcg_ml;
+    }
+  }
+
+  const rate_ml_min = rate_ml_h / 60;
+
+  document.getElementById('results').innerHTML = `
+    <div class="ritem ac">
+      <div class="rl">Pump rate</div>
+      <div><span class="rv">${rate_ml_h.toFixed(2)}</span><span class="ru">mL/h</span></div>
+    </div>
+    <div class="ritem gr">
+      <div class="rl">Rate per minute</div>
+      <div><span class="rv">${rate_ml_min.toFixed(3)}</span><span class="ru">mL/min</span></div>
+    </div>
+    <div class="ritem">
+      <div class="rl">Dose × weight</div>
+      <div><span class="rv">${d.perkg ? (dose * w).toFixed(2) : dose}</span><span class="ru">${d.unit.replace('/kg','')}</span></div>
+    </div>
+  `;
+
+  document.getElementById('result-note').innerHTML =
+    `<strong>${d.name}:</strong> ${d.note}`;
+}
+
+buildButtons();
+buildParams();
+calc();
+</script>
+</body>
+</html>

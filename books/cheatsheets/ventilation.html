@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Hamilton C1 Ventilator Guide | VSIMV, PSIMV, Modes & Clinical Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.45;
+            padding: 32px 24px;
+            color: #1a2a3f;
+        }
+        .guide-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #004d73 0%, #003953 100%);
+            padding: 28px 34px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #ffb74d;
+            color: #003953;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subhead {
+            font-size: 15px;
+            margin-top: 10px;
+            border-left: 3px solid #ffb74d;
+            padding-left: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px 34px;
+        }
+        .section {
+            margin-bottom: 36px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #004d73;
+            border-bottom: 3px solid #cbe4f0;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        .card {
+            background: #fefefe;
+            border-radius: 24px;
+            border: 1px solid #e2edf5;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            background: #ecf5fc;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 18px;
+            border-bottom: 1px solid #d0e2ef;
+            color: #005073;
+        }
+        .card-body {
+            padding: 18px 22px;
+        }
+        .param-table, .mode-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .param-table th, .mode-table th {
+            text-align: left;
+            background: #f4f9fe;
+            padding: 8px 10px;
+            font-weight: 700;
+        }
+        .param-table td, .mode-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e6edf4;
+            vertical-align: top;
+        }
+        .badge-mode {
+            background: #1f5e6e;
+            color: white;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .warning-box {
+            background: #fff6e5;
+            border-left: 5px solid #f39c12;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .alert-box {
+            background: #ffeae9;
+            border-left: 5px solid #e74c3c;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 5px solid #2980b9;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin: 16px 0;
+        }
+        .footnote {
+            font-size: 12px;
+            color: #6c86a3;
+            margin-top: 20px;
+            border-top: 1px solid #dde5ef;
+            padding-top: 14px;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #dfeaf2;
+        }
+        @media (max-width: 680px) {
+            .content { padding: 20px; }
+            .card-header { font-size: 16px; }
+        }
+        .alarm-table {
+            font-size: 12px;
+        }
+        .key-highlight {
+            background: #eef2fc;
+            padding: 6px 12px;
+            border-radius: 24px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="guide-container">
+    <div class="header">
+        <h1>
+            🫁 Hamilton C1 Ventilator <span class="badge">Clinical Reference Guide</span>
+        </h1>
+        <div class="subhead">
+            Evidence‑based overview of ventilation modes (including VSIMV & PSIMV), parameters, alarm strategies, and troubleshooting.
+        </div>
+    </div>
+    <div class="content">
+
+        <!-- MODES SECTION – UPDATED WITH VSIMV + PSIMV -->
+        <div class="section">
+            <div class="section-title">🔄 Ventilation modes (Hamilton C1)</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">📌 Volume‑controlled (VC) & Pressure‑controlled (PC)</div>
+                    <div class="card-body">
+                        <table class="mode-table">
+                            <tr><th>Mode</th><th>Description</th><th>Typical use</th></tr>
+                            <tr><td><strong>VC‑CMV</strong></td><td>Volume‑controlled continuous mandatory ventilation</td><td>Full support, ARDS, post‑cardiac arrest</td></tr>
+                            <tr><td><strong>VC‑AC</strong></td><td>Assist‑control, volume targeted</td><td>Spontaneous breathing with guaranteed tidal volume</td></tr>
+                            <tr><td><strong>PC‑CMV / PC‑AC</strong></td><td>Pressure‑controlled with set inspiratory pressure</td><td>Obstructive lung disease, to limit plateau pressure</td></tr>
+                            <tr><td><strong>VSIMV (Volume SIMV)</strong> <span class="badge-mode">most used</span></td><td>Volume‑controlled synchronized intermittent mandatory ventilation. Delivers set mandatory Vt breaths synchronized with patient effort; spontaneous breaths can be pressure‑supported (PSV).</td><td>Weaning, partial support, patients with spontaneous breathing but requiring guaranteed minute volume. Allows transition from full to partial support.</td></tr>
+                            <tr><td><strong>PSIMV (Pressure SIMV)</strong> <span class="badge-mode">most used</span></td><td>Pressure‑controlled SIMV. Mandatory breaths are pressure‑limited, spontaneous breaths can be supported. Synchronization window avoids stacking.</td><td>Obstructive lung disease (COPD, asthma), air leak syndrome, or when plateau pressure limitation is crucial. Preserves spontaneous breathing.</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🧠 Dual & advanced modes</div>
+                    <div class="card-body">
+                        <table class="mode-table">
+                            <tr><th>Mode</th><th>Description</th><th>Key feature</th></tr>
+                            <tr><td><strong>DuoLevel / APRV</strong></td><td>Two pressure levels with unrestricted spontaneous breathing</td><td>ARDS / severe hypoxemia, lung recruitment</td></tr>
+                            <tr><td><strong>INTELLiVENT‑ASV</strong></td><td>Closed‑loop adaptive support ventilation</td><td>Automates RR, PEEP, PS according to targets (EtCO₂, SpO₂)</td></tr>
+                            <tr><td><strong>NIV</strong></td><td>Non‑invasive ventilation (leak compensation)</td><td>Acute respiratory failure, COPD exacerbation, pulmonary edema</td></tr>
+                            <tr><td><strong>VS (Volume Support)</strong></td><td>Spontaneous breaths with target tidal volume; no mandatory breaths</td><td>Weaning after SIMV, full spontaneous breathing trials</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">⚡ Special modes & features</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 20px;">
+                            <li><strong>PRVC (Pressure Regulated Volume Control)</strong> – pressure‑limited, volume‑targeted.</li>
+                            <li><strong>APRV</strong> – for refractory hypoxemia; set P_high, T_high, P_low, T_low.</li>
+                            <li><strong>CPAP / PSV</strong> – for weaning and spontaneous breathing trials.</li>
+                            <li><strong>VSIMV+PSIMV tip:</strong> Always set backup rate, appropriate PS for spontaneous breaths (5–15 cmH₂O). Adjust SIMV rate to offload respiratory muscles (start 6–12/min).</li>
+                        </ul>
+                        <div class="tip-box" style="margin-top: 12px;">
+                            💡 <strong>Hamilton C1 unique:</strong> INTELLiVENT‑ASV uses minute ventilation, ideal body weight, and SpO₂/EtCO₂ targets to adjust RR, PEEP, and pressure support automatically.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARAMETERS – DETAILED EXPLANATION -->
+        <div class="section">
+            <div class="section-title">📊 Ventilator parameters: definitions, effects, and clinical titration</div>
+            <div class="card">
+                <div class="card-header">🫀 Basic parameters (what they are & how to adjust)</div>
+                <div class="card-body">
+                    <table class="param-table">
+                        <thead><tr><th>Parameter</th><th>Description</th><th>Physiologic effect</th><th>When to adjust (typical values)</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Tidal Volume (Vt)</strong></td><td>Volume delivered per breath (mL or mL/kg PBW)</td><td>Affects alveolar ventilation (PaCO₂) and lung stretch (volutrauma)</td><td>6–8 mL/kg PBW in ARDS; 8–10 mL/kg in obstructive disease; monitor plateau pressure ≤30 cmH₂O</td></tr>
+                            <tr><td><strong>Respiratory Rate (RR)</strong></td><td>Breaths per minute (mandatory + spontaneous)</td><td>Directly controls minute ventilation → PaCO₂</td><td>Start 12–16, adjust to achieve normocapnia (PaCO₂ 35–45). In SIMV: set backup rate 4–8 below spontaneous rate.</td></tr>
+                            <tr><td><strong>PEEP (Positive End‑Expiratory Pressure)</strong></td><td>Pressure remaining in airways at end‑expiration</td><td>Recruits alveoli, improves oxygenation, prevents atelectasis</td><td>ARDS: 5–15 cmH₂O (higher with FiO₂). Obstructive: ≤5 cmH₂O to avoid hyperinflation.</td></tr>
+                            <tr><td><strong>FiO₂</strong></td><td>Fraction of inspired oxygen (0.21–1.0)</td><td>Increases PaO₂, but prolonged high FiO₂ causes absorption atelectasis / toxicity</td><td>Titrate to SpO₂ 88–92% (ARDS) or 92–96% (others). Use lowest possible FiO₂ to avoid toxicity.</td></tr>
+                            <tr><td><strong>Inspiratory Pressure (ΔP / PS)</strong></td><td>Pressure above PEEP during inspiration</td><td>Determines delivered tidal volume in pressure‑controlled modes and PSV</td><td>Start 10–15 cmH₂O above PEEP; adjust to achieve Vt 6–8 mL/kg. Keep plateau pressure <30.</td></tr>
+                            <tr><td><strong>I:E ratio</strong></td><td>Inspiratory to expiratory time ratio</td><td>Affects mean airway pressure, gas trapping, and ventilation distribution</td><td>Normal 1:2; prolonged I:E (1:1 or inverse) for ARDS to improve oxygenation.</td></tr>
+                            <tr><td><strong>Flow (inspiratory)</strong></td><td>Peak inspiratory flow rate (L/min)</td><td>Higher flow shortens inspiratory time, reduces patient effort</td><td>Typically 40–60 L/min; obstructive disease: 60–80 L/min to allow prolonged expiration.</td></tr>
+                            <tr><td><strong>Trigger sensitivity (flow/pressure)</strong></td><td>Effort needed to initiate assisted breath</td><td>Too sensitive → auto‑trigger; insensitive → increased work of breathing</td><td>Flow trigger: 2–5 L/min; Pressure: –1 to –2 cmH₂O. Adjust to avoid asynchrony.</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tip-box">
+                        🧠 <strong>Clinical pearl for SIMV (VSIMV/PSIMV):</strong> Start with mandatory rate 10–12/min, PS 10–15 cmH₂O, Vt 6–8 mL/kg (for VSIMV). Wean by reducing mandatory rate by 2–4 breaths/min every 2–4 hours, then transition to CPAP/PSV when rate ≤4–6/min.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">🎯 Advanced Hamilton‑specific parameters</div>
+                <div class="card-body">
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Definition</th><th>Effect & titration</th></tr>
+                        <tr><td><strong>P0.1 (airway occlusion pressure)</strong></td><td>Pressure drop during first 100 ms of inspiratory effort</td><td>Reflects respiratory drive. Normal: 1–4 cmH₂O; elevated → excessive drive (impending failure); very low → overassistance / sedation.</td></tr>
+                        <tr><td><strong>RCexp (expiratory time constant)</strong></td><td>Time for lung to empty to 63% of initial volume</td><td>Auto‑PEEP suspicion if RCexp > 0.8-1.0 sec with inadequate expiratory flow. Used to set expiratory time.</td></tr>
+                        <tr><td><strong>INTELLiVENT‑ASV targets</strong></td><td>Set desired EtCO₂, SpO₂, and % minute ventilation</td><td>Closed‑loop adjusts RR, PS, PEEP automatically. Targets: EtCO₂ 35–45, SpO₂ 88–96%.</td></tr>
+                        <tr><td><strong>High‑pressure limit / Pmax</strong></td><td>Upper pressure safety limit</td><td>Usually 40 cmH₂O (obstructive) or 35 (ARDS). Prevents barotrauma.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- INDICATIONS & CONTRAINDICATIONS -->
+        <div class="section">
+            <div class="section-title">✅ Indications & ⚠️ Contraindications for mechanical ventilation (C1 specific)</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🟢 Indications</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li>Acute respiratory failure (PaO₂ <60 mmHg, PaCO₂ >50 mmHg with pH <7.25)</li>
+                            <li>Apnoea or impending respiratory arrest</li>
+                            <li>Severe hypoxemia (PaO₂/FiO₂ <200)</li>
+                            <li>Increased work of breathing (accessory muscle use, tachypnea, paradoxical breathing)</li>
+                            <li>Post‑cardiac arrest / post‑operative respiratory support</li>
+                            <li>Neuromuscular disease (Guillain‑Barré, myasthenia gravis)</li>
+                            <li>Transport ventilation (C1 lightweight, turbine‑driven, no external air source needed)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">🔴 Contraindications (relative)</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li>Untreated pneumothorax (needs chest tube prior to PPV)</li>
+                            <li>Massive haemoptysis / severe airway obstruction distal to ETT</li>
+                            <li>Advanced directive limiting life support (withdrawal of care)</li>
+                            <li>Some modes (APRV) not suitable for severe obstructive lung disease due to intrinsic PEEP risk.</li>
+                        </ul>
+                        <div class="warning-box" style="margin-top: 12px;">
+                            ⚠️ <strong>C1 specific caution:</strong> In NIV mode, contraindicated in facial trauma, upper airway obstruction, or inability to protect airway. Turbine can compensate for leaks up to 40 L/min.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALARM LIMITS & MANAGEMENT -->
+        <div class="section">
+            <div class="section-title">🔔 Alarm limits – recommended thresholds & troubleshooting</div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="param-table alarm-table">
+                        <thead><tr><th>Alarm</th><th>Recommended lower limit</th><th>Recommended upper limit</th><th>Common cause & response</th></tr></thead>
+                        <tbody>
+                            <tr><td>High pressure (Ppeak)</td><td>—</td><td>35–40 cmH₂O (obstructive ≤45)</td><td>Bronchospasm, secretions, kinked tube, patient biting → suction, bronchodilator, check circuit.</td></tr>
+                            <tr><td>Low pressure</td><td>5 cmH₂O below baseline Ppeak</td><td>—</td><td>Disconnection, cuff leak, leak in circuit → reconnect, check cuff, check ventilator circuit.</td></tr>
+                            <tr><td>Low minute volume (MV)</td><td>3 L/min (adult)</td><td>—</td><td>Hypoventilation, apnoea, leak, sedation → assess patient, increase RR, check alarms.</td></tr>
+                            <tr><td>High respiratory rate</td><td>—</td><td>35 breaths/min</td><td>Anxiety, pain, pulmonary oedema, asynchrony → assess sedation, change mode, consider NIV.</td></tr>
+                            <tr><td>Low SpO₂</td><td>88% (or 92%)</td><td>—</td><td>Hypoxemia, disconnection, decreased FiO₂ → increase FiO₂/PEEP, check SaO₂ probe, suction.</td></tr>
+                            <tr><td>High EtCO₂</td><td>—</td><td>45 mmHg (or 50)</td><td>Hypoventilation, increased dead space, circuit obstruction → increase RR/Vt, check circuit.</td></tr>
+                            <tr><td>Apnoea alarm</td><td>No breath in 15–20 sec</td><td>—</td><td>Patient apnoea, trigger too high → set backup RR, check trigger sensitivity, bag patient.</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="tip-box">
+                        💡 <strong>C1 alarms customisation:</strong> Access alarm settings via “Limits” menu. Adjust per patient severity (e.g., ARDS patient may tolerate lower MV alarms). Always keep high pressure limit ≤ 40 cmH₂O except in obstructive disease.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERRORS & WARNINGS (Hamilton C1 specific) -->
+        <div class="section">
+            <div class="section-title">⚠️ Common errors, warnings & troubleshooting (C1)</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🚫 Ventilator errors</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li><strong>“High PEEP leak”</strong> – circuit leak or exhalation valve malfunction → check expiratory filter, reconnect circuit, run SST (short self test).</li>
+                            <li><strong>“Check patient circuit”</strong> – disconnection or occlusion → inspect entire circuit, replace filter if wet.</li>
+                            <li><strong>“Occlusion / high pressure”</strong> – secretions, ETT kink, biting → suction, check ETT position, consider sedation.</li>
+                            <li><strong>“Power failure”</strong> – internal battery depleted → connect to external power; C1 has 4‑hour hot‑swappable battery.</li>
+                            <li><strong>“Sensor error”</strong> – flow or pressure sensor contaminated → run leak test, replace flow sensor if needed.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">⚠️ Clinical warnings & decision support</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 18px;">
+                            <li><strong>“Low compliance”</strong> – drop in dynamic compliance (norm 50–100 mL/cmH₂O). Causes: atelectasis, ARDS, pneumothorax → recruit, chest X‑ray.</li>
+                            <li><strong>“Auto‑PEEP high”</strong> – incomplete expiration, especially in asthma/COPD. Reduce RR, increase expiratory time, give bronchodilators.</li>
+                            <li><strong>“Asynchrony detected”</strong> – double‑triggering or ineffective efforts → adjust flow trigger, change mode, consider pressure support increase.</li>
+                            <li><strong>“High FiO₂ demand”</strong> – FiO₂ >60% for extended period → evaluate PEEP recruitment, consider prone positioning, treat underlying pathology.</li>
+                        </ul>
+                        <div class="alert-box" style="margin-top: 12px;">
+                            🧰 <strong>Immediate action:</strong> For any “Ventilator inoperative” error, disconnect patient and resuscitate with manual bag. Always have a backup ventilation device ready.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK REFERENCE: INITIAL SETTINGS (including VSIMV/PSIMV) -->
+        <div class="section">
+            <div class="section-title">📝 Quick initial setup (adult, IBW 70 kg)</div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="grid-2col">
+                        <div class="col">
+                            <h3>💨 VSIMV (Volume SIMV)</h3>
+                            <ul>
+                                <li>Mandatory Vt: 420–500 mL (6–8 mL/kg)</li>
+                                <li>SIMV rate: 10–12/min (backup)</li>
+                                <li>Pressure Support (PS): 10–15 cmH₂O for spontaneous breaths</li>
+                                <li>PEEP: 5 cmH₂O</li>
+                                <li>FiO₂: 1.0 → titrate to SpO₂ 92–96%</li>
+                                <li>Flow: 50 L/min (square wave)</li>
+                                <li>Trigger: flow 3 L/min</li>
+                            </ul>
+                            <div class="tip-box" style="margin-top: 8px;">📌 Weaning: reduce SIMV rate gradually as spontaneous breathing improves.</div>
+                        </div>
+                        <div class="col">
+                            <h3>🫁 PSIMV (Pressure SIMV)</h3>
+                            <ul>
+                                <li>Pressure control (ΔP): 12–15 cmH₂O above PEEP → target Vt 6–8 mL/kg</li>
+                                <li>SIMV rate: 10–12/min</li>
+                                <li>Pressure Support (PS): 10–15 cmH₂O for spontaneous breaths</li>
+                                <li>PEEP: 5–8 cmH₂O</li>
+                                <li>Inspiratory time: 1.0–1.2 sec</li>
+                                <li>FiO₂: titrate</li>
+                            </ul>
+                            <div class="tip-box" style="margin-top: 8px;">📌 Ideal for COPD: use lower SIMV rate (6–8/min) and higher inspiratory flow to allow prolonged expiration.</div>
+                        </div>
+                    </div>
+                    <div class="warning-box">
+                        📌 <strong>ARDSnet protocol:</strong> low Vt (6 mL/kg PBW), limit plateau pressure ≤ 30 cmH₂O, PEEP/FiO₂ table. Use APRV or INTELLiVENT‑ASV for difficult oxygenation.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPECIAL MODES: INTELLiVENT & APRV -->
+        <div class="section">
+            <div class="section-title">🧪 Advanced mode deep dive: INTELLiVENT‑ASV & APRV</div>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">🤖 INTELLiVENT‑ASV (closed‑loop)</div>
+                    <div class="card-body">
+                        <p><strong>How it works:</strong> Uses ideal body weight, minute ventilation target, and SpO₂/EtCO₂ to automatically adjust RR, PS, PEEP, and FiO₂.</p>
+                        <ul>
+                            <li><strong>Targets:</strong> EtCO₂ 35–45 mmHg, SpO₂ 88–96%</li>
+                            <li><strong>Safety limits:</strong> Pmax 40, PEEP max 20, RR max 40</li>
+                            <li><strong>When to use:</strong> Weaning, stable ARDS, post‑op, neuro patients. Avoid in severe metabolic acidosis.</li>
+                        </ul>
+                        <div class="tip-box">💡 Monitor patient‑ventilator synchrony; if frequent apnoea or high RR, adjust %MinVol target upward.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">⏱️ APRV (Airway Pressure Release Ventilation)</div>
+                    <div class="card-body">
+                        <p><strong>Key parameters:</strong></p>
+                        <ul>
+                            <li>P_high (20–30), T_high (4–6 sec)</li>
+                            <li>P_low (0–5), T_low (0.2–0.8 sec)</li>
+                            <li>Release breaths occur by dropping to P_low for short T_low.</li>
+                        </ul>
+                        <p><strong>Indication:</strong> Severe ARDS (PaO₂/FiO₂ < 150) unresponsive to conventional ventilation. Improves oxygenation via recruitment.</p>
+                        <div class="alert-box">⚠️ Contraindicated in severe obstructive lung disease (air trapping), large air leak, elevated ICP.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTNOTE & REFERENCES -->
+        <div class="footnote">
+            🧠 <strong>Clinical notes on VSIMV/PSIMV:</strong> These SIMV‑based modes are essential for partial ventilatory support. Use PSIMV when you need to limit airway pressures (e.g., COPD, asthma, post‑pneumonectomy). Use VSIMV for patients requiring guaranteed minute ventilation (e.g., neurological weakness). Always set the backup rate below the patient's spontaneous rate to avoid stacking. Monitor for breath‑stacking, auto‑triggering, and ineffective efforts – adjust trigger and flow accordingly.
+            <br><br>
+            📚 <strong>Sources:</strong> Hamilton Medical C1 Operator’s Manual (v6.0), INTELLiVENT‑ASV Clinical Guide, ATS/ERS guidelines on mechanical ventilation, and ERS 2025 update.
+        </div>
+    </div>
+</div>
+</body>
+</html>

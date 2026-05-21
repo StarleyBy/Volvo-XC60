@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drug Dilution Calculator</title>
+<style>
+  :root{--bg:#f5f6f8;--bg-panel:#fff;--text:#1c2333;--text-muted:#6b7a99;--accent:#3b6ff5;--accent-light:#e8effe;--border:#dde1ec;--bg-hover:#eef0f5;--green:#2d6a2d;--green-bg:#e8f4e8;--font:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;}
+  [data-theme="dark"]{--bg:#0f1117;--bg-panel:#181c27;--text:#e0e4f0;--text-muted:#6b7a99;--accent:#4d7fff;--accent-light:#1a2a4a;--border:#252b3d;--bg-hover:#1e2233;--green:#5aaa5a;--green-bg:#1a2e1a;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:20px;}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px;}
+  .subtitle{color:var(--text-muted);font-size:13px;margin-bottom:20px;}
+  .card{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:14px;}
+  .card h2{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  label{font-size:13px;min-width:200px;}
+  input[type=number],select{background:var(--bg-hover);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--font);font-size:14px;padding:7px 10px;outline:none;transition:border-color .15s;}
+  input[type=number]{width:120px;}
+  select{width:auto;}
+  input:focus,select:focus{border-color:var(--accent);}
+  .unit{color:var(--text-muted);font-size:12px;}
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}
+  .ritem{background:var(--bg-hover);border:1px solid var(--border);border-radius:6px;padding:12px;}
+  .ritem .rl{font-size:11px;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+  .ritem .rv{font-size:20px;font-weight:600;font-family:var(--mono);}
+  .ritem .ru{font-size:12px;color:var(--text-muted);margin-left:3px;}
+  .ritem.ac{background:var(--accent-light);border-color:var(--accent);}
+  .ritem.ac .rv{color:var(--accent);}
+  .ritem.gr{background:var(--green-bg);border-color:var(--green);}
+  .ritem.gr .rv{color:var(--green);}
+  .note{font-size:12px;color:var(--text-muted);margin-top:10px;line-height:1.7;}
+  .note strong{color:var(--text);}
+  .tabs{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap;}
+  .tab{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--bg-hover);cursor:pointer;font-size:13px;transition:all .12s;}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .mode{display:none;}
+  .mode.active{display:block;}
+</style>
+</head>
+<body>
+<script>
+  const theme=(window.parent?.document.documentElement.getAttribute('data-theme'))||localStorage.getItem('pmr-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+</script>
+
+<h1>Drug Dilution Calculator</h1>
+<p class="subtitle">Concentration, volume and dose calculations</p>
+
+<div class="tabs">
+  <div class="tab active" onclick="setMode('conc')">Drug → Concentration</div>
+  <div class="tab" onclick="setMode('dose')">Dose → Rate</div>
+  <div class="tab" onclick="setMode('rate')">Rate → Dose</div>
+</div>
+
+<!-- MODE 1: Drug in solution → concentration -->
+<div class="mode active" id="mode-conc">
+  <div class="card">
+    <h2>Drug Amount in Solution</h2>
+    <div class="row">
+      <label>Drug amount</label>
+      <input type="number" id="c-drug" min="0" value="50" step="0.5" oninput="calcConc()">
+      <select id="c-drug-unit" onchange="calcConc()">
+        <option>mg</option><option>mcg</option><option>g</option><option>mEq</option><option>U</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Total solution volume</label>
+      <input type="number" id="c-vol" min="1" value="50" step="1" oninput="calcConc()">
+      <span class="unit">mL</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Result</h2>
+    <div class="grid" id="conc-results"></div>
+  </div>
+</div>
+
+<!-- MODE 2: Dose → Rate -->
+<div class="mode" id="mode-dose">
+  <div class="card">
+    <h2>Calculate Infusion Rate from Dose</h2>
+    <div class="row">
+      <label>Desired dose</label>
+      <input type="number" id="d-dose" min="0" value="5" step="0.1" oninput="calcDose()">
+      <select id="d-dose-unit" onchange="calcDose()">
+        <option>mcg/kg/min</option>
+        <option>mcg/min</option>
+        <option>mg/kg/h</option>
+        <option>mg/h</option>
+        <option>U/h</option>
+        <option>mEq/h</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Patient weight</label>
+      <input type="number" id="d-weight" min="30" max="200" value="70" step="0.5" oninput="calcDose()">
+      <span class="unit">kg</span>
+    </div>
+    <div class="row">
+      <label>Drug concentration in syringe/bag</label>
+      <input type="number" id="d-conc" min="0.001" value="1" step="0.1" oninput="calcDose()">
+      <select id="d-conc-unit" onchange="calcDose()">
+        <option>mg/mL</option><option>mcg/mL</option><option>U/mL</option><option>mEq/mL</option>
+      </select>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Result</h2>
+    <div class="grid" id="dose-results"></div>
+  </div>
+</div>
+
+<!-- MODE 3: Rate → Dose -->
+<div class="mode" id="mode-rate">
+  <div class="card">
+    <h2>Calculate Dose from Infusion Rate</h2>
+    <div class="row">
+      <label>Pump rate</label>
+      <input type="number" id="r-rate" min="0" value="5" step="0.1" oninput="calcRate()">
+      <span class="unit">mL/h</span>
+    </div>
+    <div class="row">
+      <label>Patient weight</label>
+      <input type="number" id="r-weight" min="30" max="200" value="70" step="0.5" oninput="calcRate()">
+      <span class="unit">kg</span>
+    </div>
+    <div class="row">
+      <label>Drug concentration in syringe/bag</label>
+      <input type="number" id="r-conc" min="0.001" value="1" step="0.1" oninput="calcRate()">
+      <select id="r-conc-unit" onchange="calcRate()">
+        <option>mg/mL</option><option>mcg/mL</option><option>U/mL</option>
+      </select>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Result</h2>
+    <div class="grid" id="rate-results"></div>
+  </div>
+</div>
+
+<script>
+function setMode(m) {
+  document.querySelectorAll('.mode').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('mode-'+m).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function ri(cls, label, value, unit, note='') {
+  return `<div class="ritem ${cls}">
+    <div class="rl">${label}</div>
+    <div><span class="rv">${value}</span><span class="ru">${unit}</span></div>
+    ${note ? `<div style="font-size:11px;color:var(--text-muted);margin-top:4px">${note}</div>` : ''}
+  </div>`;
+}
+
+function calcConc() {
+  const drug = parseFloat(document.getElementById('c-drug').value) || 0;
+  const dunit = document.getElementById('c-drug-unit').value;
+  const vol = parseFloat(document.getElementById('c-vol').value) || 1;
+  const conc = drug / vol;
+  document.getElementById('conc-results').innerHTML =
+    ri('ac','Concentration', conc.toFixed(3), `${dunit}/mL`, `= ${(conc*1000).toFixed(1)} ${dunit === 'mg' ? 'mcg' : dunit}/mL` ) +
+    ri('','Total drug in bag', drug.toFixed(2), dunit) +
+    ri('','Total volume', vol.toFixed(0), 'mL');
+}
+
+function calcDose() {
+  const dose = parseFloat(document.getElementById('d-dose').value) || 0;
+  const dunit = document.getElementById('d-dose-unit').value;
+  const w = parseFloat(document.getElementById('d-weight').value) || 70;
+  const conc = parseFloat(document.getElementById('d-conc').value) || 1;
+  const cunit = document.getElementById('d-conc-unit').value;
+
+  let dose_per_h; // in conc units / h
+  if (dunit === 'mcg/kg/min') dose_per_h = dose * w * 60 / 1000; // → mg/h if conc in mg/mL
+  else if (dunit === 'mcg/min') dose_per_h = dose * 60 / 1000;
+  else if (dunit === 'mg/kg/h') dose_per_h = dose * w;
+  else dose_per_h = dose; // mg/h, U/h, mEq/h
+
+  const rate_ml_h = dose_per_h / conc;
+
+  document.getElementById('dose-results').innerHTML =
+    ri('ac','Pump rate', rate_ml_h.toFixed(2), 'mL/h') +
+    ri('gr','Dose/h', dose_per_h.toFixed(3), cunit.replace('/mL','/h'));
+}
+
+function calcRate() {
+  const rate = parseFloat(document.getElementById('r-rate').value) || 0;
+  const w = parseFloat(document.getElementById('r-weight').value) || 70;
+  const conc = parseFloat(document.getElementById('r-conc').value) || 1;
+  const cunit = document.getElementById('r-conc-unit').value;
+
+  const dose_per_h = rate * conc; // in drug unit / h
+  const dose_per_min = dose_per_h / 60;
+  const dose_per_kg_min = dose_per_min / w;
+  const base = cunit.replace('/mL','');
+
+  document.getElementById('rate-results').innerHTML =
+    ri('ac','Dose rate', dose_per_h.toFixed(3), `${base}/h`) +
+    ri('','Per kg per hour', (dose_per_h/w).toFixed(4), `${base}/kg/h`) +
+    ri('','Per kg per min', (dose_per_kg_min*1000).toFixed(3), `${base==='mg'?'mcg':base}/kg/min`);
+}
+
+calcConc(); calcDose(); calcRate();
+</script>
+</body>
+</html>

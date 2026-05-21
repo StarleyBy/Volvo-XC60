@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Inotropes & Vasoactive Drugs | Cardiac Surgery Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f8;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.45;
+      padding: 28px 20px;
+      color: #1a2c3e;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* header */
+    .header {
+      background: linear-gradient(135deg, #1a3a3f 0%, #1f5e6e 100%);
+      padding: 28px 34px;
+      color: white;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .badge {
+      background: #ff9f4a;
+      color: #1a3a3f;
+      padding: 5px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-block;
+      margin-top: 12px;
+    }
+    .subhead {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-top: 8px;
+      border-left: 3px solid #ffb347;
+      padding-left: 16px;
+    }
+
+    .content {
+      padding: 28px 34px;
+    }
+
+    /* navigation pills */
+    .drug-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2edf5;
+    }
+    .nav-pill {
+      background: #edf5fa;
+      color: #1f6c7c;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .nav-pill:hover {
+      background: #d4e3ef;
+      color: #0b4f5e;
+    }
+
+    /* cards / details */
+    .details-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2ebf3;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+    }
+    .details-summary {
+      background: #fafeff;
+      padding: 18px 22px;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid #e2ebf3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+      color: #1a5f6e;
+    }
+    .details-summary:hover {
+      background: #f0f7fc;
+    }
+    .details-summary::after {
+      content: "▼";
+      font-size: 14px;
+      color: #7799b0;
+      transition: transform 0.2s;
+    }
+    .details-card.open .details-summary::after {
+      transform: rotate(180deg);
+    }
+    .details-content {
+      display: none;
+      padding: 20px 24px;
+      background: white;
+    }
+    .details-card.open .details-content {
+      display: block;
+    }
+
+    /* tables */
+    .drug-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+    .drug-table th, .drug-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e5edf3;
+      text-align: left;
+      vertical-align: top;
+    }
+    .drug-table th {
+      background: #f5faff;
+      font-weight: 800;
+      color: #1c6070;
+    }
+    .mini-badge {
+      background: #ecf5fd;
+      color: #1f6c7c;
+      border-radius: 30px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .info-box {
+      background: #fff7ec;
+      border-left: 5px solid #e67e22;
+      padding: 12px 16px;
+      border-radius: 16px;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    .alert-box {
+      background: #ffeceb;
+      border-left: 5px solid #c73e2d;
+      padding: 12px 16px;
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+    h3 {
+      font-size: 18px;
+      margin: 20px 0 12px 0;
+      font-weight: 700;
+      color: #1f5e6e;
+    }
+    h4 {
+      font-size: 16px;
+      margin: 16px 0 8px;
+      font-weight: 700;
+      color: #2e6f82;
+    }
+    .footnote {
+      font-size: 11px;
+      color: #6a7f9b;
+      margin-top: 20px;
+      border-top: 1px dashed #d0deea;
+      padding-top: 12px;
+    }
+    .two-col {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .col {
+      flex: 1;
+      min-width: 240px;
+    }
+    @media (max-width: 720px) {
+      .content { padding: 18px; }
+      .header { padding: 20px; }
+      .details-summary { font-size: 18px; padding: 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📘 Inotropic & Vasoactive Drugs <span style="font-weight: 400;">— Cardiac Surgery Guide</span></h1>
+    <div class="badge">Hemodynamic support · Receptor pharmacology · Stepwise algorithm</div>
+    <div class="subhead">Evidence-based selection, dosing, and weaning for post‑cardiotomy low output syndrome (CI &lt;2.2 L/min/m², MAP &gt;70 mmHg after preload optimization).</div>
+  </div>
+  <div class="content">
+
+    <!-- Quick navigation -->
+    <div class="drug-nav" id="navLinks">
+      <span class="nav-pill" data-drug="epi">💊 Epinephrine</span>
+      <span class="nav-pill" data-drug="dobu">💊 Dobutamine</span>
+      <span class="nav-pill" data-drug="mil">💊 Milrinone</span>
+      <span class="nav-pill" data-drug="dopa">💊 Dopamine</span>
+      <span class="nav-pill" data-drug="iso">💊 Isoproterenol</span>
+      <span class="nav-pill" data-drug="norepi">💊 Norepinephrine</span>
+      <span class="nav-pill" data-drug="phenyl">💊 Phenylephrine</span>
+      <span class="nav-pill" data-drug="vaso">💊 Vasopressin</span>
+      <span class="nav-pill" data-drug="calcium">⚡ Calcium chloride</span>
+      <span class="nav-pill" data-drug="t3">⚡ T₃ / Levosimendan</span>
+      <span class="nav-pill" data-drug="algo">📐 Algorithm</span>
+    </div>
+
+    <!-- Main tables (hemodynamic effects & dosages) -->
+    <div class="details-card" id="tableHemodynamics">
+      <div class="details-summary">📊 Table 11.5 – Hemodynamic effects of vasoactive medications</div>
+      <div class="details-content">
+        <table class="drug-table">
+          <thead><tr><th>Medication</th><th>SVR</th><th>HR</th><th>PCW</th><th>CI</th><th>MAP</th><th>MvO₂</th></tr></thead>
+          <tbody>
+            <tr><td>Epinephrine</td><td>↓↑</td><td>↑↑</td><td>↓↑</td><td>↑</td><td>↑</td><td>↑</td></tr>
+            <tr><td>Dobutamine</td><td>↓</td><td>↑↑↑</td><td>↓</td><td>↑</td><td>↓↔↑</td><td>↑↔</td></tr>
+            <tr><td>Milrinone</td><td>↓↓</td><td>↑</td><td>↓</td><td>↑</td><td>↓</td><td>↓↑</td></tr>
+            <tr><td>Dopamine</td><td>↓↑</td><td>↑↑↑</td><td>↓↑</td><td>↑</td><td>↓↑</td><td>↑</td></tr>
+            <tr><td>Isoproterenol</td><td>↓↓</td><td>↑↑↑↑</td><td>↓</td><td>↑</td><td>↓↑</td><td>↑↑</td></tr>
+            <tr><td>Norepinephrine</td><td>↑↑</td><td>↑↑</td><td>↑↑</td><td>↑</td><td>↑↑↑</td><td>↑</td></tr>
+            <tr><td>Phenylephrine</td><td>↑↑</td><td>↔</td><td>↑</td><td>↔</td><td>↑↑↑</td><td>↔↑</td></tr>
+            <tr><td>Vasopressin</td><td>↑↑</td><td>↔</td><td>↑</td><td>↔</td><td>↑↑↑</td><td>↔↑</td></tr>
+            <tr><td>Calcium chloride</td><td>↑</td><td>↔</td><td>↑</td><td>↑</td><td>↑↑</td><td>↑</td></tr>
+          </tbody>
+        </table>
+        <div class="footnote">↑ increased; ↓ decreased; ↔ no change; ↓↑ variable effect. Arrows indicate relative intensity. For dopamine/epinephrine first arrow = low dose effect.</div>
+      </div>
+    </div>
+
+    <div class="details-card" id="tableDosing">
+      <div class="details-summary">💉 Table 11.6 – Standard mixes & dosage ranges</div>
+      <div class="details-content">
+        <table class="drug-table">
+          <thead><tr><th>Medication</th><th>Standard mix</th><th>Dosage range</th></tr></thead>
+          <tbody>
+            <tr><td>Epinephrine</td><td>1 mg/250 mL</td><td>1–4 μg/min (0.01–0.05 μg/kg/min)</td></tr>
+            <tr><td>Dobutamine</td><td>500 mg/250 mL</td><td>5–20 μg/kg/min</td></tr>
+            <tr><td>Milrinone</td><td>20 mg/200 mL</td><td>50 μg/kg bolus, then 0.25–0.75 μg/kg/min</td></tr>
+            <tr><td>Dopamine</td><td>400 mg/250 mL</td><td>2–20 μg/kg/min</td></tr>
+            <tr><td>Isoproterenol</td><td>1 mg/250 mL</td><td>0.5–10 μg/min (0.0075–0.1 μg/kg/min)</td></tr>
+            <tr><td>Norepinephrine</td><td>4 mg/250 mL</td><td>1–30 μg/min (0.01–0.3 μg/kg/min)</td></tr>
+            <tr><td>Phenylephrine</td><td>40 mg/250 mL</td><td>5–150 μg/min (0.05–1.5 μg/kg/min)</td></tr>
+            <tr><td>Vasopressin</td><td>40 units/80 mL</td><td>0.01–0.1 units/min</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">💡 Tip: <strong>mg/250 mL mix → infusion rate (μg/min) = 15 drops/min ≈ 15 mL/h</strong> (e.g., epinephrine 1 mg/250 mL: 2 μg/min ≈ 2 mL/h). Always use central line and infusion pump.</div>
+      </div>
+    </div>
+
+    <!-- Individual drug cards (collapsible) -->
+    <div id="drugsSection">
+      <h3>📌 Individual drug profiles (click to expand)</h3>
+      
+      <!-- Epinephrine -->
+      <div class="details-card drug-card" id="epi">
+        <div class="details-summary">💉 Epinephrine (Adrenaline)</div>
+        <div class="details-content">
+          <h4>Hemodynamic effects</h4>
+          <ul><li>Potent β₁ inotrope, increases CO by ↑HR + contractility. Low dose (&lt;2 μg/min) → β₂ vasodilation; higher dose → α vasoconstriction, SVR ↑.</li>
+          <li>Strong β₂ bronchodilation; may cause less tachycardia than dobutamine at equipotent doses (2 μg/min).</li></ul>
+          <h4>Indications</h4>
+          <ul><li>First‑line for borderline CO without tachycardia/ectopy; excellent for hypertrophied heart, slow sinus node.</li>
+          <li>Bronchospasm, anaphylaxis, cardiac arrest.</li></ul>
+          <h4>Starting dose</h4>
+          <p>1 μg/min (≈0.01 μg/kg/min) via 1 mg/250 mL; up to 4 μg/min (0.05 μg/kg/min). Higher doses rarely needed post‑op.</p>
+          <div class="info-box">Note: Metabolic acidosis may occur even without α effect; not related to hypoperfusion.</div>
+        </div>
+      </div>
+
+      <!-- Dobutamine -->
+      <div class="details-card drug-card" id="dobu">
+        <div class="details-summary">💉 Dobutamine</div>
+        <div class="details-content">
+          <h4>Hemodynamics</h4>
+          <p>Strong β₁ inotrope + mild β₂ vasodilation → ↓SVR, ↓PCWP, maintains MAP via improved CO. Tachycardia dose‑dependent, but less arrhythmogenic than dopamine. Synergistic with milrinone.</p>
+          <h4>Indications</h4>
+          <p>Marginal CO + mild ↑SVR; moderate pulmonary vasodilator (RV afterload reduction). Often combined with PDE inhibitors in advanced HF/transplant candidates.</p>
+          <h4>Dosage</h4>
+          <p>Start 5 μg/kg/min (500 mg/250 mL); up to 20 μg/kg/min.</p>
+        </div>
+      </div>
+
+      <!-- Milrinone -->
+      <div class="details-card drug-card" id="mil">
+        <div class="details-summary">💉 Milrinone (Primacor)</div>
+        <div class="details-content">
+          <h4>Inodilator (PDE III inhibitor)</h4>
+          <ul><li>Reduces SVR/PVR, modest ↑HR and inotropy, lowers filling pressures. Lusitropic effect improves compliance.</li>
+          <li>Long half‑life (1.5–2 h); additive with catecholamines. Often requires α‑agonist (norepinephrine/vasopressin) to maintain BP.</li>
+          <li>Inhaled milrinone → selective pulmonary vasodilation without systemic effects.</li></ul>
+          <h4>Indications</h4>
+          <p>Persistent low CO despite catecholamines; RV dysfunction + elevated PVR (mitral disease, post‑transplant); diastolic dysfunction / conduit spasm.</p>
+          <h4>Dosing</h4>
+          <p>50 μg/kg IV bolus over 10 min, then 0.25–0.75 μg/kg/min (20 mg/200 mL).</p>
+          <div class="alert-box">⚠️ Meta‑analyses show mixed mortality signals, but beneficial in low CO state when added after inadequate response to catecholamines.</div>
+        </div>
+      </div>
+
+      <!-- Dopamine -->
+      <div class="details-card drug-card" id="dopa">
+        <div class="details-summary">💉 Dopamine</div>
+        <div class="details-content">
+          <h4>Hemodynamic effects (dose‑dependent)</h4>
+          <ul><li>“Renal dose” 2–3 μg/kg/min ↑ urine output but no kidney protection; 3–8 μg/kg/min β₁ inotropy; >8 μg/kg/min α‑vasoconstriction.</li>
+          <li>Higher tachycardia / arrhythmia risk; may worsen V/Q mismatch.</li></ul>
+          <h4>Indications</h4>
+          <p>Limited by side effects – other inotropes preferred. May be used when SVR low and BP marginal, but epinephrine/dobutamine are better.</p>
+          <div class="info-box">Not recommended for routine renal protection; no outcome benefit.</div>
+        </div>
+      </div>
+
+      <!-- Isoproterenol -->
+      <div class="details-card drug-card" id="iso">
+        <div class="details-summary">💉 Isoproterenol</div>
+        <div class="details-content">
+          <h4>Effects</h4>
+          <p>Pure β₁+β₂ agonist → marked ↑HR, moderate inotropy, ↓SVR/PVR. High O₂ demand, arrhythmogenic.</p>
+          <h4>Indications</h4>
+          <p>RV failure + high PVR (post‑mitral surgery, post‑heart transplant to maintain HR ~100 bpm); bronchospasm + inotrope need; bradycardia without pacing wires.</p>
+          <h4>Dose</h4>
+          <p>Start 0.5 μg/min (1 mg/250 mL); up to 10 μg/min (0.0075–0.1 μg/kg/min).</p>
+        </div>
+      </div>
+
+      <!-- Norepinephrine -->
+      <div class="details-card drug-card" id="norepi">
+        <div class="details-summary">💉 Norepinephrine (Levophed)</div>
+        <div class="details-content">
+          <h4>Effects</h4>
+          <p>α + β₁ effects → ↑SVR, ↑contractility, ↑HR. Increases myocardial O₂ demand but improves perfusion pressure. Often used when low CO + low SVR (vasodilated state).</p>
+          <h4>Indications</h4>
+          <ul><li>Low CO + low SVR/hypotension (warming phase, vasoplegia).</li>
+          <li>If CI &lt;2.0 L/min/m², add separate inotrope (epinephrine/dobutamine).</li></ul>
+          <h4>Starting dose</h4>
+          <p>1 μg/min (0.01 μg/kg/min) of 4 mg/250 mL; titrate to MAP &gt;70 mmHg. Avoid high doses (>20 μg/min) – visceral ischemia risk.</p>
+          <div class="alert-box">⚠️ Monitor for reduced flow in arterial grafts (ITA/radial); combine with vasodilator if possible.</div>
+        </div>
+      </div>
+
+      <!-- Phenylephrine -->
+      <div class="details-card drug-card" id="phenyl">
+        <div class="details-summary">💉 Phenylephrine (Neo‑Synephrine)</div>
+        <div class="details-content">
+          <h4>Pure α‑agonist</h4>
+          <p>Increases SVR, reflex bradycardia; no direct inotropic effect. Use only when CO satisfactory but hypotension persists (vasoplegia).</p>
+          <h4>Indications</h4>
+          <ul><li>Hypotension with CI &gt;2.2 L/min/m² (post‑CPB warming, HOCM, SAM after mitral repair).</li>
+          <li>Preoperative ischemia with NTG; maintain MAP while reducing preload.</li></ul>
+          <h4>Dose</h4>
+          <p>5 μg/min (40 mg/250 mL); range 0.05–1.5 μg/kg/min. May become refractory after several hours → switch to norepinephrine.</p>
+          <div class="alert-box">⚠️ Caution: may provoke arterial graft spasm (ITA/radial). Prefer to reduce vasodilator than increase α‑agonist.</div>
+        </div>
+      </div>
+
+      <!-- Vasopressin -->
+      <div class="details-card drug-card" id="vaso">
+        <div class="details-summary">💉 Vasopressin (ADH)</div>
+        <div class="details-content">
+          <h4>Effects</h4>
+          <p>V₁ receptor → ↑SVR, no direct cardiac effect. Improves MAP without raising PA pressures; beneficial in vasoplegic shock refractory to catecholamines.</p>
+          <h4>Indications</h4>
+          <ul><li>Low BP poorly responsive to norepinephrine/phenylephrine.</li>
+          <li>Vasodilatory shock (vasoplegia) after CPB with preserved CO.</li></ul>
+          <h4>Dosage</h4>
+          <p>0.01–0.1 units/min (mix: 40 units/80 mL). May cause mesenteric ischemia if CO marginal.</p>
+        </div>
+      </div>
+
+      <!-- Calcium chloride -->
+      <div class="details-card drug-card" id="calcium">
+        <div class="details-summary">⚡ Calcium chloride (CaCl₂)</div>
+        <div class="details-content">
+          <h4>Effects</h4>
+          <p>↑SVR, transient ↑contractility (only if hypocalcemia). May attenuate catecholamine effects. Routine use post‑CPB controversial – may worsen reperfusion injury.</p>
+          <h4>Indications</h4>
+          <ul><li>Emergency support during weaning from CPB (if hypocalcemia present).</li>
+          <li>Hyperkalemia (&gt;6.0 mEq/L).</li></ul>
+          <h4>Dose</h4>
+          <p>0.5–1 g slow IV bolus. Avoid routine use during cardiac arrest (ACLS 2025).</p>
+        </div>
+      </div>
+
+      <!-- T3 and Levosimendan -->
+      <div class="details-card drug-card" id="t3">
+        <div class="details-summary">⚡ Triiodothyronine (T₃) & Levosimendan</div>
+        <div class="details-content">
+          <h4>Triiodothyronine (T₃)</h4>
+          <ul><li>Increases contractility independent of β‑receptors; low T₃ post‑CPB linked to low CO syndrome.</li>
+          <li>Salvage therapy when IABP and maximal inotropes fail; improves donor heart function.</li>
+          <li>Dose: 10–20 μg IV bolus (or 0.8 μg/kg + infusion).</li></ul>
+          <h4>Levosimendan</h4>
+          <ul><li>Calcium sensitizer + K<sub>ATP</sub> channel opener: inodilator without ↑MvO₂. Long half‑life (~70 h).</li>
+          <li>Use: anticipated post‑cardiotomy RV/LV dysfunction, weaning from CPB.</li>
+          <li>Dose: 12–24 μg/kg load over 10 min, then 0.1 μg/kg/min. May require α‑agonist for vasodilation.</li>
+          <li>Role remains undefined (mixed outcome data).</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stepwise selection algorithm -->
+    <div class="details-card" id="algo">
+      <div class="details-summary">📐 Algorithm: Choosing the right vasoactive drug</div>
+      <div class="details-content">
+        <div class="two-col">
+          <div class="col">
+            <h4>1️⃣ Preload & rhythm first</h4>
+            <p>Optimize volume (CVP 8–12, PCWP 12–16), correct brady/tachy, consider pacing.</p>
+            <h4>2️⃣ CI &gt;2.2 L/min/m² but MAP &lt;70 mmHg</h4>
+            <p>→ α‑agent: start <strong>norepinephrine</strong> (preferred for β reserve) or phenylephrine. If refractory → add vasopressin.</p>
+            <h4>3️⃣ CI &lt;2.0 L/min/m² (low output)</h4>
+            <p>→ First‑line: <strong>epinephrine</strong> (1‑4 μg/min) or <strong>dobutamine</strong> (5‑10 μg/kg/min). Avoid tachycardia.</p>
+            <p>If still suboptimal → add <strong>milrinone</strong> (bolus+infusion). Synergistic inotropic effect, often requires norepinephrine to maintain SVR.</p>
+            <h4>4️⃣ Refractory low output / persistent shock</h4>
+            <p>→ IABP insertion, consider levosimendan or T₃ as rescue. If still no improvement → mechanical circulatory support (ECMO/VAD).</p>
+          </div>
+          <div class="col">
+            <div class="info-box">📌 Special situations</div>
+            <ul>
+              <li><strong>RV failure + high PVR</strong>: milrinone, inhaled milrinone, isoproterenol, levosimendan.</li>
+              <li><strong>Vasoplegic shock</strong> (post‑pump, warm, high CO): norepinephrine + vasopressin (0.03‑0.04 U/min).</li>
+              <li><strong>Arterial grafts (ITA/radial)</strong>: minimise α‑agonists, maintain diltiazem/nitroglycerin to prevent spasm.</li>
+              <li><strong>Tachycardia/arrhythmia</strong>: prefer milrinone or low‑dose epinephrine over dobutamine/dopamine.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert-box" style="margin-top: 16px;">🚨 Weaning order: first α‑agonists (as patient warms) → then catecholamines (epinephrine/dobutamine to low doses) → wean milrinone last due to long half‑life. IABP can be removed when on low‑dose single inotrope (epi ≤1 μg/min or dobutamine &lt;10 μg/kg/min).</div>
+      </div>
+    </div>
+
+    <!-- Adverse effects & weaning -->
+    <div class="details-card">
+      <div class="details-summary">⚠️ Adverse effects & weaning strategy</div>
+      <div class="details-content">
+        <div class="two-col">
+          <div class="col">
+            <h4>Common adverse effects</h4>
+            <ul>
+              <li>Arrhythmias / tachycardia (epinephrine, dobutamine, isoproterenol)</li>
+              <li>Vasoconstriction / organ hypoperfusion (norepinephrine, vasopressin, high‑dose phenylephrine)</li>
+              <li>Hypotension requiring α‑agonists (milrinone, levosimendan)</li>
+              <li>Cyanide toxicity (nitroprusside), methemoglobinemia (IV NTG)</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Weaning protocol</h4>
+            <ul>
+              <li>Wean α‑agonists first when MAP stable & patient awake.</li>
+              <li>Reduce epinephrine to &lt;2 μg/min, dobutamine to &lt;10 μg/kg/min.</li>
+              <li>Milrinone: halve dose every 4‑6h; if stable, discontinue. Observe for delayed haemodynamic deterioration (long half‑life).</li>
+              <li>IABP removal: acceptable when CI ≥2.2, on low inotropic support (epi ≤1 μg/min or dobutamine &lt;10 μg/kg/min).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="info-box">✔️ Daily checklist: check CI, MAP, SvO₂, lactate, urine output. Reassess volume status before increasing inotrope.</div>
+      </div>
+    </div>
+
+    <div class="footnote" style="margin-top: 20px; text-align: center;">
+      Based on Bojar 6th Edition – Chapter 11 (Inotropic and Vasoactive Drugs). This guide integrates hemodynamic tables, dosing, and advanced strategies for cardiac surgery patients. Always verify local protocols.
+    </div>
+  </div>
+</div>
+
+<script>
+  // interactive accordion
+  const detailsCards = document.querySelectorAll('.details-card');
+  detailsCards.forEach(card => {
+    const summary = card.querySelector('.details-summary');
+    if (!summary) return;
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      card.classList.toggle('open');
+    });
+    // initially open the main tables and algorithm? keep closed to reduce clutter but open drug navigation optional.
+  });
+  
+  // navigation pills - scroll to drug card & open it
+  const navPills = document.querySelectorAll('.nav-pill');
+  navPills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      const drugId = pill.getAttribute('data-drug');
+      if (!drugId) return;
+      let target = document.getElementById(drugId);
+      if (!target) {
+        // maybe algorithm or other id
+        target = document.getElementById(drugId);
+      }
+      if (target) {
+        // open the details-card if closed
+        if (!target.classList.contains('open')) target.classList.add('open');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // optional: add highlight flash
+        target.style.transition = 'box-shadow 0.2s';
+        target.style.boxShadow = '0 0 0 3px #ffb347';
+        setTimeout(() => { target.style.boxShadow = ''; }, 1200);
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHA₂DS₂-VASc Score</title>
+<style>
+  :root{--bg:#f5f6f8;--bg-panel:#fff;--text:#1c2333;--text-muted:#6b7a99;--accent:#3b6ff5;--accent-light:#e8effe;--border:#dde1ec;--bg-hover:#eef0f5;--green:#2d6a2d;--green-bg:#e8f4e8;--orange:#8a5a00;--orange-bg:#fff4e0;--font:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;}
+  [data-theme="dark"]{--bg:#0f1117;--bg-panel:#181c27;--text:#e0e4f0;--text-muted:#6b7a99;--accent:#4d7fff;--accent-light:#1a2a4a;--border:#252b3d;--bg-hover:#1e2233;--green:#5aaa5a;--green-bg:#1a2e1a;--orange:#ddaa33;--orange-bg:#2a2000;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:20px;}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px;}
+  .subtitle{color:var(--text-muted);font-size:13px;margin-bottom:20px;}
+  .card{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:14px;}
+  .card h2{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  
+  .criterion {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+    margin-bottom: 4px;
+  }
+  .criterion:hover { background: var(--bg-hover); }
+  .criterion input {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+  .criterion-label { flex: 1; font-size: 14px; }
+  .criterion-points {
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 30px;
+    text-align: right;
+  }
+
+  .score-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .score-label { font-weight: 600; font-size: 16px; }
+  .score-value { font-size: 32px; font-weight: 700; font-family: var(--mono); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg-hover); padding: 8px 10px; text-align: left; border: 1px solid var(--border); font-size: 11px; text-transform: uppercase; }
+  td { padding: 8px 10px; border: 1px solid var(--border); }
+  
+  .highlight-row { background: var(--accent-light) !important; font-weight: 600; }
+  .highlight-row td { border-color: var(--accent); }
+
+  .note { font-size: 12px; color: var(--text-muted); margin-top: 15px; line-height: 1.6; }
+  .note strong { color: var(--text); }
+  
+  .mutually-exclusive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<script>
+  const theme=(window.parent?.document.documentElement.getAttribute('data-theme'))||localStorage.getItem('pmr-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+</script>
+
+<h1>CHA₂DS₂-VASc Score</h1>
+<p class="subtitle">Stroke risk assessment in non-valvular atrial fibrillation</p>
+
+<div class="card">
+  <h2>Scoring Criteria</h2>
+  <label class="criterion">
+    <input type="checkbox" id="c_chf" value="1" onchange="update()">
+    <span class="criterion-label"><strong>C</strong> — Congestive heart failure (or LVEF < 40%)</span>
+    <span class="criterion-points">+1</span>
+  </label>
+  <label class="criterion">
+    <input type="checkbox" id="c_htn" value="1" onchange="update()">
+    <span class="criterion-label"><strong>H</strong> — Hypertension</span>
+    <span class="criterion-points">+1</span>
+  </label>
+  <label class="criterion" id="row_age75">
+    <input type="checkbox" id="c_age75" value="2" onchange="handleAge(75)">
+    <span class="criterion-label"><strong>A₂</strong> — Age ≥ 75 years</span>
+    <span class="criterion-points">+2</span>
+  </label>
+  <label class="criterion">
+    <input type="checkbox" id="c_dm" value="1" onchange="update()">
+    <span class="criterion-label"><strong>D</strong> — Diabetes mellitus</span>
+    <span class="criterion-points">+1</span>
+  </label>
+  <label class="criterion">
+    <input type="checkbox" id="c_stroke" value="2" onchange="update()">
+    <span class="criterion-label"><strong>S₂</strong> — Stroke / TIA / thromboembolism (history)</span>
+    <span class="criterion-points">+2</span>
+  </label>
+  <label class="criterion">
+    <input type="checkbox" id="c_vasc" value="1" onchange="update()">
+    <span class="criterion-label"><strong>V</strong> — Vascular disease (prior MI, PAD, aortic plaque)</span>
+    <span class="criterion-points">+1</span>
+  </label>
+  <label class="criterion" id="row_age65">
+    <input type="checkbox" id="c_age65" value="1" onchange="handleAge(65)">
+    <span class="criterion-label"><strong>A</strong> — Age 65–74 years</span>
+    <span class="criterion-points">+1</span>
+  </label>
+  <label class="criterion">
+    <input type="checkbox" id="c_female" value="1" onchange="update()">
+    <span class="criterion-label"><strong>Sc</strong> — Sex category: female</span>
+    <span class="criterion-points">+1</span>
+  </label>
+</div>
+
+<div class="score-display">
+  <span class="score-label">Total Score:</span>
+  <span class="score-value" id="total-score">0</span>
+</div>
+
+<div class="card">
+  <h2>Interpretation & Recommendation</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Annual Stroke Risk</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody id="interp-body">
+      <tr id="row_score_0">
+        <td>0 (♂)</td>
+        <td>~0%</td>
+        <td>No therapy</td>
+      </tr>
+      <tr id="row_score_1">
+        <td>1 (♂) / 0 (♀)</td>
+        <td>~1.3%</td>
+        <td>Consider OAC</td>
+      </tr>
+      <tr id="row_score_2">
+        <td>≥ 2</td>
+        <td>~2.2–15.2%</td>
+        <td><strong>OAC recommended</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p class="note">
+    <strong>Note:</strong> Female sex alone (score = 1 in ♀) does not independently indicate anticoagulation — at least one additional clinical risk factor required.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Preferred Anticoagulants</h2>
+  <div class="note">
+    <ul style="padding-left: 20px;">
+      <li><strong>NOACs preferred</strong> over warfarin (unless valvular AF, mechanical valve, severe CKD)</li>
+      <li><strong>Rivaroxaban</strong> 20 mg OD with evening meal</li>
+      <li><strong>Apixaban</strong> 5 mg BID (2.5 mg BID if ≥ 2 of: age ≥ 80, weight ≤ 60 kg, Cr ≥ 133 µmol/L)</li>
+      <li><strong>Dabigatran</strong> 150 mg BID (110 mg BID if age ≥ 80, high bleeding risk, or eGFR 30–50)</li>
+      <li><strong>Warfarin</strong> target INR 2.0–3.0</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>Valvular AF — Always Anticoagulate:</strong> Regardless of score in rheumatic MS or mechanical heart valves.</p>
+  </div>
+</div>
+
+<script>
+  function handleAge(type) {
+    const age75 = document.getElementById('c_age75');
+    const age65 = document.getElementById('c_age65');
+    
+    if (type === 75 && age75.checked) {
+      age65.checked = false;
+    } else if (type === 65 && age65.checked) {
+      age75.checked = false;
+    }
+    update();
+  }
+
+  function update() {
+    const ids = ['c_chf', 'c_htn', 'c_age75', 'c_dm', 'c_stroke', 'c_vasc', 'c_age65', 'c_female'];
+    let score = 0;
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el.checked) score += parseInt(el.value);
+    });
+
+    document.getElementById('total-score').textContent = score;
+
+    // Highlighting logic
+    const isFemale = document.getElementById('c_female').checked;
+    
+    // Clear all highlights
+    document.querySelectorAll('#interp-body tr').forEach(tr => tr.classList.remove('highlight-row'));
+
+    // Based on the MD table:
+    // Score 0 (M) -> row 0
+    // Score 1 (M) / 0 extra (F) [total 1] -> row 1
+    // Score >= 2 -> row 2
+    
+    // BUT the note says Female score 1 (sex alone) doesn't indicate anticoagulation.
+    // If I follow the table "0 (F)" as "Score 1 (F)", then Score 1 (F) highlights "Consider OAC".
+    // If I follow the note, Score 1 (F) should probably highlight nothing or "No therapy".
+    
+    // Let's re-interpret the table:
+    // Score 0 (M) -> No therapy
+    // Score 1 (M) OR 1 (F) but 0 extra? 
+    // Usually, 1 (F) is low risk like 0 (M).
+    // So 0 (M) and 1 (F) -> No therapy.
+    // 1 (M) and 2 (F) -> Consider.
+    // >=2 (M) and >=3 (F) -> Recommended.
+    
+    // This matches the "extra factors" logic:
+    // 0 extra factors -> No therapy
+    // 1 extra factor -> Consider
+    // >=2 extra factors -> Recommended
+    
+    // Literal highlighting based on total score and table labels
+    if (score === 0) {
+      document.getElementById('row_score_0').classList.add('highlight-row');
+    } else if (score === 1) {
+      document.getElementById('row_score_1').classList.add('highlight-row');
+    } else if (score >= 2) {
+      document.getElementById('row_score_2').classList.add('highlight-row');
+    }
+  }
+
+  // Initial update
+  update();
+</script>
+</body>
+</html>

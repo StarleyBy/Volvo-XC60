@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS Helper — Editor</title>
+  <link rel="stylesheet" href="app.css">
+  <style>
+    body { overflow: auto; }
+    #app { display: block; height: auto; overflow: visible; }
+
+    /* ── EDITOR LAYOUT ─────────────────────── */
+    #editor-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    #editor-topbar {
+      height: 52px;
+      background: var(--bg-sidebar);
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      gap: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky; top: 0; z-index: 50;
+      flex-shrink: 0;
+    }
+    #editor-topbar-logo { font-size: 20px; }
+    #editor-topbar-title {
+      color: #fff; font-weight: 600; font-size: 14px;
+    }
+    #editor-topbar-file {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-sidebar-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 3px 8px; border-radius: 4px;
+    }
+    #editor-topbar-actions { margin-left: auto; display: flex; gap: 8px; }
+    .ed-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-sidebar);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .ed-btn:hover { background: rgba(255,255,255,0.1); }
+    .ed-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .ed-btn.primary:hover { background: var(--accent-dim); }
+
+    /* ── PANELS ────────────────────────────── */
+    #editor-body {
+      flex: 1;
+      display: flex;
+      gap: 0;
+      min-height: calc(100vh - 52px);
+    }
+    #editor-panel, #preview-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    #editor-panel { border-right: 2px solid var(--border); }
+
+    .panel-header {
+      padding: 8px 16px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .panel-header-badge {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 2px 6px;
+      background: var(--bg-active);
+      border-radius: 3px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    #md-editor {
+      flex: 1;
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.75;
+      border: none;
+      outline: none;
+      padding: 20px 24px;
+      resize: none;
+      tab-size: 2;
+    }
+    #preview-panel { overflow-y: auto; }
+    #preview-content {
+      padding: 24px 28px;
+      flex: 1;
+    }
+
+    /* ── FRONTMATTER STRIP ─────────────────── */
+    #frontmatter-bar {
+      background: var(--tag-ref);
+      border-bottom: 1px solid var(--tag-ref-text);
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--tag-ref-text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    #frontmatter-bar .fm-field {
+      display: flex; gap: 4px; align-items: center;
+    }
+    #frontmatter-bar label { font-weight: 600; }
+    #frontmatter-bar input, #frontmatter-bar select {
+      background: transparent;
+      border: 1px solid var(--tag-ref-text);
+      border-radius: 4px;
+      color: var(--tag-ref-text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 6px;
+      outline: none;
+    }
+    #frontmatter-bar input[type=checkbox] { width: auto; }
+
+    /* ── MANIFEST BROWSER ──────────────────── */
+    #manifest-sidebar {
+      width: 220px;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .ms-header {
+      padding: 10px 12px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    #manifest-list {
+      flex: 1; overflow-y: auto;
+      padding: 8px 0;
+    }
+    .ms-section-title {
+      padding: 6px 12px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .ms-item {
+      padding: 6px 12px 6px 18px;
+      font-size: 12.5px;
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.1s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ms-item:hover { background: var(--bg-hover); }
+    .ms-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+    .ms-hidden { opacity: 0.45; }
+
+    /* ── STATUS BAR ────────────────────────── */
+    #status-bar {
+      height: 24px;
+      background: var(--bg-sidebar);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 20px;
+      font-size: 11px;
+      color: var(--text-sidebar-muted);
+      flex-shrink: 0;
+    }
+    #status-bar span { display: flex; align-items: center; gap: 4px; }
+
+    /* ── VIEW MODES ────────────────────────── */
+    .view-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-sidebar);
+      padding: 3px 8px; border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 11px; cursor: pointer;
+      transition: all 0.12s;
+    }
+    .view-btn.active { background: rgba(255,255,255,0.12); }
+
+    @media (max-width: 900px) {
+      #manifest-sidebar { display: none; }
+    }
+    @media (max-width: 640px) {
+      #editor-panel { display: none; }
+      #preview-panel { display: flex; }
+    }
+  </style>
+</head>
+<body>
+<div id="editor-shell">
+
+  <!-- TOP BAR -->
+  <div id="editor-topbar">
+    <span id="editor-topbar-logo">🫀</span>
+    <span id="editor-topbar-title">CS Helper — Editor</span>
+    <span id="editor-topbar-file" id="file-label">No file selected</span>
+    <div id="editor-topbar-actions">
+      <button class="ed-btn" onclick="copyContent()" title="Copy markdown to clipboard">📋 Copy</button>
+      <button class="view-btn active" id="view-split" onclick="setView('split')">Split</button>
+      <button class="view-btn" id="view-edit" onclick="setView('edit')">Editor</button>
+      <button class="view-btn" id="view-preview" onclick="setView('preview')">Preview</button>
+      <button class="ed-btn" onclick="window.close()">✕ Close</button>
+    </div>
+  </div>
+
+  <div id="editor-body">
+    <!-- MANIFEST BROWSER -->
+    <div id="manifest-sidebar">
+      <div class="ms-header">📁 Files</div>
+      <div id="manifest-list"><div style="padding:20px;color:var(--text-muted);font-size:12px">Loading…</div></div>
+    </div>
+
+    <!-- EDITOR -->
+    <div id="editor-panel">
+      <div class="panel-header">
+        ✏️ Markdown
+        <span class="panel-header-badge" id="char-count">0 chars</span>
+      </div>
+      <div id="frontmatter-bar" style="display:none">
+        <span class="fm-field"><label>Title:</label> <input id="fm-title" type="text"></span>
+        <span class="fm-field"><label>Type:</label>
+          <select id="fm-type">
+            <option>reference</option><option>calculator</option><option>scale</option>
+            <option>protocol</option><option>cheatsheet</option><option>icd</option>
+          </select>
+        </span>
+        <span class="fm-field"><label>Visible:</label> <input id="fm-visible" type="checkbox" checked></span>
+      </div>
+      <textarea id="md-editor" spellcheck="false" placeholder="Select a file from the sidebar, or start typing Markdown here…"></textarea>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="preview-panel">
+      <div class="panel-header">👁 Preview</div>
+      <div id="preview-content" class="md-body">
+        <p style="color:var(--text-muted)">Select a file or start typing to see the preview.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="status-bar">
+    <span id="sb-file">No file</span>
+    <span id="sb-lines">0 lines</span>
+    <span id="sb-words">0 words</span>
+    <span style="margin-left:auto">CS Helper Editor · Read-only preview — save files directly in your repo</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+<script>
+'use strict';
+
+// ── THEME ──────────────────────────────────────────────
+const saved = localStorage.getItem('pmr-theme') || 'dark';
+document.documentElement.setAttribute('data-theme', saved);
+
+// ── STATE ──────────────────────────────────────────────
+let currentFile = null;
+let manifest = null;
+
+// ── ELEMENTS ───────────────────────────────────────────
+const editor = document.getElementById('md-editor');
+const preview = document.getElementById('preview-content');
+const charCount = document.getElementById('char-count');
+const sbFile = document.getElementById('sb-file');
+const sbLines = document.getElementById('sb-lines');
+const sbWords = document.getElementById('sb-words');
+const fileLabel = document.getElementById('editor-topbar-file');
+
+// ── LIVE PREVIEW ───────────────────────────────────────
+let previewTimer;
+editor.addEventListener('input', () => {
+  updateStats();
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(renderPreview, 150);
+});
+
+function renderPreview() {
+  const text = editor.value;
+  // Strip YAML frontmatter for preview
+  const body = text.replace(/^---[\s\S]*?---\n/, '');
+  preview.innerHTML = marked.parse(body);
+}
+
+function updateStats() {
+  const v = editor.value;
+  charCount.textContent = v.length + ' chars';
+  sbLines.textContent = v.split('\n').length + ' lines';
+  sbWords.textContent = (v.match(/\S+/g) || []).length + ' words';
+}
+
+// ── LOAD FILE ──────────────────────────────────────────
+async function loadFile(filePath) {
+  try {
+    const resp = await fetch(filePath + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('not found');
+    const text = await resp.text();
+    editor.value = text;
+    currentFile = filePath;
+    fileLabel.textContent = filePath;
+    sbFile.textContent = filePath.split('/').pop();
+    parseFrontmatter(text);
+    renderPreview();
+    updateStats();
+  } catch(e) {
+    editor.value = `---\ntitle: ${filePath.split('/').pop().replace(/\.\w+$/, '')}\ntype: reference\nvisible: true\n---\n\n# Title\n\nContent goes here.\n`;
+    fileLabel.textContent = filePath + ' (new)';
+    renderPreview();
+    updateStats();
+  }
+}
+
+function parseFrontmatter(text) {
+  const match = text.match(/^---\n([\s\S]*?)\n---/);
+  const bar = document.getElementById('frontmatter-bar');
+  if (match) {
+    bar.style.display = 'flex';
+    try {
+      const fm = jsyaml.load(match[1]);
+      document.getElementById('fm-title').value = fm.title || '';
+      document.getElementById('fm-type').value = fm.type || 'reference';
+      document.getElementById('fm-visible').checked = fm.visible !== false;
+    } catch(e) {}
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── MANIFEST BROWSER ───────────────────────────────────
+async function loadManifest() {
+  try {
+    const text = await fetch('./app-manifest.yml').then(r => r.text());
+    manifest = jsyaml.load(text);
+    buildManifestList();
+  } catch(e) {
+    document.getElementById('manifest-list').innerHTML =
+      '<div style="padding:12px;color:var(--text-muted);font-size:12px">Manifest not found</div>';
+  }
+}
+
+function buildManifestList() {
+  const list = document.getElementById('manifest-list');
+  let html = '';
+  for (const section of manifest.sections) {
+    html += `<div class="ms-section-title">${section.icon} ${section.title}</div>`;
+    for (const item of section.items) {
+      html += `<div class="ms-item ${!item.visible ? 'ms-hidden' : ''}" data-file="${item.file}" onclick="selectItem('${item.file}', this)">
+        ${item.title}${!item.visible ? ' 🔒' : ''}
+      </div>`;
+    }
+  }
+  list.innerHTML = html;
+}
+
+function selectItem(filePath, el) {
+  document.querySelectorAll('.ms-item').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  loadFile(filePath);
+}
+
+// ── COPY ───────────────────────────────────────────────
+function copyContent() {
+  navigator.clipboard.writeText(editor.value).then(() => {
+    const btn = document.querySelector('[onclick="copyContent()"]');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+// ── VIEW MODES ─────────────────────────────────────────
+function setView(mode) {
+  const edPanel = document.getElementById('editor-panel');
+  const pvPanel = document.getElementById('preview-panel');
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + mode).classList.add('active');
+  if (mode === 'split') {
+    edPanel.style.display = ''; pvPanel.style.display = '';
+  } else if (mode === 'edit') {
+    edPanel.style.display = ''; pvPanel.style.display = 'none';
+  } else {
+    edPanel.style.display = 'none'; pvPanel.style.display = '';
+  }
+}
+
+// ── TABS / INDENT ──────────────────────────────────────
+editor.addEventListener('keydown', e => {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    editor.value = editor.value.substring(0, start) + '  ' + editor.value.substring(end);
+    editor.selectionStart = editor.selectionEnd = start + 2;
+    renderPreview();
+  }
+});
+
+// ── URL PARAM ──────────────────────────────────────────
+const urlFile = new URLSearchParams(location.search).get('file');
+if (urlFile) loadFile(urlFile);
+
+loadManifest();
+updateStats();
+</script>
+</body>
+</html>
