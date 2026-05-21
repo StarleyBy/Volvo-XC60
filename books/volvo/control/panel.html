@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Приборная панель Volvo XC60 2020 | Полный гид с графикой</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #eef2f8;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        /* премиум-контейнер */
+        .premium-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(105deg, #00263b 0%, #003e5c 100%);
+            padding: 2rem 2.5rem;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 span {
+            font-weight: 400;
+            color: #ffb347;
+        }
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 750px;
+        }
+
+        .content {
+            padding: 2rem 2.2rem 2.5rem;
+        }
+
+        /* графическая панель + легенда */
+        .dashboard-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .dashboard-canvas {
+            flex: 1.4;
+            background: #0c1220;
+            border-radius: 32px;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 20px 28px -12px rgba(0,0,0,0.3);
+        }
+        .dashboard-canvas svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .legend-side {
+            flex: 1;
+            background: #f9fbfe;
+            border-radius: 28px;
+            border: 1px solid #e2edf7;
+            padding: 1.5rem;
+        }
+        .legend-side h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #003057;
+            border-left: 4px solid #e30613;
+            padding-left: 0.8rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1px solid #e9f0f5;
+            padding: 1.4rem;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #003057;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .icon-badge {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 1.2rem 0;
+        }
+        .spec-table th, .spec-table td {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .spec-table th {
+            background: #f8fafd;
+            font-weight: 700;
+            width: 35%;
+            color: #1e466e;
+        }
+        .tip-block {
+            background: #eef3fc;
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #e30613;
+        }
+        .footnote {
+            font-size: 0.8rem;
+            color: #5f7f9e;
+            border-top: 1px solid #e2edf7;
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            text-align: center;
+        }
+        @media (max-width: 850px) {
+            .hero { padding: 1.5rem; }
+            .content { padding: 1.2rem; }
+            .dashboard-flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="premium-wrap">
+    <div class="hero">
+        <h1>Volvo XC60 <span>| Приборная панель 2020</span></h1>
+        <p>Полное руководство по 8" и 12,3" дисплеям: зоны, символы, настройка тем, вывод карты, датчик дождя и премиум-функции</p>
+    </div>
+    <div class="content">
+        <!-- ГРАФИЧЕСКАЯ ИЛЛЮСТРАЦИЯ + ЛЕГЕНДА -->
+        <div class="dashboard-flex">
+            <div class="dashboard-canvas">
+                <svg viewBox="0 0 880 420" xmlns="http://www.w3.org/2000/svg" style="background: #0d1322; border-radius: 28px; width:100%">
+                    <rect width="880" height="420" fill="#0d1322" rx="24"/>
+                    <!-- левый спидометр -->
+                    <circle cx="230" cy="210" r="94" fill="none" stroke="#2c3e66" stroke-width="5"/>
+                    <text x="230" y="218" text-anchor="middle" fill="#ffffff" font-size="46" font-weight="800">87</text>
+                    <text x="230" y="250" text-anchor="middle" fill="#8aa1c2" font-size="12">km/h</text>
+                    <!-- правый тахометр / ECO -->
+                    <circle cx="650" cy="210" r="94" fill="none" stroke="#2c3e66" stroke-width="5"/>
+                    <text x="650" y="218" text-anchor="middle" fill="#b3ffcf" font-size="42" font-weight="700">1.9</text>
+                    <text x="650" y="250" text-anchor="middle" fill="#8aa1c2" font-size="12">x1000 rpm</text>
+                    <!-- центральный блок с сообщениями -->
+                    <rect x="335" y="110" width="210" height="56" rx="14" fill="#1a253c" stroke="#31639c" stroke-width="1.2"/>
+                    <text x="440" y="142" text-anchor="middle" fill="#FFD966" font-size="14" font-weight="600">● City Safety активно</text>
+                    <!-- карта навигации (8" стрелки) -->
+                    <rect x="330" y="260" width="220" height="95" rx="16" fill="#121d30" stroke="#2e5780" stroke-width="1"/>
+                    <text x="345" y="285" fill="#5f9eff" font-size="13">↖️ через 200 м поворот</text>
+                    <text x="345" y="308" fill="#e0efff" font-size="14" font-weight="500">ул. Менахем Бегин</text>
+                    <text x="345" y="330" fill="#aaccff" font-size="11">2 полосы → направо</text>
+                    <!-- Lane Keeping Aid -->
+                    <path d="M70 355 L200 355" stroke="#4bc0c0" stroke-width="2.5" stroke-dasharray="8 6"/>
+                    <path d="M680 355 L810 355" stroke="#4bc0c0" stroke-width="2.5" stroke-dasharray="8 6"/>
+                    <text x="440" y="375" text-anchor="middle" fill="#88dddd" font-size="11">Lane Keeping Aid ▸ активно</text>
+                    <!-- Верхние значки: датчик дождя, часы -->
+                    <rect x="710" y="28" width="24" height="16" rx="6" fill="#3070b0"/>
+                    <text x="742" y="42" fill="#bdd4ff" font-size="11">🌧️ RAIN</text>
+                    <path d="M725 32 Q728 27 731 32 Q733 35 729 36 Q726 36 725 32Z" fill="#90caf9"/>
+                    <rect x="790" y="28" width="18" height="14" fill="#ff9944" rx="3"/>
+                    <text x="815" y="42" fill="#ffddbb" font-size="10">⏺ Eco</text>
+                    <circle cx="100" cy="35" r="8" fill="#44ff88"/>
+                    <text x="115" y="42" fill="#aaffcc" font-size="10">AHB</text>
+                    <text x="20" y="42" fill="#ffffff" font-size="12">10:32</text>
+                    <text x="850" y="42" fill="#ffffff" font-size="12">+23°C</text>
+                </svg>
+                <p style="color:#6e88a2; font-size:0.75rem; text-align:center; margin-top:14px;">* Визуализация 8-дюймовой панели. Реальный вид зависит от версии ПО и темы.</p>
+            </div>
+            <div class="legend-side">
+                <h3>📌 Ключевые зоны дисплея</h3>
+                <ul style="list-style: none; margin-top: 0.8rem;">
+                    <li>🔵 <strong>Левая зона</strong> – спидометр, круиз-контроль, запас хода, температура ОЖ.</li>
+                    <li>🟢 <strong>Центр (верх)</strong> – сообщения City Safety, предупреждения, динамический символ.</li>
+                    <li>🗺️ <strong>Центр (низ)</strong> – навигационные подсказки (или карта на 12,3").</li>
+                    <li>🟠 <strong>Правая зона</strong> – тахометр / ECO-шкала, режим движения, старт-стоп, топливо.</li>
+                    <li>🌧️ <strong>Верхняя строка</strong> – часы, температура, датчик дождя (капля+волны), адаптивный дальний свет.</li>
+                </ul>
+                <div class="tip-block" style="margin-top: 1.5rem; padding: 0.8rem 1rem;">
+                    <strong>💡 Где значок датчика дождя?</strong><br>
+                    Белая иконка капли с дугами появляется в <strong>правой части верхней строки</strong> после нажатия кнопки датчика дождя на правом подрулевом рычаге. Если значок серый — датчик в режиме ожидания.
+                </div>
+            </div>
+        </div>
+
+        <!-- ТИПЫ ПАНЕЛЕЙ 8" vs 12.3" -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>📱 8" цифровая панель <span style="font-size:0.8rem;">(стандарт Momentum)</span></h4>
+                <p>Базовая, но информативная. Скорость, тахометр, полоса Eco-режима. <strong>Навигация</strong> отображается только в виде стрелок и подсказок (turn‑by‑turn). Темы оформления доступны все 4 варианта.</p>
+                <p><strong>Особенности:</strong> компактное расположение информации, индикаторы систем помощи отображаются в центральной зоне.</p>
+            </div>
+            <div class="card">
+                <h4>🌟 12,3" премиум-дисплей <span style="font-size:0.8rem;">(опция)</span></h4>
+                <p>Полноценная карта на всю центральную область, более плавная анимация, возможность показывать карту даже без активного маршрута. Выше детализация графики, улучшенная читаемость.</p>
+                <p>Настройка: <strong>Настройки → Мой автомобиль → Дисплеи → Информация на дисплее водителя</strong> → выбрать "Показывать навигацию без маршрута".</p>
+            </div>
+        </div>
+
+        <!-- ТАБЛИЦА СИМВОЛОВ И ИНДИКАТОРОВ -->
+        <h3 style="font-size:1.5rem; margin: 1rem 0 0.5rem; color:#003057;">⚠️ Расшифровка значков (самые важные)</h3>
+        <table class="spec-table">
+            <thead><tr><th>Символ / цвет</th><th>Значение</th><th>Действие</th></tr></thead>
+            <tbody>
+                <tr><td>🔴 КРАСНЫЙ треугольник с "!"</td><td>Общая критическая неисправность / аварийное торможение</td><td>Остановиться безопасно, прочитать сообщение.</td></tr>
+                <tr><td>🟡 🧲 (машина со следами) — горит жёлтым</td><td>Система стабилизации ESC отключена или работает Sport mode</td><td>Будьте осторожны на скользкой дороге. При неисправности — сервис.</td></tr>
+                <tr><td>🛞 жёлтый (половинка шины)</td><td>Низкое давление в шинах / неисправность TPMS</td><td>Проверьте давление, сохраните эталон через Car Status → TPMS.</td></tr>
+                <tr><td>🌡️ красный термометр</td><td>Перегрев двигателя</td><td>Остановитесь, заглушите двигатель, дайте остыть.</td></tr>
+                <tr><td>⚠️ (P) красный</td><td>Стояночный тормоз активирован</td><td>Отпустите перед началом движения.</td></tr>
+                <tr><td>💧 Белая капля с дугами (верхняя строка)</td><td>Датчик дождя активен</td><td>Автоматический режим стеклоочистителей включён.</td></tr>
+                <tr><td>❄️ снежинка</td><td>Температура от -5 до +2°C — риск гололёда</td><td>Снизьте скорость, увеличьте дистанцию.</td></tr>
+                <tr><td>🔵 синий значок дальнего света</td><td>Дальний свет включён вручную или активен Auto High Beam</td><td>При необходимости переключите.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- НАСТРОЙКИ И ТЕМЫ -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>🎨 Темы оформления (Display Themes)</h4>
+                <p>Путь: <strong>Настройки → Мой автомобиль → Дисплеи → Темы дисплея</strong></p>
+                <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                    <li><strong>Glass</strong> — светлая, «стеклянная» графика.</li>
+                    <li><strong>Minimalistic</strong> — строгий чёрный фон, минимум отвлечений.</li>
+                    <li><strong>Performance</strong> — красные акценты, фокус на тахометре.</li>
+                    <li><strong>Chrome Rings</strong> — хромированные кольца вокруг шкал.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>💡 Регулировка яркости</h4>
+                <p>Колёсико <strong>слева от рулевой колонки</strong> (рядом с регулятором света) изменяет яркость и приборной панели, и центрального экрана. Ночью автоматически адаптируется под датчик освещённости.</p>
+                <p>Также можно настроить яркость <strong>Ambient Lighting</strong> (декоративная подсветка салона) в меню Настройки → Мой автомобиль → Освещение салона.</p>
+            </div>
+        </div>
+
+        <!-- НАВИГАЦИЯ И APP MENU -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>🗺️ Вывод карты и навигация</h4>
+                <p>На 12,3" панели можно вывести полноэкранную карту. На 8" — только стрелки и расстояние до манёвра.</p>
+                <p><strong>Как включить карту:</strong> Убедитесь, что в настройках навигации (Настройки → Навигация → Параметры маршрута) включены «Пошаговые подсказки». Затем в <strong>App menu</strong> выберите навигационный виджет.</p>
+                <p>Для 12,3": <code>Настройки → Мой автомобиль → Дисплеи → Driver Display Information → Show navigation even if no route set</code>.</p>
+            </div>
+            <div class="card">
+                <h4>🕹️ App menu (меню приложений)</h4>
+                <p>Управляется <strong>правой клавиатурой руля</strong> (◀/▶). Доступные виджеты:</p>
+                <ul>
+                    <li>Бортовой компьютер (TM/TA — расход, скорость, время)</li>
+                    <li>Медиаплеер (трек, радио)</li>
+                    <li>Телефон (список вызовов, контакты)</li>
+                    <li>Навигация (активные подсказки)</li>
+                </ul>
+                <p>Если есть неподтверждённое сообщение (красный или жёлтый символ), нажмите <strong>⭕ (О)</strong> для сброса, прежде чем открыть App menu.</p>
+            </div>
+        </div>
+
+        <!-- ДАТЧИК ДОЖДЯ: ПОДРОБНО + КАРТИНКИ -->
+        <div class="tip-block">
+            <h4 style="margin-bottom: 0.5rem;">🌧️ Датчик дождя — где и как работает?</h4>
+            <p><strong>Местоположение значка на приборной панели:</strong> в <strong>верхней строке справа</strong>, рядом с часами и температурой. Иконка белой капли с дугами означает, что датчик активирован и автоматически управляет дворниками.</p>
+            <p><strong>Как включить/выключить:</strong> на <strong>правом подрулевом рычаге</strong> (стеклоочистители) нажмите кнопку с символом капли. После этого в приборке загорится соответствующий индикатор. Чувствительность регулируется поворотным кольцом на рычаге (чем выше положение, тем раньше срабатывают дворники).</p>
+            <p><strong>Функция памяти:</strong> в меню <strong>Настройки → Мой автомобиль → Дворники</strong> можно включить «Память датчика дождя» — тогда датчик останется активным после выключения двигателя.</p>
+            <div class="icon-badge" style="margin-top: 8px;">💧 Белый значок — датчик активен; серый / отсутствует — датчик выключен или в режиме ожидания.</div>
+        </div>
+
+        <!-- РЕЖИМЫ ДВИЖЕНИЯ И ИХ ВЛИЯНИЕ -->
+        <h3 style="font-size:1.5rem; margin: 1rem 0 0.5rem;">⚙️ Режимы движения (Drive Modes) и приборка</h3>
+        <table class="spec-table">
+            <thead><tr><th>Режим</th><th>Как меняется приборная панель</th></tr></thead>
+            <tbody>
+                <tr><td>Comfort</td><td>Стандартные круглые шкалы, центральная зона для сообщений, карта (если активна).</td></tr>
+                <tr><td>Eco</td><td>Правый круг превращается в ECO-шкалу (зелёная зона — экономичное вождение). Отображается индикатор наката (Coast).</td></tr>
+                <tr><td>Dynamic / Polestar*</td><td>Красные акценты, шкала мощности, тахометр становится более заметным, подсказки переключения передач.</td></tr>
+                <tr><td>Off Road</td><td>Появляется компас, указатель угла наклона кузова, графический индикатор полного привода.</td></tr>
+                <tr><td>Individual</td><td>Пользовательская настройка отображения (тема, информация).</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ОШИБКИ И РЕШЕНИЯ -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>🛠️ Типичные ошибки и их решение</h4>
+                <ul>
+                    <li><strong>«Адаптивный круиз недоступен»</strong> — загрязнена камера в лобовом стекле (район зеркала). Протрите стекло.</li>
+                    <li><strong>Жёлтая иконка ESC</strong> — возможно, случайно включён Sport mode; выключите в Function view. Если не гаснет — сервис.</li>
+                    <li><strong>Не горит подсветка приборов</strong> — проверьте колёсико яркости слева от руля.</li>
+                    <li><strong>Нет значка датчика дождя</strong> — нажмите кнопку на правом рычаге; убедитесь, что функция не отключена в настройках дворников.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>📚 Персонализация и советы</h4>
+                <p>• <strong>Единицы измерения:</strong> Настройки → Система → Системные языки и единицы → выберите метрические (км/ч, литры) или имперские.</p>
+                <p>• <strong>Язык панели:</strong> там же — измените систему на русский, иврит или английский.</p>
+                <p>• <strong>Сброс поездки TM:</strong> зажмите кнопку RESET на левом подрулевом рычаге. TA сбрасывается автоматически после 4 часов стоянки.</p>
+                <p>• <strong>Обновления ПО:</strong> периодически проверяйте наличие обновлений для цифровой панели через Download Center (при подключении к интернету).</p>
+            </div>
+        </div>
+
+        <div class="footnote">
+            📘 Данные основаны на официальной документации Volvo XC60 2020 и быстром руководстве (Quick Guide). Конфигурация для Израиля — 8" панель стандарт, 12,3" доступна в пакетах. Все рекомендации приведены для модели T4 Momentum с передним приводом.<br>
+            ⭐ Премиум-совет: активируйте в настройках дисплея «Показывать навигацию без маршрута» (для 12,3") и используйте тему Glass для лучшей читаемости в солнечную погоду.
+        </div>
+    </div>
+</div>
+</body>
+</html>

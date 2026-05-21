@@ -116,7 +116,7 @@ sections:`;
     }
 
     const files = fs.readdirSync(section.dir)
-      .filter(f => f.endsWith('.md') || f.endsWith('.html') || f.endsWith('.json'))
+      .filter(f => f.endsWith('.md') || f.endsWith('.html') || f.endsWith('.json') || f.endsWith('.pdf'))
       .sort();
 
     if (files.length === 0) {
