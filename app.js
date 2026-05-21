@@ -461,8 +461,9 @@ function renderHTML(item, area, section) {
           font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
         }
 
-        /* Агрессивный сброс цвета для ВСЕХ элементов внутри */
+        /* Агрессивный сброс цвета и фона для ВСЕХ элементов */
         * { color: var(--text) !important; border-color: var(--border) !important; }
+        div, section, header, footer, article, aside, main, p, li { background-color: transparent !important; }
         
         /* Заголовки и акценты */
         h1, h2, h3, h4, h5, h6, strong, b { color: #fff !important; }
@@ -473,9 +474,11 @@ function renderHTML(item, area, section) {
         a, a * { color: var(--gold) !important; text-decoration: none !important; }
         a:hover { text-decoration: underline !important; }
         
-        /* Специальные блоки (карточки, цитаты, оглавление) */
-        .card, .info-card, .highlight, .toc, blockquote, .note, .warning {
+        /* Специальные блоки (карточки, цитаты, оглавление, предупреждения) */
+        .card, .info-card, .highlight, .toc, blockquote, .note, .warning, 
+        [class*="card"], [class*="warning"], [class*="block"], [class*="alert"], [class*="note"] {
           background: var(--panel) !important;
+          background-color: var(--panel) !important;
           border: 1px solid var(--border) !important;
           border-left: 4px solid var(--gold) !important;
           padding: 20px !important;
@@ -495,11 +498,11 @@ function renderHTML(item, area, section) {
         /* Таблицы */
         table { width: 100% !important; border-collapse: collapse !important; margin: 20px 0 !important; background: var(--panel) !important; }
         th { background: #000 !important; color: var(--gold) !important; text-align: left !important; padding: 12px !important; font-size: 11px !important; text-transform: uppercase !important; }
-        td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; }
+        td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; background: transparent !important; }
 
         /* Исключения для бейджей */
         .badge, [class*="badge"] { background: var(--gold) !important; color: #000 !important; padding: 2px 6px !important; border-radius: 2px !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 10px !important; }
-        .badge * { color: #000 !important; }
+        .badge *, .badge { color: #000 !important; }
 
         /* Скрытие лишнего мусора из старых шаблонов */
         .sidebar, aside, nav:not(.toc nav), header br { display: none !important; }
