@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Volvo XC60 2020 — Руководство по устройству, габаритам и спецификациям</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fb;
+            color: #1a2c3e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Контейнер с двумя колонками (навигация + контент) */
+        .layout {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            min-height: 100vh;
+        }
+
+        /* Боковая навигация (sticky) */
+        .sidebar {
+            flex: 0 0 280px;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            align-self: start;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #003057;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
+            border-left: 4px solid #e30613;
+            padding-left: 0.75rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-list a {
+            display: block;
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3e50;
+            padding: 0.5rem 0.75rem;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-list a:hover {
+            background: #eef2ff;
+            color: #003057;
+        }
+
+        .nav-list a.active {
+            background: #e30613;
+            color: white;
+        }
+
+        /* Основной контент */
+        .content {
+            flex: 1;
+            padding: 2rem 2.5rem;
+            max-width: calc(100% - 280px);
+            background: #ffffff;
+        }
+
+        /* Заголовки секций */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #003057;
+            border-bottom: 3px solid #e30613;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .subsection-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e466e;
+            margin: 1.5rem 0 1rem;
+            padding-left: 0.5rem;
+            border-left: 4px solid #e30613;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.25rem;
+            border: 1px solid #e9edf2;
+            transition: transform 0.1s ease;
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #003057;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1.25rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .spec-table th,
+        .spec-table td {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .spec-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #0f3b5c;
+            width: 40%;
+        }
+
+        .spec-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            background: #e30613;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .dimension-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .dim-item {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            flex: 1 1 auto;
+            min-width: 140px;
+        }
+
+        .dim-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #5b6e8c;
+            letter-spacing: 0.5px;
+        }
+
+        .dim-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #003057;
+        }
+
+        .footnote {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-top: 0.5rem;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                flex: 0 0 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                padding: 1rem;
+            }
+            .content {
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+            .layout {
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media print {
+            .sidebar {
+                display: none;
+            }
+            .content {
+                max-width: 100%;
+                padding: 0;
+            }
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <!-- Боковая навигация -->
+    <aside class="sidebar">
+        <h2>Volvo XC60 <br>2020</h2>
+        <ul class="nav-list">
+            <li><a href="#intro" class="nav-link">Общее устройство</a></li>
+            <li><a href="#dimensions" class="nav-link">Габаритные размеры</a></li>
+            <li><a href="#weights" class="nav-link">Массовые параметры</a></li>
+            <li><a href="#engines" class="nav-link">Двигатели и характеристики</a></li>
+            <li><a href="#fluids" class="nav-link">Жидкости и емкости</a></li>
+            <li><a href="#tires" class="nav-link">Шины и давление</a></li>
+            <li><a href="#other" class="nav-link">Дополнительные спецификации</a></li>
+        </ul>
+        <div class="footnote" style="margin-top: 2rem;">
+            ⚙️ Данные основаны на официальном руководстве пользователя 2020 Volvo XC60 (US).<br>
+            * — опции / дополнительное оборудование.
+        </div>
+    </aside>
+
+    <!-- Основной контент -->
+    <main class="content">
+        <!-- Введение / общее устройство -->
+        <section id="intro" class="section">
+            <h1 class="section-title">Общее устройство и ключевые системы</h1>
+            <p>Volvo XC60 2020 модельного года — премиальный среднеразмерный SUV, воплощающий философию безопасности IntelliSafe, скандинавский дизайн и передовые технологии подключения Sensus. Автомобиль построен на модульной платформе SPA, оснащается бензиновыми двигателями Drive-E (T5, T6 AWD) и 8-ступенчатой автоматической трансмиссией.</p>
+            
+            <div class="card-grid">
+                <div class="info-card">
+                    <h3>🔹 IntelliSafe — активная безопасность</h3>
+                    <p>City Safety (автоторможение, обнаружение пешеходов/велосипедистов/крупных животных), Pilot Assist* (полуавтономное руление), адаптивный круиз-контроль, BLIS*, система удержания полосы, предупреждение о перекрестном движении сзади.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔹 Sensus — интерфейс и связь</h3>
+                    <p>9‑дюймовый сенсорный экран в портретной ориентации, голосовое управление, Apple CarPlay®, Android Auto*, навигация Sensus*, точка доступа Wi‑Fi, радио HD Radio™ и спутниковое SiriusXM®.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔹 Комфорт и климат</h3>
+                    <p>2-зонный или 4-зонный* климат-контроль, подогрев передних и задних* сидений, вентиляция сидений*, подогрев руля, чистящая система IAQS (Clean Zone) с датчиком качества воздуха.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔹 Шасси и трансмиссия</h3>
+                    <p>Полный привод AWD (T6), 8-ступенчатый «автомат» Geartronic, электронный стояночный тормоз, режимы движения (Comfort, Eco, Dynamic, Off‑Road, Individual), пневмоподвеска*.</p>
+                </div>
+            </div>
+            <p>Интерьер отличается эргономичными креслами, функцией массажа* и регулировками поясничной поддержки. Приборная панель — цифровая (8" или 12,3"*) с отображением навигации и систем помощи. Задние сиденья складываются в соотношении 60/40, предусмотрен лыжный люк и крепления ISOFIX.</p>
+        </section>
+
+        <!-- ГАБАРИТЫ -->
+        <section id="dimensions" class="section">
+            <h2 class="section-title">Габаритные размеры (внешние и внутренние)</h2>
+            <table class="spec-table">
+                <tr><th>Параметр</th><th>мм / дюймы</th></tr>
+                <tr><td>Длина (C)</td><td>4688 мм (184,6")</td></tr>
+                <tr><td>Ширина без зеркал (K)</td><td>1902 мм (74,9")</td></tr>
+                <tr><td>Ширина с зеркалами (L)</td><td>2117 мм (83,3")</td></tr>
+                <tr><td>Ширина со сложенными зеркалами (M)</td><td>1999 мм (78,7")</td></tr>
+                <tr><td>Высота (в снаряженном состоянии) (F)</td><td>1658 мм (65,3")</td></tr>
+                <tr><td>Колесная база (B)</td><td>2865 мм (112,8")</td></tr>
+                <tr><td>Дорожный просвет (A)*</td><td>211 мм (8,3")</td></tr>
+                <tr><td>Колея передняя (H)<br>(зависит от размера колес)</td><td>1653–1668 мм</td></tr>
+                <tr><td>Колея задняя (I)</td><td>1657–1673 мм</td></tr>
+            </table>
+            <div class="subsection-title">Размеры грузового отсека</div>
+            <div class="dimension-grid">
+                <div class="dim-item"><div class="dim-label">Длина пола (E)</div><div class="dim-value">960 мм (37,8")</div></div>
+                <div class="dim-item"><div class="dim-label">Длина со сложенными сиденьями (D)</div><div class="dim-value">1746 мм (68,7")</div></div>
+                <div class="dim-item"><div class="dim-label">Ширина пола (J)</div><div class="dim-value">1010 мм (39,8")</div></div>
+                <div class="dim-item"><div class="dim-label">Высота загрузки (G)</div><div class="dim-value">776 мм (30,6")</div></div>
+            </div>
+            <div class="footnote">* Дорожный просвет приведён для массы снаряжённого автомобиля + 1 человек. Может незначительно меняться в зависимости от шин и подвески.</div>
+        </section>
+
+        <!-- ВЕСОВЫЕ ПАРАМЕТРЫ -->
+        <section id="weights" class="section">
+            <h2 class="section-title">Массы и нагрузка</h2>
+            <table class="spec-table">
+                <tr><th>Показатель</th><th>Значение (кг / фунты)</th></tr>
+                <tr><td>Снаряженная масса (Curb weight)</td><td>1870–2160 кг (3990–4750 lbs)</td></tr>
+                <tr><td>Полная масса (GVW) T5 AWD</td><td>2430 кг (5360 lbs)</td></tr>
+                <tr><td>Полная масса (GVW) T6 AWD</td><td>2450 кг (5400 lbs)</td></tr>
+                <tr><td>Грузоподъемность (пассажиры + багаж)</td><td>430 кг (950 lbs)</td></tr>
+                <tr><td>Допустимая нагрузка на переднюю ось (T6 AWD)</td><td>1230 кг (2710 lbs)</td></tr>
+                <tr><td>Допустимая нагрузка на заднюю ось (T6 AWD)</td><td>1260 кг (2780 lbs)</td></tr>
+                <tr><td>Макс. нагрузка на крышу</td><td>100 кг (220 lbs)</td></tr>
+                <tr><td>Макс. масса буксируемого прицепа с тормозами</td><td>1580 кг (3500 lbs)</td></tr>
+                <tr><td>Макс. масса буксируемого прицепа без тормозов</td><td>750 кг (1650 lbs)</td></tr>
+                <tr><td>Вертикальная нагрузка на фаркоп</td><td>150 кг (350 lbs)</td></tr>
+            </table>
+            <p class="footnote">Примечание: значения могут различаться для двигателей T5 и T6. Всегда сверяйтесь с заводской табличкой на стойке водителя.</p>
+        </section>
+
+        <!-- ДВИГАТЕЛИ И ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ -->
+        <section id="engines" class="section">
+            <h2 class="section-title">Двигатели и эксплуатационные характеристики</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <h3>T5 / T5 AWD <span class="badge">2.0 л</span></h3>
+                    <p>Код двигателя: B4204T23<br>
+                    Мощность: 250 л.с. при 5500 об/мин<br>
+                    Крутящий момент: 350 Нм (258 lb-ft) при 1500–4800 об/мин<br>
+                    Привод: передний / полный AWD</p>
+                </div>
+                <div class="info-card">
+                    <h3>T6 AWD <span class="badge">2.0 л Twin Turbo</span></h3>
+                    <p>Код двигателя: B4204T27<br>
+                    Мощность: 316 л.с. при 5700 об/мин<br>
+                    Крутящий момент: 400 Нм (295 lb-ft) при 2200–5400 об/мин<br>
+                    Привод: постоянный полный AWD</p>
+                </div>
+            </div>
+            <div class="subsection-title">Трансмиссия</div>
+            <p>8-ступенчатая автоматическая коробка передач Geartronic (модель AWF8G55 или TG-81SC) с возможностью ручного переключения через подрулевые лепестки* и режимом "kick-down". Полный привод AWD с автоматическим распределением крутящего момента.</p>
+        </section>
+
+        <!-- ЖИДКОСТИ, ЕМКОСТИ, ЗАПРАВОЧНЫЕ ОБЪЕМЫ -->
+        <section id="fluids" class="section">
+            <h2 class="section-title">Жидкости и заправочные объемы</h2>
+            <table class="spec-table">
+                <tr><th>Компонент</th><th>Спецификация / объем</th></tr>
+                <tr><td>Моторное масло (двигатели T5/T6)</td><td>5,6 литра, полностью синтетическое ACEA A5/B5, вязкость SAE 5W-30 (рекомендовано). Для тяжелых условий — VCC RBS0-2AE/SAE 0W20.</td></tr>
+                <tr><td>Охлаждающая жидкость</td><td>Готовая смесь Volvo (этиленгликоль) или концентрат 50/50 с водой. Объём системы уточняйте у дилера.</td></tr>
+                <tr><td>Трансмиссионная жидкость AT</td><td>AW-1 (TG-81SC) или AW-2 (AWF8G55). Замена по регламенту — только в сертифицированном сервисе.</td></tr>
+                <tr><td>Тормозная жидкость</td><td>DOT 4, 5.1 / ISO 4925 class 6. Объём системы ≈ 0,6–0,8 л.</td></tr>
+                <tr><td>Топливный бак</td><td>71 литр (18,8 галлона). Рекомендуемое топливо: бензин с октановым числом не менее 91 (AKI) — премиум для T5/T6, для оптимальной производительности 93.</td></tr>
+                <tr><td>Хладагент кондиционера</td><td>R1234yf (фреон), 650 г. Масло компрессора: PAG SP-A2, 130 мл.</td></tr>
+                <tr><td>Бачок омывателя (с омывателем фар)</td><td>5,3 литра (без омывателя фар — 3,5 л). Использовать зимнюю жидкость с антифризом.</td></tr>
+            </table>
+            <div class="footnote">Рекомендуется использовать оригинальные жидкости Volvo или соответствующие допускам. Интервалы замены — согласно сервисной книжке.</div>
+        </section>
+
+        <!-- ШИНЫ И ДАВЛЕНИЕ -->
+        <section id="tires" class="section">
+            <h2 class="section-title">Шины и давление накачки</h2>
+            <p>Всесезонные шины, рекомендованные заводом. Для зимней эксплуатации — зимние шины (с шипами или без) на всех колёсах. Давление проверять на холодных шинах.</p>
+            <table class="spec-table">
+                <tr><th>Размерность шин</th><th>Давление передние/задние (psi / кПа)</th></tr>
+                <tr><td>235/60 R18, 235/55 R19, 255/45 R20<br>255/40 R21, 265/35 R22</td><td>35 psi (240 кПа) — все позиции</td></tr>
+                <tr><td>Запасное колесо "Temporary Spare" T125/80 R18</td><td>60 psi (420 кПа)</td></tr>
+            </table>
+            <div class="info-card" style="margin-top: 1rem;">
+                <h3>📌 Система контроля давления TPMS</h3>
+                <p>Автомобиль оснащён системой непрямого измерения (на основе ABS/датчиков скорости вращения колёс). После регулировки давления необходимо сохранить эталонное давление через меню <strong>Car Status → TPMS → Store Pressure</strong>. Нормальная работа — после движения со скоростью >35 км/ч.</p>
+                <p>Заводская табличка с давлением находится на центральной стойке (B-pillar) со стороны водителя.</p>
+            </div>
+        </section>
+
+        <!-- ДОПОЛНИТЕЛЬНЫЕ СПЕЦИФИКАЦИИ -->
+        <section id="other" class="section">
+            <h2 class="section-title">Дополнительные спецификации и особенности</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <h3>⚡ Электрическое оборудование</h3>
+                    <p>Аккумулятор стартерный: AGM (H7/H8) 12V 80–95 Ah. Дополнительная вспомогательная батарея для Start/Stop: 12V 10 Ah (AGM). Система рекуперативного торможения и функция Auto-hold.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔧 Трансмиссия и привод</h3>
+                    <p>All Wheel Drive с электронным управлением муфтой BorgWarner, система стабилизации ESC с подрежимами Sport, Trailer Stability Assist (TSA), Hill Descent Control (HDC) для бездорожья.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🧊 Климатическая установка</h3>
+                    <p>Хладагент R1234yf (экологичный). Конденсация в фарах — допустимое явление, пропадает после включения света. Регулярная замена салонного фильтра каждые 20–30 тыс. км.</p>
+                </div>
+            </div>
+            <div class="footnote" style="margin-top: 1rem;">
+                * Приведённые данные основаны на официальной документации Volvo XC60 MY2020 для рынка США/Канада. Конфигурации и наличие опций могут различаться в зависимости от рынка и года выпуска.
+            </div>
+        </section>
+
+        <footer style="border-top: 1px solid #e2e8f0; margin-top: 2rem; padding-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #5b6e8c;">
+            © Информационно-справочный материал на основе Owner's Manual Volvo XC60 2020. Все товарные знаки принадлежат Volvo Car Corporation.
+        </footer>
+    </main>
+</div>
+
+<script>
+    // Подсветка активного пункта меню при скролле
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    function setActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('load', setActiveLink);
+</script>
+</body>
+</html>
