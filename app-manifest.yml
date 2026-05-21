@@ -1,13 +1,19 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-21 13:52
+  updated: 2026-05-21 14:36
 
 sections:
   - id: device
     title: Устройство
     icon: 🏗️
     items:
+      - id: alarm
+        title: "Volvo в Израиле — полный справочник водителя (2026)"
+        file: books/volvo/device/alarm.html
+        type: reference
+        visible: true
+        tags: []
       - id: car
         title: "Volvo XC60 T4 Momentum 2020 — руководство по устройству, габаритам и спецификациям"
         file: books/volvo/device/car.html
