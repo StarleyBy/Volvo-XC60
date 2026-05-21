@@ -549,6 +549,20 @@ function renderHome() {
         <h1>${greeting}</h1>
         <p>Volvo XC60 · ${now.toLocaleDateString('ru-RU', {weekday:'long', day:'numeric', month:'long', year:'numeric'})}</p>
       </div>
+
+      <div id="vehicle-info-bar">
+        <div id="vehicle-img-wrap">🚗</div>
+        <div id="vehicle-details">
+          <div id="vehicle-title">Volvo XC60 Momentum <span style="opacity:0.5">2020</span></div>
+          <div id="vehicle-specs">
+            <div class="spec-pill">VIN</div>
+            <div class="vin-box">LYVUZAKVDLB515051</div>
+            <div class="spec-pill">Plate</div>
+            <div class="plate-box">78770601</div>
+          </div>
+        </div>
+      </div>
+
       <div class="home-grid">${cards}</div>
     </div>
   `;
