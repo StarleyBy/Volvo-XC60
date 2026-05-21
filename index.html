@@ -79,25 +79,22 @@
         <div id="user-dot"></div>
         <span id="user-role-label">Владелец</span>
       </div>
-      <div id="sidebar-footer-actions">
-        <button class="footer-btn admin-only" onclick="window.open('redact.html','_blank')" title="Открыть редактор">✏️</button>
-      </div>
     </div>
   </nav>
 
   <!-- MAIN -->
   <div id="main">
-  <div id="topbar">
-    <button id="menu-toggle">☰</button>
-    <div id="page-breadcrumb"></div>
-    <span id="page-title-bar">Volvo XC60</span>
-    <div id="topbar-actions">
-      <button class="topbar-btn" onclick="updateFontSize(-1)">A−</button>
-      <button class="topbar-btn" onclick="updateFontSize(1)">A+</button>
-      <button class="topbar-btn" id="sound-toggle" onclick="AudioEngine.toggle()">🔊</button>
-      <button class="topbar-btn" id="theme-toggle">🌙</button>
+    <div id="topbar">
+      <button id="menu-toggle">☰</button>
+      <div id="page-breadcrumb"></div>
+      <div style="flex:1"></div>
+      <div id="topbar-actions">
+        <button class="topbar-btn" onclick="updateFontSize(-1)">A−</button>
+        <button class="topbar-btn" onclick="updateFontSize(1)">A+</button>
+        <button class="topbar-btn" id="sound-toggle" onclick="AudioEngine.toggle()">🔊</button>
+        <button class="topbar-btn" id="theme-toggle">🌙</button>
+      </div>
     </div>
-  </div>
 
     <div id="content-area">
       <p class="loading-msg">Инициализация…</p>

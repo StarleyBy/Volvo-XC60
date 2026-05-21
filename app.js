@@ -417,12 +417,19 @@ function openSection(sectionId, push = true) {
 function openItem(section, item, push = true) {
   State.currentItem = item;
   if (push) updateUrl({ view: 'item', sectionId: section.id, itemId: item.id });
+
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.itemId === item.id));
-  $('page-breadcrumb').innerHTML = `<span class="bc-link" onclick="showHome()">Главная</span><span class="bc-sep">/</span><span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>`;
-  $('page-title-bar').textContent = item.title;
+
+  $('page-breadcrumb').innerHTML = `
+    <span class="bc-link" onclick="showHome()">Главная</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-link" onclick="openSection('${section.id}')">${section.title}</span>
+  `;
+
   $('sidebar').classList.remove('open');
   $('overlay').classList.remove('visible');
   AudioEngine.playSFX('open');
+
   const area = $('content-area');
   const file = resolvePath(item.file);
   if (item.type === 'document' || file.endsWith('.pdf')) renderPDF(item, area, section);
@@ -434,8 +441,7 @@ function openItem(section, item, push = true) {
 function showHome(push = true) {
   if (push) updateUrl({ view: 'home' });
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  $('page-breadcrumb').innerHTML = '';
-  $('page-title-bar').textContent = 'Volvo XC60';
+  $('page-breadcrumb').innerHTML = '<span class="bc-link" onclick="showHome()">Панель управления</span>';
   State.currentItem = null;
   renderHome();
 }
