@@ -1,7 +1,13 @@
 meta:
+<<<<<<< HEAD
   app: Volvo XC60 Справочник
   version: 2.0.0
   updated: 2026-05-21 11:10
+=======
+  app: CS Helper
+  version: 1.0.0
+  updated: 2026-05-21 11:08
+>>>>>>> 4aa0eef1e169da76ea935d7029ce36f7de9ffb2a
 
 sections:
   - id: device
