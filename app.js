@@ -266,7 +266,7 @@ function showHome(push = true) {
 
 // ── RENDER: HOME ─────────────────────────────────────────
 function renderHome() {
-  if (!State.manifest) return;
+  if (!State.manifest || !State.manifest.sections) return;
   const area = $('content-area');
   const now = new Date();
   const hour = now.getHours();
@@ -274,11 +274,13 @@ function renderHome() {
 
   let cards = '';
   for (const section of State.manifest.sections) {
+    const itemsCount = (section.items || []).length;
+    // Show sections even if empty (optional, but requested for dynamic categories)
     cards += `
       <div class="home-card" onclick="openSection('${section.id}')">
-        <div class="home-card-icon">${section.icon}</div>
+        <div class="home-card-icon">${section.icon || '📁'}</div>
         <div class="home-card-title">${section.title}</div>
-        <div class="home-card-count">${section.items.length} ${pluralize(section.items.length, ['статья', 'статьи', 'статей'])}</div>
+        <div class="home-card-count">${itemsCount} ${pluralize(itemsCount, ['статья', 'статьи', 'статей'])}</div>
       </div>
     `;
   }
