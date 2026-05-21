@@ -71,111 +71,126 @@ function isFavorite(itemId, sectionId) {
   return State.favorites.some(f => f.itemId === itemId && f.sectionId === sectionId);
 }
 
-// ── AUDIO ENGINE (SYNTHESIZED) ──────────────────────────
+// ── AUDIO ENGINE (ADVANCED SYNTH) ───────────────────────
 const AudioEngine = {
   ctx: null,
   muted: localStorage.getItem('volvo-muted') === 'true',
-  ambient: null,
+  bgmNodes: [],
   
-  init() {
-    this.updateToggle();
-  },
+  init() { this.updateToggle(); },
 
   async ensureCtx() {
-    if (!this.ctx) {
-      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (this.ctx.state === 'suspended') {
-      await this.ctx.resume();
-    }
+    if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (this.ctx.state === 'suspended') await this.ctx.resume();
   },
 
   playSFX(type) {
     if (this.muted) return;
     this.ensureCtx().then(() => {
-      if (type === 'click') this.synthClick();
-      if (type === 'error') this.synthError();
-      if (type === 'start') this.synthStart();
+      switch(type) {
+        case 'click': this.synthClick(800, 0.1); break;
+        case 'nav':   this.synthClick(400, 0.15, 'triangle'); break;
+        case 'open':  this.synthDoublePing(); break;
+        case 'error': this.synthError(); break;
+        case 'engine': this.synthEngineStart(); break;
+      }
     });
   },
 
-  synthClick() {
+  synthClick(freq, dur, type = 'sine') {
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.1);
-    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 0.1);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq/2, this.ctx.currentTime + dur);
+    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + dur);
+    osc.connect(gain); gain.connect(this.ctx.destination);
+    osc.start(); osc.stop(this.ctx.currentTime + dur);
+  },
+
+  synthDoublePing() {
+    [1200, 1500].forEach((f, i) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.08);
+      gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.08 + 0.1);
+      osc.connect(gain); gain.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.08); osc.stop(this.ctx.currentTime + i * 0.08 + 0.1);
+    });
   },
 
   synthError() {
-    [220, 180].forEach((freq, i) => {
+    [200, 150].forEach((f, i) => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.15);
-      gain.gain.setValueAtTime(0.1, this.ctx.currentTime + i * 0.15);
-      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.15 + 0.1);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(this.ctx.currentTime + i * 0.15);
-      osc.stop(this.ctx.currentTime + i * 0.15 + 0.1);
+      osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.1);
+      gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.1 + 0.1);
+      osc.connect(gain); gain.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.1); osc.stop(this.ctx.currentTime + i * 0.1 + 0.1);
     });
   },
 
-  synthStart() {
-    // Нарастающий гул систем
+  synthEngineStart() {
+    const dur = 2.5;
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.frequency.setValueAtTime(40, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 1.5);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(30, this.ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(60, this.ctx.currentTime + dur * 0.2);
+    osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + dur);
     gain.gain.setValueAtTime(0.01, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.5);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 2.0);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 2.0);
+    gain.gain.linearRampToValueAtTime(0.2, this.ctx.currentTime + 0.5);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + dur);
+    
+    // Low pass filter for "muffled" engine sound
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 200;
+
+    osc.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+    osc.start(); osc.stop(this.ctx.currentTime + dur);
   },
 
-  startAmbient() {
+  startBGM() {
     if (this.muted) return;
     this.ensureCtx().then(() => {
-      // Имитация тихого гула в салоне (Brown Noise)
-      const bufferSize = 2 * this.ctx.sampleRate;
-      const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
-      let lastOut = 0.0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        output[i] = (lastOut + (0.02 * white)) / 1.02;
-        lastOut = output[i];
-        output[i] *= 3.5; // Громкость
-      }
-      this.ambient = this.ctx.createBufferSource();
-      this.ambient.buffer = noiseBuffer;
-      this.ambient.loop = true;
-      const gain = this.ctx.createGain();
-      gain.gain.value = 0.03; // Очень тихо
-      this.ambient.connect(gain);
-      gain.connect(this.ctx.destination);
-      this.ambient.start();
+      // Скандинавский эмбиент: очень медленные пульсирующие синусоиды
+      const createPad = (freq, vol) => {
+        const osc = this.ctx.createOscillator();
+        const lfo = this.ctx.createOscillator();
+        const lfoGain = this.ctx.createGain();
+        const gain = this.ctx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        lfo.frequency.value = 0.1; // Очень медленно
+        lfoGain.gain.value = 0.02;
+        gain.gain.value = vol;
+        
+        lfo.connect(lfoGain); lfoGain.connect(gain.gain);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(); lfo.start();
+        this.bgmNodes.push(osc, lfo);
+      };
+      createPad(110, 0.02); // Низкий фон
+      createPad(220, 0.01); // Средний фон
     });
+  },
+
+  stopBGM() {
+    this.bgmNodes.forEach(n => { try { n.stop(); } catch(e) {} });
+    this.bgmNodes = [];
   },
 
   toggle() {
     this.muted = !this.muted;
     localStorage.setItem('volvo-muted', this.muted);
-    if (this.muted) {
-      if (this.ambient) this.ambient.stop();
-    } else {
-      this.startAmbient();
-    }
+    if (this.muted) this.stopBGM();
+    else this.startBGM();
     this.updateToggle();
   },
   
@@ -210,8 +225,8 @@ async function checkPin() {
     $('login-status').textContent = 'ENGINE STARTING...';
     $('login-status').style.color = '#4caf50';
     document.querySelector('#ignition-knob').classList.add('ignited');
-    AudioEngine.playSFX('start');
-    AudioEngine.startAmbient();
+    AudioEngine.playSFX('engine');
+    AudioEngine.startBGM();
     
     localStorage.setItem('volvo-session', Date.now());
     
@@ -249,7 +264,7 @@ $('ignition-knob').addEventListener('click', () => {
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
   // Проверяем версию для принудительного показа новых фишек
-  const APP_VERSION = '2.1';
+  const APP_VERSION = '2.2';
   if (localStorage.getItem('volvo-app-version') !== APP_VERSION) {
     localStorage.removeItem('volvo-session');
     localStorage.setItem('volvo-app-version', APP_VERSION);
@@ -435,6 +450,8 @@ function openItem(section, item, push = true) {
 
   $('sidebar').classList.remove('open');
   $('overlay').classList.remove('visible');
+
+  AudioEngine.playSFX('open');
 
   const area = $('content-area');
   const file = resolvePath(item.file);
@@ -736,35 +753,6 @@ $('sidebar-search').addEventListener('input', e => {
 
 // ── MOBILE SIDEBAR ───────────────────────────────────────
 $('menu-toggle').addEventListener('click', () => {
-  $('sidebar').classList.add('open');
-  $('overlay').classList.add('visible');
-});
-$('overlay').addEventListener('click', () => {
-  $('sidebar').classList.remove('open');
-  $('overlay').classList.remove('visible');
-});
-
-// ── THEME ────────────────────────────────────────────────
-$('theme-toggle').addEventListener('click', toggleTheme);
-
-function updatePinDisplay() {
-  const dots = document.querySelectorAll('.pin-dot');
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i < pinInput.length);
-  });
-}
-
-// ── BOOT ─────────────────────────────────────────────────
-AudioEngine.init();
-initTheme();
-showApp();
-
-// PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}e').addEventListener('click', () => {
   $('sidebar').classList.add('open');
   $('overlay').classList.add('visible');
 });
