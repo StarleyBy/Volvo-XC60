@@ -173,7 +173,7 @@ const AudioEngine = {
         osc.start();
         this.bgmNodes.push(osc);
       };
-      createPad(110, 0.03); createPad(165, 0.02);
+      createPad(110, 0.05); createPad(165, 0.03);
     });
   },
 
@@ -219,7 +219,7 @@ $('ignition-knob').addEventListener('click', () => {
 
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
-  const APP_VERSION = '2.5';
+  const APP_VERSION = '2.6';
   if (localStorage.getItem('volvo-app-version') !== APP_VERSION) {
     localStorage.removeItem('volvo-session');
     localStorage.setItem('volvo-app-version', APP_VERSION);
@@ -295,6 +295,7 @@ function openItem(section, item, push = true) {
   const area = $('content-area');
   const file = resolvePath(item.file);
   if (item.type === 'document' || file.endsWith('.pdf')) renderPDF(item, area, section);
+  else if (file.endsWith('.json')) renderJSON(item, area, section);
   else if (item.type === 'calculator' || item.file.endsWith('.html')) renderHTML(item, area, section);
   else renderMarkdown(item, area, section);
   area.scrollTo(0, 0);
@@ -365,7 +366,7 @@ function renderHTML(item, area, section) {
     try {
       const doc = frame.contentWindow.document;
       const style = doc.createElement('style');
-      style.textContent = `:root { --gold: #c5a059; --bg: #121212; --panel: #1e1e1e; --border: #333; --text: #e0e0e0; --base-font: ${State.fontSize}px; } body { background: transparent !important; margin: 0 !important; padding: 0 !important; line-height: 1.6; color: var(--text) !important; font-family: sans-serif !important; font-size: var(--base-font) !important; } * { color: var(--text) !important; border-color: var(--border) !important; } div, section, header, footer, article, aside, main, p, li { background-color: transparent !important; } h1, h2, h3, h4, strong, b { color: #fff !important; } h2 { color: var(--gold) !important; text-transform: uppercase; } a, a * { color: var(--gold) !important; text-decoration: none !important; } .card, .info-card, .highlight, .toc, blockquote, [class*="card"], [class*="warning"], [class*="block"] { background: var(--panel) !important; border: 1px solid var(--border) !important; border-left: 4px solid var(--gold) !important; padding: 20px !important; margin: 20px 0 !important; } table { width: 100% !important; border-collapse: collapse !important; background: var(--panel) !important; } th { background: #000 !important; color: var(--gold) !important; padding: 12px !important; } td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; } .sidebar, aside, nav:not(.toc nav) { display: none !important; } .layout, .content, .container { display: block !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }`;
+      style.textContent = `:root { --gold: #c5a059; --bg: #121212; --panel: #1e1e1e; --border: #333; --text: #e0e0e0; --base-font: ${State.fontSize}px; } body { background: transparent !important; margin: 0 !important; padding: 20px !important; line-height: 1.6; color: var(--text) !important; font-family: sans-serif !important; font-size: var(--base-font) !important; } * { color: var(--text) !important; border-color: var(--border) !important; } div, section, header, footer, article, aside, main, p, li { background-color: transparent !important; } h1, h2, h3, h4, strong, b { color: #fff !important; } h2 { color: var(--gold) !important; text-transform: uppercase; } a, a * { color: var(--gold) !important; text-decoration: none !important; } .card, .info-card, .highlight, .toc, blockquote, [class*="card"], [class*="warning"], [class*="block"] { background: var(--panel) !important; border: 1px solid var(--border) !important; border-left: 4px solid var(--gold) !important; padding: 20px !important; margin: 20px 0 !important; } table { width: 100% !important; border-collapse: collapse !important; background: var(--panel) !important; } th { background: #000 !important; color: var(--gold) !important; padding: 12px !important; } td { padding: 12px !important; border-bottom: 1px solid var(--border) !important; } .sidebar, aside, nav:not(.toc nav) { display: none !important; } .layout, .content, .container { display: block !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }`;
       doc.head.appendChild(style);
       const updateHeight = () => { frame.style.height = doc.documentElement.scrollHeight + 'px'; };
       updateHeight(); frame.style.opacity = '1';
@@ -373,6 +374,21 @@ function renderHTML(item, area, section) {
     } catch(e) { frame.style.height = '80vh'; frame.style.opacity = '1'; }
   };
   frame.src = resolvePath(item.file);
+}
+
+function renderJSON(item, area, section) {
+  area.innerHTML = '<p class="loading-msg">Загрузка каталога…</p>';
+  fetch(resolvePath(item.file)).then(r=>r.json()).then(data => {
+    let h = `<div id="page-view" class="wide"><div class="page-header"><span class="page-type-badge">Каталог</span></div>`;
+    for(let k in data.categories){
+      let c = data.categories[k]; if(!c.name) continue;
+      h += `<h2 style="color:var(--accent-gold); margin-top:30px;">${c.name}</h2>`;
+      (c.items||[]).forEach(p => {
+        h += `<div class="card sec-${section.id}" style="margin-bottom:15px; border-left:4px solid var(--accent-gold);"><h3 style="color:#fff;">${p.name}</h3><p style="font-size:0.9em; opacity:0.8;">${p.interval||''}</p><div class="vin-box" style="margin-top:10px;">${p.original}</div></div>`;
+      });
+    }
+    area.innerHTML = h + `</div>`;
+  });
 }
 
 function renderPDF(item, area, section) {
@@ -384,10 +400,18 @@ function interceptLinks(area) {
   area.querySelectorAll('a').forEach(a => {
     a.onclick = (e) => {
       const href = a.getAttribute('href');
-      if (href && href.startsWith('#')) {
+      if (!href) return;
+      if (href.startsWith('#')) {
         e.preventDefault();
         const target = area.querySelector(href);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
+      } else if (href.endsWith('.md') || href.endsWith('.html') || href.endsWith('.json') || href.endsWith('.pdf')) {
+        e.preventDefault();
+        const filename = href.split('/').pop();
+        for (const section of State.manifest.sections) {
+          const item = section.items.find(i => i.file.endsWith(filename));
+          if (item) { openItem(section, item); return; }
+        }
       }
     };
   });
