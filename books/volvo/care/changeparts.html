@@ -1,388 +1,196 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Плановое обслуживание Volvo XC60 T4 Momentum (2020) — полный гид по расходникам</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-            background: #f0f2f5;
-            color: #1a2c3e;
-            line-height: 1.45;
-            padding: 2rem 1.5rem;
-        }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .hero {
-            background: linear-gradient(135deg, #003057 0%, #00263b 100%);
-            padding: 2rem 2.5rem;
-            color: white;
-        }
-        .hero h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .hero h1 span {
-            font-weight: 400;
-            color: #ffb347;
-        }
-        .hero p {
-            opacity: 0.85;
-            max-width: 800px;
-        }
-        .content {
-            padding: 2rem 2.2rem;
-        }
-        /* навигация */
-        .nav-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2.5rem;
-            background: #f8fafd;
-            padding: 1.2rem 1.5rem;
-            border-radius: 28px;
-            border: 1px solid #e2edf7;
-        }
-        .nav-link {
-            background: white;
-            border: 1px solid #dce5f0;
-            border-radius: 40px;
-            padding: 0.5rem 1.2rem;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #003057;
-            transition: all 0.2s;
-        }
-        .nav-link:hover {
-            background: #e30613;
-            color: white;
-            border-color: #e30613;
-        }
-        .service-card {
-            background: #f9fbfe;
-            border-radius: 28px;
-            border: 1px solid #e2edf7;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            scroll-margin-top: 1.5rem;
-        }
-        .service-header {
-            background: #ffffff;
-            padding: 1.2rem 1.5rem;
-            border-bottom: 2px solid #e30613;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .service-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #003057;
-        }
-        .interval-badge {
-            background: #eef3fc;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #003057;
-        }
-        .service-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .service-table th, .service-table td {
-            padding: 1rem 1.2rem;
-            text-align: left;
-            border-bottom: 1px solid #e9f0f5;
-            vertical-align: top;
-        }
-        .service-table th {
-            background: #f8fafd;
-            font-weight: 700;
-            width: 28%;
-            color: #1e466e;
-        }
-        .service-table tr:last-child td {
-            border-bottom: none;
-        }
-        .part-number {
-            font-family: monospace;
-            background: #f1f5f9;
-            padding: 0.2rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin: 0.2rem 0;
-        }
-        .analog-list {
-            list-style: none;
-            margin-top: 0.3rem;
-        }
-        .analog-list li {
-            font-size: 0.85rem;
-            margin-bottom: 0.2rem;
-        }
-        .warning-sign {
-            background: #fff3e0;
-            border-left: 4px solid #e30613;
-            padding: 0.75rem 1rem;
-            border-radius: 16px;
-            margin: 1rem 1.2rem;
-            font-size: 0.85rem;
-        }
-        .fuel-note {
-            background: #e6f7e6;
-            border-radius: 20px;
-            padding: 1rem 1.5rem;
-            margin-top: 1rem;
-        }
-        @media (max-width: 750px) {
-            .hero { padding: 1.5rem; }
-            .content { padding: 1rem; }
-            .service-table th, .service-table td { padding: 0.8rem; display: block; width: 100%; }
-            .service-table th { background: transparent; padding-top: 1rem; }
-            .service-table tr { display: block; margin-bottom: 1rem; border-bottom: 1px solid #e2edf7; }
-            .service-header { flex-direction: column; align-items: flex-start; }
-            .nav-grid { justify-content: center; }
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="hero">
-        <h1>Плановое обслуживание <span>Volvo XC60 T4 Momentum 2020</span></h1>
-        <p>Полный каталог расходных материалов: оригиналы, качественные аналоги, периодичность замены и признаки износа. Для Израиля.</p>
-    </div>
-    <div class="content">
+# Плановое обслуживание Volvo XC60 T4 Momentum 2020
 
-        <!-- НАВИГАЦИЯ ПО РАСХОДНИКАМ -->
-        <div class="nav-grid">
-            <a href="#oil" class="nav-link">🛢️ Масло моторное</a>
-            <a href="#oilfilter" class="nav-link">🔧 Масляный фильтр</a>
-            <a href="#airfilter" class="nav-link">🌬️ Воздушный фильтр</a>
-            <a href="#cabin" class="nav-link">🍃 Салонный фильтр</a>
-            <a href="#sparks" class="nav-link">⚡ Свечи зажигания</a>
-            <a href="#brakefront" class="nav-link">🚦 Колодки передние</a>
-            <a href="#brakerear" class="nav-link">🚦 Колодки задние</a>
-            <a href="#brakefluid" class="nav-link">🧪 Тормозная жидкость</a>
-            <a href="#coolant" class="nav-link">❄️ Антифриз</a>
-            <a href="#atf" class="nav-link">⚙️ Масло АКПП</a>
-            <a href="#fuelfilter" class="nav-link">⛽ Топливный фильтр</a>
-            <a href="#timing" class="nav-link">⛓️ Ремень ГРМ</a>
-        </div>
+> Полный каталог расходных материалов: оригиналы, качественные аналоги, периодичность замены и признаки износа. **Для Израиля**.
 
-        <!-- Моторное масло -->
-        <div id="oil" class="service-card">
-            <div class="service-header">
-                <h2>🛢️ Моторное масло</h2>
-                <div class="interval-badge">⏱️ Каждые 15 000 км / раз в год</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Объём заливки</th><td>5.6 литра (с фильтром)</tr>
-                <tr><th>Допуск / вязкость</th><td>ACEA A5/B5, Volvo VCC RBS0-2AE. <strong>SAE 5W-30</strong> (всесезонно для жары), SAE 0W-20 (экономия топлива).</tr>
-                <tr><th>Оригинальное масло Volvo</th><td>Castrol Edge Professional V 0W-20 (арт. 31372882) или VCC RBS0-2AE 0W-20.</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>Liqui Moly Top Tec 4200 5W-30</li><li>Motul Specific 913D 5W-30</li><li>Ravenol Eco Synth EFS 0W-20</li><li>Shell Helix Ultra Professional AV 0W-20</li><li>Mobil 1 ESP 5W-30</li></ul></td>
-                </tr>
-                <tr><th>Замена</th><td>Раз в год или каждые 15 000 км. При тяжёлых условиях (жара, пыль, пробки) — каждые 10 000 км.</tr>
-            </table>
-            <div class="warning-sign">
-                ⚠️ Для Израиля предпочтительнее SAE 5W-30 из-за высоких температур. Не используйте масла ниже ACEA A5/B5.
-            </div>
-        </div>
+## 📑 Содержание
 
-        <!-- Масляный фильтр -->
-        <div id="oilfilter" class="service-card">
-            <div class="service-header">
-                <h2>🔧 Масляный фильтр</h2>
-                <div class="interval-badge">⏱️ Каждую замену масла</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный номер Volvo</th><td>30788490 (B4204T31/T44)</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>MANN-FILTER HU 719/8 Y</li><li>MAHLE OX 1075D</li><li>BOSCH F 026 407 225</li></ul></td>
-                </tr>
-            </table>
-        </div>
+- [🛢️ Моторное масло](#моторное-масло)
+- [🔧 Масляный фильтр](#масляный-фильтр)
+- [🌬️ Воздушный фильтр двигателя](#воздушный-фильтр-двигателя)
+- [🍃 Салонный фильтр (угольный)](#салонный-фильтр-угольный)
+- [⚡ Свечи зажигания](#свечи-зажигания)
+- [🚦 Тормозные колодки передние](#тормозные-колодки-передние)
+- [🚦 Тормозные колодки задние](#тормозные-колодки-задние)
+- [🧪 Тормозная жидкость](#тормозная-жидкость)
+- [❄️ Охлаждающая жидкость (антифриз)](#охлаждающая-жидкость-антифриз)
+- [⚙️ Трансмиссионная жидкость (АКПП)](#трансмиссионная-жидкость-акпп)
+- [⛽ Топливный фильтр](#топливный-фильтр)
+- [⛓️ Ремень ГРМ (комплект)](#ремень-грм-комплект)
+- [🇮🇱 Практические советы для Израиля](#практические-советы-для-израиля)
 
-        <!-- Воздушный фильтр двигателя -->
-        <div id="airfilter" class="service-card">
-            <div class="service-header">
-                <h2>🌬️ Воздушный фильтр двигателя</h2>
-                <div class="interval-badge">⏱️ 30 000–45 000 км (в пыльных зонах — чаще)</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный номер Volvo</th><td>31370161</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>MANN-FILTER C 35 177</li><li>MAHLE LX 1591</li><li>BOSCH F 026 400 567</li></ul></td>
-                 </tr>
-                <tr><th>Признаки износа</th><td>Снижение мощности, увеличение расхода топлива, видимое загрязнение.</tr>
-            </table>
-        </div>
+---
 
-        <!-- Салонный фильтр -->
-        <div id="cabin" class="service-card">
-            <div class="service-header">
-                <h2>🍃 Салонный фильтр (угольный)</h2>
-                <div class="interval-badge">⏱️ 20 000 км или раз в год</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный номер Volvo</th><td>31390880 (угольный)</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>MANN-FILTER CUK 2733</li><li>MAHLE LAK 1310</li><li>BOSCH 0 986 628 147</li></ul></td>
-                 </tr>
-            </table>
-        </div>
+## 🛢️ Моторное масло
+**⏱️ Периодичность:** каждые 15 000 км / раз в год
 
-        <!-- Свечи зажигания -->
-        <div id="sparks" class="service-card">
-            <div class="service-header">
-                <h2>⚡ Свечи зажигания</h2>
-                <div class="interval-badge">⏱️ 50 000–60 000 км</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный номер Volvo</th><td>31673604 (комплект 4 шт)</tr>
-                <tr><th>Качественные аналоги (иридиевые)</th>
-                    <td><ul class="analog-list"><li>NGK ILZKAR8J8SY (95660)</li><li>DENSO ZXU25PR9</li><li>Bosch FR7NII33X</li></ul></td>
-                 </tr>
-                <tr><th>Признаки износа</th><td>Трудный пуск, троение, повышенный расход топлива.</tr>
-            </table>
-        </div>
+| Параметр | Значение |
+|----------|----------|
+| Объём заливки | 5.6 литра (с фильтром) |
+| Допуск / вязкость | ACEA A5/B5, Volvo VCC RBS0-2AE. **SAE 5W-30** (всесезонно для жары), SAE 0W-20 (экономия топлива) |
+| Оригинальное масло Volvo | Castrol Edge Professional V 0W-20 (арт. 31372882) или VCC RBS0-2AE 0W-20 |
+| **Качественные аналоги** | Liqui Moly Top Tec 4200 5W-30, Motul Specific 913D 5W-30, Ravenol Eco Synth EFS 0W-20, Shell Helix Ultra Professional AV 0W-20, Mobil 1 ESP 5W-30 |
+| Замена | Раз в год или каждые 15 000 км. При тяжёлых условиях (жара, пыль, пробки) — каждые 10 000 км |
 
-        <!-- Тормозные колодки передние -->
-        <div id="brakefront" class="service-card">
-            <div class="service-header">
-                <h2>🚦 Тормозные колодки передние</h2>
-                <div class="interval-badge">⏱️ 30 000–50 000 км (зависит от стиля)</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальные номера Volvo</th><td>31445975 / 31445976 (18-19" диски), 32276321</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>Brembo P 86 023</li><li>ATE 13.0460-7338.2</li><li>TRW GDB2146</li></ul></td>
-                 </tr>
-                <tr><th>Признаки износа</th><td>Писк при торможении, остаток фрикционного слоя менее 3 мм, загорание датчика износа.</tr>
-            </table>
-        </div>
+> **⚠️ Важно:** Для Израиля предпочтительнее **SAE 5W-30** из-за высоких температур. Не используйте масла ниже ACEA A5/B5.
 
-        <!-- Тормозные колодки задние -->
-        <div id="brakerear" class="service-card">
-            <div class="service-header">
-                <h2>🚦 Тормозные колодки задние</h2>
-                <div class="interval-badge">⏱️ 40 000–60 000 км</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальные номера Volvo</th><td>31423653 (с датчиком), 30794554/30794555</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>TRW GDB2168</li><li>Brembo P 86 021</li><li>Marshall M2622568</li></ul></td>
-                 </tr>
-            </table>
-        </div>
+[🔝 Вернуться к содержанию](#содержание)
 
-        <!-- Тормозная жидкость -->
-        <div id="brakefluid" class="service-card">
-            <div class="service-header">
-                <h2>🧪 Тормозная жидкость</h2>
-                <div class="interval-badge">⏱️ Каждые 2 года</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Спецификация</th><td>DOT 4 (ISO 4925 Class 6)</tr>
-                <tr><th>Оригинальный номер Volvo</th><td>9437431 (DOT4+)</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>ATE SL.6</li><li>BOSCH ESI6-32N</li><li>Febi Bilstein 26748</li></ul></td>
-                 </tr>
-                <tr><th>Объём системы</th><td>≈0.8 литра</tr>
-            </table>
-        </div>
+---
 
-        <!-- Охлаждающая жидкость -->
-        <div id="coolant" class="service-card">
-            <div class="service-header">
-                <h2>❄️ Охлаждающая жидкость (антифриз)</h2>
-                <div class="interval-badge">⏱️ Каждые 5 лет / 100 000 км</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный концентрат</th><td>32339856 (G64 Si-OAT, зелёный)</tr>
-                <tr><th>Рекомендуемый аналог</th><td>Volvo Genuine Coolant, разбавлять 50/50 дистиллированной водой. Не смешивать с другими цветами.</tr>
-                <tr><th>Объём системы</th><td>≈8.5 литра</tr>
-            </table>
-        </div>
+## 🔧 Масляный фильтр
+**⏱️ Периодичность:** каждую замену масла
 
-        <!-- Трансмиссионная жидкость АКПП -->
-        <div id="atf" class="service-card">
-            <div class="service-header">
-                <h2>⚙️ Трансмиссионная жидкость (АКПП)</h2>
-                <div class="interval-badge">⏱️ 60 000–80 000 км (в жару — 50 000 км)</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Спецификация</th><td>AW-1 / JWS 3324</tr>
-                <tr><th>Оригинальный номер Volvo</th><td>31256774 (1 литр)</tr>
-                <tr><th>Качественные аналоги</th>
-                    <td><ul class="analog-list"><li>AISIN ATF AW-1</li><li>Toyota ATF WS</li><li>Motul ATF VI</li></ul></td>
-                 </tr>
-                <tr><th>Объём системы</th><td>≈7.0 литров (полная замена)</tr>
-                <tr><th>Признаки износа</th><td>Толчки при переключении, затемнение жидкости.</tr>
-            </table>
-        </div>
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный номер Volvo | `30788490` (B4204T31/T44) |
+| **Аналоги** | MANN-FILTER HU 719/8 Y, MAHLE OX 1075D, BOSCH F 026 407 225 |
 
-        <!-- Топливный фильтр -->
-        <div id="fuelfilter" class="service-card">
-            <div class="service-header">
-                <h2>⛽ Топливный фильтр</h2>
-                <div class="interval-badge">⏱️ 60 000 км</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный номер</th><td>31355911</tr>
-                <tr><th>Аналоги</th><td>MANN-FILTER WK 6030, MAHLE KL 588</tr>
-            </table>
-        </div>
+[🔝 Вернуться к содержанию](#содержание)
 
-        <!-- Ремень ГРМ (комплект) -->
-        <div id="timing" class="service-card">
-            <div class="service-header">
-                <h2>⛓️ Ремень ГРМ (комплект)</h2>
-                <div class="interval-badge">⏱️ 120 000 км или 5 лет (в Израиле — 90 000–100 000 км)</div>
-            </div>
-            <table class="service-table">
-                <tr><th>Оригинальный комплект</th><td>32213096 (ремень + ролики)</tr>
-                <tr><th>Аналоги (ремень)</th><td>Gates K015685, ContiTech CT1165</tr>
-                <tr><th>Рекомендация</th><td>Менять вместе с натяжным роликом. Для двигателей Drive-E требуется специнструмент.</tr>
-            </table>
-            <div class="warning-sign">
-                🚨 Замену ГРМ на двигателях Volvo Drive-E доверяйте только специализированным сервисам.
-            </div>
-        </div>
+---
 
-        <!-- Дополнительные рекомендации для Израиля -->
-        <div class="fuel-note">
-            <h4 style="margin-bottom: 0.5rem;">🇮🇱 Практические советы для Израиля</h4>
-            <ul style="margin-left: 1.2rem;">
-                <li>Моторное масло: из-за жары используйте <strong>5W-30</strong>, а не 0W-20.</li>
-                <li>Воздушный и салонный фильтры меняйте каждые 15 000–20 000 км из-за пыли.</li>
-                <li>Тормозную жидкость проверяйте на влажность раз в год.</li>
-                <li>Топливо — только АИ‑95 высокого качества.</li>
-                <li>Заказывайте оригинальные расходники у официальных дилеров (Delek Motors, Union Motors) или через проверенные онлайн-магазины.</li>
-            </ul>
-        </div>
+## 🌬️ Воздушный фильтр двигателя
+**⏱️ Периодичность:** 30 000–45 000 км (в пыльных зонах — чаще)
 
-    </div>
-</div>
-</body>
-</html>
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный номер Volvo | `31370161` |
+| **Аналоги** | MANN-FILTER C 35 177, MAHLE LX 1591, BOSCH F 026 400 567 |
+| Признаки износа | Снижение мощности, увеличение расхода топлива, видимое загрязнение |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🍃 Салонный фильтр (угольный)
+**⏱️ Периодичность:** 20 000 км или раз в год
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный номер Volvo | `31390880` (угольный) |
+| **Аналоги** | MANN-FILTER CUK 2733, MAHLE LAK 1310, BOSCH 0 986 628 147 |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ⚡ Свечи зажигания
+**⏱️ Периодичность:** 50 000–60 000 км
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный номер Volvo | `31673604` (комплект 4 шт) |
+| **Аналоги (иридиевые)** | NGK ILZKAR8J8SY (95660), DENSO ZXU25PR9, Bosch FR7NII33X |
+| Признаки износа | Трудный пуск, троение, повышенный расход топлива |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🚦 Тормозные колодки передние
+**⏱️ Периодичность:** 30 000–50 000 км (зависит от стиля)
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальные номера Volvo | `31445975` / `31445976` (18-19" диски), `32276321` |
+| **Аналоги** | Brembo P 86 023, ATE 13.0460-7338.2, TRW GDB2146 |
+| Признаки износа | Писк при торможении, остаток фрикционного слоя менее 3 мм, загорание датчика износа |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🚦 Тормозные колодки задние
+**⏱️ Периодичность:** 40 000–60 000 км
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальные номера Volvo | `31423653` (с датчиком), `30794554` / `30794555` |
+| **Аналоги** | TRW GDB2168, Brembo P 86 021, Marshall M2622568 |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🧪 Тормозная жидкость
+**⏱️ Периодичность:** каждые 2 года
+
+| Параметр | Значение |
+|----------|----------|
+| Спецификация | DOT 4 (ISO 4925 Class 6) |
+| Оригинальный номер Volvo | `9437431` (DOT4+) |
+| **Аналоги** | ATE SL.6, BOSCH ESI6-32N, Febi Bilstein 26748 |
+| Объём системы | ≈0.8 литра |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ❄️ Охлаждающая жидкость (антифриз)
+**⏱️ Периодичность:** каждые 5 лет / 100 000 км
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный концентрат | `32339856` (G64 Si-OAT, зелёный) |
+| Рекомендуемый аналог | Volvo Genuine Coolant, разбавлять 50/50 дистиллированной водой. Не смешивать с другими цветами. |
+| Объём системы | ≈8.5 литра |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ⚙️ Трансмиссионная жидкость (АКПП)
+**⏱️ Периодичность:** 60 000–80 000 км (в жару — 50 000 км)
+
+| Параметр | Значение |
+|----------|----------|
+| Спецификация | AW-1 / JWS 3324 |
+| Оригинальный номер Volvo | `31256774` (1 литр) |
+| **Аналоги** | AISIN ATF AW-1, Toyota ATF WS, Motul ATF VI |
+| Объём системы | ≈7.0 литров (полная замена) |
+| Признаки износа | Толчки при переключении, затемнение жидкости |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ⛽ Топливный фильтр
+**⏱️ Периодичность:** 60 000 км
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный номер | `31355911` |
+| **Аналоги** | MANN-FILTER WK 6030, MAHLE KL 588 |
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ⛓️ Ремень ГРМ (комплект)
+**⏱️ Периодичность:** 120 000 км или 5 лет (в Израиле — 90 000–100 000 км)
+
+| Параметр | Значение |
+|----------|----------|
+| Оригинальный комплект | `32213096` (ремень + ролики) |
+| **Аналоги (ремень)** | Gates K015685, ContiTech CT1165 |
+| Рекомендация | Менять вместе с натяжным роликом. Для двигателей Drive-E требуется специнструмент. |
+
+> **🚨 Важно:** Замену ГРМ на двигателях Volvo Drive-E доверяйте только специализированным сервисам.
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🇮🇱 Практические советы для Израиля
+
+- **Моторное масло:** из-за жары используйте **5W-30**, а не 0W-20.
+- **Воздушный и салонный фильтры** меняйте каждые 15 000–20 000 км из-за пыли.
+- **Тормозную жидкость** проверяйте на влажность раз в год.
+- **Топливо** — только АИ‑95 высокого качества.
+- **Заказывайте оригинальные расходники** у официальных дилеров (Delek Motors, Union Motors) или через проверенные онлайн-магазины.
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+*📌 Все данные актуальны для Volvo XC60 T4 Momentum 2020. Перед покупкой сверяйте номера по VIN автомобиля.*
