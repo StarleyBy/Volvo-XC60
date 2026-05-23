@@ -1,7 +1,7 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-23 11:47
+  updated: 2026-05-23 11:54
 
 sections:
   - id: device
@@ -10,19 +10,19 @@ sections:
     items:
       - id: alarm
         title: "Alarm"
-        file: books/volvo/device/alarm.html
+        file: books/volvo/device/alarm.md
         type: reference
         visible: true
         tags: []
       - id: car
         title: "Car"
-        file: books/volvo/device/car.html
+        file: books/volvo/device/car.md
         type: reference
         visible: true
         tags: []
       - id: podveska
         title: "Podveska"
-        file: books/volvo/device/podveska.html
+        file: books/volvo/device/podveska.md
         type: reference
         visible: true
         tags: []
@@ -39,49 +39,49 @@ sections:
     items:
       - id: android
         title: "Android"
-        file: books/volvo/control/android.html
+        file: books/volvo/control/android.md
         type: reference
         visible: true
         tags: []
       - id: centalrscreen
         title: "Centalrscreen"
-        file: books/volvo/control/centalrscreen.html
+        file: books/volvo/control/centalrscreen.md
         type: reference
         visible: true
         tags: []
       - id: climat
         title: "Climat"
-        file: books/volvo/control/climat.html
+        file: books/volvo/control/climat.md
         type: reference
         visible: true
         tags: []
       - id: cruiz
         title: "Cruiz"
-        file: books/volvo/control/cruiz.html
+        file: books/volvo/control/cruiz.md
         type: reference
         visible: true
         tags: []
       - id: innlight
         title: "Innlight"
-        file: books/volvo/control/innlight.html
+        file: books/volvo/control/innlight.md
         type: reference
         visible: true
         tags: []
       - id: korobka
         title: "Korobka"
-        file: books/volvo/control/korobka.html
+        file: books/volvo/control/korobka.md
         type: reference
         visible: true
         tags: []
       - id: outlight
         title: "Outlight"
-        file: books/volvo/control/outlight.html
+        file: books/volvo/control/outlight.md
         type: reference
         visible: true
         tags: []
       - id: panel
         title: "Panel"
-        file: books/volvo/control/panel.html
+        file: books/volvo/control/panel.md
         type: reference
         visible: true
         tags: []
@@ -93,7 +93,7 @@ sections:
         tags: []
       - id: siting_mirrors
         title: "Siting_mirrors"
-        file: books/volvo/control/siting_mirrors.html
+        file: books/volvo/control/siting_mirrors.md
         type: reference
         visible: true
         tags: []
@@ -108,13 +108,13 @@ sections:
     items:
       - id: changeparts
         title: "Changeparts"
-        file: books/volvo/care/changeparts.html
+        file: books/volvo/care/changeparts.md
         type: reference
         visible: true
         tags: []
       - id: recomendations
         title: "Recomendations"
-        file: books/volvo/care/recomendations.html
+        file: books/volvo/care/recomendations.md
         type: reference
         visible: true
         tags: []
