@@ -1,429 +1,340 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Volvo в Израиле — полный справочник водителя (2026)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #f0f2f5;
-            color: #1a2c3e;
-            line-height: 1.45;
-            padding: 2rem 1rem;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-        .hero {
-            background: linear-gradient(135deg, #003057 0%, #00263b 100%);
-            padding: 2rem 2rem;
-            color: white;
-        }
-        .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .hero h1 span { font-weight: 400; color: #ffb347; }
-        .hero p { opacity: 0.85; max-width: 900px; }
-        .content { padding: 2rem 1.8rem; }
-        .nav-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            margin-bottom: 2rem;
-            background: #f8fafd;
-            padding: 1rem 1.2rem;
-            border-radius: 28px;
-            border: 1px solid #e2edf7;
-        }
-        .nav-link {
-            background: white;
-            border: 1px solid #dce5f0;
-            border-radius: 40px;
-            padding: 0.4rem 1rem;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #003057;
-            transition: 0.2s;
-        }
-        .nav-link:hover { background: #e30613; color: white; border-color: #e30613; }
-        .section-card {
-            background: #f9fbfe;
-            border-radius: 28px;
-            border: 1px solid #e2edf7;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            scroll-margin-top: 1rem;
-        }
-        .section-header {
-            background: white;
-            padding: 1rem 1.5rem;
-            border-bottom: 2px solid #e30613;
-        }
-        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: #003057; display: flex; align-items: center; gap: 0.6rem; }
-        .section-body { padding: 1.2rem 1.5rem; }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        .contact-item {
-            background: white;
-            border-radius: 20px;
-            padding: 0.9rem 1rem;
-            border: 1px solid #e9f0f5;
-        }
-        .contact-item h3 { font-size: 1rem; font-weight: 700; color: #e30613; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .contact-details { font-size: 0.85rem; margin-bottom: 0.25rem; }
-        .contact-details strong { color: #003057; }
-        .map-link {
-            display: inline-block;
-            margin-top: 0.4rem;
-            background: #eef3fc;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            text-decoration: none;
-            color: #003057;
-            font-weight: 500;
-        }
-        .map-link:hover { background: #003057; color: white; }
-        .warning-block {
-            background: #fff3e0;
-            border-left: 4px solid #e30613;
-            padding: 0.7rem 1rem;
-            border-radius: 16px;
-            margin: 0.8rem 0;
-            font-size: 0.85rem;
-        }
-        .footnote {
-            font-size: 0.75rem;
-            color: #5f7f9e;
-            border-top: 1px solid #e2edf7;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            text-align: center;
-        }
-        @media (max-width: 700px) {
-            .hero { padding: 1.2rem; }
-            .content { padding: 1rem; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .section-header h2 { font-size: 1.2rem; }
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="hero">
-        <h1>Volvo <span>в Израиле — полный справочник водителя</span></h1>
-        <p>Экстренные службы, помощь на дорогах (эвакуатор, прокол, аккумулятор), официальные и независимые сервисы, мойки, шиномонтаж, тюнинг, заказ запчастей — только актуальные данные (2026). С упором на Холон, Ришон-ле-Цион, Бат-Ям и по всей стране.</p>
-    </div>
-    <div class="content">
-        <div class="nav-grid">
-            <a href="#emergency" class="nav-link">🚨 Экстренные службы</a>
-            <a href="#road-assistance" class="nav-link">🆘 Помощь на дорогах</a>
-            <a href="#volvo-assist" class="nav-link">🔵 Volvo Assistance</a>
-            <a href="#official" class="nav-link">🏢 Официальные дилеры</a>
-            <a href="#volvo-specialist" class="nav-link">🚗 Volvo-специалисты</a>
-            <a href="#multi" class="nav-link">🔧 Мультибрендовые СТО</a>
-            <a href="#tuning" class="nav-link">⚡ Тюнинг / чип</a>
-            <a href="#carwash" class="nav-link">🧼 Мойки и детейлинг</a>
-            <a href="#tires" class="nav-link">🛞 Шиномонтаж</a>
-            <a href="#parts" class="nav-link">🔩 Запчасти (мир)</a>
-        </div>
+# Volvo в Израиле — полный справочник водителя (2026)
 
-        <!-- 1. Экстренные службы -->
-        <div id="emergency" class="section-card">
-            <div class="section-header"><h2>🚨 Экстренные службы Израиля</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item"><h3>📞 Полиция</h3><div class="contact-details"><strong>100</strong> — круглосуточно</div></div>
-                    <div class="contact-item"><h3>🚑 Скорая (МАДА)</h3><div class="contact-details"><strong>101</strong> — круглосуточно</div></div>
-                    <div class="contact-item"><h3>🔥 Пожарная служба</h3><div class="contact-details"><strong>102</strong></div></div>
-                    <div class="contact-item"><h3>⚡ Электрическая компания</h3><div class="contact-details"><strong>103</strong> (аварии на ЛЭП)</div></div>
-                    <div class="contact-item"><h3>🏙️ Муниципальная горячая линия</h3><div class="contact-details"><strong>106</strong> — помощь в городе</div></div>
-                </div>
-            </div>
-        </div>
+> Экстренные службы, помощь на дорогах (эвакуатор, прокол, аккумулятор), официальные и независимые сервисы, мойки, шиномонтаж, тюнинг, заказ запчастей — только актуальные данные (2026). С упором на Холон, Ришон-ле-Цион, Бат-Ям и по всей стране.
 
-        <!-- 2. Помощь на дорогах (эвакуация, прокол, аккумулятор, топливо) -->
-        <div id="road-assistance" class="section-card">
-            <div class="section-header"><h2>🆘 Универсальная помощь на дорогах — эвакуация, прокол, аккумулятор, топливо</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>🚛 Shagrir Group (שגריר)</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> <a href="tel:97235578888">+972-3-5578888</a></div>
-                        <div class="contact-details">• Круглосуточная эвакуация по всей стране<br>• Замена колеса, прикуривание аккумулятора, доставка топлива<br>• Предоставление подменного авто<br>• Адрес в Холоне: ул. Ха-Нефа 8, Холон</div>
-                        <a href="https://waze.com/ul?q=הנפח+8+חולון" class="map-link">🗺️ Маршрут (офис)</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🆘 Yedidim (ידידים) — волонтёрская сеть</h3>
-                        <div class="contact-details"><strong>📞 Единая линия:</strong> *6446 (с мобильного)</div>
-                        <div class="contact-details"><strong>📱 WhatsApp:</strong> 053-2250640</div>
-                        <div class="contact-details">Бесплатная помощь: прокол, запуск двигателя, открытие заблокированного авто, эвакуация при застревании. Самая быстрая служба.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>⚡ Nati Group (נתי שירותי רכב)</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> <a href="tel:0722155800">072-2155800</a></div>
-                        <div class="contact-details">• Круглосуточная помощь по всей стране<br>• Эвакуация, запуск двигателя, замена колеса<br>• Спецпредложения для электромобилей</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🔧 MEMSI (Israeli Automobile and Touring Club)</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> *2730 (с мобильного)</div>
-                        <div class="contact-details">• Старейшая организация помощи водителям<br>• Эвакуация, запуск, замена колеса, юридическая консультация</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🛣️ Moked Enosh (מוקד אנוש)</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> *2723</div>
-                        <div class="contact-details">Общенациональная диспетчерская служба. Эвакуация, помощь на месте.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📱 Мобильные приложения</h3>
-                        <div class="contact-details"><strong>Mobicar, Turqat</strong> — вызов помощи через приложение, эвакуатор, запуск, доставка топлива в один клик.</div>
-                    </div>
-                </div>
-                <div class="warning-block">
-                    💡 <strong>Совет:</strong> Перед выездом проверьте полис автострахования («Битуах макиф») — часто в него уже включена помощь на дорогах (эвакуация, замена колеса). Позвоните в страховую компанию и уточните.
-                </div>
-            </div>
-        </div>
+## 📑 Содержание
 
-        <!-- 3. Volvo Assistance (официальный ассистанс) -->
-        <div id="volvo-assist" class="section-card">
-            <div class="section-header"><h2>🔵 Volvo Assistance — официальная помощь для Volvo</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>📞 Volvo Assistance Israel</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> <a href="tel:+972773601417">+972-77-360-1417</a></div>
-                        <div class="contact-details">24/7, на русском/иврите/английском. Эвакуация до ближайшего дилера, замена колеса, запуск двигателя, доставка топлива, такси/аренда на время ремонта (по гарантии).</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📱 Приложение Volvo Cars</h3>
-                        <div class="contact-details">Кнопка SOS с автоматической передачей геолокации и VIN. Рекомендуется установить и настроить заранее.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+- [🚨 Экстренные службы Израиля](#экстренные-службы-израиля)
+- [🆘 Универсальная помощь на дорогах](#универсальная-помощь-на-дорогах-эвакуация-прокол-аккумулятор-топливо)
+- [🔵 Volvo Assistance — официальная помощь для Volvo](#volvo-assistance-официальная-помощь-для-volvo)
+- [🏢 Официальные дилеры и сервисные центры Volvo](#официальные-дилеры-и-сервисные-центры-volvo)
+- [🚗 Специализированные сервисы Volvo (лучшие по отзывам)](#специализированные-сервисы-volvo-лучшие-по-отзывам)
+- [🔧 Мультибрендовые СТО (Volvo, BMW, Honda и др.)](#мультибрендовые-сто-volvo-bmw-honda-и-др)
+- [⚡ Тюнинг и повышение производительности](#тюнинг-и-повышение-производительности)
+- [🧼 Мойки, химчистка, детейлинг](#мойки-химчистка-детейлинг)
+- [🛞 Шиномонтаж, сезонное хранение, правка дисков](#шиномонтаж-сезонное-хранение-правка-дисков)
+- [🔩 Где заказать запчасти Volvo](#где-заказать-запчасти-volvo)
 
-        <!-- 4. Официальные дилеры Volvo по всей стране -->
-        <div id="official" class="section-card">
-            <div class="section-header"><h2>🏢 Официальные дилеры и сервисные центры Volvo</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>📞 Центральный колл-центр Volvo Israel</h3>
-                        <div class="contact-details"><strong>Телефон:</strong> *5789 (со стационарного и мобильного)</div>
-                        <div class="contact-details">Запись на ТО, гарантия, помощь на дорогах, координация с дилерами.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Майер (Meir) — Ришон ле-Цион</h3>
-                        <div class="contact-details">ул. Хаим Моше Шапира 25, Ришон ле-Цион</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 03-6755555 / *5789</div>
-                        <div class="contact-details">Официальный дилер, гарантийные работы, Polestar Optimization.</div>
-                        <a href="https://waze.com/ul?q=חיים+משה+שפירא+25+ראשון+לציון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Мейр — Тель-Авив (Роках)</h3>
-                        <div class="contact-details">бульвар Роках 61, Тель-Авив</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 03-6755555</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Мейр — Петах-Тиква</h3>
-                        <div class="contact-details">ул. Дантун 9, Петах-Тиква</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Мейр — Хайфа (Тират-Кармель)</h3>
-                        <div class="contact-details">ул. Ха-Шхора 2, Тират-Кармель</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Мейр — Беэр-Шева</h3>
-                        <div class="contact-details">ул. Ха-Бааль Шем Тов 36, Беэр-Шева</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+---
 
-        <!-- 5. Специализированные Volvo-сервисы (с упором на Холон, Ришон, Бат-Ям) -->
-        <div id="volvo-specialist" class="section-card">
-            <div class="section-header"><h2>🚗 Специализированные сервисы Volvo (лучшие по отзывам)</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>📍 מוסך שי געש — Холон</h3>
-                        <div class="contact-details">ул. Ха-Йоцер 22, Холон (промзона)</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 050-3333940 (Гай)</div>
-                        <div class="contact-details">Семейный бизнес, десятки лет опыта, только Volvo. Диагностика, ремонт, оригинал.</div>
-                        <a href="https://waze.com/ul?q=הרב+עובדיה+יוסף+22+חולון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 מוסך ישראל IMC — Холон</h3>
-                        <div class="contact-details">промзона Кирьят-Атар (ул. Ха-Садот 5), Холон</div>
-                        <div class="contact-details">Эксперт по электрике и сложным неисправностям Volvo.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 מוסך וולוו יד חרוצים — Тель-Авив (граница Бат-Ям)</h3>
-                        <div class="contact-details">ул. Яд Харуцим 8, Тель-Авив</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 03-5590887</div>
-                        <div class="contact-details">40+ лет опыта, ремонт Volvo и Honda, лицензирован Минтрансом.</div>
-                        <a href="https://waze.com/ul?q=יד+חרוצים+8+תל+אביב" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 מוסך זיסו — Ришон ле-Цион</h3>
-                        <div class="contact-details">ул. Першковского 4, Ришон ле-Цион</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 03-5663322, 052-6677411</div>
-                        <div class="contact-details">Авторизованный партнер импортера, ранее официальный дилер.</div>
-                        <a href="https://waze.com/ul?q=פרשקובסקי+4+ראשון+לציון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 מוסך יוסי וולוו — Бат-Ям</h3>
-                        <div class="contact-details">ул. Бен-Гурион 32 (промзона), Бат-Ям</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 054-4412233</div>
-                        <div class="contact-details">Специализация: Volvo XC60, XC90, ходовая часть, тормозная система.</div>
-                        <a href="https://waze.com/ul?q=דרך+בן+גוריון+32+בת+ים" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+## 🚨 Экстренные службы Израиля
 
-        <!-- 6. Мультибрендовые сервисы с опытом Volvo -->
-        <div id="multi" class="section-card">
-            <div class="section-header"><h2>🔧 Мультибрендовые СТО (Volvo, BMW, Honda и др.)</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>📍 מוסך בימר (Bimmer) — Бат-Ям</h3>
-                        <div class="contact-details">ул. Ха-Хагана 15, Бат-Ям</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 072-3952321</div>
-                        <div class="contact-details">Специализация BMW, но берут Volvo. Кузовной и сварочный участок.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Гараж Авто Акцент — Холон</h3>
-                        <div class="contact-details">ул. Ха-Оргим 12, Холон</div>
-                        <div class="contact-details"><strong>Телефон:</strong> 03-5509966</div>
-                        <div class="contact-details">Ремонт двигателей, АКПП, ходовой — опыт с XC60.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+- **📞 Полиция:** `100` (круглосуточно)
+- **🚑 Скорая (МАДА):** `101` (круглосуточно)
+- **🔥 Пожарная служба:** `102`
+- **⚡ Электрическая компания:** `103` (аварии на ЛЭП)
+- **🏙️ Муниципальная горячая линия:** `106` — помощь в городе
 
-        <!-- 7. Тюнинг и чип-тюнинг (Polestar, HEICO, ZIP) -->
-        <div id="tuning" class="section-card">
-            <div class="section-header"><h2>⚡ Тюнинг и повышение производительности</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>⭐ Polestar Engineered Optimization</h3>
-                        <div class="contact-details">Официальная прошивка через дилеров Volvo (Мейр). Увеличение мощности, сохранение заводской гарантии.</div>
-                        <div class="contact-details"><strong>Запись:</strong> *5789.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🏁 HEICO SPORTIV (Германия)</h3>
-                        <div class="contact-details">Обвесы, диски, выхлопные системы, чип-тюнинг e.motion. Доставка в Израиль напрямую.</div>
-                        <a href="https://www.heicosportiv.de" class="map-link">🔗 Официальный сайт HEICO</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>⚙️ ZIPtuning — удалённые прошивки (Stage 1/2)</h3>
-                        <div class="contact-details">Кастомные прошивки для Drive-E. Доставка по почте, требуется местный установщик.</div>
-                        <a href="https://www.ziptuning.com" class="map-link">🔗 Сайт ZIPtuning</a>
-                    </div>
-                </div>
-                <div class="warning-block">
-                    🚨 Неофициальный чип-тюнинг может аннулировать остаточную заводскую гарантию. Рекомендуется только Polestar Optimization.
-                </div>
-            </div>
-        </div>
+[🔝 Вернуться к содержанию](#содержание)
 
-        <!-- 8. Мойки и детейлинг (Холон, Ришон, Бат-Ям) -->
-        <div id="carwash" class="section-card">
-            <div class="section-header"><h2>🧼 Мойки, химчистка, детейлинг</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>🚗 Super Wash — Холон</h3>
-                        <div class="contact-details">ул. Ха-Меркава 36, Холон (промзона)</div>
-                        <div class="contact-details">Ручная мойка, сухая чистка салона, полировка, керамика. Круглосуточно.</div>
-                        <a href="https://waze.com/ul?q=המרכבה+36+חולון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>✨ Star Car Wash — Ришон ле-Цион</h3>
-                        <div class="contact-details">Malkhei Yisrael St 1, Ришон ле-Цион</div>
-                        <div class="contact-details">Детейлинг-центр: нанокерамика, антигравийная пленка, химчистка.</div>
-                        <a href="https://waze.com/ul?q=מלכי+ישראל+1+ראשון+לציון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🧼 Pinto Wash — Бат-Ям</h3>
-                        <div class="contact-details">ул. Бен-Гурион 89, Бат-Ям</div>
-                        <div class="contact-details">Бесконтактная мойка, восковое покрытие.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+---
 
-        <!-- 9. Шиномонтаж -->
-        <div id="tires" class="section-card">
-            <div class="section-header"><h2>🛞 Шиномонтаж, сезонное хранение, правка дисков</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>⏱️ Tire Plus Holon</h3>
-                        <div class="contact-details">ул. Ха-Мелаха 9, Холон</div>
-                        <div class="contact-details">Балансировка, ремонт проколов, сезонное хранение, продажа Michelin, Continental.</div>
-                        <a href="https://waze.com/ul?q=המלאכה+9+חולון" class="map-link">🗺️ Маршрут</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>⚙️ A.N. Romi Tires — Холон</h3>
-                        <div class="contact-details">ул. Ха-Оргим 6, Холон</div>
-                        <div class="contact-details">Замена шин, ремонт, широкий ассортимент дисков.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🔧 Winer Tire — Бат-Ям</h3>
-                        <div class="contact-details">ул. Бен-Гурион 100, Бат-Ям</div>
-                        <div class="contact-details">Компьютерная балансировка, правка дисков, бескамерный ремонт.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+## 🆘 Универсальная помощь на дорогах (эвакуация, прокол, аккумулятор, топливо)
 
-        <!-- 10. Заказ запчастей (оригинал, аналоги, международная доставка) -->
-        <div id="parts" class="section-card">
-            <div class="section-header"><h2>🔩 Где заказать запчасти Volvo</h2></div>
-            <div class="section-body">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>📦 אורגינל חלפים — Холон</h3>
-                        <div class="contact-details">ул. А-Оргим, Холон (промзона)</div>
-                        <div class="contact-details">Оригинальные детали Volvo, аналоги, масла. Быстрая доставка по Гуш-Дану.</div>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🇺🇸 FCP Euro (США)</h3>
-                        <div class="contact-details">Пожизненная гарантия на детали, огромный каталог Volvo. Доставка в Израиль авиапочтой.</div>
-                        <a href="https://www.fcpeuro.com" class="map-link">🔗 Перейти на FCP Euro</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🇪🇺 R&D Car Parts (Литва)</h3>
-                        <div class="contact-details">Специализация Volvo / Saab, более 17 000 запчастей. Экспресс-доставка по миру.</div>
-                        <a href="https://www.rendcarparts.com" class="map-link">🔗 R&D Car Parts</a>
-                    </div>
-                </div>
-                <div class="warning-block">
-                    ✈️ При заказе из-за границы учитывайте таможенные пошлины (17% НДС + сбор). Группируйте заказы для экономии.
-                </div>
-            </div>
-        </div>
+<details>
+<summary><strong>🚛 Shagrir Group (שגריר)</strong></summary>
 
-        <div class="footnote">
-            📌 Данные актуальны на 2026 год. Собраны из официальных источников, отзывов и рекомендаций клубов Volvo. Рекомендуем перед визитом уточнять часы работы и стоимость по телефону.
-        </div>
-    </div>
-</div>
-</body>
-</html>
+- **Телефон:** `+972-3-5578888`
+- **Услуги:**
+  - Круглосуточная эвакуация по всей стране
+  - Замена колеса, прикуривание аккумулятора, доставка топлива
+  - Предоставление подменного авто
+- **Адрес в Холоне:** ул. Ха-Нефа 8, Холон
+- [🗺️ Маршрут (офис)](https://waze.com/ul?q=הנפח+8+חולון)
+</details>
+
+<details>
+<summary><strong>🆘 Yedidim (ידידים) — волонтёрская сеть</strong></summary>
+
+- **📞 Единая линия:** `*6446` (с мобильного)
+- **📱 WhatsApp:** `053-2250640`
+- **Услуги:** Бесплатная помощь: прокол, запуск двигателя, открытие заблокированного авто, эвакуация при застревании. Самая быстрая служба.
+</details>
+
+<details>
+<summary><strong>⚡ Nati Group (נתי שירותי רכב)</strong></summary>
+
+- **Телефон:** `072-2155800`
+- **Услуги:** Круглосуточная помощь по всей стране: эвакуация, запуск двигателя, замена колеса. Спецпредложения для электромобилей.
+</details>
+
+<details>
+<summary><strong>🔧 MEMSI (Israeli Automobile and Touring Club)</strong></summary>
+
+- **Телефон:** `*2730` (с мобильного)
+- **Услуги:** Старейшая организация помощи водителям: эвакуация, запуск, замена колеса, юридическая консультация.
+</details>
+
+<details>
+<summary><strong>🛣️ Moked Enosh (מוקד אנוש)</strong></summary>
+
+- **Телефон:** `*2723`
+- **Услуги:** Общенациональная диспетчерская служба. Эвакуация, помощь на месте.
+</details>
+
+<details>
+<summary><strong>📱 Мобильные приложения</strong></summary>
+
+- **Mobicar, Turqat** — вызов помощи через приложение, эвакуатор, запуск, доставка топлива в один клик.
+</details>
+
+> 💡 **Совет:** Перед выездом проверьте полис автострахования («Битуах макиф») — часто в него уже включена помощь на дорогах (эвакуация, замена колеса). Позвоните в страховую компанию и уточните.
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🔵 Volvo Assistance — официальная помощь для Volvo
+
+<details>
+<summary><strong>📞 Volvo Assistance Israel</strong></summary>
+
+- **Телефон:** `+972-77-360-1417`
+- **Режим работы:** 24/7, на русском/иврите/английском.
+- **Услуги:** Эвакуация до ближайшего дилера, замена колеса, запуск двигателя, доставка топлива, такси/аренда на время ремонта (по гарантии).
+</details>
+
+<details>
+<summary><strong>📱 Приложение Volvo Cars</strong></summary>
+
+- Кнопка SOS с автоматической передачей геолокации и VIN. Рекомендуется установить и настроить заранее.
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🏢 Официальные дилеры и сервисные центры Volvo
+
+<details>
+<summary><strong>📞 Центральный колл-центр Volvo Israel</strong></summary>
+
+- **Телефон:** `*5789` (со стационарного и мобильного)
+- Запись на ТО, гарантия, помощь на дорогах, координация с дилерами.
+</details>
+
+<details>
+<summary><strong>📍 Майер (Meir) — Ришон ле-Цион</strong></summary>
+
+- **Адрес:** ул. Хаим Моше Шапира 25, Ришон ле-Цион
+- **Телефон:** `03-6755555` / `*5789`
+- Официальный дилер, гарантийные работы, Polestar Optimization.
+- [🗺️ Маршрут](https://waze.com/ul?q=חיים+משה+שפירא+25+ראשון+לציון)
+</details>
+
+<details>
+<summary><strong>📍 Мейр — Тель-Авив (Роках)</strong></summary>
+
+- **Адрес:** бульвар Роках 61, Тель-Авив
+- **Телефон:** `03-6755555`
+</details>
+
+<details>
+<summary><strong>📍 Мейр — Петах-Тиква</strong></summary>
+
+- **Адрес:** ул. Дантун 9, Петах-Тиква
+</details>
+
+<details>
+<summary><strong>📍 Мейр — Хайфа (Тират-Кармель)</strong></summary>
+
+- **Адрес:** ул. Ха-Шхора 2, Тират-Кармель
+</details>
+
+<details>
+<summary><strong>📍 Мейр — Беэр-Шева</strong></summary>
+
+- **Адрес:** ул. Ха-Бааль Шем Тов 36, Беэр-Шева
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🚗 Специализированные сервисы Volvo (лучшие по отзывам)
+
+<details>
+<summary><strong>📍 מוסך שי געש — Холон</strong></summary>
+
+- **Адрес:** ул. Ха-Йоцер 22, Холон (промзона)
+- **Телефон:** `050-3333940` (Гай)
+- Семейный бизнес, десятки лет опыта, только Volvo. Диагностика, ремонт, оригинал.
+- [🗺️ Маршрут](https://waze.com/ul?q=הרב+עובדיה+יוסף+22+חולון)
+</details>
+
+<details>
+<summary><strong>📍 מוסך ישראל IMC — Холон</strong></summary>
+
+- **Адрес:** промзона Кирьят-Атар (ул. Ха-Садот 5), Холон
+- Эксперт по электрике и сложным неисправностям Volvo.
+</details>
+
+<details>
+<summary><strong>📍 מוסך וולוו יד חרוצים — Тель-Авив (граница Бат-Ям)</strong></summary>
+
+- **Адрес:** ул. Яд Харуцим 8, Тель-Авив
+- **Телефон:** `03-5590887`
+- 40+ лет опыта, ремонт Volvo и Honda, лицензирован Минтрансом.
+- [🗺️ Маршрут](https://waze.com/ul?q=יד+חרוצים+8+תל+אביב)
+</details>
+
+<details>
+<summary><strong>📍 מוסך זיסו — Ришон ле-Цион</strong></summary>
+
+- **Адрес:** ул. Першковского 4, Ришон ле-Цион
+- **Телефон:** `03-5663322`, `052-6677411`
+- Авторизованный партнер импортера, ранее официальный дилер.
+- [🗺️ Маршрут](https://waze.com/ul?q=פרשקובסקי+4+ראשון+לציון)
+</details>
+
+<details>
+<summary><strong>📍 מוסך יוסי וולוו — Бат-Ям</strong></summary>
+
+- **Адрес:** ул. Бен-Гурион 32 (промзона), Бат-Ям
+- **Телефон:** `054-4412233`
+- Специализация: Volvo XC60, XC90, ходовая часть, тормозная система.
+- [🗺️ Маршрут](https://waze.com/ul?q=דרך+בן+גוריון+32+בת+ים)
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🔧 Мультибрендовые СТО (Volvo, BMW, Honda и др.)
+
+<details>
+<summary><strong>📍 מוסך בימר (Bimmer) — Бат-Ям</strong></summary>
+
+- **Адрес:** ул. Ха-Хагана 15, Бат-Ям
+- **Телефон:** `072-3952321`
+- Специализация BMW, но берут Volvo. Кузовной и сварочный участок.
+</details>
+
+<details>
+<summary><strong>📍 Гараж Авто Акцент — Холон</strong></summary>
+
+- **Адрес:** ул. Ха-Оргим 12, Холон
+- **Телефон:** `03-5509966`
+- Ремонт двигателей, АКПП, ходовой — опыт с XC60.
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## ⚡ Тюнинг и повышение производительности
+
+<details>
+<summary><strong>⭐ Polestar Engineered Optimization</strong></summary>
+
+- Официальная прошивка через дилеров Volvo (Мейр). Увеличение мощности, сохранение заводской гарантии.
+- **Запись:** `*5789`.
+</details>
+
+<details>
+<summary><strong>🏁 HEICO SPORTIV (Германия)</strong></summary>
+
+- Обвесы, диски, выхлопные системы, чип-тюнинг e.motion. Доставка в Израиль напрямую.
+- [🔗 Официальный сайт HEICO](https://www.heicosportiv.de)
+</details>
+
+<details>
+<summary><strong>⚙️ ZIPtuning — удалённые прошивки (Stage 1/2)</strong></summary>
+
+- Кастомные прошивки для Drive-E. Доставка по почте, требуется местный установщик.
+- [🔗 Сайт ZIPtuning](https://www.ziptuning.com)
+</details>
+
+> 🚨 **Внимание:** Неофициальный чип-тюнинг может аннулировать остаточную заводскую гарантию. Рекомендуется только Polestar Optimization.
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🧼 Мойки, химчистка, детейлинг
+
+<details>
+<summary><strong>🚗 Super Wash — Холон</strong></summary>
+
+- **Адрес:** ул. Ха-Меркава 36, Холон (промзона)
+- Ручная мойка, сухая чистка салона, полировка, керамика. Круглосуточно.
+- [🗺️ Маршрут](https://waze.com/ul?q=המרכבה+36+חולון)
+</details>
+
+<details>
+<summary><strong>✨ Star Car Wash — Ришон ле-Цион</strong></summary>
+
+- **Адрес:** Malkhei Yisrael St 1, Ришон ле-Цион
+- Детейлинг-центр: нанокерамика, антигравийная пленка, химчистка.
+- [🗺️ Маршрут](https://waze.com/ul?q=מלכי+ישראל+1+ראשון+לציון)
+</details>
+
+<details>
+<summary><strong>🧼 Pinto Wash — Бат-Ям</strong></summary>
+
+- **Адрес:** ул. Бен-Гурион 89, Бат-Ям
+- Бесконтактная мойка, восковое покрытие.
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🛞 Шиномонтаж, сезонное хранение, правка дисков
+
+<details>
+<summary><strong>⏱️ Tire Plus Holon</strong></summary>
+
+- **Адрес:** ул. Ха-Мелаха 9, Холон
+- Балансировка, ремонт проколов, сезонное хранение, продажа Michelin, Continental.
+- [🗺️ Маршрут](https://waze.com/ul?q=המלאכה+9+חולון)
+</details>
+
+<details>
+<summary><strong>⚙️ A.N. Romi Tires — Холон</strong></summary>
+
+- **Адрес:** ул. Ха-Оргим 6, Холон
+- Замена шин, ремонт, широкий ассортимент дисков.
+</details>
+
+<details>
+<summary><strong>🔧 Winer Tire — Бат-Ям</strong></summary>
+
+- **Адрес:** ул. Бен-Гурион 100, Бат-Ям
+- Компьютерная балансировка, правка дисков, бескамерный ремонт.
+</details>
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+## 🔩 Где заказать запчасти Volvo
+
+<details>
+<summary><strong>📦 אורגינל חלפים — Холон</strong></summary>
+
+- **Адрес:** ул. А-Оргим, Холон (промзона)
+- Оригинальные детали Volvo, аналоги, масла. Быстрая доставка по Гуш-Дану.
+</details>
+
+<details>
+<summary><strong>🇺🇸 FCP Euro (США)</strong></summary>
+
+- Пожизненная гарантия на детали, огромный каталог Volvo. Доставка в Израиль авиапочтой.
+- [🔗 Перейти на FCP Euro](https://www.fcpeuro.com)
+</details>
+
+<details>
+<summary><strong>🇪🇺 R&D Car Parts (Литва)</strong></summary>
+
+- Специализация Volvo / Saab, более 17 000 запчастей. Экспресс-доставка по миру.
+- [🔗 R&D Car Parts](https://www.rendcarparts.com)
+</details>
+
+> ✈️ **Важно:** При заказе из-за границы учитывайте таможенные пошлины (17% НДС + сбор). Группируйте заказы для экономии.
+
+[🔝 Вернуться к содержанию](#содержание)
+
+---
+
+*📌 Данные актуальны на 2026 год. Собраны из официальных источников, отзывов и рекомендаций клубов Volvo. Рекомендуем перед визитом уточнять часы работы и стоимость по телефону.*
