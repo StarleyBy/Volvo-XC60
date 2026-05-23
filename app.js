@@ -219,7 +219,7 @@ $('ignition-knob').addEventListener('click', () => {
 
 // ── APP INIT ─────────────────────────────────────────────
 async function showApp() {
-  const APP_VERSION = '2.6';
+  const APP_VERSION = '2.7';
   if (localStorage.getItem('volvo-app-version') !== APP_VERSION) {
     localStorage.removeItem('volvo-session');
     localStorage.setItem('volvo-app-version', APP_VERSION);
@@ -352,7 +352,15 @@ async function renderMarkdown(item, area, section) {
   area.innerHTML = '<p class="loading-msg">Загрузка…</p>';
   try {
     const text = await fetch(resolvePath(item.file) + '?v=' + Date.now()).then(r => r.text());
-    const html = marked.parse(text);
+    
+    // Настраиваем генерацию ID для заголовков
+    const renderer = new marked.Renderer();
+    renderer.heading = (text, level) => {
+      const id = text.toLowerCase().trim().replace(/[^\wа-яё]+/g, '-').replace(/^-+|-+$/g, '');
+      return `<h${level} id="${id}">${text}</h${level}>`;
+    };
+
+    const html = marked.parse(text, { renderer });
     const responsiveHtml = html.replace(/<table>/g, '<div class="table-wrapper"><table>').replace(/<\/table>/g, '</table></div>');
     area.innerHTML = `<div id="page-view"><div class="page-header"><span class="page-type-badge">${item.type}</span><button id="fav-toggle" class="topbar-btn" onclick="toggleFavorite('${item.id}', '${section.id}')" style="margin-left:10px; font-size:18px; border:none; background:transparent;">${isFavorite(item.id, section.id) ? '★' : '☆'}</button></div><div class="md-body">${responsiveHtml}</div></div>`;
     interceptLinks(area);
@@ -403,7 +411,9 @@ function interceptLinks(area) {
       if (!href) return;
       if (href.startsWith('#')) {
         e.preventDefault();
-        const target = area.querySelector(href);
+        const rawId = decodeURIComponent(href.substring(1)).toLowerCase().trim();
+        const slugId = rawId.replace(/[^\wа-яё]+/g, '-').replace(/^-+|-+$/g, '');
+        const target = area.querySelector(`[id="${slugId}"]`) || area.querySelector(`[id="${rawId}"]`) || area.querySelector(href);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       } else if (href.endsWith('.md') || href.endsWith('.html') || href.endsWith('.json') || href.endsWith('.pdf')) {
         e.preventDefault();
