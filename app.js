@@ -281,16 +281,31 @@ const AudioEngine = {
   updateToggle() { const btn = $('sound-toggle'); if (btn) btn.textContent = this.muted ? '🔇' : '🔊'; },
 
   updateUI() {
-    const playBtn = $('music-play');
-    if (playBtn) playBtn.textContent = this.audio.paused ? '▶️' : '⏸️';
+    const playIcon = $('play-icon');
+    if (playIcon) {
+      if (this.audio.paused) {
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z" fill="currentColor"/>';
+      } else {
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/>';
+      }
+    }
     
     const info = $('music-info');
     if (info) {
-      const name = this.playlist[this.currentIndex] || '---';
-      info.textContent = this.audio.paused ? 'Paused' : name.replace('.mp3', '');
+      const name = this.playlist[this.currentIndex] || 'STANDING BY';
+      info.textContent = this.audio.paused ? 'PAUSED' : name.replace('.mp3', '');
+    }
+
+    const dot = $('player-status-dot');
+    if (dot) {
+      dot.style.background = this.audio.paused ? '#777' : 'var(--accent-gold)';
+      dot.style.boxShadow = this.audio.paused ? 'none' : '0 0 10px var(--accent-gold)';
     }
   }
 };
+
+// Expose AudioEngine globally to ensure it's accessible from inline onclick handlers
+window.AudioEngine = AudioEngine;
 
 // ── AUTH & IGNITION ──────────────────────────────────────
 const AUTH_CODE = '456755';

@@ -54,6 +54,29 @@
 <!-- ── APP SHELL ─────────────────────────────────────── -->
 <div id="app">
 
+  <!-- PREMIUM FLOATING PLAYER -->
+  <div id="premium-player">
+    <div id="player-track-info">
+      <div id="player-status-dot"></div>
+      <span id="music-info">STANDING BY</span>
+    </div>
+    <div id="player-controls">
+      <button class="player-btn" onclick="AudioEngine.playPrev()" title="Previous">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L18 18V6z" fill="currentColor"/></svg>
+      </button>
+      <button class="player-btn main-action" id="music-play" onclick="AudioEngine.togglePlay()" title="Play/Pause">
+        <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+      <button class="player-btn" onclick="AudioEngine.playNext()" title="Next">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zm9-12v12h2V6z" fill="currentColor"/></svg>
+      </button>
+      <div class="player-divider"></div>
+      <button class="player-btn" onclick="AudioEngine.toggle()" id="sound-toggle-premium" title="Mute/Unmute">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+
   <!-- SIDEBAR -->
   <nav id="sidebar">
     <div id="sidebar-header">
@@ -88,17 +111,6 @@
       <button id="menu-toggle">☰</button>
       <div id="page-breadcrumb"></div>
       
-      <!-- MUSIC PLAYER CONTROLS -->
-      <div id="music-player">
-        <div id="music-info">---</div>
-        <div id="music-btns">
-          <button class="music-btn" onclick="AudioEngine.playPrev()">⏮</button>
-          <button class="music-btn" id="music-play" onclick="AudioEngine.togglePlay()">▶️</button>
-          <button class="music-btn" onclick="AudioEngine.playNext()">⏭</button>
-          <button class="music-btn" onclick="AudioEngine.stop()">⏹</button>
-        </div>
-      </div>
-
       <div style="flex:1"></div>
       <div id="topbar-actions">
         <button class="topbar-btn" onclick="updateFontSize(-1)">A−</button>
