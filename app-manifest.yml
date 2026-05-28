@@ -50,49 +50,49 @@ sections:
         visible: true
         tags: []
       - id: climat
-        title: "Climat"
+        title: "Климат-контроль"
         file: books/volvo/control/climat.md
         type: reference
         visible: true
         tags: []
       - id: cruiz
-        title: "Cruiz"
+        title: "Круиз-контроль"
         file: books/volvo/control/cruiz.md
         type: reference
         visible: true
         tags: []
       - id: innlight
-        title: "Innlight"
+        title: "Внутреннее освещение"
         file: books/volvo/control/innlight.md
         type: reference
         visible: true
         tags: []
       - id: korobka
-        title: "Korobka"
+        title: "Коробка передач"
         file: books/volvo/control/korobka.md
         type: reference
         visible: true
         tags: []
       - id: outlight
-        title: "Outlight"
+        title: "Внешнее освещение"
         file: books/volvo/control/outlight.md
         type: reference
         visible: true
         tags: []
       - id: panel
-        title: "Panel"
+        title: "Панель приборов"
         file: books/volvo/control/panel.md
         type: reference
         visible: true
         tags: []
       - id: safe
-        title: "Safe"
+        title: "Безопасность"
         file: books/volvo/control/safe.md
         type: reference
         visible: true
         tags: []
       - id: siting_mirrors
-        title: "Siting_mirrors"
+        title: "Зеркала и сиденья"
         file: books/volvo/control/siting_mirrors.md
         type: reference
         visible: true
@@ -103,7 +103,7 @@ sections:
     icon: 🛠️
     items:
       - id: parts
-        title: "Parts"
+        title: "Запчасти"
         file: books/volvo/repair/parts.json
         type: reference
         visible: true
@@ -114,13 +114,13 @@ sections:
     icon: ✨
     items:
       - id: changeparts
-        title: "Changeparts"
+        title: "Замена запчастей"
         file: books/volvo/care/changeparts.md
         type: reference
         visible: true
         tags: []
       - id: recomendations
-        title: "Recomendations"
+        title: "Рекомендации"
         file: books/volvo/care/recomendations.md
         type: reference
         visible: true
