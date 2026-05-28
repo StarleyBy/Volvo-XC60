@@ -87,6 +87,18 @@
     <div id="topbar">
       <button id="menu-toggle">☰</button>
       <div id="page-breadcrumb"></div>
+      
+      <!-- MUSIC PLAYER CONTROLS -->
+      <div id="music-player">
+        <div id="music-info">---</div>
+        <div id="music-btns">
+          <button class="music-btn" onclick="AudioEngine.playPrev()">⏮</button>
+          <button class="music-btn" id="music-play" onclick="AudioEngine.togglePlay()">▶️</button>
+          <button class="music-btn" onclick="AudioEngine.playNext()">⏭</button>
+          <button class="music-btn" onclick="AudioEngine.stop()">⏹</button>
+        </div>
+      </div>
+
       <div style="flex:1"></div>
       <div id="topbar-actions">
         <button class="topbar-btn" onclick="updateFontSize(-1)">A−</button>

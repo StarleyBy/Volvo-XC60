@@ -205,16 +205,19 @@ const AudioEngine = {
       console.log('AudioEngine: playCurrent aborted, muted or empty playlist');
       return;
     }
-    const trackUrl = 'music/' + this.playlist[this.currentIndex];
+    const trackName = this.playlist[this.currentIndex];
+    const trackUrl = 'music/' + trackName;
     console.log('AudioEngine: Playing track:', trackUrl);
     this.audio.src = trackUrl;
     this.audio.play().then(() => {
       console.log('AudioEngine: Playback started successfully');
+      this.updateUI();
     }).catch(e => {
       console.warn('AudioEngine: Autoplay blocked or error:', e);
+      this.updateUI();
       const playOnInteraction = () => {
         console.log('AudioEngine: User interaction detected, attempting play');
-        this.audio.play();
+        this.audio.play().then(() => this.updateUI());
         window.removeEventListener('click', playOnInteraction);
       };
       window.addEventListener('click', playOnInteraction);
@@ -225,6 +228,28 @@ const AudioEngine = {
     if (this.playlist.length === 0) return;
     this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
     this.playCurrent();
+  },
+
+  playPrev() {
+    if (this.playlist.length === 0) return;
+    this.currentIndex = (this.currentIndex - 1 + this.playlist.length) % this.playlist.length;
+    this.playCurrent();
+  },
+
+  togglePlay() {
+    if (this.audio.paused) {
+      if (!this.audio.src && this.playlist.length > 0) this.startBGM();
+      else this.audio.play().then(() => this.updateUI());
+    } else {
+      this.audio.pause();
+      this.updateUI();
+    }
+  },
+
+  stop() {
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.updateUI();
   },
 
   shuffle(array) {
@@ -238,6 +263,7 @@ const AudioEngine = {
     this.bgmNodes.forEach(n => { try { n.stop(); } catch(e) {} }); 
     this.bgmNodes = []; 
     this.audio.pause();
+    this.updateUI();
   },
 
   toggle() { 
@@ -246,13 +272,24 @@ const AudioEngine = {
     if (this.muted) {
       this.stopBGM(); 
     } else {
-      if (this.audio.src) this.audio.play();
+      if (this.audio.src) this.audio.play().then(() => this.updateUI());
       else this.startBGM(); 
     }
     this.updateToggle(); 
   },
 
-  updateToggle() { const btn = $('sound-toggle'); if (btn) btn.textContent = this.muted ? '🔇' : '🔊'; }
+  updateToggle() { const btn = $('sound-toggle'); if (btn) btn.textContent = this.muted ? '🔇' : '🔊'; },
+
+  updateUI() {
+    const playBtn = $('music-play');
+    if (playBtn) playBtn.textContent = this.audio.paused ? '▶️' : '⏸️';
+    
+    const info = $('music-info');
+    if (info) {
+      const name = this.playlist[this.currentIndex] || '---';
+      info.textContent = this.audio.paused ? 'Paused' : name.replace('.mp3', '');
+    }
+  }
 };
 
 // ── AUTH & IGNITION ──────────────────────────────────────
