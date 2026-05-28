@@ -13,265 +13,149 @@
             --text: #e0e0e0;
             --text-muted: #808080;
         }
-        body { font-family: 'IBM Plex Sans', sans-serif; color: var(--text); background: transparent; margin: 0; padding: 0; }
-        .container { max-width: 100%; padding: 20px; }
+        body { font-family: 'IBM Plex Sans', sans-serif; color: var(--text); background: transparent; margin: 0; padding: 0; overflow: hidden; }
+        .container { height: 100vh; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; }
         
         /* Табы */
-        .tabs { display: flex; gap: 5px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
         .tab-btn { 
-            padding: 10px 20px; background: transparent; border: none; color: var(--text-muted); 
-            cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em;
+            padding: 8px 15px; background: transparent; border: none; color: var(--text-muted); 
+            cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em;
             border-bottom: 2px solid transparent; transition: 0.2s;
         }
         .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-        .tab-content { display: none; animation: fadeIn 0.3s; }
-        .tab-content.active { display: block; }
+        .tab-content { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+        .tab-content.active { display: flex; }
 
-        h2 { font-weight: 300; color: #fff; margin-bottom: 20px; font-size: 1.5rem; }
-        
-        form { background: var(--panel); padding: 20px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 30px; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        .field { display: flex; flex-direction: column; gap: 5px; }
-        label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-        input, select, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 10px; border-radius: 2px; font-family: inherit; }
+        form { background: var(--panel); padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 15px; flex-shrink: 0; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+        .field { display: flex; flex-direction: column; gap: 3px; }
+        label { font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+        input, select, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 8px; border-radius: 2px; font-size: 13px; font-family: inherit; }
         input:focus { border-color: var(--gold); outline: none; }
         
-        button.submit-btn { background: #003057; color: #fff; border: none; padding: 12px 24px; cursor: pointer; border-radius: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.2s; margin-top: 20px; width: 100%; }
-        button.submit-btn:hover { background: #004a87; }
-        button.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .data-list { margin-top: 20px; display: grid; gap: 10px; }
-        .data-item { background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 4px; border-left: 4px solid var(--border); }
-        .data-item.type-log { border-left-color: #4facfe; }
-        .data-item.type-note { border-left-color: #43e97b; }
-        .data-item.type-remind { border-left-color: #fa709a; }
+        .submit-btn { background: #003057; color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 2px; font-weight: 600; text-transform: uppercase; font-size: 11px; margin-top: 10px; width: 100%; }
         
-        .item-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; color: var(--text-muted); }
-        .item-title { font-weight: 600; color: #fff; font-size: 15px; margin-bottom: 5px; }
-        .item-desc { font-size: 14px; color: #ccc; }
-        .item-price { color: var(--gold); font-weight: 700; }
+        /* Фрейм с данными */
+        #viewer-frame {
+            flex: 1;
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: #000;
+        }
 
-        .alert-box { background: rgba(250, 112, 154, 0.1); border: 1px solid #fa709a; padding: 15px; border-radius: 4px; margin-bottom: 20px; display: none; }
-        .alert-box h3 { font-size: 14px; color: #fa709a; margin-bottom: 10px; text-transform: uppercase; }
-
-        #status { margin-top: 10px; text-align: center; font-size: 13px; min-height: 1.5em; }
+        #status { margin-top: 5px; text-align: center; font-size: 12px; height: 1.2em; }
         .success { color: #4caf50; }
         .error { color: #f44336; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- АЛЕРТЫ ДЛЯ НАПОМИНАНИЙ -->
-        <div id="alert-section" class="alert-box">
-            <h3>⚠️ Внимание: Предстоящие события</h3>
-            <div id="alert-list"></div>
-        </div>
-
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('log')">Журнал ТО</button>
-            <button class="tab-btn" onclick="switchTab('notes')">Заметки</button>
-            <button class="tab-btn" onclick="switchTab('reminders')">Напоминания</button>
+            <button class="tab-btn active" onclick="switchTab('add')">Добавить запись</button>
+            <button class="tab-btn" onclick="switchTab('view')">Просмотр всех записей</button>
         </div>
 
-        <!-- РАЗДЕЛ: ЖУРНАЛ ТО -->
-        <div id="tab-log" class="tab-content active">
-            <form id="form-log">
-                <input type="hidden" name="type" value="log">
-                <div class="form-grid">
-                    <div class="field"><label>Дата</label><input type="date" name="date" required></div>
-                    <div class="field"><label>Пробег (км)</label><input type="number" name="mileage" required></div>
-                    <div class="field"><label>Работа / Запчасть</label><input type="text" name="title" placeholder="Замена масла" required></div>
-                    <div class="field"><label>Стоимость</label><input type="text" name="price" placeholder="0.00"></div>
+        <!-- ВКЛАДКА: ДОБАВЛЕНИЕ -->
+        <div id="tab-add" class="tab-content active">
+            <form id="main-form">
+                <div class="field" style="margin-bottom:10px;">
+                    <label>Тип записи</label>
+                    <select name="type" id="entry-type" onchange="updateFormFields()">
+                        <option value="log">🛠️ Журнал ТО</option>
+                        <option value="note">📝 Заметка / Блокнот</option>
+                        <option value="remind">🏁 Напоминание</option>
+                    </select>
                 </div>
-                <button type="submit" class="submit-btn">Добавить в журнал</button>
-            </form>
-            <div id="list-log" class="data-list"></div>
-        </div>
 
-        <!-- РАЗДЕЛ: ЗАМЕТКИ -->
-        <div id="tab-notes" class="tab-content">
-            <form id="form-notes">
-                <input type="hidden" name="type" value="note">
-                <div class="field" style="margin-bottom:15px;"><label>Заголовок</label><input type="text" name="title" placeholder="Купить зимнюю резину" required></div>
-                <div class="field"><label>Текст заметки</label><textarea name="content" rows="4" placeholder="Текст..."></textarea></div>
-                <button type="submit" class="submit-btn">Сохранить заметку</button>
-            </form>
-            <div id="list-notes" class="data-list"></div>
-        </div>
-
-        <!-- РАЗДЕЛ: НАПОМИНАНИЯ -->
-        <div id="tab-reminders" class="tab-content">
-            <form id="form-reminders">
-                <input type="hidden" name="type" value="remind">
-                <div class="form-grid">
-                    <div class="field"><label>Событие</label><input type="text" name="title" placeholder="Годовой тест" required></div>
-                    <div class="field"><label>Дата дедлайна</label><input type="date" name="date" required></div>
-                    <div class="field">
-                        <label>Напомнить за</label>
-                        <select name="remind_before">
-                            <option value="7">За неделю</option>
-                            <option value="3">За 3 дня</option>
-                            <option value="1">За день</option>
-                            <option value="0">В день события</option>
-                        </select>
-                    </div>
+                <div class="form-grid" id="form-fields">
+                    <!-- Поля меняются динамически -->
                 </div>
-                <button type="submit" class="submit-btn">Создать напоминание</button>
+                
+                <button type="submit" class="submit-btn">Сохранить в облако</button>
+                <div id="status"></div>
             </form>
-            <div id="list-reminders" class="data-list"></div>
+            <div style="color:var(--text-muted); font-size:11px; text-align:center;">
+                Записи сохраняются в вашу Google Таблицу мгновенно.
+            </div>
         </div>
 
-        <div id="status"></div>
+        <!-- ВКЛАДКА: ПРОСМОТР -->
+        <div id="tab-view" class="tab-content">
+            <iframe id="viewer-frame" src="about:blank"></iframe>
+            <button class="submit-btn" style="background:#222; margin-top:10px;" onclick="refreshViewer()">🔄 Обновить список</button>
+        </div>
     </div>
 
     <script>
-        // ВСТАВЬТЕ ВАШ URL ИЗ ИНСТРУКЦИИ НИЖЕ:
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwD6Z6HeNpAJsQwr4hksDhzdZQac689JKmd8xmfglAiiTSz1xFHQn1oJ4PPyuo5C3QH/exec'; 
-
-        const status = document.getElementById('status');
-
-        // Установка текущей даты по умолчанию
-        function setDefaultDate() {
-            const today = new Date().toISOString().split('T')[0];
-            document.querySelectorAll('input[type="date"]').forEach(input => {
-                input.value = today;
-            });
-        }
-        setDefaultDate();
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec'; 
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('onclick').includes(tab)));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tab));
+            if (tab === 'view') refreshViewer();
         }
 
-        // Универсальная отправка
-        async function handleForm(id) {
-            const form = document.getElementById(id);
-            form.onsubmit = async (e) => {
-                e.preventDefault();
-                if (!SCRIPT_URL) {
-                    status.innerHTML = '<span class="error">Ошибка: Сначала подключите Google Таблицу</span>';
-                    return;
-                }
-                status.textContent = 'Синхронизация с облаком...';
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                data.timestamp = new Date().toISOString();
-
-                try {
-                    await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        cache: 'no-cache',
-                        body: JSON.stringify(data)
-                    });
-                    status.innerHTML = '<span class="success">Готово! Данные сохранены.</span>';
-                    form.reset();
-                    setDefaultDate();
-                    setTimeout(loadData, 1500);
-                } catch (err) {
-                    status.innerHTML = '<span class="error">Ошибка связи: ' + err.message + '</span>';
-                }
-            };
+        function updateFormFields() {
+            const type = document.getElementById('entry-type').value;
+            const container = document.getElementById('form-fields');
+            const today = new Date().toISOString().split('T')[0];
+            
+            let html = '';
+            if (type === 'log') {
+                html = `
+                    <div class="field"><label>Дата</label><input type="date" name="date" value="${today}" required></div>
+                    <div class="field"><label>Пробег</label><input type="number" name="mileage" placeholder="км" required></div>
+                    <div class="field"><label>Работа</label><input type="text" name="title" placeholder="Замена масла" required></div>
+                    <div class="field"><label>Цена</label><input type="text" name="price" placeholder="₪"></div>
+                `;
+            } else if (type === 'note') {
+                html = `
+                    <div class="field" style="grid-column: 1 / -1;"><label>Заголовок</label><input type="text" name="title" placeholder="Тема..." required></div>
+                    <div class="field" style="grid-column: 1 / -1;"><label>Текст</label><textarea name="content" rows="3"></textarea></div>
+                `;
+            } else {
+                html = `
+                    <div class="field"><label>Событие</label><input type="text" name="title" placeholder="Тест" required></div>
+                    <div class="field"><label>Дата</label><input type="date" name="date" value="${today}" required></div>
+                    <div class="field"><label>Напомнить за (дн)</label><input type="number" name="remind_before" value="7"></div>
+                `;
+            }
+            container.innerHTML = html;
         }
+        updateFormFields();
 
-        ['form-log', 'form-notes', 'form-reminders'].forEach(handleForm);
+        document.getElementById('main-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('status');
+            status.innerHTML = 'Синхронизация...';
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            data.timestamp = new Date().toISOString();
 
-        async function loadData() {
-            if (!SCRIPT_URL) return;
             try {
-                const fetchUrl = SCRIPT_URL + (SCRIPT_URL.includes('?') ? '&' : '?') + 'action=get&v=' + Date.now();
-                const response = await fetch(fetchUrl, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'omit',
-                    redirect: 'follow'
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(data)
                 });
-
-                // Читаем как текст и парсим вручную (обход CORS на JSON)
-                const text = await response.text();
-                const allData = JSON.parse(text);
-
-                if (!Array.isArray(allData)) throw new Error('Invalid data format');
-
-                renderList(allData.filter(d => d.type === 'log'), 'list-log', 'log');
-                renderList(allData.filter(d => d.type === 'note'), 'list-notes', 'note');
-                renderList(allData.filter(d => d.type === 'remind'), 'list-reminders', 'remind');
-
-                checkReminders(allData.filter(d => d.type === 'remind'));
-                status.innerHTML = '';
-            } catch (e) {
-                console.warn('Load failed:', e);
-                status.innerHTML = '<span class="error">Данные загружаются... (попробуйте обновить через 5 сек)</span>';
+                status.innerHTML = '<span class="success">Запись добавлена!</span>';
+                e.target.reset();
+                updateFormFields();
+                setTimeout(() => { status.innerHTML = ''; switchTab('view'); }, 1500);
+            } catch (err) {
+                status.innerHTML = '<span class="error">Ошибка сети</span>';
             }
+        };
+
+        function refreshViewer() {
+            if (!SCRIPT_URL) return;
+            const frame = document.getElementById('viewer-frame');
+            frame.src = SCRIPT_URL + '?v=' + Date.now();
         }
-
-        function renderList(items, containerId, type) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            if (items.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">Записей пока нет</p>';
-                return;
-            }
-
-            items.sort((a,b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
-
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.className = `data-item type-${type}`;
-                let body = '';
-                if (type === 'log') {
-                    body = `
-                        <div class="item-header"><span>${item.date}</span> <span>${item.mileage} км</span></div>
-                        <div class="item-title">${item.title}</div>
-                        <div class="item-price">${item.price || '0.00'} ₪</div>
-                    `;
-                } else if (type === 'note') {
-                    body = `
-                        <div class="item-header"><span>${new Date(item.timestamp).toLocaleDateString()}</span></div>
-                        <div class="item-title">${item.title}</div>
-                        <div class="item-desc">${item.content || ''}</div>
-                    `;
-                } else {
-                    body = `
-                        <div class="item-header"><span>Дедлайн: ${item.date}</span></div>
-                        <div class="item-title">${item.title}</div>
-                        <div style="font-size:12px; color:var(--gold)">Напомнить за ${item.remind_before} дн.</div>
-                    `;
-                }
-                div.innerHTML = body;
-                container.appendChild(div);
-            });
-        }
-
-        function checkReminders(reminders) {
-            const alertBox = document.getElementById('alert-section');
-            const alertList = document.getElementById('alert-list');
-            alertList.innerHTML = '';
-            let hasAlerts = false;
-
-            const now = new Date();
-            reminders.forEach(r => {
-                const deadline = new Date(r.date);
-                const diffTime = deadline - now;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
-                if (diffDays >= 0 && diffDays <= parseInt(r.remind_before)) {
-                    hasAlerts = true;
-                    const p = document.createElement('p');
-                    p.style.marginBottom = '5px';
-                    p.innerHTML = `🏁 <strong>${r.title}</strong> через ${diffDays} дн. (${r.date})`;
-                    alertList.appendChild(p);
-                }
-            });
-
-            alertBox.style.display = hasAlerts ? 'block' : 'none';
-        }
-
-        loadData();
     </script>
 </body>
 </html>
