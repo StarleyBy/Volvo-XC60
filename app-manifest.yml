@@ -1,7 +1,7 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.0.0
-  updated: 2026-05-28 18:20
+  updated: 2026-05-28 18:45
 
 sections:
   - id: device
@@ -9,25 +9,25 @@ sections:
     icon: 🏗️
     items:
       - id: alarm
-        title: "Тревоги и предупреждения"
+        title: "Alarm"
         file: books/volvo/device/alarm.md
         type: reference
         visible: true
         tags: []
       - id: car
-        title: "Автомобиль"
+        title: "Car"
         file: books/volvo/device/car.md
         type: reference
         visible: true
         tags: []
       - id: podveska
-        title: "Подвеска"
+        title: "Podveska"
         file: books/volvo/device/podveska.md
         type: reference
         visible: true
         tags: []
       - id: spec
-        title: "Спецификация"
+        title: "Spec"
         file: books/volvo/device/spec.md
         type: reference
         visible: true
@@ -44,55 +44,55 @@ sections:
         visible: true
         tags: []
       - id: centalrscreen
-        title: "Центральный экран"
+        title: "Centalrscreen"
         file: books/volvo/control/centalrscreen.md
         type: reference
         visible: true
         tags: []
       - id: climat
-        title: "Климат-контроль"
+        title: "Climat"
         file: books/volvo/control/climat.md
         type: reference
         visible: true
         tags: []
       - id: cruiz
-        title: "Круиз-контроль"
+        title: "Cruiz"
         file: books/volvo/control/cruiz.md
         type: reference
         visible: true
         tags: []
       - id: innlight
-        title: "Внутреннее освещение"
+        title: "Innlight"
         file: books/volvo/control/innlight.md
         type: reference
         visible: true
         tags: []
       - id: korobka
-        title: "Коробка передач"
+        title: "Korobka"
         file: books/volvo/control/korobka.md
         type: reference
         visible: true
         tags: []
       - id: outlight
-        title: "Внешнее освещение"
+        title: "Outlight"
         file: books/volvo/control/outlight.md
         type: reference
         visible: true
         tags: []
       - id: panel
-        title: "Панель приборов"
+        title: "Panel"
         file: books/volvo/control/panel.md
         type: reference
         visible: true
         tags: []
       - id: safe
-        title: "Безопасность"
+        title: "Safe"
         file: books/volvo/control/safe.md
         type: reference
         visible: true
         tags: []
       - id: siting_mirrors
-        title: "Зеркала и сиденья"
+        title: "Siting_mirrors"
         file: books/volvo/control/siting_mirrors.md
         type: reference
         visible: true
@@ -103,7 +103,7 @@ sections:
     icon: 🛠️
     items:
       - id: parts
-        title: "Запчасти"
+        title: "Parts"
         file: books/volvo/repair/parts.json
         type: reference
         visible: true
@@ -114,13 +114,13 @@ sections:
     icon: ✨
     items:
       - id: changeparts
-        title: "Замена запчастей"
+        title: "Changeparts"
         file: books/volvo/care/changeparts.md
         type: reference
         visible: true
         tags: []
       - id: recomendations
-        title: "Рекомендации"
+        title: "Recomendations"
         file: books/volvo/care/recomendations.md
         type: reference
         visible: true
