@@ -27,6 +27,22 @@
   --font-mono:   'IBM Plex Mono', monospace;
 }
 
+/* ── LIGHT THEME OVERRIDES ────────────────────────────── */
+[data-theme='light'] {
+  --bg:          #f4f4f4;
+  --bg-panel:    #ffffff;
+  --bg-sidebar:  #eeeeee;
+  --bg-hover:    #e0e0e0;
+  --bg-active:   #005a9c;
+  
+  --text:        #1a1a1a;
+  --text-muted:  #666666;
+  --text-sidebar:#333333;
+  
+  --border:      #dddddd;
+  --accent-gold: #a6894a; /* Slightly darker gold for better contrast on white */
+}
+
 /* ── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; width: 100%; overflow: hidden; background: #000; }
