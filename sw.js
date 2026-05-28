@@ -1,4 +1,4 @@
-const CACHE_NAME = 'volvo-v1';
+const CACHE_NAME = 'volvo-v2';
 
 const STATIC_ASSETS = [
   './',
@@ -14,13 +14,8 @@ const STATIC_ASSETS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
-      console.log(`[SW] Installing ${CACHE_NAME} and pre-caching core assets...`);
       for (const url of STATIC_ASSETS) {
-        try {
-          await cache.add(url);
-        } catch (err) {
-          console.warn(`[SW] Could not pre-cache: ${url}`);
-        }
+        try { await cache.add(url); } catch (err) {}
       }
     })
   );
@@ -37,10 +32,14 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Пропускаем запросы к Google Scripts мимо кэша (решает проблему CORS/Redirect)
-  if (event.request.url.includes('script.google.com')) return;
+  const url = event.request.url;
 
-  if (!event.request.url.startsWith('http')) return;
+  // ПОЛНЫЙ ОБХОД ДЛЯ GOOGLE SCRIPTS (решает CORS и Redirects)
+  if (url.includes('script.google.com') || url.includes('googleusercontent.com')) {
+    return; // Позволяем браузеру обработать запрос напрямую
+  }
+
+  if (!url.startsWith('http')) return;
 
   event.respondWith(
     fetch(event.request)
@@ -57,6 +56,8 @@ self.addEventListener('fetch', event => {
           if (event.request.destination === 'document') {
             return caches.match('./index.html');
           }
+          // Возвращаем пустой ответ вместо undefined, чтобы избежать ошибки "Failed to convert to Response"
+          return new Response('', { status: 404, statusText: 'Not Found' });
         });
       })
   );

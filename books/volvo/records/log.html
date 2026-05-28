@@ -183,23 +183,30 @@
         async function loadData() {
             if (!SCRIPT_URL) return;
             try {
-                // Добавляем t=Date.now() чтобы избежать кэширования
-                const response = await fetch(SCRIPT_URL + '?action=get&t=' + Date.now(), {
+                // Прямой запрос с отключением кэша
+                const fetchUrl = SCRIPT_URL + (SCRIPT_URL.includes('?') ? '&' : '?') + 'action=get&v=' + Date.now();
+                const response = await fetch(fetchUrl, {
                     method: 'GET',
+                    mode: 'cors',
+                    credentials: 'omit',
                     redirect: 'follow'
                 });
+
+                if (!response.ok) throw new Error('Network response was not ok');
                 const allData = await response.json();
-                
+
                 renderList(allData.filter(d => d.type === 'log'), 'list-log', 'log');
                 renderList(allData.filter(d => d.type === 'note'), 'list-notes', 'note');
                 renderList(allData.filter(d => d.type === 'remind'), 'list-reminders', 'remind');
-                
+
                 checkReminders(allData.filter(d => d.type === 'remind'));
+                status.innerHTML = ''; // Очищаем статус при успехе
             } catch (e) {
-                console.warn('Не удалось загрузить данные:', e);
-                status.innerHTML = '<span class="error">Ошибка загрузки данных из таблицы.</span>';
+                console.warn('Sync failed:', e);
+                status.innerHTML = '<span class="error">Данные загружены из кэша или ошибка связи.</span>';
             }
         }
+
 
         function renderList(items, containerId, type) {
             const container = document.getElementById(containerId);
