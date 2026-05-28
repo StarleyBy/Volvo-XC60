@@ -310,38 +310,25 @@ function setStatus(msg, cls) {
     document.getElementById('status').innerHTML = msg ? `<span class="${cls}">${msg}</span>` : '';
 }
 
-function loadRecords() {
+async function loadRecords() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('spinning');
     document.getElementById('sync-status').textContent = '● СИНХРОНИЗАЦИЯ...';
-
-    // Удаляем предыдущий скрипт если есть
-    const old = document.getElementById('jsonp-script');
-    if (old) old.remove();
-
-    // Глобальный callback для JSONP
-    window._jsonpCallback = function(json) {
-        try {
-            allRecords = (json.rows || []).reverse();
-            renderRecords();
-            document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
-        } catch(e) {
-            document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка обработки данных</div>`;
-            document.getElementById('sync-status').textContent = '● ОШИБКА';
-        } finally {
-            icon.classList.remove('spinning');
-        }
-    };
-
-    const script = document.createElement('script');
-    script.id = 'jsonp-script';
-    script.onerror = () => {
-        document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка загрузки</div>`;
+    try {
+        const url = SCRIPT_URL + '?action=get&v=' + Date.now();
+        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const res = await fetch(proxy);
+        const outer = await res.json();
+        const json = JSON.parse(outer.contents);
+        allRecords = (json.rows || []).reverse();
+        renderRecords();
+        document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
+    } catch(e) {
+        document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка: ${e.message}</div>`;
         document.getElementById('sync-status').textContent = '● ОШИБКА';
+    } finally {
         icon.classList.remove('spinning');
-    };
-    script.src = SCRIPT_URL + '?action=get&callback=_jsonpCallback&v=' + Date.now();
-    document.head.appendChild(script);
+    }
 }
 
 function setFilter(f) {
