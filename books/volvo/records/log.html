@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бортовой журнал</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -17,308 +17,229 @@
             --green: #43e97b;
             --pink: #fa709a;
         }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
-        html, body {
+        body {
             background: var(--bg);
             color: var(--text);
             font-family: 'IBM Plex Mono', monospace;
-            /* НЕТ overflow:hidden — страница скроллится целиком */
+            padding: 12px;
         }
 
-        .app { display: flex; flex-direction: column; min-height: 100vh; }
-
-        /* ── TOP BAR ── */
-        .topbar {
+        /* ── HEADER ── */
+        .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
+            padding: 10px 14px;
             background: var(--panel);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
         }
-        .topbar-title {
+        .header-title {
             font-family: 'Oswald', sans-serif;
             font-size: 16px;
             letter-spacing: 0.12em;
             color: var(--gold);
             text-transform: uppercase;
         }
-        .topbar-sub { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+        .sync-status { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
 
-        /* ── TABS ── */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
+        /* ── SECTION ── */
+        .section {
             background: var(--panel);
-            position: sticky;
-            top: 49px;
-            z-index: 9;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
         }
-        .tab-btn {
-            flex: 1;
-            padding: 13px;
-            background: transparent;
-            border: none;
-            color: var(--muted);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: 0.15s;
+        .section-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid var(--border);
         }
-        .tab-btn .ticon { font-size: 16px; }
-        .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-        /* ── PAGES ── */
-        .page { display: none; padding: 14px 14px 30px; flex-direction: column; gap: 12px; }
-        .page.active { display: flex; }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-arrow {
+            color: var(--muted);
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+        .section.collapsed .section-arrow { transform: rotate(-90deg); }
+        .section-body { padding: 14px; }
+        .section.collapsed .section-body { display: none; }
 
         /* ── TYPE PICKER ── */
-        .type-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .type-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
         .type-card {
-            background: var(--panel);
+            background: #111;
             border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: 0.15s;
-            font-size: 10px;
-            color: var(--muted);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            border-radius: 8px;
+            padding: 10px 4px;
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+            cursor: pointer; transition: 0.15s;
+            font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase;
         }
-        .type-card .tc-icon { font-size: 24px; }
+        .type-card .tc-icon { font-size: 22px; }
         .type-card.selected { border-color: var(--gold); background: #1e1700; color: var(--gold); }
 
         /* ── FORM ── */
-        .form-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .field { display: flex; flex-direction: column; gap: 5px; }
+        .form-fields { display: flex; flex-direction: column; gap: 10px; }
+        .field { display: flex; flex-direction: column; gap: 4px; }
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .field label { font-size: 9px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; }
         .field input, .field textarea {
-            background: #111;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 15px;
-            font-family: 'IBM Plex Mono', monospace;
-            width: 100%;
-            -webkit-appearance: none;
+            background: #111; border: 1px solid var(--border); color: var(--text);
+            padding: 11px 12px; border-radius: 6px; font-size: 15px;
+            font-family: 'IBM Plex Mono', monospace; width: 100%; -webkit-appearance: none;
         }
         .field input:focus, .field textarea:focus { border-color: var(--gold); outline: none; background: #141000; }
         .field textarea { resize: none; line-height: 1.5; }
 
         .save-btn {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            cursor: pointer;
-            width: 100%;
+            background: var(--gold); color: #000; border: none; padding: 14px; border-radius: 8px;
+            font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; width: 100%; margin-top: 10px;
         }
         .save-btn:active { opacity: 0.75; }
         .save-btn:disabled { opacity: 0.4; }
-
-        #status { text-align: center; font-size: 12px; min-height: 18px; }
+        #status { text-align: center; font-size: 12px; min-height: 18px; margin-top: 8px; }
         .success { color: var(--green); }
         .error { color: var(--pink); }
 
-        /* ── VIEW CONTROLS ── */
+        /* ── VIEW ── */
         .view-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
         }
         .record-count { font-size: 11px; color: var(--muted); }
         .refresh-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 7px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: 'IBM Plex Mono', monospace;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 6px 12px; border-radius: 20px; font-size: 11px; cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 5px;
         }
-        .refresh-icon { display: inline-block; }
-        .refresh-icon.spinning { animation: spin 0.7s linear infinite; }
+        .refresh-btn:active { border-color: var(--gold); color: var(--gold); }
+        .refresh-icon.spinning { display: inline-block; animation: spin 0.7s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── FILTERS ── */
-        .filter-bar {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .filter-bar { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; scrollbar-width: none; }
         .filter-bar::-webkit-scrollbar { display: none; }
         .filter-chip {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 6px 13px;
-            font-size: 11px;
-            color: var(--muted);
-            cursor: pointer;
-            white-space: nowrap;
-            font-family: 'IBM Plex Mono', monospace;
-            flex-shrink: 0;
+            background: #111; border: 1px solid var(--border); border-radius: 20px;
+            padding: 5px 12px; font-size: 11px; color: var(--muted); cursor: pointer;
+            white-space: nowrap; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
         }
         .filter-chip.active { background: #1e1700; border-color: var(--gold); color: var(--gold); }
 
         /* ── RECORDS ── */
         #records-list { display: flex; flex-direction: column; gap: 10px; }
 
+        /* На широком экране — две колонки */
+        @media (min-width: 600px) {
+            #records-list { display: grid; grid-template-columns: 1fr 1fr; }
+            .type-picker { grid-template-columns: repeat(3, 1fr); }
+            .field-row { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
         .record-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            animation: fadeIn 0.2s ease;
+            background: #111; border: 1px solid var(--border); border-radius: 10px;
+            overflow: hidden; animation: fadeIn 0.2s ease;
         }
         @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } }
-
         .record-top {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 14px;
-            border-left: 3px solid;
+            display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-left: 3px solid;
         }
-        .record-icon { font-size: 22px; flex-shrink: 0; }
+        .record-icon { font-size: 20px; flex-shrink: 0; }
         .record-main { flex: 1; min-width: 0; }
         .record-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 17px;
-            letter-spacing: 0.04em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 0.04em;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .record-date { font-size: 10px; color: var(--muted); margin-top: 3px; }
-        .record-price { font-family: 'Oswald', sans-serif; font-size: 18px; color: var(--gold); flex-shrink: 0; }
+        .record-date { font-size: 10px; color: var(--muted); margin-top: 2px; }
+        .record-price { font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--gold); flex-shrink: 0; }
         .record-mileage { font-size: 11px; color: var(--muted); padding: 0 14px 8px; }
-        .record-content {
-            font-size: 13px; color: #aaa; line-height: 1.5;
-            padding: 8px 14px 12px;
-            border-top: 1px solid var(--border);
-        }
+        .record-content { font-size: 13px; color: #aaa; line-height: 1.5; padding: 8px 14px 12px; border-top: 1px solid var(--border); }
 
-        .state-msg {
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .state-msg .big { font-size: 36px; }
+        .state-msg { text-align: center; color: var(--muted); font-size: 12px; padding: 30px 20px; }
+        .state-msg .big { font-size: 32px; display: block; margin-bottom: 8px; }
     </style>
 </head>
 <body>
-<div class="app">
 
-    <div class="topbar">
-        <div class="topbar-title">🚗 Бортовой журнал</div>
-        <div class="topbar-sub" id="sync-status">● ГОТОВ</div>
+    <div class="header">
+        <div class="header-title">🚗 Бортовой журнал</div>
+        <div class="sync-status" id="sync-status">● ГОТОВ</div>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" id="tab-add-btn" onclick="showPage('add')">
-            <span class="ticon">✚</span> Добавить
-        </button>
-        <button class="tab-btn" id="tab-view-btn" onclick="showPage('view')">
-            <span class="ticon">☰</span> Журнал
-        </button>
-    </div>
-
-    <!-- PAGE: ADD -->
-    <div class="page active" id="page-add">
-        <div class="type-picker">
-            <div class="type-card selected" data-type="log" onclick="selectType('log')">
-                <span class="tc-icon">🛠️</span>Журнал ТО
+    <!-- ДОБАВИТЬ ЗАПИСЬ -->
+    <div class="section" id="section-add">
+        <div class="section-header" onclick="toggleSection('add')">
+            <div class="section-title">✚ Добавить запись</div>
+            <span class="section-arrow">▾</span>
+        </div>
+        <div class="section-body">
+            <div class="type-picker">
+                <div class="type-card selected" data-type="log" onclick="selectType('log')">
+                    <span class="tc-icon">🛠️</span>Журнал ТО
+                </div>
+                <div class="type-card" data-type="note" onclick="selectType('note')">
+                    <span class="tc-icon">📝</span>Заметка
+                </div>
+                <div class="type-card" data-type="remind" onclick="selectType('remind')">
+                    <span class="tc-icon">🏁</span>Событие
+                </div>
             </div>
-            <div class="type-card" data-type="note" onclick="selectType('note')">
-                <span class="tc-icon">📝</span>Заметка
-            </div>
-            <div class="type-card" data-type="remind" onclick="selectType('remind')">
-                <span class="tc-icon">🏁</span>Событие
-            </div>
-        </div>
-        <div class="form-card">
-            <div id="form-fields"></div>
-        </div>
-        <button class="save-btn" id="save-btn" onclick="submitForm()">Сохранить</button>
-        <div id="status"></div>
-    </div>
-
-    <!-- PAGE: VIEW -->
-    <div class="page" id="page-view">
-        <div class="view-controls">
-            <span class="record-count" id="record-count">— записей</span>
-            <button class="refresh-btn" onclick="loadRecords()">
-                <span class="refresh-icon" id="refresh-icon">↻</span> Обновить
-            </button>
-        </div>
-        <div class="filter-bar">
-            <div class="filter-chip active" data-filter="all" onclick="setFilter('all')">Все</div>
-            <div class="filter-chip" data-filter="log" onclick="setFilter('log')">🛠️ ТО</div>
-            <div class="filter-chip" data-filter="note" onclick="setFilter('note')">📝 Заметки</div>
-            <div class="filter-chip" data-filter="remind" onclick="setFilter('remind')">🏁 События</div>
-        </div>
-        <div id="records-list">
-            <div class="state-msg"><span class="big">📋</span>Нажмите «Обновить» для загрузки</div>
+            <div class="form-fields" id="form-fields"></div>
+            <button class="save-btn" id="save-btn" onclick="submitForm()">Сохранить</button>
+            <div id="status"></div>
         </div>
     </div>
 
-</div>
+    <!-- ЖУРНАЛ -->
+    <div class="section" id="section-view">
+        <div class="section-header" onclick="toggleSection('view')">
+            <div class="section-title">☰ Журнал записей</div>
+            <span class="section-arrow">▾</span>
+        </div>
+        <div class="section-body">
+            <div class="view-controls">
+                <span class="record-count" id="record-count">— записей</span>
+                <button class="refresh-btn" onclick="loadRecords()">
+                    <span id="refresh-icon">↻</span> Обновить
+                </button>
+            </div>
+            <div class="filter-bar">
+                <div class="filter-chip active" data-filter="all" onclick="setFilter('all')">Все</div>
+                <div class="filter-chip" data-filter="log" onclick="setFilter('log')">🛠️ ТО</div>
+                <div class="filter-chip" data-filter="note" onclick="setFilter('note')">📝 Заметки</div>
+                <div class="filter-chip" data-filter="remind" onclick="setFilter('remind')">🏁 События</div>
+            </div>
+            <div id="records-list">
+                <div class="state-msg"><span class="big">📋</span>Нажмите «Обновить» для загрузки</div>
+            </div>
+        </div>
+    </div>
+
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec';
 let currentType = 'log';
 let currentFilter = 'all';
 let allRecords = [];
 
-function showPage(name) {
-    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
-    document.getElementById('tab-add-btn').classList.toggle('active', name === 'add');
-    document.getElementById('tab-view-btn').classList.toggle('active', name === 'view');
-    if (name === 'view' && allRecords.length === 0) loadRecords();
+function toggleSection(name) {
+    document.getElementById('section-' + name).classList.toggle('collapsed');
 }
 
 function selectType(type) {
@@ -337,21 +258,18 @@ function renderFormFields() {
                 <div class="field"><label>Пробег (км)</label><input type="number" id="f-mileage" placeholder="120000" inputmode="numeric"></div>
             </div>
             <div class="field"><label>Вид работы</label><input type="text" id="f-title" placeholder="Замена масла..."></div>
-            <div class="field"><label>Стоимость (₪)</label><input type="text" id="f-price" placeholder="450" inputmode="decimal"></div>
-        `;
+            <div class="field"><label>Стоимость (₪)</label><input type="text" id="f-price" placeholder="450" inputmode="decimal"></div>`;
     } else if (currentType === 'note') {
         html = `
             <div class="field"><label>Заголовок</label><input type="text" id="f-title" placeholder="Тема заметки..."></div>
-            <div class="field"><label>Текст</label><textarea id="f-content" rows="4" placeholder="Текст..."></textarea></div>
-        `;
+            <div class="field"><label>Текст</label><textarea id="f-content" rows="4" placeholder="Текст..."></textarea></div>`;
     } else {
         html = `
             <div class="field"><label>Событие</label><input type="text" id="f-title" placeholder="ТО у дилера..."></div>
             <div class="field-row">
                 <div class="field"><label>Дата</label><input type="date" id="f-date" value="${today}"></div>
                 <div class="field"><label>Напомнить за (дн)</label><input type="number" id="f-remind" value="7" inputmode="numeric"></div>
-            </div>
-        `;
+            </div>`;
     }
     document.getElementById('form-fields').innerHTML = html;
 }
@@ -364,9 +282,7 @@ async function submitForm() {
     btn.disabled = true;
     setStatus('Синхронизация...', '');
     const data = {
-        type: currentType,
-        timestamp: new Date().toISOString(),
-        title,
+        type: currentType, timestamp: new Date().toISOString(), title,
         date: document.getElementById('f-date')?.value || '',
         mileage: document.getElementById('f-mileage')?.value || '',
         price: document.getElementById('f-price')?.value || '',
@@ -378,7 +294,11 @@ async function submitForm() {
         setStatus('✓ Запись сохранена!', 'success');
         renderFormFields();
         allRecords.unshift(data);
-        setTimeout(() => { setStatus('', ''); showPage('view'); renderRecords(); }, 1200);
+        // Открыть журнал, свернуть форму
+        document.getElementById('section-add').classList.add('collapsed');
+        document.getElementById('section-view').classList.remove('collapsed');
+        renderRecords();
+        setTimeout(() => setStatus('', ''), 2000);
     } catch(e) {
         setStatus('Ошибка сети', 'error');
     } finally {
