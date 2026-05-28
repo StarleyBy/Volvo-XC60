@@ -76,13 +76,19 @@ function toggleFavorite(itemId, sectionId) {
 }
 function isFavorite(itemId, sectionId) { return State.favorites.some(f => f.itemId === itemId && f.sectionId === sectionId); }
 
-// ── AUDIO ENGINE (ADVANCED SYNTH 4.0) ───────────────────
+// ── AUDIO ENGINE (ADVANCED SYNTH 4.0 + PLAYLIST) ────────
 const AudioEngine = {
   ctx: null,
   muted: localStorage.getItem('volvo-muted') === 'true',
   bgmNodes: [],
+  playlist: [],
+  currentIndex: -1,
+  audio: new Audio(),
   
-  init() { this.updateToggle(); },
+  init() {
+    this.updateToggle();
+    this.audio.onended = () => this.playNext();
+  },
 
   async ensureCtx() {
     if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -160,6 +166,19 @@ const AudioEngine = {
 
   startBGM() {
     if (this.muted) return;
+    if (State.manifest && State.manifest.meta && State.manifest.meta.music && State.manifest.meta.music.length > 0) {
+      if (this.playlist.length === 0) {
+        this.playlist = [...State.manifest.meta.music];
+        this.shuffle(this.playlist);
+        this.currentIndex = 0;
+      }
+      this.playCurrent();
+    } else {
+      this.startSynthBGM();
+    }
+  },
+
+  startSynthBGM() {
     this.ensureCtx().then(() => {
       this.stopBGM();
       const createPad = (freq, vol) => {
@@ -177,8 +196,50 @@ const AudioEngine = {
     });
   },
 
-  stopBGM() { this.bgmNodes.forEach(n => { try { n.stop(); } catch(e) {} }); this.bgmNodes = []; },
-  toggle() { this.muted = !this.muted; localStorage.setItem('volvo-muted', this.muted); if (this.muted) this.stopBGM(); else this.startBGM(); this.updateToggle(); },
+  playCurrent() {
+    if (this.muted || this.playlist.length === 0) return;
+    this.audio.src = 'music/' + this.playlist[this.currentIndex];
+    this.audio.play().catch(e => {
+      console.warn('Autoplay blocked. Waiting for user interaction.');
+      const playOnInteraction = () => {
+        this.audio.play();
+        window.removeEventListener('click', playOnInteraction);
+      };
+      window.addEventListener('click', playOnInteraction);
+    });
+  },
+
+  playNext() {
+    if (this.playlist.length === 0) return;
+    this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
+    this.playCurrent();
+  },
+
+  shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  },
+
+  stopBGM() { 
+    this.bgmNodes.forEach(n => { try { n.stop(); } catch(e) {} }); 
+    this.bgmNodes = []; 
+    this.audio.pause();
+  },
+
+  toggle() { 
+    this.muted = !this.muted; 
+    localStorage.setItem('volvo-muted', this.muted); 
+    if (this.muted) {
+      this.stopBGM(); 
+    } else {
+      if (this.audio.src) this.audio.play();
+      else this.startBGM(); 
+    }
+    this.updateToggle(); 
+  },
+
   updateToggle() { const btn = $('sound-toggle'); if (btn) btn.textContent = this.muted ? '🔇' : '🔊'; }
 };
 
@@ -237,6 +298,7 @@ async function showApp() {
     if (sid && iid) openItemById(sid, iid, false);
     else if (sid) openSection(sid, false);
     else showHome(false);
+    AudioEngine.startBGM();
   } catch(e) { console.error('Manifest fail', e); }
 }
 

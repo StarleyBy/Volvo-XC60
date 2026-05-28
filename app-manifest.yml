@@ -1,7 +1,8 @@
 meta:
   app: Volvo XC60 Справочник
-  version: 2.0.0
-  updated: 2026-05-28 20:51
+  version: 2.7.0
+  updated: 2026-05-28 21:15
+  music: ["track1.mp3","track2.mp3","track3.mp3","track4.mp3","track5.mp3","track6.mp3","track7.mp3","track8.mp3"]
 
 sections:
   - id: device
@@ -129,11 +130,11 @@ sections:
   - id: inspection
     title: Техосмотр
     icon: 📋
-    items:
+    items: []
   - id: schedule
     title: График замен
     icon: 📅
-    items:
+    items: []
   - id: records
     title: Записи
     icon: 📝
@@ -189,12 +190,12 @@ sections:
   - id: insurance
     title: Страховка
     icon: 🛡️
-    items:
+    items: []
   - id: tuning
     title: Тюнинг
     icon: 🏎️
-    items:
+    items: []
   - id: accessories
     title: Аксессуары
     icon: 👜
-    items:
+    items: []

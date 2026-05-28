@@ -100,10 +100,17 @@ function parseSimpleYaml(yaml) {
 }
 
 function generateYaml() {
+  const musicDir = 'music';
+  let musicList = [];
+  if (fs.existsSync(musicDir)) {
+    musicList = fs.readdirSync(musicDir).filter(f => f.endsWith('.mp3'));
+  }
+
   let yaml = `meta:
   app: Volvo XC60 Справочник
-  version: 2.0.0
+  version: 2.7.0
   updated: ${new Date().toISOString().replace('T', ' ').substring(0, 16)}
+  music: ${JSON.stringify(musicList)}
 
 sections:`;
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бортовой журнал и Дневник</title>
+    <title>Бортовой журнал</title>
     <style>
         :root {
             --gold: #c5a059;
@@ -16,7 +16,6 @@
         body { font-family: 'IBM Plex Sans', sans-serif; color: var(--text); background: transparent; margin: 0; padding: 0; overflow: hidden; }
         .container { height: 100vh; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; }
         
-        /* Табы */
         .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
         .tab-btn { 
             padding: 8px 15px; background: transparent; border: none; color: var(--text-muted); 
@@ -33,29 +32,46 @@
         .field { display: flex; flex-direction: column; gap: 3px; }
         label { font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
         input, select, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 8px; border-radius: 2px; font-size: 13px; font-family: inherit; }
-        input:focus { border-color: var(--gold); outline: none; }
+        input:focus, textarea:focus { border-color: var(--gold); outline: none; }
         
         .submit-btn { background: #003057; color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 2px; font-weight: 600; text-transform: uppercase; font-size: 11px; margin-top: 10px; width: 100%; }
-        
-        /* Фрейм с данными */
-        #viewer-frame {
-            flex: 1;
-            width: 100%;
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Список записей */
+        #records-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+        #records-list::-webkit-scrollbar { width: 4px; }
+        #records-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .item {
+            background: var(--panel);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            background: #000;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid var(--gold);
+            flex-shrink: 0;
         }
+        .item-date { font-size: 11px; color: #888; margin-bottom: 5px; }
+        .item-title { font-weight: bold; color: #fff; font-size: 15px; }
+        .item-price { color: var(--gold); margin-top: 5px; font-weight: bold; font-size: 13px; }
+        .item-content { margin-top: 7px; font-size: 13px; color: #ccc; line-height: 1.4; }
+        .item-mileage { font-size: 12px; color: #888; margin-top: 4px; }
+
+        .loading { text-align: center; color: var(--text-muted); padding: 30px; font-size: 13px; }
+        .empty { text-align: center; color: #555; padding: 40px; font-size: 13px; }
 
         #status { margin-top: 5px; text-align: center; font-size: 12px; height: 1.2em; }
         .success { color: #4caf50; }
         .error { color: #f44336; }
+
+        .refresh-btn { background: #1e1e1e; color: var(--text-muted); border: 1px solid var(--border); padding: 8px; cursor: pointer; border-radius: 2px; font-size: 11px; margin-bottom: 10px; width: 100%; flex-shrink: 0; }
+        .refresh-btn:hover { color: var(--text); }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('add')">Добавить запись</button>
-            <button class="tab-btn" onclick="switchTab('view')">Просмотр всех записей</button>
+            <button class="tab-btn" onclick="switchTab('view')">Просмотр записей</button>
         </div>
 
         <!-- ВКЛАДКА: ДОБАВЛЕНИЕ -->
@@ -69,12 +85,8 @@
                         <option value="remind">🏁 Напоминание</option>
                     </select>
                 </div>
-
-                <div class="form-grid" id="form-fields">
-                    <!-- Поля меняются динамически -->
-                </div>
-                
-                <button type="submit" class="submit-btn">Сохранить в облако</button>
+                <div class="form-grid" id="form-fields"></div>
+                <button type="submit" class="submit-btn" id="submit-btn">Сохранить в облако</button>
                 <div id="status"></div>
             </form>
             <div style="color:var(--text-muted); font-size:11px; text-align:center;">
@@ -84,25 +96,26 @@
 
         <!-- ВКЛАДКА: ПРОСМОТР -->
         <div id="tab-view" class="tab-content">
-            <iframe id="viewer-frame" src="about:blank"></iframe>
-            <button class="submit-btn" style="background:#222; margin-top:10px;" onclick="refreshViewer()">🔄 Обновить список</button>
+            <button class="refresh-btn" onclick="loadRecords()">🔄 Обновить список</button>
+            <div id="records-list">
+                <div class="loading">Загрузка...</div>
+            </div>
         </div>
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec'; 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec';
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('onclick').includes(tab)));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tab));
-            if (tab === 'view') refreshViewer();
+            if (tab === 'view') loadRecords();
         }
 
         function updateFormFields() {
             const type = document.getElementById('entry-type').value;
             const container = document.getElementById('form-fields');
             const today = new Date().toISOString().split('T')[0];
-            
             let html = '';
             if (type === 'log') {
                 html = `
@@ -113,8 +126,8 @@
                 `;
             } else if (type === 'note') {
                 html = `
-                    <div class="field" style="grid-column: 1 / -1;"><label>Заголовок</label><input type="text" name="title" placeholder="Тема..." required></div>
-                    <div class="field" style="grid-column: 1 / -1;"><label>Текст</label><textarea name="content" rows="3"></textarea></div>
+                    <div class="field" style="grid-column:1/-1"><label>Заголовок</label><input type="text" name="title" placeholder="Тема..." required></div>
+                    <div class="field" style="grid-column:1/-1"><label>Текст</label><textarea name="content" rows="3"></textarea></div>
                 `;
             } else {
                 html = `
@@ -130,10 +143,11 @@
         document.getElementById('main-form').onsubmit = async (e) => {
             e.preventDefault();
             const status = document.getElementById('status');
+            const btn = document.getElementById('submit-btn');
             status.innerHTML = 'Синхронизация...';
-            
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
+            btn.disabled = true;
+
+            const data = Object.fromEntries(new FormData(e.target).entries());
             data.timestamp = new Date().toISOString();
 
             try {
@@ -142,19 +156,53 @@
                     mode: 'no-cors',
                     body: JSON.stringify(data)
                 });
-                status.innerHTML = '<span class="success">Запись добавлена!</span>';
+                status.innerHTML = '<span class="success">✓ Запись добавлена!</span>';
                 e.target.reset();
                 updateFormFields();
                 setTimeout(() => { status.innerHTML = ''; switchTab('view'); }, 1500);
             } catch (err) {
                 status.innerHTML = '<span class="error">Ошибка сети</span>';
+            } finally {
+                btn.disabled = false;
             }
         };
 
-        function refreshViewer() {
-            if (!SCRIPT_URL) return;
-            const frame = document.getElementById('viewer-frame');
-            frame.src = SCRIPT_URL + '?v=' + Date.now();
+        async function loadRecords() {
+            const list = document.getElementById('records-list');
+            list.innerHTML = '<div class="loading">Загрузка...</div>';
+            
+            try {
+                const res = await fetch(SCRIPT_URL + '?action=get&v=' + Date.now());
+                const json = await res.json();
+                
+                if (!json.rows || json.rows.length === 0) {
+                    list.innerHTML = '<div class="empty">Записей нет</div>';
+                    return;
+                }
+
+                const rows = [...json.rows].reverse();
+                list.innerHTML = rows.map(r => {
+                    const icon = r.type === 'log' ? '🛠️' : r.type === 'note' ? '📝' : '🏁';
+                    const color = r.type === 'log' ? '#4facfe' : r.type === 'note' ? '#43e97b' : '#fa709a';
+                    const dateStr = r.date || (r.timestamp ? new Date(r.timestamp).toLocaleDateString('ru-RU') : '');
+                    
+                    return `
+                        <div class="item" style="border-left-color:${color}">
+                            <div class="item-date">${dateStr}</div>
+                            <div class="item-title">${icon} ${escHtml(r.title || '')}</div>
+                            ${r.mileage ? `<div class="item-mileage">📍 ${r.mileage} км</div>` : ''}
+                            ${r.price ? `<div class="item-price">${escHtml(String(r.price))} ₪</div>` : ''}
+                            ${r.content ? `<div class="item-content">${escHtml(String(r.content))}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                list.innerHTML = `<div class="empty">Ошибка загрузки: ${err.message}</div>`;
+            }
+        }
+
+        function escHtml(s) {
+            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         }
     </script>
 </body>
