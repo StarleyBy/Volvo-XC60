@@ -165,15 +165,19 @@ const AudioEngine = {
   },
 
   startBGM() {
+    console.log('AudioEngine: startBGM called, muted:', this.muted);
     if (this.muted) return;
     if (State.manifest && State.manifest.meta && State.manifest.meta.music && State.manifest.meta.music.length > 0) {
+      console.log('AudioEngine: Found music in manifest:', State.manifest.meta.music);
       if (this.playlist.length === 0) {
         this.playlist = [...State.manifest.meta.music];
         this.shuffle(this.playlist);
         this.currentIndex = 0;
+        console.log('AudioEngine: Playlist initialized and shuffled:', this.playlist);
       }
       this.playCurrent();
     } else {
+      console.log('AudioEngine: No music in manifest (or not loaded yet), starting synth BGM');
       this.startSynthBGM();
     }
   },
@@ -197,11 +201,19 @@ const AudioEngine = {
   },
 
   playCurrent() {
-    if (this.muted || this.playlist.length === 0) return;
-    this.audio.src = 'music/' + this.playlist[this.currentIndex];
-    this.audio.play().catch(e => {
-      console.warn('Autoplay blocked. Waiting for user interaction.');
+    if (this.muted || this.playlist.length === 0) {
+      console.log('AudioEngine: playCurrent aborted, muted or empty playlist');
+      return;
+    }
+    const trackUrl = 'music/' + this.playlist[this.currentIndex];
+    console.log('AudioEngine: Playing track:', trackUrl);
+    this.audio.src = trackUrl;
+    this.audio.play().then(() => {
+      console.log('AudioEngine: Playback started successfully');
+    }).catch(e => {
+      console.warn('AudioEngine: Autoplay blocked or error:', e);
       const playOnInteraction = () => {
+        console.log('AudioEngine: User interaction detected, attempting play');
         this.audio.play();
         window.removeEventListener('click', playOnInteraction);
       };

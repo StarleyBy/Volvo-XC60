@@ -1,8 +1,13 @@
 meta:
   app: Volvo XC60 Справочник
+<<<<<<< HEAD
   version: 2.7.0
   updated: 2026-05-28 21:15
   music: ["track1.mp3","track2.mp3","track3.mp3","track4.mp3","track5.mp3","track6.mp3","track7.mp3","track8.mp3"]
+=======
+  version: 2.0.0
+  updated: 2026-05-28 21:02
+>>>>>>> ed3def8cb02afd54656db84eddc29e64f4efd4f0
 
 sections:
   - id: device
