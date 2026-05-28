@@ -13,90 +13,36 @@
             --border: #2a2a2a;
             --text: #e8e8e8;
             --muted: #606060;
-            --blue: #4facfe;
-            --green: #43e97b;
-            --pink: #fa709a;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Mono', monospace; padding: 12px; }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'IBM Plex Mono', monospace;
-            padding: 12px;
-        }
-
-        /* ── HEADER ── */
         .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 14px;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 14px; background: var(--panel);
+            border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px;
         }
-        .header-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 16px;
-            letter-spacing: 0.12em;
-            color: var(--gold);
-            text-transform: uppercase;
-        }
-        .sync-status { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+        .header-title { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+        .sync-status { font-size: 10px; color: var(--muted); }
 
-        /* ── SECTION ── */
-        .section {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            cursor: pointer;
-            user-select: none;
-            border-bottom: 1px solid var(--border);
-        }
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gold);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-arrow {
-            color: var(--muted);
-            font-size: 12px;
-            transition: transform 0.2s;
-        }
+        .section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
+        .section-title { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px; }
+        .section-arrow { color: var(--muted); font-size: 12px; transition: transform 0.2s; }
         .section.collapsed .section-arrow { transform: rotate(-90deg); }
         .section-body { padding: 14px; }
         .section.collapsed .section-body { display: none; }
 
-        /* ── TYPE PICKER ── */
         .type-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
         .type-card {
-            background: #111;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 4px;
-            display: flex; flex-direction: column; align-items: center; gap: 5px;
-            cursor: pointer; transition: 0.15s;
-            font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase;
+            background: #111; border: 1.5px solid var(--border); border-radius: 8px;
+            padding: 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 5px;
+            cursor: pointer; transition: 0.15s; font-size: 10px; color: var(--muted);
+            letter-spacing: 0.05em; text-transform: uppercase;
         }
         .type-card .tc-icon { font-size: 22px; }
         .type-card.selected { border-color: var(--gold); background: #1e1700; color: var(--gold); }
 
-        /* ── FORM ── */
         .form-fields { display: flex; flex-direction: column; gap: 10px; }
         .field { display: flex; flex-direction: column; gap: 4px; }
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -106,7 +52,7 @@
             padding: 11px 12px; border-radius: 6px; font-size: 15px;
             font-family: 'IBM Plex Mono', monospace; width: 100%; -webkit-appearance: none;
         }
-        .field input:focus, .field textarea:focus { border-color: var(--gold); outline: none; background: #141000; }
+        .field input:focus, .field textarea:focus { border-color: var(--gold); outline: none; }
         .field textarea { resize: none; line-height: 1.5; }
 
         .save-btn {
@@ -116,127 +62,68 @@
         }
         .save-btn:active { opacity: 0.75; }
         .save-btn:disabled { opacity: 0.4; }
-        #status { text-align: center; font-size: 12px; min-height: 18px; margin-top: 8px; }
-        .success { color: var(--green); }
-        .error { color: var(--pink); }
 
-        /* ── VIEW ── */
-        .view-controls {
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+        #status { text-align: center; font-size: 12px; min-height: 18px; margin-top: 8px; }
+        .success { color: #43e97b; }
+        .error { color: #fa709a; }
+
+        /* Iframe для просмотра — растягивается по содержимому через JS */
+        #viewer-frame {
+            width: 100%;
+            border: none;
+            display: block;
+            min-height: 200px;
         }
-        .record-count { font-size: 11px; color: var(--muted); }
+
         .refresh-btn {
             background: transparent; border: 1px solid var(--border); color: var(--muted);
             padding: 6px 12px; border-radius: 20px; font-size: 11px; cursor: pointer;
-            font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 5px;
+            font-family: 'IBM Plex Mono', monospace; margin-bottom: 10px;
         }
         .refresh-btn:active { border-color: var(--gold); color: var(--gold); }
-        .refresh-icon.spinning { display: inline-block; animation: spin 0.7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .filter-bar { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; scrollbar-width: none; }
-        .filter-bar::-webkit-scrollbar { display: none; }
-        .filter-chip {
-            background: #111; border: 1px solid var(--border); border-radius: 20px;
-            padding: 5px 12px; font-size: 11px; color: var(--muted); cursor: pointer;
-            white-space: nowrap; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
-        }
-        .filter-chip.active { background: #1e1700; border-color: var(--gold); color: var(--gold); }
-
-        /* ── RECORDS ── */
-        #records-list { display: flex; flex-direction: column; gap: 10px; }
-
-        /* На широком экране — две колонки */
-        @media (min-width: 600px) {
-            #records-list { display: grid; grid-template-columns: 1fr 1fr; }
-            .type-picker { grid-template-columns: repeat(3, 1fr); }
-            .field-row { grid-template-columns: 1fr 1fr 1fr; }
-        }
-
-        .record-card {
-            background: #111; border: 1px solid var(--border); border-radius: 10px;
-            overflow: hidden; animation: fadeIn 0.2s ease;
-        }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } }
-        .record-top {
-            display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-left: 3px solid;
-        }
-        .record-icon { font-size: 20px; flex-shrink: 0; }
-        .record-main { flex: 1; min-width: 0; }
-        .record-title {
-            font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 0.04em;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .record-date { font-size: 10px; color: var(--muted); margin-top: 2px; }
-        .record-price { font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--gold); flex-shrink: 0; }
-        .record-mileage { font-size: 11px; color: var(--muted); padding: 0 14px 8px; }
-        .record-content { font-size: 13px; color: #aaa; line-height: 1.5; padding: 8px 14px 12px; border-top: 1px solid var(--border); }
-
-        .state-msg { text-align: center; color: var(--muted); font-size: 12px; padding: 30px 20px; }
-        .state-msg .big { font-size: 32px; display: block; margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="header-title">🚗 Бортовой журнал</div>
-        <div class="sync-status" id="sync-status">● ГОТОВ</div>
-    </div>
+<div class="header">
+    <div class="header-title">🚗 Бортовой журнал</div>
+    <div class="sync-status" id="sync-status">● ГОТОВ</div>
+</div>
 
-    <!-- ДОБАВИТЬ ЗАПИСЬ -->
-    <div class="section" id="section-add">
-        <div class="section-header" onclick="toggleSection('add')">
-            <div class="section-title">✚ Добавить запись</div>
-            <span class="section-arrow">▾</span>
-        </div>
-        <div class="section-body">
-            <div class="type-picker">
-                <div class="type-card selected" data-type="log" onclick="selectType('log')">
-                    <span class="tc-icon">🛠️</span>Журнал ТО
-                </div>
-                <div class="type-card" data-type="note" onclick="selectType('note')">
-                    <span class="tc-icon">📝</span>Заметка
-                </div>
-                <div class="type-card" data-type="remind" onclick="selectType('remind')">
-                    <span class="tc-icon">🏁</span>Событие
-                </div>
-            </div>
-            <div class="form-fields" id="form-fields"></div>
-            <button class="save-btn" id="save-btn" onclick="submitForm()">Сохранить</button>
-            <div id="status"></div>
-        </div>
+<!-- ДОБАВИТЬ -->
+<div class="section" id="section-add">
+    <div class="section-header" onclick="toggleSection('add')">
+        <div class="section-title">✚ Добавить запись</div>
+        <span class="section-arrow">▾</span>
     </div>
+    <div class="section-body">
+        <div class="type-picker">
+            <div class="type-card selected" data-type="log" onclick="selectType('log')"><span class="tc-icon">🛠️</span>Журнал ТО</div>
+            <div class="type-card" data-type="note" onclick="selectType('note')"><span class="tc-icon">📝</span>Заметка</div>
+            <div class="type-card" data-type="remind" onclick="selectType('remind')"><span class="tc-icon">🏁</span>Событие</div>
+        </div>
+        <div class="form-fields" id="form-fields"></div>
+        <button class="save-btn" id="save-btn" onclick="submitForm()">Сохранить</button>
+        <div id="status"></div>
+    </div>
+</div>
 
-    <!-- ЖУРНАЛ -->
-    <div class="section" id="section-view">
-        <div class="section-header" onclick="toggleSection('view')">
-            <div class="section-title">☰ Журнал записей</div>
-            <span class="section-arrow">▾</span>
-        </div>
-        <div class="section-body">
-            <div class="view-controls">
-                <span class="record-count" id="record-count">— записей</span>
-                <button class="refresh-btn" onclick="loadRecords()">
-                    <span id="refresh-icon">↻</span> Обновить
-                </button>
-            </div>
-            <div class="filter-bar">
-                <div class="filter-chip active" data-filter="all" onclick="setFilter('all')">Все</div>
-                <div class="filter-chip" data-filter="log" onclick="setFilter('log')">🛠️ ТО</div>
-                <div class="filter-chip" data-filter="note" onclick="setFilter('note')">📝 Заметки</div>
-                <div class="filter-chip" data-filter="remind" onclick="setFilter('remind')">🏁 События</div>
-            </div>
-            <div id="records-list">
-                <div class="state-msg"><span class="big">📋</span>Нажмите «Обновить» для загрузки</div>
-            </div>
-        </div>
+<!-- ПРОСМОТР -->
+<div class="section" id="section-view">
+    <div class="section-header" onclick="toggleSection('view')">
+        <div class="section-title">☰ Журнал записей</div>
+        <span class="section-arrow">▾</span>
     </div>
+    <div class="section-body">
+        <button class="refresh-btn" onclick="refreshFrame()">↻ Обновить список</button>
+        <iframe id="viewer-frame" src="about:blank" scrolling="no" onload="resizeFrame(this)"></iframe>
+    </div>
+</div>
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec';
+
 let currentType = 'log';
-let currentFilter = 'all';
-let allRecords = [];
 
 function toggleSection(name) {
     document.getElementById('section-' + name).classList.toggle('collapsed');
@@ -293,12 +180,9 @@ async function submitForm() {
         await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
         setStatus('✓ Запись сохранена!', 'success');
         renderFormFields();
-        allRecords.unshift(data);
-        // Открыть журнал, свернуть форму
         document.getElementById('section-add').classList.add('collapsed');
         document.getElementById('section-view').classList.remove('collapsed');
-        renderRecords();
-        setTimeout(() => setStatus('', ''), 2000);
+        setTimeout(() => { refreshFrame(); setStatus('', ''); }, 1000);
     } catch(e) {
         setStatus('Ошибка сети', 'error');
     } finally {
@@ -310,62 +194,19 @@ function setStatus(msg, cls) {
     document.getElementById('status').innerHTML = msg ? `<span class="${cls}">${msg}</span>` : '';
 }
 
-async function loadRecords() {
-    const icon = document.getElementById('refresh-icon');
-    icon.classList.add('spinning');
-    document.getElementById('sync-status').textContent = '● СИНХРОНИЗАЦИЯ...';
+function refreshFrame() {
+    const frame = document.getElementById('viewer-frame');
+    frame.src = SCRIPT_URL + '?v=' + Date.now();
+}
+
+function resizeFrame(frame) {
     try {
-        const url = SCRIPT_URL + '?action=get&v=' + Date.now();
-        const proxy = 'https://corsproxy.io/?' + encodeURIComponent(url);
-        const res = await fetch(proxy);
-        const json = await res.json();
-        allRecords = (json.rows || []).reverse();
-        renderRecords();
-        document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
+        const h = frame.contentDocument.body.scrollHeight;
+        if (h > 0) frame.style.height = h + 'px';
     } catch(e) {
-        document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка: ${e.message}</div>`;
-        document.getElementById('sync-status').textContent = '● ОШИБКА';
-    } finally {
-        icon.classList.remove('spinning');
+        // cross-origin — ставим фиксированную большую высоту
+        frame.style.height = '1200px';
     }
-}
-
-function setFilter(f) {
-    currentFilter = f;
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.filter === f));
-    renderRecords();
-}
-
-function renderRecords() {
-    const list = document.getElementById('records-list');
-    const filtered = currentFilter === 'all' ? allRecords : allRecords.filter(r => r.type === currentFilter);
-    document.getElementById('record-count').textContent = filtered.length + ' записей';
-    if (filtered.length === 0) {
-        list.innerHTML = `<div class="state-msg"><span class="big">📭</span>Нет записей в этой категории</div>`;
-        return;
-    }
-    list.innerHTML = filtered.map(r => {
-        const icon  = r.type === 'log' ? '🛠️' : r.type === 'note' ? '📝' : '🏁';
-        const color = r.type === 'log' ? 'var(--blue)' : r.type === 'note' ? 'var(--green)' : 'var(--pink)';
-        const dateStr = r.date || (r.timestamp ? new Date(r.timestamp).toLocaleDateString('ru-RU') : '');
-        return `
-        <div class="record-card">
-          <div class="record-top" style="border-left-color:${color}">
-            <span class="record-icon">${icon}</span>
-            <div class="record-main">
-              <div class="record-title">${esc(r.title||'')}</div>
-              <div class="record-date">${dateStr}</div>
-            </div>
-            ${r.price ? `<div class="record-price">${esc(String(r.price))} ₪</div>` : ''}
-          </div>
-          ${r.mileage ? `<div class="record-mileage">📍 ${esc(String(r.mileage))} км</div>` : ''}
-          ${r.content ? `<div class="record-content">${esc(String(r.content))}</div>` : ''}
-        </div>`;
-    }).join('');
-}
-
-function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
 </body>
