@@ -233,7 +233,7 @@
     </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwb3eGRaqFRLZzp7x07G4ByZmuG9tWzNFnfWo2hPSTE8Ma4rvvR9yYh5taqFcDjA9es/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxe9ABv21rfuSxFkl0Pywk3LH--LP_MexhmhUKRRHAA1yRDhf9781-gWz_MRta19pqY/exec';
 let currentType = 'log';
 let currentFilter = 'all';
 let allRecords = [];
@@ -310,22 +310,38 @@ function setStatus(msg, cls) {
     document.getElementById('status').innerHTML = msg ? `<span class="${cls}">${msg}</span>` : '';
 }
 
-async function loadRecords() {
+function loadRecords() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('spinning');
     document.getElementById('sync-status').textContent = '● СИНХРОНИЗАЦИЯ...';
-    try {
-        const res = await fetch(SCRIPT_URL + '?action=get&v=' + Date.now());
-        const json = await res.json();
-        allRecords = (json.rows || []).reverse();
-        renderRecords();
-        document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
-    } catch(e) {
+
+    // Удаляем предыдущий скрипт если есть
+    const old = document.getElementById('jsonp-script');
+    if (old) old.remove();
+
+    // Глобальный callback для JSONP
+    window._jsonpCallback = function(json) {
+        try {
+            allRecords = (json.rows || []).reverse();
+            renderRecords();
+            document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
+        } catch(e) {
+            document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка обработки данных</div>`;
+            document.getElementById('sync-status').textContent = '● ОШИБКА';
+        } finally {
+            icon.classList.remove('spinning');
+        }
+    };
+
+    const script = document.createElement('script');
+    script.id = 'jsonp-script';
+    script.onerror = () => {
         document.getElementById('records-list').innerHTML = `<div class="state-msg"><span class="big">⚠️</span>Ошибка загрузки</div>`;
         document.getElementById('sync-status').textContent = '● ОШИБКА';
-    } finally {
         icon.classList.remove('spinning');
-    }
+    };
+    script.src = SCRIPT_URL + '?action=get&callback=_jsonpCallback&v=' + Date.now();
+    document.head.appendChild(script);
 }
 
 function setFilter(f) {
