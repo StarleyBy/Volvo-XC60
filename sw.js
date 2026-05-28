@@ -1,4 +1,4 @@
-const CACHE_NAME = 'volvo-v2';
+const CACHE_NAME = 'volvo-v3';
 
 const STATIC_ASSETS = [
   './',
@@ -34,9 +34,9 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = event.request.url;
 
-  // ПОЛНЫЙ ОБХОД ДЛЯ GOOGLE SCRIPTS (решает CORS и Redirects)
-  if (url.includes('script.google.com') || url.includes('googleusercontent.com')) {
-    return; // Позволяем браузеру обработать запрос напрямую
+  // ПОЛНЫЙ ИГНОР ДЛЯ GOOGLE (решает проблемы с CORS и Redirects в PWA)
+  if (url.includes('google.com') || url.includes('googleusercontent.com') || url.includes('script.google.com')) {
+    return; // Не вызываем event.respondWith — браузер делает нативный запрос
   }
 
   if (!url.startsWith('http')) return;
@@ -56,8 +56,7 @@ self.addEventListener('fetch', event => {
           if (event.request.destination === 'document') {
             return caches.match('./index.html');
           }
-          // Возвращаем пустой ответ вместо undefined, чтобы избежать ошибки "Failed to convert to Response"
-          return new Response('', { status: 404, statusText: 'Not Found' });
+          return new Response('', { status: 404 });
         });
       })
   );

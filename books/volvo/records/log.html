@@ -183,7 +183,6 @@
         async function loadData() {
             if (!SCRIPT_URL) return;
             try {
-                // Прямой запрос с отключением кэша
                 const fetchUrl = SCRIPT_URL + (SCRIPT_URL.includes('?') ? '&' : '?') + 'action=get&v=' + Date.now();
                 const response = await fetch(fetchUrl, {
                     method: 'GET',
@@ -192,21 +191,23 @@
                     redirect: 'follow'
                 });
 
-                if (!response.ok) throw new Error('Network response was not ok');
-                const allData = await response.json();
+                // Читаем как текст и парсим вручную (обход CORS на JSON)
+                const text = await response.text();
+                const allData = JSON.parse(text);
+
+                if (!Array.isArray(allData)) throw new Error('Invalid data format');
 
                 renderList(allData.filter(d => d.type === 'log'), 'list-log', 'log');
                 renderList(allData.filter(d => d.type === 'note'), 'list-notes', 'note');
                 renderList(allData.filter(d => d.type === 'remind'), 'list-reminders', 'remind');
 
                 checkReminders(allData.filter(d => d.type === 'remind'));
-                status.innerHTML = ''; // Очищаем статус при успехе
+                status.innerHTML = '';
             } catch (e) {
-                console.warn('Sync failed:', e);
-                status.innerHTML = '<span class="error">Данные загружены из кэша или ошибка связи.</span>';
+                console.warn('Load failed:', e);
+                status.innerHTML = '<span class="error">Данные загружаются... (попробуйте обновить через 5 сек)</span>';
             }
         }
-
 
         function renderList(items, containerId, type) {
             const container = document.getElementById(containerId);
