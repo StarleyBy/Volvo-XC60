@@ -316,10 +316,9 @@ async function loadRecords() {
     document.getElementById('sync-status').textContent = '● СИНХРОНИЗАЦИЯ...';
     try {
         const url = SCRIPT_URL + '?action=get&v=' + Date.now();
-        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const proxy = 'https://corsproxy.io/?' + encodeURIComponent(url);
         const res = await fetch(proxy);
-        const outer = await res.json();
-        const json = JSON.parse(outer.contents);
+        const json = await res.json();
         allRecords = (json.rows || []).reverse();
         renderRecords();
         document.getElementById('sync-status').textContent = '● СИНХРОНИЗИРОВАНО';
