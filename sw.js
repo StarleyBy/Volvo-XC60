@@ -37,6 +37,9 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Пропускаем запросы к Google Scripts мимо кэша (решает проблему CORS/Redirect)
+  if (event.request.url.includes('script.google.com')) return;
+
   if (!event.request.url.startsWith('http')) return;
 
   event.respondWith(
