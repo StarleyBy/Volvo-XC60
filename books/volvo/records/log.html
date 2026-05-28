@@ -133,6 +133,15 @@
 
         const status = document.getElementById('status');
 
+        // Установка текущей даты по умолчанию
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.value = today;
+            });
+        }
+        setDefaultDate();
+
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('onclick').includes(tab)));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tab));
@@ -156,11 +165,13 @@
                     await fetch(SCRIPT_URL, {
                         method: 'POST',
                         mode: 'no-cors',
+                        cache: 'no-cache',
                         body: JSON.stringify(data)
                     });
-                    status.innerHTML = '<span class="success">Готово! Данные сохранены в таблицу.</span>';
+                    status.innerHTML = '<span class="success">Готово! Данные сохранены.</span>';
                     form.reset();
-                    setTimeout(loadData, 1000);
+                    setDefaultDate();
+                    setTimeout(loadData, 1500);
                 } catch (err) {
                     status.innerHTML = '<span class="error">Ошибка связи: ' + err.message + '</span>';
                 }
@@ -172,7 +183,11 @@
         async function loadData() {
             if (!SCRIPT_URL) return;
             try {
-                const response = await fetch(SCRIPT_URL + '?action=get');
+                // Добавляем t=Date.now() чтобы избежать кэширования
+                const response = await fetch(SCRIPT_URL + '?action=get&t=' + Date.now(), {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
                 const allData = await response.json();
                 
                 renderList(allData.filter(d => d.type === 'log'), 'list-log', 'log');
@@ -182,6 +197,7 @@
                 checkReminders(allData.filter(d => d.type === 'remind'));
             } catch (e) {
                 console.warn('Не удалось загрузить данные:', e);
+                status.innerHTML = '<span class="error">Ошибка загрузки данных из таблицы.</span>';
             }
         }
 
