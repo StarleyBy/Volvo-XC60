@@ -9,7 +9,7 @@ sections:
     icon: 🏗️
     items:
       - id: alarm
-        title: "ТревогиAlarm"
+        title: "Тревоги и предупреждения"
         file: books/volvo/device/alarm.md
         type: reference
         visible: true
