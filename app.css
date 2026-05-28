@@ -29,19 +29,54 @@
 
 /* ── LIGHT THEME OVERRIDES ────────────────────────────── */
 [data-theme='light'] {
-  --bg:          #f4f4f4;
-  --bg-panel:    #ffffff;
-  --bg-sidebar:  #eeeeee;
-  --bg-hover:    #e0e0e0;
-  --bg-active:   #005a9c;
+  --bg:          #ffffff;
+  --bg-panel:    #f8f8f8;
+  --bg-sidebar:  #f0f0f0;
+  --bg-hover:    #e8e8e8;
+  --bg-active:   #e0e0e0;
   
-  --text:        #1a1a1a;
-  --text-muted:  #666666;
-  --text-sidebar:#333333;
+  --text:        #111111;
+  --text-muted:  #555555;
+  --text-sidebar:#222222;
   
-  --border:      #dddddd;
-  --accent-gold: #a6894a; /* Slightly darker gold for better contrast on white */
+  --border:      #cccccc;
+  --accent-gold: #8b6d31; /* Darker gold for light background */
 }
+
+/* Theme-aware element adjustments */
+[data-theme='light'] body { color: var(--text); background: var(--bg); }
+[data-theme='light'] #sidebar-title { color: var(--text); }
+[data-theme='light'] #sidebar-logo svg circle,
+[data-theme='light'] #sidebar-logo svg path,
+[data-theme='light'] #sidebar-logo svg rect { stroke: var(--text); fill: var(--text); }
+[data-theme='light'] #sidebar-logo svg circle { fill: none; }
+
+[data-theme='light'] .nav-item { color: var(--text-sidebar); }
+[data-theme='light'] .nav-item.active { background: rgba(0,0,0,0.05); color: var(--accent-gold); border-left-color: var(--accent-gold); }
+
+[data-theme='light'] .topbar-btn { background: rgba(0,0,0,0.05); border-color: #ccc; color: #333; }
+[data-theme='light'] .topbar-btn:hover { border-color: var(--accent-gold); background: rgba(0,0,0,0.1); }
+[data-theme='light'] #menu-toggle { color: var(--text); }
+
+[data-theme='light'] .md-body, 
+[data-theme='light'] .md-body p,
+[data-theme='light'] .md-body li { color: #333; }
+[data-theme='light'] .md-body h1, 
+[data-theme='light'] .md-body h3 { color: #000; }
+[data-theme='light'] .home-greeting h1 { color: #000; }
+[data-theme='light'] #vehicle-title { color: #000; }
+[data-theme='light'] .home-card-title { color: #333; }
+[data-theme='light'] .index-card-title { color: #111; }
+[data-theme='light'] .loading-msg { color: var(--text); }
+
+[data-theme='light'] #premium-player {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+[data-theme='light'] #music-info { color: #111; }
+[data-theme='light'] .player-btn { color: rgba(0, 0, 0, 0.5); }
+[data-theme='light'] .player-btn:hover { color: #000; }
 
 /* ── RESET ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
