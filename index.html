@@ -56,7 +56,10 @@
 
   <!-- PREMIUM FLOATING PLAYER -->
   <div id="premium-player">
-    <div id="player-track-info">
+    <button id="player-minimize-btn" onclick="AudioEngine.toggleMinimize()" title="Minimize/Expand">
+      <svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 13H5v-2h14v2z" fill="currentColor"/></svg>
+    </button>
+    <div id="player-track-info" onclick="AudioEngine.toggleMinimize()">
       <div id="player-status-dot"></div>
       <span id="music-info">STANDING BY</span>
     </div>

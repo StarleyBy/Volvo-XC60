@@ -84,10 +84,100 @@ const AudioEngine = {
   playlist: [],
   currentIndex: -1,
   audio: new Audio(),
+  minimized: localStorage.getItem('volvo-player-minimized') === 'true',
   
   init() {
     this.updateToggle();
     this.audio.onended = () => this.playNext();
+    this.applyMinimize();
+    this.initDraggable();
+  },
+
+  toggleMinimize() {
+    this.minimized = !this.minimized;
+    localStorage.setItem('volvo-player-minimized', this.minimized);
+    this.applyMinimize();
+  },
+
+  applyMinimize() {
+    const player = $('premium-player');
+    const btn = $('player-minimize-btn');
+    if (player) {
+      if (this.minimized) {
+        player.classList.add('minimized');
+        if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 16.5l-6-6h12l-6 6z" fill="currentColor"/></svg>';
+      } else {
+        player.classList.remove('minimized');
+        if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M19 13H5v-2h14v2z" fill="currentColor"/></svg>';
+      }
+    }
+  },
+
+  initDraggable() {
+    const player = $('premium-player');
+    if (!player) return;
+
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    // Load position
+    const pos = JSON.parse(localStorage.getItem('volvo-player-pos') || 'null');
+    if (pos) {
+      xOffset = pos.x;
+      yOffset = pos.y;
+      player.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+    }
+
+    const dragStart = (e) => {
+      // Don't drag if clicking buttons
+      if (e.target.closest('.player-btn') || e.target.id === 'player-minimize-btn' || e.target.closest('#player-minimize-btn')) return;
+      
+      const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+      
+      initialX = clientX - xOffset;
+      initialY = clientY - yOffset;
+
+      if (e.target.closest('#premium-player')) {
+        isDragging = true;
+      }
+    };
+
+    const dragEnd = () => {
+      if (!isDragging) return;
+      initialX = currentX;
+      initialY = currentY;
+      isDragging = false;
+      localStorage.setItem('volvo-player-pos', JSON.stringify({ x: xOffset, y: yOffset }));
+    };
+
+    const drag = (e) => {
+      if (isDragging) {
+        e.preventDefault();
+        const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+        
+        currentX = clientX - initialX;
+        currentY = clientY - initialY;
+
+        xOffset = currentX;
+        yOffset = currentY;
+        player.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+      }
+    };
+
+    player.addEventListener("touchstart", dragStart, { passive: false });
+    document.addEventListener("touchend", dragEnd, false);
+    document.addEventListener("touchmove", drag, { passive: false });
+
+    player.addEventListener("mousedown", dragStart, false);
+    document.addEventListener("mouseup", dragEnd, false);
+    document.addEventListener("mousemove", drag, false);
   },
 
   async ensureCtx() {
