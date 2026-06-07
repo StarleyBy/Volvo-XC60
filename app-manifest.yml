@@ -1,7 +1,7 @@
 meta:
   app: Volvo XC60 Справочник
   version: 2.7.0
-  updated: 2026-05-28 22:26
+  updated: 2026-06-07 09:05
   music: ["track1.mp3","track2.mp3","track3.mp3","track4.mp3","track5.mp3","track6.mp3","track7.mp3","track8.mp3"]
 
 sections:
@@ -186,11 +186,42 @@ sections:
         type: document
         visible: true
         tags: []
+      - id: ביטוח מקיף - 78770601
+        title: "ביטוח מקיף   78770601"
+        file: books/volvo/documents/ביטוח מקיף - 78770601.pdf
+        type: document
+        visible: true
+        tags: []
+      - id: סרגיי רישיון הנהיגה
+        title: "סרגיי רישיון הנהיגה"
+        file: books/volvo/documents/סרגיי רישיון הנהיגה.pdf
+        type: document
+        visible: true
+        tags: []
+      - id: פרטי רישיון רכב מלאים
+        title: "פרטי רישיון רכב מלאים"
+        file: books/volvo/documents/פרטי רישיון רכב מלאים.pdf
+        type: document
+        visible: true
+        tags: []
+      - id: רישיון רכב
+        title: "רישיון רכב"
+        file: books/volvo/documents/רישיון רכב.pdf
+        type: document
+        visible: true
+        tags: []
 
   - id: insurance
     title: Страховка
     icon: 🛡️
     items:
+      - id: 2026
+        title: "2026"
+        file: books/volvo/insurance/2026.md
+        type: reference
+        visible: true
+        tags: []
+
   - id: tuning
     title: Тюнинг
     icon: 🏎️
