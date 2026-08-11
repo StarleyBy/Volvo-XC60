@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0908">
 <title>OrBit — Памятка прошивальщика</title>
 <!--
 metadata:
@@ -13,6 +15,7 @@ metadata:
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme: dark;
   --bg:#0a0908; --panel:#141311; --panel2:#1b1a17; --hover:#201f1c;
   --border:#2a2823; --border2:#37342c;
   --text:#e9e6df; --muted:#8a8578; --muted2:#5f5c52;
@@ -32,7 +35,14 @@ body{background:var(--bg); color:var(--text); font-family:var(--font-b); font-si
 
 a{color:var(--gold);}
 button{font-family:var(--font-b); cursor:pointer;}
-input,select,textarea{font-family:var(--font-b);}
+input,select,textarea{font-family:var(--font-b); color-scheme:dark; accent-color:var(--gold);}
+select{
+  -webkit-appearance:none; -moz-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0L5 6L10 0Z' fill='%23c5a059'/></svg>");
+  background-repeat:no-repeat; background-position:right 10px center; padding-right:26px !important;
+}
+input[type=file]{color:var(--muted);}
+input[type=checkbox]{width:15px; height:15px;}
 code,.mono{font-family:var(--font-m);}
 
 /* ===== HEADER ===== */
@@ -140,7 +150,7 @@ h1,h2,h3{font-family:var(--font-h); font-weight:600; letter-spacing:.03em;}
 }
 #searchbox:focus{outline:none; border-color:var(--gold-dim);}
 .selfilter{
-  background:var(--panel2); border:1px solid var(--border2); border-radius:8px; color:var(--muted); padding:9px 10px; font-size:12.5px;
+  background-color:var(--panel2); border:1px solid var(--border2); border-radius:8px; color:var(--muted); padding:9px 26px 9px 10px; font-size:12.5px;
 }
 .chip{
   border:1px solid var(--border2); background:var(--panel2); color:var(--muted); font-size:11.5px; font-family:var(--font-h);
@@ -184,7 +194,7 @@ h1,h2,h3{font-family:var(--font-h); font-weight:600; letter-spacing:.03em;}
 .opts-table .oid{font-family:var(--font-m); color:var(--gold-dim); width:28px;}
 .opts-table .oval{font-family:var(--font-m); color:var(--text); white-space:nowrap;}
 .cur-flag{font-size:9px; font-family:var(--font-h); color:var(--gold); border:1px solid var(--gold-dim); border-radius:8px; padding:1px 6px; margin-left:6px;}
-.opt-select{width:100%; background:var(--panel2); border:1px solid var(--border2); color:var(--text); border-radius:6px; padding:8px 9px; font-family:var(--font-m); font-size:12.5px;}
+.opt-select{width:100%; background-color:var(--panel2); border:1px solid var(--border2); color:var(--text); border-radius:6px; padding:8px 26px 8px 9px; font-family:var(--font-m); font-size:12.5px;}
 .opt-select:focus{outline:none; border-color:var(--gold);}
 .was-now{font-family:var(--font-m); font-size:11.5px; color:var(--muted); margin-top:6px;}
 .was-now b{color:var(--gold);}
