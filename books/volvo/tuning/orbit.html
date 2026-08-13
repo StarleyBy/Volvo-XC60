@@ -199,6 +199,24 @@ h1,h2,h3{font-family:var(--font-h); font-weight:600; letter-spacing:.03em;}
 .was-now{font-family:var(--font-m); font-size:11.5px; color:var(--muted); margin-top:6px;}
 .was-now b{color:var(--gold);}
 
+/* ===== SECTION DIVIDER ===== */
+.section-divider{margin:30px 0 14px; padding-top:18px; border-top:1px solid var(--border);}
+.section-divider h2{font-size:16px; color:var(--text); display:flex; align-items:center; gap:8px;}
+.section-divider .section-sub{color:var(--muted); font-size:12.5px; margin-top:4px; max-width:62ch;}
+
+/* ===== PLAN ITEMS (wishlist editor) ===== */
+.plan-check-row{display:flex; align-items:center; gap:10px; padding:11px 14px; cursor:pointer; user-select:none;}
+.plan-check-row:hover{background:var(--hover);}
+.plan-check-row input[type=checkbox]{flex-shrink:0;}
+.plan-check-row .item-title{flex:1; min-width:0;}
+.plan-extra{display:none; padding:0 14px 14px 50px; border-top:1px solid var(--border);}
+.item.plan-included .plan-extra{display:block; padding-top:10px;}
+.item.plan-included{border-color:var(--gold-dim);}
+.plan-item-comment{width:100%; margin-top:8px; background:var(--panel2); border:1px solid var(--border2); border-radius:6px; padding:7px 9px; font-size:12px; color:var(--text); resize:vertical; min-height:44px; font-family:var(--font-b);}
+.plan-target-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.plan-target-row .arrow{color:var(--gold-dim);}
+.plan-badge{font-size:9.5px; font-family:var(--font-h); letter-spacing:.05em; text-transform:uppercase; padding:2.5px 7px; border-radius:9px; background:var(--gold-glow); color:var(--gold); border:1px solid var(--gold-dim);}
+
 /* ===== PROFILES ===== */
 .profile-toolbar{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center;}
 .btn{
@@ -399,6 +417,15 @@ h1,h2,h3{font-family:var(--font-h); font-weight:600; letter-spacing:.03em;}
       <button class="btn danger" onclick="resetAllConfirm()">🗑 <span data-t="btn_reset">Сброс</span></button>
     </div>
     <div id="profilegrid" class="profile-grid"></div>
+
+    <div class="section-divider">
+      <h2>🧾 <span data-t="plans_title">Планы (лист желаний)</span></h2>
+      <p class="section-sub" data-t="plans_sub">Заранее отметьте, что планируете поменять в следующую сессию прошивки — список целевых значений с комментариями, без применения к базе прямо сейчас.</p>
+    </div>
+    <div class="profile-toolbar">
+      <button class="btn primary" onclick="openPlanEditor(null)">📝 <span data-t="btn_new_plan">Новый план</span></button>
+    </div>
+    <div id="plangrid" class="profile-grid"></div>
   </section>
 
   <!-- ============ REVIEWS ============ -->
@@ -472,6 +499,40 @@ h1,h2,h3{font-family:var(--font-h); font-weight:600; letter-spacing:.03em;}
       <button class="btn" onclick="closeModal('base-modal')" data-t="cancel">Отмена</button>
       <button class="btn primary" onclick="saveBaseFromEditor()" data-t="save_base">Сохранить базу</button>
     </div>
+  </div>
+</div>
+
+<!-- Modal: plan editor -->
+<div class="modal-bg" id="plan-modal">
+  <div class="modal">
+    <h2><span id="plan-editor-title" data-t="plan_editor_title_new">Новый план</span><span class="xclose" onclick="closeModal('plan-modal')">✕</span></h2>
+    <div id="plan-editor-summary" class="was-now" style="margin-bottom:12px;"></div>
+    <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+      <input id="plan-search" type="text" data-t-ph="search_ph" placeholder="Поиск…" oninput="renderPlanEditorList()" style="flex:1 1 180px; background:var(--panel2); border:1px solid var(--border2); border-radius:8px; color:var(--text); padding:9px 12px; font-size:13px;">
+      <select class="selfilter" id="plan-catfilter" onchange="renderPlanEditorList()"></select>
+      <label class="chip" style="cursor:pointer;"><input type="checkbox" id="plan-onlyincluded" onchange="renderPlanEditorList()" style="margin-right:5px;"><span data-t="chip_onlyincluded">Только выбранные</span></label>
+    </div>
+    <div id="plan-editor-list" style="max-height:46vh; overflow-y:auto; display:flex; flex-direction:column; gap:6px; margin-bottom:16px; border:1px solid var(--border); border-radius:8px; padding:8px;"></div>
+    <div class="field">
+      <label data-t="plan_field_name">Имя плана</label>
+      <input type="text" id="plan-name" data-t-ph="plan_field_name_ph" placeholder="напр. Перед зимой, Сессия №3">
+    </div>
+    <div class="field">
+      <label data-t="plan_field_comment">Общий комментарий к плану</label>
+      <textarea id="plan-comment" data-t-ph="plan_field_comment_ph" placeholder="Цель этой сессии прошивки в целом…"></textarea>
+    </div>
+    <div style="display:flex; gap:10px; justify-content:flex-end;">
+      <button class="btn" onclick="closeModal('plan-modal')" data-t="cancel">Отмена</button>
+      <button class="btn primary" onclick="savePlanFromEditor()" data-t="save_plan">Сохранить план</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: plan detail -->
+<div class="modal-bg" id="plan-detail-modal">
+  <div class="modal">
+    <h2><span id="plan-detail-title">План</span><span class="xclose" onclick="closeModal('plan-detail-modal')">✕</span></h2>
+    <div id="plan-detail-body"></div>
   </div>
 </div>
 
@@ -582,14 +643,30 @@ ru:{
   how_3_t:"Отзывы", how_3_d:"впечатления от профилей после реальной эксплуатации: динамика, расход, побочные эффекты.",
   how_4_t:"Советы", how_4_d:"практика сообщества OrBit: типовые изменения, зависимости от оборудования, безопасный порядок действий.",
   diff_p:"Профиль не хранит все 395 значений — только то, что отличается от базы. Это компактно и наглядно показывает, что именно было изменено:",
-  rule_1_d:"Прочитайте и сохраните текущую конфигурацию как профиль «База», прежде чем менять хоть один пункт. Это ваша точка отката.",
+  rule_1_d:"Зафиксируйте текущую конфигурацию как профиль «База», прежде чем планировать изменения — так будет с чем сравнивать и что показывать в диффах. Для отката самой машины к заводским значениям у OrBit есть отдельная встроенная функция — читайте про неё в разделе «Советы».",
   rule_2_d:"Один пункт (или тесно связанная группа) за раз, затем тест-драйв. Так проще понять, какое изменение что дало.",
   rule_3_d:"Включение функции без физического оборудования (радар, камера, проводка, конкретный переключатель) даст DTC или нерабочую функцию, а не новую фичу.",
   rule_4_d:"По опыту сообщества, после изменений, затрагивающих тормозную систему, обычно требуется отдельно выполнить сброс конфигурации ABS.",
   rule_5_d:"Пункты с пометкой «не менять» — диагностические или влияющие на пиротехнику/иммобилайзер/VIN-идентификацию. Их меняют только в контексте официального сервиса.",
   hero_p1:"OrBit — стороннее (не от Volvo) ПК-приложение от SPAyceTech / UP Industries LLC для диагностики, чтения и записи конфигурации, а также прошивки блоков управления автомобилей Volvo и Polestar на платформах SPA и CMA (XC90 2016+, S90/V90 2016+, XC60 2018+, S60/V60 2019+, XC40, Polestar 1/2). Проект не аффилирован с Volvo Cars, Polestar или Geely.",
   hero_p2:"В отличие от заводского VIDA, который пишет изменения «официально» — конфигурация синхронизируется с серверами Volvo — OrBit работает локально, напрямую с блоками по DoIP, ничего не отправляя в облако. Это дешевле и не требует стабилизированного питания борта >13 В, но означает, что удалённое несоответствие «официальной» конфигурации иногда фиксируется при следующем визите к дилеру.",
-  warn_body:"Изменения конфигурации применяются к реальным блокам управления. Ошибочная запись, потеря питания во время прошивки или несовпадение с фактически установленным оборудованием может привести к неработающим функциям, ложным DTC или заблокированному модулю. Всегда сохраняйте бэкап текущей конфигурации перед первой записью.",
+  warn_body:"Изменения конфигурации применяются к реальным блокам управления. Ошибочная запись, потеря питания во время прошивки или несовпадение с фактически установленным оборудованием может привести к неработающим функциям, ложным DTC или заблокированному модулю. У самого OrBit есть встроенный откат к заводским значениям без отдельного бэкапа — но профиль «База» в этой памятке всё равно стоит откалибровать, как офлайн-точку отсчёта для планов и профилей.",
+  plans_title:"Планы (лист желаний)", plans_sub:"Заранее отметьте, что планируете поменять в следующую сессию прошивки — список целевых значений с комментариями, без применения к базе прямо сейчас.",
+  btn_new_plan:"Новый план", plan_editor_title_new:"Новый план", plan_editor_title_edit:"Редактирование плана",
+  plan_field_name:"Имя плана", plan_field_name_ph:"напр. Перед зимой, Сессия №3",
+  plan_field_comment:"Общий комментарий к плану", plan_field_comment_ph:"Цель этой сессии прошивки в целом…",
+  plan_item_comment_ph:"Комментарий к этому пункту (необязательно)…",
+  chip_onlyincluded:"Только выбранные", plan_include:"Включить в план", plan_target_label:"Целевое значение",
+  save_plan:"Сохранить план", plan_created:"создан", plan_updated:"обновлён", plan_items_count:"пунктов",
+  plan_empty:"Пока нет ни одного плана", plan_empty_p:"Отметьте пункты, которые хотите изменить в следующую сессию — с комментариями, без применения к базе.",
+  plan_view:"Открыть", plan_edit:"Изменить", plan_delete:"Удалить", plan_pdf:"PDF", plan_to_profile:"В профиль",
+  confirm_delete_plan:"Удалить этот план?", toast_plan_saved:"План сохранён", toast_plan_deleted:"План удалён",
+  toast_plan_no_items:"Отметьте хотя бы один пункт для плана", toast_plan_pdf_hint:"Откроется окно печати — выберите «Сохранить как PDF»",
+  plan_detail_no_items:"В этом плане нет пунктов", plan_detail_items_title:"Пункты плана",
+  plan_no_comment:"без комментария", plan_converted:"План перенесён в редактор профиля — проверьте и сохраните",
+  pdf_doc_title:"План прошивки OrBit", pdf_generated:"Сформировано", pdf_col_id:"№", pdf_col_item:"Пункт",
+  pdf_col_current:"Сейчас (база)", pdf_col_target:"Станет", pdf_col_comment:"Комментарий", pdf_plan_comment_title:"Комментарий к плану",
+  pdf_footer_note:"Сформировано на странице OrBit — Памятка прошивальщика (Volvo-XC60 справочник). Проверяйте актуальные значения перед записью.",
 },
 en:{
   app_title:"OrBit — Flashing Handbook", app_sub:"Volvo SPA · configuration · profiles",
@@ -637,14 +714,30 @@ en:{
   how_3_t:"Reviews", how_3_d:"real-world impressions after driving with a profile: acceleration, braking feel, fuel consumption, side effects.",
   how_4_t:"Tips", how_4_d:"OrBit community practice: typical changes, hardware dependencies, a safe order of operations.",
   diff_p:"A profile doesn't store all 395 values — only what differs from base. That's compact and makes it obvious what actually changed:",
-  rule_1_d:"Read and save the current configuration as the \"Base\" profile before changing a single item. This is your rollback point.",
+  rule_1_d:"Set the current configuration as the \"Base\" profile before planning any changes — that gives you something to diff against. To roll the actual car back to factory values, OrBit has its own built-in function for that — see the Tips section.",
   rule_2_d:"One item (or a tightly related group) at a time, then a test drive. Makes it easier to tell what each change actually did.",
   rule_3_d:"Enabling a feature without the matching physical hardware (radar, camera, wiring, a specific switch) gets you a DTC or a non-functional feature, not a new one.",
   rule_4_d:"Community experience suggests that after changes touching the brake system, an ABS configuration clear is usually needed separately.",
   rule_5_d:"Items marked \"do not touch\" are diagnostic-only or affect pyrotechnics/immobilizer/VIN identification. Only change these in an official service context.",
   hero_p1:"OrBit is a third-party (not Volvo) PC application from SPAyceTech / UP Industries LLC for diagnostics, reading/writing configuration, and flashing control modules on Volvo and Polestar vehicles built on the SPA and CMA platforms (XC90 2016+, S90/V90 2016+, XC60 2018+, S60/V60 2019+, XC40, Polestar 1/2). The project is not affiliated with Volvo Cars, Polestar, or Geely.",
   hero_p2:"Unlike the factory VIDA tool, which writes changes \"officially\" — the configuration is synced to Volvo's servers — OrBit works locally, talking directly to the modules over DoIP without sending anything to Volvo's cloud. That's cheaper and doesn't require a stabilized >13V bench supply, but it means the configuration can drift from what Volvo's backend expects, which sometimes gets flagged at the next dealer visit.",
-  warn_body:"Configuration changes are applied to real control modules. A failed write, a power loss mid-flash, or a mismatch with the hardware actually fitted can leave you with non-functional features, false DTCs, or a bricked module. Always back up the current configuration before your first write.",
+  warn_body:"Configuration changes are applied to real control modules. A failed write, a power loss mid-flash, or a mismatch with the hardware actually fitted can leave you with non-functional features, false DTCs, or a bricked module. OrBit itself has a built-in factory-restore that needs no separate backup — but it's still worth calibrating the \"Base\" profile here as an offline reference point for plans and profiles.",
+  plans_title:"Plans (wishlist)", plans_sub:"Mark ahead of time what you plan to change in your next flashing session — a list of target values with comments, without touching the base right now.",
+  btn_new_plan:"New plan", plan_editor_title_new:"New plan", plan_editor_title_edit:"Edit plan",
+  plan_field_name:"Plan name", plan_field_name_ph:"e.g. Before winter, Session #3",
+  plan_field_comment:"Overall plan comment", plan_field_comment_ph:"What this flashing session is for, overall…",
+  plan_item_comment_ph:"Comment for this item (optional)…",
+  chip_onlyincluded:"Selected only", plan_include:"Include in plan", plan_target_label:"Target value",
+  save_plan:"Save plan", plan_created:"created", plan_updated:"updated", plan_items_count:"items",
+  plan_empty:"No plans yet", plan_empty_p:"Check off the items you want to change next session — with comments, without touching base.",
+  plan_view:"Open", plan_edit:"Edit", plan_delete:"Delete", plan_pdf:"PDF", plan_to_profile:"To profile",
+  confirm_delete_plan:"Delete this plan?", toast_plan_saved:"Plan saved", toast_plan_deleted:"Plan deleted",
+  toast_plan_no_items:"Check at least one item for the plan", toast_plan_pdf_hint:"The print dialog will open — choose \"Save as PDF\"",
+  plan_detail_no_items:"This plan has no items", plan_detail_items_title:"Plan items",
+  plan_no_comment:"no comment", plan_converted:"Plan loaded into the profile editor — review and save",
+  pdf_doc_title:"OrBit Flashing Plan", pdf_generated:"Generated", pdf_col_id:"#", pdf_col_item:"Item",
+  pdf_col_current:"Now (base)", pdf_col_target:"Target", pdf_col_comment:"Comment", pdf_plan_comment_title:"Plan comment",
+  pdf_footer_note:"Generated from the OrBit Flashing Handbook (Volvo-XC60 reference app). Verify current values before writing.",
 }
 };
 
@@ -659,6 +752,10 @@ const TIPS_RU = [
   ["Экранные темы/скины","Косметические пункты вроде смены темы приборной панели или заставки — низкий риск, хорошее место для первого эксперимента с записью."],
   ["Доп. освещение через реле","Активация «доп. фар» создаёт в Sensus кнопку, замыкающую цепь на массу в CEM для управления внешним реле — само по себе не запитывает свет, это только логическая функция."],
   ["Экономьте PIN-запросы","PIN CEM/VGM нужен для операций программирования блоков — уточняйте зависимость конкретного пункта заранее, чтобы не тратить лишние запросы/попытки."],
+  ["Программирование ключей","OrBit умеет добавлять и удалять ключи прямо из приложения. Для блоков CEM новее (в основном с 2019 г.) PIN для программирования извлекается автоматически за пару минут; для более старых блоков нужен отдельный платный сервис извлечения PIN. «Вирджинизация» ключа не требуется — совместимый новый или б/у ключ того же типа просто кладётся в подстаканник и добавляется через мастер программирования."],
+  ["Сброс DTC — не всегда просто Clear","Чтение и сброс кодов неисправностей (DTC) есть прямо в OrBit. Но у части кодов (например, часто у DTC, связанных со Start/Stop после просадки бортовой батареи) обычный Clear DTC не помогает — по сервисным материалам Volvo такие блоки требуют полного отключения основной и вспомогательной АКБ на 15–60 минут, чтобы сбросить внутреннюю флеш-память блока."],
+  ["Встроенный возврат к заводским настройкам","По данным сайта разработчика, OrBit умеет откатывать конфигурацию к заводским значениям без необходимости заранее делать отдельный бэкап — заводские значения хранятся в самих блоках. Профиль «База» и планы в этой памятке остаются полезны как офлайн-справочник и площадка для подготовки — без повторного подключения к машине."],
+  ["Перед продажей автомобиля","Сообщество OrBit советует перед продажей вернуть конфигурацию к заводской через OrBit. Это отдельное действие от сброса Sensus (мультимедиа) до заводских настроек — сброс медиасистемы не откатывает изменения конфигурации блоков, сделанные через OrBit, и наоборот."],
 ];
 const TIPS_EN = [
   ["Pre-flight checklist","Before connecting, verify battery charge, a stable adapter connection, and that you've logged the current configuration (VIDA log or manual check) into the \"Base\" section of this page."],
@@ -671,23 +768,30 @@ const TIPS_EN = [
   ["Screen themes/skins","Cosmetic items like the instrument cluster theme or splash screen are low risk — a good place for a first write experiment."],
   ["Auxiliary lights via relay","Enabling 'auxiliary lights' adds a button in Sensus that grounds a circuit in the CEM to trigger an external relay — it's a logic function only, it doesn't power the lights itself."],
   ["Budget your PIN requests","CEM/VGM PINs are needed for module-programming operations — check whether a given item actually needs one before spending extra attempts."],
+  ["Key fob programming","OrBit can add and erase key fobs right from the app. On newer CEM units (roughly 2019+) the programming PIN is extracted automatically in a couple of minutes; older CEMs need a separate paid PIN-extraction service. No key \"virginizing\" is needed — a compatible new or used key of the same type just goes in the cupholder and gets added through the programming wizard."],
+  ["Clearing DTCs isn't always a plain Clear","Reading and clearing fault codes (DTCs) is built into OrBit. But some codes (commonly Start/Stop-related DTCs after a low 12V battery) don't clear with a plain Clear DTC — Volvo service material notes those modules need the main and support battery fully disconnected for 15–60 minutes to reset the module's internal flash memory."],
+  ["Built-in factory restore","According to the developer's site, OrBit can roll the configuration back to factory values without needing a separate backup beforehand — the factory values live in the modules themselves. The \"Base\" profile and plans in this handbook are still useful as an offline reference and prep surface, without reconnecting to the car."],
+  ["Before selling the car","The OrBit community recommends reverting the configuration to factory via OrBit before selling. That's separate from resetting Sensus (the infotainment system) to factory — resetting the media system doesn't undo OrBit configuration changes, and vice versa."],
 ];
 
 /* =========================================================
    STATE
 ========================================================= */
-const LS_KEYS = {lang:'orbit-lang', base:'orbit-base', profiles:'orbit-profiles'};
+const LS_KEYS = {lang:'orbit-lang', base:'orbit-base', profiles:'orbit-profiles', plans:'orbit-plans'};
 let state = {
   lang: localStorage.getItem(LS_KEYS.lang) || 'ru',
   tab: 'overview',
   base: {},        // id -> optionId
   baseUpdatedAt: null,
   profiles: [],     // {id,name,comment,created,updated,changes:[{id,name_ru,name_en,from,fromLabel,toLabel...}],reviews:[]}
+  plans: [],        // {id,name,comment,created,updated,items:[{id,name_ru,name_en,target,comment}]}
   filters: {q:'', cat:'', risk:'', hwOnly:false},
   editorDraft: null, // {id: optionId}
   editorEditingProfileId: null,
   reviewTargetProfileId: null,
   reviewStars: 0,
+  planDraft: null,   // {id: {target, comment}}
+  planEditingId: null,
 };
 
 function loadState(){
@@ -699,6 +803,10 @@ function loadState(){
     const p = JSON.parse(localStorage.getItem(LS_KEYS.profiles) || '[]');
     state.profiles = Array.isArray(p) ? p : [];
   }catch(e){ state.profiles = []; }
+  try{
+    const pl = JSON.parse(localStorage.getItem(LS_KEYS.plans) || '[]');
+    state.plans = Array.isArray(pl) ? pl : [];
+  }catch(e){ state.plans = []; }
   ensureBaseDefaults();
 }
 function ensureBaseDefaults(){
@@ -706,6 +814,7 @@ function ensureBaseDefaults(){
 }
 function persistBase(){ localStorage.setItem(LS_KEYS.base, JSON.stringify({values:state.base, updatedAt: Date.now()})); }
 function persistProfiles(){ localStorage.setItem(LS_KEYS.profiles, JSON.stringify(state.profiles)); }
+function persistPlans(){ localStorage.setItem(LS_KEYS.plans, JSON.stringify(state.plans)); }
 
 /* =========================================================
    HELPERS
@@ -751,6 +860,7 @@ function applyStaticTranslations(){
   populateCatSelect(document.getElementById('catfilter'), true);
   populateCatSelect(document.getElementById('editor-catfilter'), true);
   populateCatSelect(document.getElementById('base-catfilter'), true);
+  populateCatSelect(document.getElementById('plan-catfilter'), true);
   populateRiskSelect();
 }
 function setLang(l){
@@ -763,7 +873,7 @@ function setTab(tab){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
   document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id==='view-'+tab));
   if(tab==='reference') renderReference();
-  if(tab==='profiles') renderProfiles();
+  if(tab==='profiles'){ renderProfiles(); renderPlans(); }
   if(tab==='reviews') renderReviews();
   if(tab==='tips') renderTips();
   if(tab==='overview') renderOverviewStats();
@@ -1113,6 +1223,230 @@ function openProfileDetail(id){
 }
 
 /* =========================================================
+   PLANS (wishlist)
+========================================================= */
+function renderPlans(){
+  const grid = document.getElementById('plangrid');
+  if(!grid) return;
+  if(state.plans.length===0){
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1;"><div class="ei">🧾</div><h3 style="margin-bottom:6px;">${t('plan_empty')}</h3><p>${t('plan_empty_p')}</p></div>`;
+    return;
+  }
+  grid.innerHTML = state.plans.map(p=>`
+    <div class="pcard">
+      <div class="pcard-top">
+        <div><h3>📝 ${escapeHtml(p.name)}</h3><div class="pdate">${t('plan_created')} ${fmtDate(p.created)}${p.updated?' · '+t('plan_updated')+' '+fmtDate(p.updated):''}</div></div>
+      </div>
+      <div class="pcomment">${escapeHtml(p.comment||'')}</div>
+      <div class="pstats"><span><b>${p.items.length}</b> ${t('plan_items_count')}</span></div>
+      <div class="pcard-actions">
+        <button class="btn small" onclick="openPlanDetail('${p.id}')">👁 ${t('plan_view')}</button>
+        <button class="btn small" onclick="openPlanEditor('${p.id}')">✏️ ${t('plan_edit')}</button>
+        <button class="btn small" onclick="exportPlanPDF('${p.id}')">📄 ${t('plan_pdf')}</button>
+        <button class="btn small danger" onclick="deletePlan('${p.id}')">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+function openPlanEditor(planId){
+  state.planEditingId = planId;
+  document.getElementById('plan-name').value = '';
+  document.getElementById('plan-comment').value = '';
+  document.getElementById('plan-editor-title').textContent = t('plan_editor_title_new');
+  state.planDraft = {};
+  if(planId){
+    const p = state.plans.find(x=>x.id===planId);
+    if(p){
+      p.items.forEach(it=>{ state.planDraft[it.id] = {target: it.target, comment: it.comment||''}; });
+      document.getElementById('plan-name').value = p.name;
+      document.getElementById('plan-comment').value = p.comment||'';
+      document.getElementById('plan-editor-title').textContent = t('plan_editor_title_edit');
+    }
+  }
+  document.getElementById('plan-search').value='';
+  document.getElementById('plan-onlyincluded').checked=false;
+  populateCatSelect(document.getElementById('plan-catfilter'), false);
+  document.getElementById('plan-catfilter').value='';
+  renderPlanEditorList();
+  showModal('plan-modal');
+}
+function planItemRowHTML(item){
+  const inc = item.id in state.planDraft;
+  const draft = state.planDraft[item.id] || {target: state.base[item.id], comment:''};
+  const options = item.opts.map(o=>`<option value="${o.id}" ${o.id===draft.target?'selected':''}>${o.id} — ${escapeHtml(o.v)}</option>`).join('');
+  return `
+  <div class="item${inc?' plan-included':''}" data-item="${item.id}" data-cat="${item.cat}">
+    <div class="plan-check-row" onclick="event.target.tagName!=='INPUT' && togglePlanCheckbox('${item.id}')">
+      <input type="checkbox" ${inc?'checked':''} onclick="event.stopPropagation(); togglePlanItem('${item.id}', this.checked)">
+      <span class="id-badge">#${item.id}</span>
+      <div class="item-title">
+        <div class="nm">${escapeHtml(name(item))}</div>
+        <div class="cat">${CAT_ICON[item.cat]} ${CAT_LABEL[state.lang][item.cat]}</div>
+      </div>
+      ${inc ? `<span class="plan-badge">${t('plan_include')}</span>` : ''}
+    </div>
+    <div class="plan-extra">
+      <div class="plan-target-row">
+        <label style="font-size:10.5px; font-family:var(--font-h); letter-spacing:.05em; text-transform:uppercase; color:var(--muted2);">${t('plan_target_label')}:</label>
+        <select class="opt-select" style="width:auto; min-width:220px;" onchange="onPlanTargetChange('${item.id}', this.value)">${options}</select>
+      </div>
+      <textarea class="plan-item-comment" data-t-ph="plan_item_comment_ph" placeholder="${t('plan_item_comment_ph')}" oninput="onPlanCommentChange('${item.id}', this.value)">${escapeHtml(draft.comment||'')}</textarea>
+    </div>
+  </div>`;
+}
+function togglePlanCheckbox(id){
+  const cb = document.querySelector(`.item[data-item="${id}"] .plan-check-row input[type=checkbox]`);
+  if(cb){ cb.checked = !cb.checked; togglePlanItem(id, cb.checked); }
+}
+function togglePlanItem(id, included){
+  if(included){
+    if(!state.planDraft[id]) state.planDraft[id] = {target: state.base[id], comment:''};
+  } else {
+    delete state.planDraft[id];
+  }
+  const onlyIncluded = document.getElementById('plan-onlyincluded').checked;
+  if(onlyIncluded){ renderPlanEditorList(); return; }
+  const wrap = document.querySelector(`#plan-editor-list .item[data-item="${id}"]`);
+  if(wrap) wrap.outerHTML = planItemRowHTML(byId[id]);
+  updatePlanEditorSummary();
+}
+function onPlanTargetChange(id, val){
+  if(state.planDraft[id]) state.planDraft[id].target = val;
+}
+function onPlanCommentChange(id, val){
+  if(state.planDraft[id]) state.planDraft[id].comment = val;
+}
+function renderPlanEditorList(){
+  const q = document.getElementById('plan-search').value.trim().toLowerCase();
+  const cat = document.getElementById('plan-catfilter').value;
+  const onlyIncluded = document.getElementById('plan-onlyincluded').checked;
+  const wrap = document.getElementById('plan-editor-list');
+  let filtered = ORBIT_ITEMS.filter(it=> matchQuery(it,q) && (!cat || it.cat===cat));
+  if(onlyIncluded) filtered = filtered.filter(it=> it.id in state.planDraft);
+  wrap.innerHTML = filtered.map(it=>planItemRowHTML(it)).join('') || `<div class="empty" style="padding:20px;"><p>—</p></div>`;
+  updatePlanEditorSummary();
+}
+function updatePlanEditorSummary(){
+  const n = Object.keys(state.planDraft).length;
+  document.getElementById('plan-editor-summary').textContent = state.lang==='ru' ? `Выбрано пунктов: ${n}` : `${n} item(s) selected`;
+}
+function savePlanFromEditor(){
+  const name_ = document.getElementById('plan-name').value.trim();
+  if(!name_){ toast(state.lang==='ru'?'Введите имя плана':'Enter a plan name'); return; }
+  const ids = Object.keys(state.planDraft);
+  if(ids.length===0){ toast(t('toast_plan_no_items')); return; }
+  const comment = document.getElementById('plan-comment').value.trim();
+  const items = ids.map(id=>{
+    const it = byId[id];
+    const d = state.planDraft[id];
+    return {id, name_ru: it.name_ru, name_en: it.name_en, target: d.target, comment: (d.comment||'').trim()};
+  });
+  if(state.planEditingId){
+    const p = state.plans.find(x=>x.id===state.planEditingId);
+    if(p){ p.name=name_; p.comment=comment; p.items=items; p.updated=Date.now(); }
+  } else {
+    state.plans.unshift({id:uid(), name:name_, comment, created:Date.now(), updated:null, items});
+  }
+  persistPlans();
+  closeModal('plan-modal');
+  toast(t('toast_plan_saved'));
+  renderPlans();
+  renderOverviewStats();
+}
+function deletePlan(id){
+  if(!confirm(t('confirm_delete_plan'))) return;
+  state.plans = state.plans.filter(p=>p.id!==id);
+  persistPlans();
+  toast(t('toast_plan_deleted'));
+  renderPlans();
+}
+function openPlanDetail(id){
+  const p = state.plans.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('plan-detail-title').textContent = p.name;
+  const itemsHTML = p.items.length ? p.items.map(it0=>{
+    const it = byId[it0.id];
+    return `<div class="diffrow" style="flex-direction:column; align-items:flex-start; gap:4px;">
+      <div style="display:flex; align-items:center; gap:10px; width:100%;">
+        <span class="did">#${it0.id}</span>
+        <span class="dname" style="flex:1;">${escapeHtml(state.lang==='ru'?it0.name_ru:it0.name_en)}</span>
+        <span class="dchange">${escapeHtml(optShort(it,state.base[it0.id]))} → <b style="color:var(--gold);">${escapeHtml(optShort(it,it0.target))}</b></span>
+      </div>
+      ${it0.comment ? `<div style="font-family:var(--font-b); color:var(--muted); font-size:12px; padding-left:2px;">💬 ${escapeHtml(it0.comment)}</div>` : ''}
+    </div>`;
+  }).join('') : `<div class="empty" style="padding:16px;"><p>${t('plan_detail_no_items')}</p></div>`;
+  document.getElementById('plan-detail-body').innerHTML = `
+    <div class="pcomment" style="color:var(--muted); margin-bottom:14px;">${escapeHtml(p.comment||'')}</div>
+    <h3 style="font-size:13px; color:var(--muted2); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">📋 ${t('plan_detail_items_title')}</h3>
+    <div class="detail-diffs">${itemsHTML}</div>
+    <div style="display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <button class="btn small" onclick="convertPlanToProfile('${p.id}')">➡️ ${t('plan_to_profile')}</button>
+      <button class="btn small primary" onclick="exportPlanPDF('${p.id}')">📄 ${t('plan_pdf')}</button>
+    </div>
+  `;
+  showModal('plan-detail-modal');
+}
+function convertPlanToProfile(planId){
+  const p = state.plans.find(x=>x.id===planId);
+  if(!p) return;
+  closeModal('plan-detail-modal');
+  openProfileEditor(null);
+  p.items.forEach(it=>{ state.editorDraft[it.id] = it.target; });
+  document.getElementById('profile-name').value = p.name;
+  document.getElementById('profile-comment').value = p.comment||'';
+  renderEditorList();
+  toast(t('plan_converted'));
+}
+function exportPlanPDF(id){
+  const p = state.plans.find(x=>x.id===id);
+  if(!p) return;
+  toast(t('toast_plan_pdf_hint'));
+  const isRu = state.lang==='ru';
+  const rows = p.items.map(it0=>{
+    const it = byId[it0.id];
+    return `<tr>
+      <td class="c">${it0.id}</td>
+      <td>${escapeHtml(isRu?it0.name_ru:it0.name_en)}</td>
+      <td class="c mono">${escapeHtml(optShort(it,state.base[it0.id]))}</td>
+      <td class="c mono target">${escapeHtml(optShort(it,it0.target))}</td>
+      <td>${escapeHtml(it0.comment||'—')}</td>
+    </tr>`;
+  }).join('');
+  const html = `<!DOCTYPE html><html lang="${state.lang}"><head><meta charset="UTF-8"><title>${escapeHtml(p.name)} — ${t('pdf_doc_title')}</title>
+  <style>
+    @page{ size:A4; margin:16mm 14mm; }
+    *{box-sizing:border-box;}
+    body{font-family:'Helvetica Neue',Arial,sans-serif; color:#111; font-size:11px; line-height:1.5; margin:0;}
+    h1{font-size:18px; margin:0 0 2px; letter-spacing:.02em;}
+    .sub{color:#666; font-size:10.5px; margin-bottom:14px;}
+    .meta{display:flex; gap:22px; margin-bottom:10px; font-size:10.5px; color:#444;}
+    .plancomment{background:#f4f1ea; border-left:3px solid #b5924f; padding:8px 12px; margin-bottom:16px; font-size:11px; color:#333;}
+    table{width:100%; border-collapse:collapse; margin-top:6px;}
+    th{text-align:left; font-size:9px; text-transform:uppercase; letter-spacing:.05em; color:#777; border-bottom:1.5px solid #333; padding:5px 6px;}
+    td{padding:6px; border-bottom:1px solid #ddd; vertical-align:top; font-size:10.5px;}
+    td.c{white-space:nowrap;}
+    td.mono{font-family:'Courier New',monospace;}
+    td.target{color:#8b6d31; font-weight:bold;}
+    .footer{margin-top:22px; font-size:9px; color:#999; border-top:1px solid #ddd; padding-top:8px;}
+    @media print{ .noprint{display:none;} }
+  </style></head><body>
+    <h1>${escapeHtml(p.name)}</h1>
+    <div class="sub">${t('pdf_doc_title')}</div>
+    <div class="meta"><span>${t('plan_created')}: ${fmtDate(p.created)}</span>${p.updated?`<span>${t('plan_updated')}: ${fmtDate(p.updated)}</span>`:''}<span>${t('pdf_generated')}: ${fmtDate(Date.now())}</span></div>
+    ${p.comment ? `<div class="plancomment"><b>${t('pdf_plan_comment_title')}:</b> ${escapeHtml(p.comment)}</div>` : ''}
+    <table>
+      <thead><tr><th>${t('pdf_col_id')}</th><th>${t('pdf_col_item')}</th><th>${t('pdf_col_current')}</th><th>${t('pdf_col_target')}</th><th>${t('pdf_col_comment')}</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="footer">${t('pdf_footer_note')}</div>
+  </body></html>`;
+  const w = window.open('', '_blank');
+  if(!w){ toast(state.lang==='ru'?'Разрешите всплывающие окна для экспорта':'Allow pop-ups to export'); return; }
+  w.document.open(); w.document.write(html); w.document.close();
+  setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} }, 350);
+}
+
+/* =========================================================
    REVIEWS
 ========================================================= */
 function openReviewModal(profileId){
@@ -1171,7 +1505,7 @@ function renderTips(){
    IMPORT / EXPORT / RESET
 ========================================================= */
 function exportAll(){
-  const data = {version:1, exported:Date.now(), base:state.base, baseUpdatedAt:state.baseUpdatedAt, profiles:state.profiles};
+  const data = {version:2, exported:Date.now(), base:state.base, baseUpdatedAt:state.baseUpdatedAt, profiles:state.profiles, plans:state.plans};
   downloadJSON(data, 'orbit-profiles-backup.json');
   toast(t('toast_exported'));
 }
@@ -1196,6 +1530,8 @@ function importAll(evt){
       if(data.base){ state.base = data.base; state.baseUpdatedAt = data.baseUpdatedAt||Date.now(); persistBase(); }
       if(Array.isArray(data.profiles)){ state.profiles = data.profiles; persistProfiles(); }
       else if(data.changes){ state.profiles.unshift(data); persistProfiles(); } // single profile import
+      if(Array.isArray(data.plans)){ state.plans = data.plans; persistPlans(); }
+      else if(data.items && !data.changes){ state.plans.unshift(data); persistPlans(); } // single plan import
       toast(t('toast_imported'));
       renderAll();
     }catch(e){ toast(state.lang==='ru'?'Не удалось прочитать файл':'Could not read file'); }
@@ -1205,8 +1541,8 @@ function importAll(evt){
 }
 function resetAllConfirm(){
   if(!confirm(t('confirm_reset'))) return;
-  localStorage.removeItem(LS_KEYS.base); localStorage.removeItem(LS_KEYS.profiles);
-  state.base = {}; state.baseUpdatedAt=null; state.profiles=[];
+  localStorage.removeItem(LS_KEYS.base); localStorage.removeItem(LS_KEYS.profiles); localStorage.removeItem(LS_KEYS.plans);
+  state.base = {}; state.baseUpdatedAt=null; state.profiles=[]; state.plans=[];
   ensureBaseDefaults();
   toast(t('toast_reset'));
   renderAll();
@@ -1227,7 +1563,7 @@ document.querySelectorAll('.modal-bg').forEach(bg=>{
 function renderAll(){
   renderOverviewStats();
   if(state.tab==='reference') renderReference();
-  if(state.tab==='profiles') renderProfiles();
+  if(state.tab==='profiles'){ renderProfiles(); renderPlans(); }
   if(state.tab==='reviews') renderReviews();
   if(state.tab==='tips') renderTips();
 }
